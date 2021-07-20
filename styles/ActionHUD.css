@@ -1,0 +1,41 @@
+/*Container to be used for the action\bonus\special\end turn*/
+.actions-container{
+    margin-top: -5px;
+}
+/*Bottom box containing the text for the container of items or other informations*/
+.item-container-bottom{
+    margin-top: -5px;
+}
+/*Element of the actions\bonus\special bars*/
+.action-element{
+    margin-top: -5px;
+}
+/*Specific details for the class above*/
+.action-element .action{
+    margin-top: -5px;
+}
+
+.action-element .bonus{
+    margin-top: -5px;
+}
+
+.action-element .special{
+    margin-top: -5px;
+}
+
+.action-element .endturn{
+    margin-top: -5px;
+}
+/*Blue square that indicates if something has uses avaieble or not*/
+.action-indicator{
+    margin-top: -5px;
+}
+/*button to be used in various cirumnstances*/
+.action-button{
+    margin-top: -5px;
+}
+/*cancel button*/
+.action-button .cancel{
+    margin-top: -5px;
+}
+

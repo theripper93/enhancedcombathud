@@ -1,48 +1,40 @@
 {
-  "name": "module",
-  "title": "New Module",
-  "description": "",
-  "version": "This is auto replaced",
-  "library": "false",
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "0.7.9",
-  "compatibleCoreVersion": "0.7.9",
+  "name": "enhancedcombathud",
+  "title": "Actor HUD",
+  "description": "It's Magic",
+  "version": "0.1",
   "authors": [
-    {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
-    }
-  ],
-  "dependencies": [
-
-  ],
-  "conflicts": [
-    
-  ],
-  "esmodules": [
-    "/scripts/module.js"
-  ],
-  "scripts": [
-    "/scripts/lib/lib.js"
-  ],
-  "styles": [
-    "/styles/module.css"
+      {
+          "name": "theripper93",
+          "email": "tsplab@gmail.com",
+          "url": "https://www.patreon.com/theripper93"
+      }
   ],
   "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json"
-    }
+      {
+          "lang": "en",
+          "name": "English",
+          "path": "languages/en.json"
+      }
   ],
-  "url": "This is auto replaced",
-  "manifest": "This is auto replaced",
-  "download": "This is auto replaced",
-  "media": [
-    {
-      "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
-    }
+  "scripts": [
+      "./scripts/main.js",
+      "./scripts/config.js",
+      "./scripts/ExtendedCombatHud.js"
+  ],
+  "styles": [
+      "./styles/CombatHUD.css",
+      "./styles/ActionHUD.css",
+      "./styles/PortraitHUD.css"
+  ],
+  "packs": [
+  ],
+  "minimumCoreVersion": "0.8.6",
+  "compatibleCoreVersion": "0.8.8",
+  "url": "https://github.com/theripper93/enhancedcombathud",
+  "manifest": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.json",
+  "download": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.zip",
+  "socket":true,
+  "dependencies": [
   ]
 }
