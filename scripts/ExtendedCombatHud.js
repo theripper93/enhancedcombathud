@@ -37,6 +37,7 @@ class CombatHud{
             other: true,
         }
         this.sets = this.getSets()
+        this.sets.active = this.actor.data.flags.enhancedcombathud?.activeSet ? this.sets[`set${this.actor.data.flags.enhancedcombathud?.activeSet}`] : this.sets.set1
         console.log(this)
 
     }
@@ -85,6 +86,7 @@ class CombatHud{
             if(item.data.flags.enhancedcombathud?.set1) set1.push(item)
             if(item.data.flags.enhancedcombathud?.set2) set2.push(item)
         }
+        return {set1: set1,set2:set2}
     }
     _render(){
         canvas.hud.enhancedcombathud.bind(this.token)
@@ -109,12 +111,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD{
       setPosition() {
         if (!this.object) return;
         this.options.hudData = new CombatHud(this.object)
+        this.rigButtons()
         const position = {
             bottom: "15px",
             position: "absolute",
             "z-index": 100,
           }
         this.element.css(position);
+      }
+
+      rigButtons(){
+          $(this.element[2]).on("click",'[data-type="trigger"]',(event) => {
+            let itemName = event.currentTarget.dataset.itemname  
+            game.dnd5e.rollItemMacro(itemName);
+          })
       }
 }
   
