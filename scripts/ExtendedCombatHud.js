@@ -195,6 +195,29 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let category = event.currentTarget.dataset.category;
       game.dnd5e.rollItemMacro(itemName);
     });
+
+    /*// Feature Accordion
+    this.element.on('click', '.feature-accordion-title', (event) => {
+      let $element = $(event.currentTarget);
+      let $accordion = $element.closest('.features-accordion');
+      let numberOfFeatures = $accordion.find('.feature-element').length;
+
+      // hide Open Elements
+      $accordion.closest('.features-container').find('.features-accordion.show').removeClass('show').css({
+        width: '0px'
+      });
+
+      if ($accordion.hasClass('show')) {
+        $accordion.css({
+          width: `0px`
+        });
+      }else{
+        $accordion.css({
+          width: `${numberOfFeatures > 3 ? 615 : numberOfFeatures * 205}px`
+        });
+      }
+      $accordion.toggleClass('show');
+    })*/
   }
 }
 

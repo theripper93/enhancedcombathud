@@ -16,6 +16,7 @@
 
 .extended-combat-hud {
   bottom: 15px;
+  color: var(--theme-fore-color);
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -150,33 +151,70 @@
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 700;
+  margin-left: 4px;
   padding: 0px 0.5rem;
   position: absolute;
 }
 .features-container.show {
   display: flex;
 }
-.feature-element {
-  background: purple no-repeat center;
-  background-origin: content-box;
-  background-size: cover;
-  border: 1px solid var(--theme-border-color);
-  height: 100px;
-  margin-bottom: 3rem;
-  position: relative;
-  width: 150px;
 
-  cursor: pointer;
+.features-accordion {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 450px;
+	overflow: hidden;
+    padding-left: 52px;
+    position: relative;
+    margin-right: 15px;
+	min-height: 150px;
+	transition: all 0.3s ease-in-out;
+}
+.feature-accordion-title {
+    align-items: center;
+    backdrop-filter: blur(6px);
+    background-color: rgb(0 0 0 / 30%);
+    border: 1px solid var(--theme-border-color);
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    margin-right: -75px;
+    padding: 1rem 0.5rem;
+    transform: rotate(-90deg);
+    transform-origin: bottom;
+    width: 150px;
+    position: absolute;
+    bottom: 75px;
+    left: -23px;
+}
+
+.feature-element {
+	background: purple no-repeat center;
+    background-origin: content-box;
+    background-size: cover;
+    border: 1px solid var(--theme-border-color);
+    flex: 1 0 33.333333333%;
+    height: 150px;
+	overflow: hidden;
+    position: relative;
+    width: 150px;
+    cursor: pointer;
 }
 .feature-element-title {
   align-items: center;
   backdrop-filter: blur(6px);
   background-color: rgb(0 0 0 / 30%);
   border: 1px solid var(--theme-border-color);
-  bottom: -3rem;
+  bottom: 0px;
   display: flex;
-  height: 3rem;
   justify-content: center;
+  padding: 1rem 0.5rem;
   position: absolute;
   width: 100%;
 }
+/*.feature-element {
+	height: 0px;
+}
+.features-accordion.show .feature-element {
+	height: 150px;
+}*/
