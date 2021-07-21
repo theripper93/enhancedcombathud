@@ -173,8 +173,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   setPosition() {
     if (!this.object) return;
-    //this.object.data.hudData = new CombatHud(this.object);
-    //this.options.hudData = new CombatHud(this.object);
     this.rigButtons();
     const position = {
       bottom: "15px",
@@ -191,6 +189,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', (event) => {
       let itemName = event.currentTarget.dataset.itemname;
+      game.dnd5e.rollItemMacro(itemName);
+    });
+    this.element.on("click", '[data-type="category"]', (event) => {
+      let category = event.currentTarget.dataset.category;
       game.dnd5e.rollItemMacro(itemName);
     });
   }
