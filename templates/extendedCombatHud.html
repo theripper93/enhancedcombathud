@@ -5,11 +5,13 @@
 		{{#each hudData.actions.spells}}
 		<div class="features-accordion">
 			<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
+			<div class="features-accordion-content">
 			{{#each this}}
-			<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-				<span class="feature-element-title">{{data.name}}</span>
-			</div>
+				<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+					<span class="feature-element-title">{{data.name}}</span>
+				</div>
 			{{/each}}
+			</div>
 		</div>
 		{{/each}}
   	</div>

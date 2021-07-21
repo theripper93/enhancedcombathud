@@ -179,7 +179,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       position: "absolute",
       left: "15px",
       "z-index": 100,
-      transform: "scale(0.8)",
+      //transform: "scale(0.8)",
       "transform-origin" : "left bottom",
     };
     this.element.css(position);
@@ -200,27 +200,38 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
 
     // Feature Accordion
-    this.element.on('click', '.feature-accordion-title', (event) => {
-      let $element = $(event.currentTarget);
-      let $accordion = $element.closest('.features-accordion');
-      let numberOfFeatures = $accordion.find('.feature-element').length;
+    let spellHudWidth = 0;
+    this.element.find('.features-accordion').each((index, element) => {
+      let $element = $(element);
+      let numberOfFeatures = $element.find('.feature-element').length;
 
-      // hide Open Elements
-      $accordion.closest('.features-container').find('.features-accordion.show').removeClass('show').css({
-        width: '0px'
+      spellHudWidth += numberOfFeatures > 3 ? (450 + 53) : ((numberOfFeatures * 150) + 53);
+
+      $element.css({
+        width: `${numberOfFeatures > 3 ? (450 + 53) : ((numberOfFeatures * 150) + 53)}px`
       });
-
-      if ($accordion.hasClass('show')) {
-        $accordion.css({
-          width: `0px`
-        });
-      }else{
-        $accordion.css({
-          width: `${numberOfFeatures > 3 ? 615 : numberOfFeatures * 205}px`
-        });
-      }
-      $accordion.toggleClass('show');
+      $element.find('.features-accordion-content').css({
+        'min-width': `${numberOfFeatures > 3 ? (450) : ((numberOfFeatures * 150))}px`
+      });
     })
+
+    // If container is smaller than window size, then open containers.
+    this.element.find('.features-accordion').toggleClass('show', spellHudWidth < $(window).width());
+
+    // If container is larger than window, allow accordion usage
+    if (spellHudWidth > $(window).width()) {
+      this.element.on('click', '.feature-accordion-title', (event) => {
+        let $element = $(event.currentTarget);
+        let $accordion = $element.closest('.features-accordion');
+        let $container = $element.closest('.features-container');
+
+        if ($container.width() + 503 > $(window).width()) {
+          $container.find('.features-accordion').removeClass('show');
+        }
+        
+        $accordion.toggleClass('show');
+      })
+    }
   }
 }
 
