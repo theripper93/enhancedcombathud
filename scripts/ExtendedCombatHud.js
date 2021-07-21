@@ -1,5 +1,6 @@
 class CombatHud{
     constructor(token){
+        this.token=token
         this.actor = token.actor;
         this.actions = {
             attack: this.getItems({actionType:["action"],itemType:["weapon"],equipped:true}),
@@ -35,6 +36,7 @@ class CombatHud{
             bonus: true,
             other: true,
         }
+        this.sets = this.getSets()
         console.log(this)
 
     }
@@ -74,13 +76,51 @@ class CombatHud{
             return filteredItems
         }
     }
+
+    getSets(){
+        let items = this.actor.data.items
+        let set1 = []
+        let set2 = []
+        for(let item of items){
+            if(item.data.flags.enhancedcombathud?.set1) set1.push(item)
+            if(item.data.flags.enhancedcombathud?.set2) set2.push(item)
+        }
+    }
     _render(){
-        new CombatHudCanvasElement(this)
+        canvas.hud.enhancedcombathud.bind(this.token)
     }
 }
 
-class CombatHudCanvasElement{
-    constructor(combatHud){
-        this.data = combatHud;
-    }
+class CombatHudCanvasElement extends BasePlaceableHUD{
+
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        options.template = "modules/enhancedcombathud/templates/extendedCombatHud.html";
+        options.id = "enhancedcombathud";
+        
+        return options;
+      }
+
+      getData() {
+        const data = super.getData();
+        return data;
+      }
+    
+      setPosition() {
+        if (!this.object) return;
+        this.options.hudData = new CombatHud(this.object)
+        const position = {
+            bottom: "15px",
+            position: "absolute",
+            "z-index": 100,
+          }
+        this.element.css(position);
+      }
 }
+  
+  Hooks.once("init", () => {
+    Hooks.on("renderHeadsUpDisplay", async (app, html, data) => {
+      html.append('<template id="levels-tooltip"></template>');
+      canvas.hud.enhancedcombathud = new CombatHudCanvasElement();
+    });
+  });
