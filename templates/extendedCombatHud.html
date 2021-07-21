@@ -2,18 +2,20 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
 	<div class="features-container is-spell show">
-		{{#hudData.actions.spells}}
-			{{#this}}
-			<div class="feature-element" style="background-image: url(http://localhost:30000/systems/dnd5e/icons/spells/fireball-eerie-1.jpg)">
+		{{#each hudData.actions.spells}}
+		{{#each this}}
+			<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 				<span class="feature-element-title">{{data.name}}</span>
 			</div>
-			{{/this}}
-		{{/hudData.actions.spells}}
+			{{/each}}
+		{{/each}}
   	</div>
     <div class="features-container is-consumable">
-    	<div class="feature-element" style="background-image: url(http://localhost:30000/systems/dnd5e/icons/spells/fireball-eerie-1.jpg)">
-          <span class="feature-element-title">Healing Potion</span>
+		{{#each hudData.actions.consumables}}
+    	<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+          <span class="feature-element-title">{{data.name}}</span>
       	</div>
+		{{/each}}
   	</div>
 	<div class="actions-container has-actions" data-title="Main Actions">
 		<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
@@ -33,12 +35,14 @@
       	<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Use Power</span>
       	</div>
+		  <div class="action-element-container">
       	<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Ready</span>
       	</div>
       	<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Hide</span>
       	</div>
+	</div>
       	<div class="action-element-container">
 			<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 				<span class="action-element-title">dash</span>
