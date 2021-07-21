@@ -196,7 +196,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       game.dnd5e.rollItemMacro(itemName);
     });
 
-    // Feature Accordion
+    /*// Feature Accordion
     this.element.on('click', '.feature-accordion-title', (event) => {
       let $element = $(event.currentTarget);
       let $accordion = $element.closest('.features-accordion');
@@ -217,7 +217,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         });
       }
       $accordion.toggleClass('show');
-    })
+    })*/
   }
 }
 

@@ -162,7 +162,7 @@
 .features-accordion {
     display: flex;
     flex-wrap: wrap-reverse;
-    width: 0px;
+    width: 450px;
 	overflow: hidden;
     padding-left: 52px;
     position: relative;
@@ -212,9 +212,9 @@
   position: absolute;
   width: 100%;
 }
-.feature-element {
+/*.feature-element {
 	height: 0px;
 }
 .features-accordion.show .feature-element {
 	height: 150px;
-}
+}*/
