@@ -139,7 +139,11 @@ class CombatHud {
       return filteredItems;
     }
   }
-
+  findItemByName(itemName) {
+    let items = this.actor.data.items;
+    let item = items.find(i => i.data.name==itemName);
+    return item;
+  }
   getSets() {
     let items = this.actor.data.items;
     let set1 = [];
@@ -168,6 +172,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   getData() {
     const data = super.getData();
     data.hudData = new CombatHud(this.object);
+    this.hudData = data.hudData;
     return data;
   }
 
@@ -188,15 +193,16 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   rigButtons() {
     let _this = this
     this.element.unbind("click");
-    this.element.on("click", '[data-type="trigger"]', (event) => {
+    this.element.on("click", '[data-type="trigger"]',async (event) => {
       let itemName = event.currentTarget.dataset.itemname;
-      game.dnd5e.rollItemMacro(itemName);
+      await game.dnd5e.rollItemMacro(itemName);
+      let item = _this.hudData.findItemByName(itemName)
+      event.currentTarget.dataset.itemCount = item.data.data.quantity
     });
-    this.element.on("click", '[data-type="menu"]', (event) => {
+    this.element.on("click", '[data-type="menu"]',(event) => {
       let category = event.currentTarget.dataset.menu;
       $(_this.element).find('div[data-iscontainer="true"]').removeClass("show")
       $(_this.element).find(`div[class="features-container ${category}"]`).addClass("show")
-      game.dnd5e.rollItemMacro(itemName);
     });
 
     // Feature Accordion

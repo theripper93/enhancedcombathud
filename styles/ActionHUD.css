@@ -225,6 +225,33 @@
     width: 150px;
     cursor: pointer;
 }
+
+
+.feature-element.has-count:before {
+  border-top: 4rem solid var(--theme-color);
+  border-right: 4rem solid transparent;
+  content: "";
+  filter: brightness(150%);
+  height: 0;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 0;
+}
+.feature-element.has-count:after {
+  align-items: center;
+  content: attr(data-item-count);
+  display: flex;
+  font-size: 1.5rem;
+  height: 2.5rem;
+  justify-content: center;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 2.5rem;
+}
+
+
 .feature-element-title {
   align-items: center;
   backdrop-filter: blur(6px);

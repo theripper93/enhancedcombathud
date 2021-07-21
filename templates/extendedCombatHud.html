@@ -17,7 +17,7 @@
   	</div>
     <div class="features-container is-consumable show" data-iscontainer="true">
 		{{#each hudData.actions.consumables}}
-    	<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+    	<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.quantity}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
           <span class="feature-element-title">{{data.name}}</span>
       	</div>
 		{{/each}}
