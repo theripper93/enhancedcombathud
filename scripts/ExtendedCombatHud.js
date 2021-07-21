@@ -186,13 +186,16 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigButtons() {
+    let _this = this
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', (event) => {
       let itemName = event.currentTarget.dataset.itemname;
       game.dnd5e.rollItemMacro(itemName);
     });
-    this.element.on("click", '[data-type="category"]', (event) => {
-      let category = event.currentTarget.dataset.category;
+    this.element.on("click", '[data-type="menu"]', (event) => {
+      let category = event.currentTarget.dataset.menu;
+      $(_this.element).find('div[data-iscontainer="true"]').removeClass("show")
+      $(_this.element).find(`div[class="features-container ${category}"]`).addClass("show")
       game.dnd5e.rollItemMacro(itemName);
     });
 
