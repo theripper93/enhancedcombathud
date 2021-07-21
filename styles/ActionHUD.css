@@ -223,9 +223,13 @@
 	overflow: hidden;
     position: relative;
     width: 150px;
+    margin-right: 1rem;
     cursor: pointer;
 }
 
+.features-container.is-spells .feature-element {
+  margin-right: 0rem;
+}
 
 .feature-element.has-count:before {
   border-top: 4rem solid var(--theme-color);

@@ -1,7 +1,7 @@
 <form id="{{id}}" class="{{classes}}" data-appid="{{appId}}" autocomplete="off"></form>
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
-	<div class="features-container is-spell" data-iscontainer="true">
+	<div class="features-container is-spells" data-iscontainer="true">
 		{{#each hudData.actions.spells}}
 		<div class="features-accordion">
 			<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
@@ -15,9 +15,16 @@
 		</div>
 		{{/each}}
   	</div>
-    <div class="features-container is-consumable show" data-iscontainer="true">
+    <div class="features-container is-consumables" data-iscontainer="true">
 		{{#each hudData.actions.consumables}}
     	<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.quantity}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+          <span class="feature-element-title">{{data.name}}</span>
+      	</div>
+		{{/each}}
+  	</div>
+	  <div class="features-container is-powers" data-iscontainer="true">
+		{{#each hudData.actions.special}}
+    	<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
           <span class="feature-element-title">{{data.name}}</span>
       	</div>
 		{{/each}}
@@ -34,10 +41,10 @@
 				<span class="action-element-title">dodge</span>
       		</div>
       	</div>
-      	<div class="action-element" data-type="menu" data-menu="is-spell" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Cast Spell</span>
       	</div>
-      	<div class="action-element" data-type="menu" data-menu="is-power"  style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Use Power</span>
       	</div>
 		  <div class="action-element-container">
@@ -56,7 +63,7 @@
 				<span class="action-element-title">shove</span>
       		</div>
       	</div>
-      	<div class="action-element has-count"  data-type="menu" data-menu="is-consumable"  data-item-count="3" style="background-image: url(https://cdn.streamelements.com/uploads/dcb630cd-1f3f-4c94-bd33-6008fe46e646.png)">
+      	<div class="action-element has-count"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables"  data-item-count="3" style="background-image: url(https://cdn.streamelements.com/uploads/dcb630cd-1f3f-4c94-bd33-6008fe46e646.png)">
 			<span class="action-element-title">Use Item</span>
       	</div>
   	</div>

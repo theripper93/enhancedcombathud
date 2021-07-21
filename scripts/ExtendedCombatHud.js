@@ -13,7 +13,7 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["action"], itemType: ["weapone"] }),
+      special: this.getItems({ actionType: ["action"], itemType: ["feat"] }),
       consumables: this.getItems({
         actionType: ["action"],
         itemType: ["consumable"],
@@ -69,13 +69,13 @@ class CombatHud {
       ac: this.actor.data.data.attributes.ac.value,
       classes: this.getClassesAsString(),
       specialItemsNames: {
-          disengage: "Disengage",
-          hide: "Hide",
-          shove: "Shove",
-          dash: "Dash",
-          dodge: "Dodge",
-          ready: "Ready",
-      }
+        disengage: "Disengage",
+        hide: "Hide",
+        shove: "Shove",
+        dash: "Dash",
+        dodge: "Dodge",
+        ready: "Ready",
+      },
     };
     this.spellSlots = this.actor.data.data.spells;
     this.resources = {
@@ -87,7 +87,7 @@ class CombatHud {
     this.sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
       ? this.sets[`set${this.actor.data.flags.enhancedcombathud?.activeSet}`]
       : this.sets.set1;
-    this.test = "test"
+    this.test = "test";
     console.log(this);
   }
   getClassesAsString() {
@@ -141,7 +141,7 @@ class CombatHud {
   }
   findItemByName(itemName) {
     let items = this.actor.data.items;
-    let item = items.find(i => i.data.name==itemName);
+    let item = items.find((i) => i.data.name == itemName);
     return item;
   }
   getSets() {
@@ -178,65 +178,100 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   setPosition() {
     if (!this.object) return;
-    this.rigButtons();
+    this.rigHtml();
     const position = {
       bottom: "15px",
       position: "absolute",
       left: "15px",
       "z-index": 100,
-      //transform: "scale(0.8)",
-      "transform-origin" : "left bottom",
+      transform: "scale(0.8)",
+      "transform-origin": "left bottom",
     };
     this.element.css(position);
   }
 
+  rigHtml() {
+    this.clearEmpty();
+    this.rigButtons();
+    this.rigAccordion();
+  }
+
   rigButtons() {
-    let _this = this
+    let _this = this;
     this.element.unbind("click");
-    this.element.on("click", '[data-type="trigger"]',async (event) => {
+    this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = event.currentTarget.dataset.itemname;
       await game.dnd5e.rollItemMacro(itemName);
-      let item = _this.hudData.findItemByName(itemName)
-      event.currentTarget.dataset.itemCount = item.data.data.quantity
+      let item = _this.hudData.findItemByName(itemName);
+      if (!item) {
+        $(event.currentTarget).remove();
+      } else {
+        event.currentTarget.dataset.itemCount = item.data.data.quantity;
+      }
     });
-    this.element.on("click", '[data-type="menu"]',(event) => {
+    this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
-      $(_this.element).find('div[data-iscontainer="true"]').removeClass("show")
-      $(_this.element).find(`div[class="features-container ${category}"]`).addClass("show")
+      $(_this.element).find('div[data-iscontainer="true"]').removeClass("show");
+      $(_this.element)
+        .find(`div[class="features-container ${category}"]`)
+        .addClass("show");
     });
+  }
 
-    // Feature Accordion
+  rigAccordion() {
     let spellHudWidth = 0;
-    this.element.find('.features-accordion').each((index, element) => {
+    this.element.find(".features-accordion").each((index, element) => {
       let $element = $(element);
-      let numberOfFeatures = $element.find('.feature-element').length;
+      let numberOfFeatures = $element.find(".feature-element").length;
 
-      spellHudWidth += numberOfFeatures > 3 ? (450 + 53) : ((numberOfFeatures * 150) + 53);
+      spellHudWidth +=
+        numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53;
 
       $element.css({
-        width: `${numberOfFeatures > 3 ? (450 + 53) : ((numberOfFeatures * 150) + 53)}px`
+        width: `${
+          numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53
+        }px`,
       });
-      $element.find('.features-accordion-content').css({
-        'min-width': `${numberOfFeatures > 3 ? (450) : ((numberOfFeatures * 150))}px`
+      $element.find(".features-accordion-content").css({
+        "min-width": `${numberOfFeatures > 3 ? 450 : numberOfFeatures * 150}px`,
       });
-    })
+    });
 
     // If container is smaller than window size, then open containers.
-    this.element.find('.features-accordion').toggleClass('show', spellHudWidth < $(window).width());
+    this.element
+      .find(".features-accordion")
+      .toggleClass("show", spellHudWidth < $(window).width());
 
     // If container is larger than window, allow accordion usage
     if (spellHudWidth > $(window).width()) {
-      this.element.on('click', '.feature-accordion-title', (event) => {
+      this.element.on("click", ".feature-accordion-title", (event) => {
         let $element = $(event.currentTarget);
-        let $accordion = $element.closest('.features-accordion');
-        let $container = $element.closest('.features-container');
+        let $accordion = $element.closest(".features-accordion");
+        let $container = $element.closest(".features-container");
 
         if ($container.width() + 503 > $(window).width()) {
-          $container.find('.features-accordion').removeClass('show');
+          $container.find(".features-accordion").removeClass("show");
         }
-        
-        $accordion.toggleClass('show');
-      })
+
+        $accordion.toggleClass("show");
+      });
+    }
+  }
+
+  clearEmpty() {
+    let menuButtons = $(this.element).find('[data-type="menu"]');
+    for (let button of menuButtons) {
+      let category = button.dataset.actiontype;
+      let itemType = button.dataset.itemtype;
+      let objectToCheck = this.hudData[category][itemType];
+      if (
+        objectToCheck == [] ||
+        objectToCheck == {} ||
+        !objectToCheck ||
+        objectToCheck.length == 0
+      ) {
+        $(button).remove();
+      }
     }
   }
 }
