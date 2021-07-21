@@ -75,12 +75,44 @@ class CombatHud{
         }
     }
     _render(){
-        new CombatHudCanvasElement(this)
+        canvas.hud.enhancedcombathud.bind(this)
     }
 }
 
-class CombatHudCanvasElement{
-    constructor(combatHud){
-        this.data = combatHud;
-    }
+class CombatHudCanvasElement extends BasePlaceableHUD{
+
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        options.classes = options.classes.concat(["levels-tooltip"]);
+        options.template = "modules/enhancedcombathud/templates/ActionHUD.html";
+        options.id = "id";
+        return options;
+      }
+
+      getData() {
+        const data = super.getData();
+        return data;
+      }
+    
+      setPosition() {
+        if (!this.object) return;
+        let posleft = this.object.center.x - this.object.width / 2;
+        let postop = this.object.center.y - this.object.height / 2;
+        const position = {
+          width: canvas.grid.size * 1.2,
+          height: canvas.grid.size * 0.8,
+          left: posleft,
+          top: postop,
+          "font-size": canvas.grid.size / 3.5 + "px",
+          display: "grid",
+        };
+        this.element.css(position);
+      }
 }
+  
+  Hooks.once("init", () => {
+    Hooks.on("renderHeadsUpDisplay", async (app, html, data) => {
+      html.append('<template id="levels-tooltip"></template>');
+      canvas.hud.enhancedcombathud = new CombatHudCanvasElement();
+    });
+  });
