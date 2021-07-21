@@ -83,9 +83,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD{
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        options.classes = options.classes.concat(["levels-tooltip"]);
         options.template = "modules/enhancedcombathud/templates/ActionHUD.html";
-        options.id = "id";
+        options.id = "enhancedcombathud";
         return options;
       }
 
