@@ -1,7 +1,21 @@
 <form id="{{id}}" class="{{classes}}" data-appid="{{appId}}" autocomplete="off"></form>
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
-	<div class="actions-container has-actions actions-used" data-title="Main Actions">
+	<div class="features-container is-spell show">
+		{{#hudData.actions.spells}}
+			{{#this}}
+			<div class="feature-element" style="background-image: url(http://localhost:30000/systems/dnd5e/icons/spells/fireball-eerie-1.jpg)">
+				<span class="feature-element-title">{{data.name}}</span>
+			</div>
+			{{/this}}
+		{{/hudData.actions.spells}}
+  	</div>
+    <div class="features-container is-consumable">
+    	<div class="feature-element" style="background-image: url(http://localhost:30000/systems/dnd5e/icons/spells/fireball-eerie-1.jpg)">
+          <span class="feature-element-title">Healing Potion</span>
+      	</div>
+  	</div>
+	<div class="actions-container has-actions" data-title="Main Actions">
 		<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
 			<span class="action-element-title">Attact</span>
       	</div>

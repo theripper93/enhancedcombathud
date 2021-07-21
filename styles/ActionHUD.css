@@ -15,9 +15,11 @@
 }
 
 .extended-combat-hud {
-  color: var(--theme-fore-color);
+  bottom: 15px;
   display: flex;
   flex-direction: row;
+  position: absolute;
+  z-index: 100;
 }
 
 .actions-container {
@@ -126,13 +128,55 @@
   text-transform: uppercase;
   width: 100%;
 }
-
+.action-element-container {
+  display: flex;
+  flex-direction: column;
+}
 .action-element-container .action-element {
-  min-height: 100px;
-  min-width: 125px;
+  flex: 1;
+  min-height: 0px;
+  min-width: 105px;
   padding-bottom: 2rem;
 }
 .action-element-container .action-element .action-element-title {
   height: 2rem;
   text-transform: lowercase;
+}
+
+.features-container {
+  bottom: 270px;
+  display: none;
+  flex-direction: row;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 0.5rem;
+  position: absolute;
+}
+.features-container.show {
+  display: flex;
+}
+.feature-element {
+  background: purple no-repeat center;
+  background-origin: content-box;
+  background-size: cover;
+  border: 1px solid var(--theme-border-color);
+  height: 100px;
+  margin-bottom: 3rem;
+  position: relative;
+  width: 150px;
+
+  cursor: pointer;
+}
+.feature-element-title {
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background-color: rgb(0 0 0 / 30%);
+  border: 1px solid var(--theme-border-color);
+  bottom: -3rem;
+  display: flex;
+  height: 3rem;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
 }
