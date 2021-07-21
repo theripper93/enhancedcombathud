@@ -1,5 +1,6 @@
 class CombatHud{
     constructor(token){
+        this.token=token
         this.actor = token.actor;
         this.actions = {
             attack: this.getItems({actionType:["action"],itemType:["weapon"],equipped:true}),
@@ -35,6 +36,7 @@ class CombatHud{
             bonus: true,
             other: true,
         }
+        this.sets = this.getSets()
         console.log(this)
 
     }
@@ -74,8 +76,18 @@ class CombatHud{
             return filteredItems
         }
     }
+
+    getSets(){
+        let items = this.actor.data.items
+        let set1 = []
+        let set2 = []
+        for(let item of items){
+            if(item.data.flags.enhancedcombathud?.set1) set1.push(item)
+            if(item.data.flags.enhancedcombathud?.set2) set2.push(item)
+        }
+    }
     _render(){
-        canvas.hud.enhancedcombathud.bind(this)
+        canvas.hud.enhancedcombathud.bind(this.token)
     }
 }
 
@@ -83,8 +95,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD{
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        options.template = "modules/enhancedcombathud/templates/ActionHUD.html";
+        options.template = "modules/enhancedcombathud/templates/extendedCombatHud.html";
         options.id = "enhancedcombathud";
+        
         return options;
       }
 
@@ -95,16 +108,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD{
     
       setPosition() {
         if (!this.object) return;
-        let posleft = this.object.center.x - this.object.width / 2;
-        let postop = this.object.center.y - this.object.height / 2;
+        this.options.hudData = new CombatHud(this.object)
         const position = {
-          width: canvas.grid.size * 1.2,
-          height: canvas.grid.size * 0.8,
-          left: posleft,
-          top: postop,
-          "font-size": canvas.grid.size / 3.5 + "px",
-          display: "grid",
-        };
+            bottom: "15px",
+            position: "absolute",
+            "z-index": 100,
+          }
         this.element.css(position);
       }
 }
