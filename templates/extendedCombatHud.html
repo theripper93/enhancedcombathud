@@ -1,88 +1,106 @@
-<form id="{{id}}" class="{{classes}}" data-appid="{{appId}}" autocomplete="off"></form>
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
-	<div class="features-container is-spells" data-iscontainer="true">
-		{{#each hudData.actions.spells}}
-		<div class="features-accordion">
-			<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
-			<div class="features-accordion-content">
-			{{#each this}}
-				<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-					<span class="feature-element-title">{{data.name}}</span>
-				</div>
+	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
+		<div class="portrait-stat-block">
+			<span>HP</span> 
+			<span style="font-size: 1.5rem;">{{hudData.actor.data.data.attributes.hp.value}}</span>
+			<span>of {{hudData.actor.data.data.attributes.hp.max}} HP</span>
+		</div>
+		<div class="portrait-stat-block">
+			<span>AC</span> 
+			<span style="font-size: 1.5rem;">{{hudData.actor.data.data.attributes.ac.value}}</span>
+		</div>
+		<div class="portrait-stat-block player-details">
+			<span class="player-name">{{hudData.actor.data.name}}</span>
+			{{#each hudData.actor.data.data.classes}}
+				<span class="player-detail">
+					LVL {{levels}} {{@key}} ({{subclass}})
+				</span>
 			{{/each}}
+		</div>
+	</div>
+	<div class="action-hud">
+		<div class="features-container is-spells" data-iscontainer="true">
+			{{#each hudData.actions.spells}}
+			<div class="features-accordion">
+				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
+				<div class="features-accordion-content">
+				{{#each this}}
+					<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+						<span class="feature-element-title">{{data.name}}</span>
+					</div>
+				{{/each}}
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		<div class="features-container is-consumables" data-iscontainer="true">
+			{{#each hudData.actions.consumables}}
+			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.quantity}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<span class="feature-element-title">{{data.name}}</span>
+			</div>
+			{{/each}}
+		</div>
+		<div class="features-container is-powers" data-iscontainer="true">
+			{{#each hudData.actions.special}}
+			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<span class="feature-element-title">{{data.name}}</span>
+			</div>
+			{{/each}}
+		</div>
+		<div class="actions-container has-actions" data-actionbartype="action" data-title="Main Actions">
+			<div class="action-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
+				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
+			</div>
+			<div class="action-element-container">
+				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
+					<span class="action-element-title">disengage</span>
+				</div>
+				<div class="action-element" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
+					<span class="action-element-title">dodge</span>
+				</div>
+			</div>
+			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
+				<span class="action-element-title">Cast Spell</span>
+			</div>
+			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
+				<span class="action-element-title">Use Power</span>
+			</div>
+			<div class="action-element-container">
+			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
+				<span class="action-element-title">Ready</span>
+			</div>
+			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
+				<span class="action-element-title">Hide</span>
 			</div>
 		</div>
-		{{/each}}
-  	</div>
-    <div class="features-container is-consumables" data-iscontainer="true">
-		{{#each hudData.actions.consumables}}
-    	<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.quantity}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-          <span class="feature-element-title">{{data.name}}</span>
-      	</div>
-		{{/each}}
-  	</div>
-	  <div class="features-container is-powers" data-iscontainer="true">
-		{{#each hudData.actions.special}}
-    	<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-          <span class="feature-element-title">{{data.name}}</span>
-      	</div>
-		{{/each}}
-  	</div>
-	<div class="actions-container has-actions" data-actionbartype="action" data-title="Main Actions">
-		<div class="action-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
-			<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
-      	</div>
-      	<div class="action-element-container">
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
-				<span class="action-element-title">disengage</span>
-      		</div>
-          	<div class="action-element" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
-				<span class="action-element-title">dodge</span>
-      		</div>
-      	</div>
-      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
-			<span class="action-element-title">Cast Spell</span>
-      	</div>
-      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
-			<span class="action-element-title">Use Power</span>
-      	</div>
-		  <div class="action-element-container">
-      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
-			<span class="action-element-title">Ready</span>
-      	</div>
-      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
-			<span class="action-element-title">Hide</span>
-      	</div>
+			<div class="action-element-container">
+				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dash}}" style="background-image: url(modules/enhancedcombathud/icons/walking-boot.svg)">
+					<span class="action-element-title">dash</span>
+				</div>
+				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.shove}}" style="background-image: url(modules/enhancedcombathud/icons/shield-bash.svg)">
+					<span class="action-element-title">shove</span>
+				</div>
+			</div>
+			<div class="action-element"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables" style="background-image: url(modules/enhancedcombathud/icons/drink-me.svg)">
+				<span class="action-element-title">Use Item</span>
+			</div>
+		</div>
+		
+		<div class="actions-container" data-title="Reactions">
+			<div class="action-element">
+				<span class="action-element-title">Testing1</span>
+			</div>
+		</div>
+		<div class="actions-container" data-title="Bonus">
+			<div class="action-element bonus-action">
+				<span class="action-element-title">Testing1</span>
+			</div>
+		</div>
+		<div class="actions-container" data-title="Pass">
+			<div class="action-element end-turn">
+				<span class="action-element-title">End Turn</span>
+			</div>
+		</div>
 	</div>
-      	<div class="action-element-container">
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dash}}" style="background-image: url(modules/enhancedcombathud/icons/walking-boot.svg)">
-				<span class="action-element-title">dash</span>
-      		</div>
-          	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.shove}}" style="background-image: url(modules/enhancedcombathud/icons/shield-bash.svg)">
-				<span class="action-element-title">shove</span>
-      		</div>
-      	</div>
-      	<div class="action-element"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables" style="background-image: url(modules/enhancedcombathud/icons/drink-me.svg)">
-			<span class="action-element-title">Use Item</span>
-      	</div>
-  	</div>
-  
-  
-  	<div class="actions-container" data-title="Reactions">
-      	<div class="action-element">
-			<span class="action-element-title">Testing1</span>
-      	</div>
-  	</div>
-  	<div class="actions-container" data-title="Bonus">
-      	<div class="action-element bonus-action">
-			<span class="action-element-title">Testing1</span>
-      	</div>
-    </div>
-  	<div class="actions-container" data-title="Pass">
-      	<div class="action-element end-turn">
-			<span class="action-element-title">End Turn</span>
-      	</div>
-  	</div>
 </div>
-</form>

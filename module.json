@@ -24,6 +24,7 @@
       "./scripts/items.js"
   ],
   "styles": [
+      "./styles/ECH.css",
       "./styles/CombatHUD.css",
       "./styles/ActionHUD.css",
       "./styles/PortraitHUD.css"
