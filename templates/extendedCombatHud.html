@@ -13,12 +13,12 @@
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
 		<div class="portrait-stat-block">
 			<span>HP</span> 
-			<span style="font-size: 1.5rem;">{{hudData.actor.data.data.attributes.hp.value}}</span>
-			<span>of {{hudData.actor.data.data.attributes.hp.max}} HP</span>
+			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}" style="font-size: 1.5rem;"></span>
+			<span data-hp-max="{{hudData.actor.data.data.attributes.hp.max}}"></span>
 		</div>
 		<div class="portrait-stat-block">
 			<span>AC</span> 
-			<span style="font-size: 1.5rem;">{{hudData.actor.data.data.attributes.ac.value}}</span>
+			<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}" style="font-size: 1.5rem;"></span>
 		</div>
 		<div class="portrait-stat-block player-details">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
