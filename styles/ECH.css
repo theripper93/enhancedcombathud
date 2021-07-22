@@ -41,3 +41,24 @@
 .extended-combat-hud :after {
   box-sizing: border-box;
 }
+
+.ech-swords{
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url(../icons/crossed-swords.svg) no-repeat center;
+    background-size: contain;
+    filter:brightness(0.7);
+    padding: 5px;
+    background-origin: content-box;
+
+}
+
+.control-tool:hover .ech-swords, .control-tool:focus .ech-swords, .control-tool:active .ech-swords,.active > .ech-swords{
+    filter: brightness(1);
+}
+
+.token-info-container .control-icon .ech-swords {
+	filter: brightness(1);
+	padding: 10px;
+}

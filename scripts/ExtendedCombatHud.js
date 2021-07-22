@@ -217,7 +217,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.rigHtml();
     const position = {
       "z-index": 100,
-      transform: "scale(0.8)",
+      transform: "scale(1)",
     };
     this.element.css(position);
   }
@@ -232,7 +232,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let _this = this;
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
-      let itemName = event.currentTarget.dataset.itemname;
+      let itemName = $(event.currentTarget).data('itemname');
       await this.addSpecialItem(itemName)
       await game.dnd5e.rollItemMacro(itemName); 
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
@@ -332,8 +332,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     //this.updateSetElement(secondary, this.hudData.sets.active.secondary);
   }
   updateSetElement(element, item) {
+    console.log(element, item);
     element
       .data("itemname", item.name)
+      .prop('data-itemname', item.name)
       .css({ "background-image": `url(${item.data.img})` })
       .find(".action-element-title")
       .text(item.name);

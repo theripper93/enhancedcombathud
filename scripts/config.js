@@ -40,22 +40,30 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
     .before(confightml);
 });
 
-
-
 Hooks.on("getSceneControlButtons", (controls, b, c) => {
-    if (!_patrol) _patrol = Patrol.get();
     controls.find(x => x.name == "token").tools.push({
       active: false,
       icon: "ech-swords",
       name: "echtoggle",
       title: "Toggle",
       onClick: (toggle) => {
-        if(toggle){
+        if(toggle) {
           canvas.hud.enhancedcombathud.bind(_token)
         }else{
           canvas.hud.enhancedcombathud.clear()
         }
+
+        $('.ech-swords').parent().toggleClass('active', toggle);
       },
-      toggle: true,
+      toggle: true
     });
+});
+Hooks.on('renderTokenHUD', (app, html, data) => { 
+  let $tokenHUDButton = $(`<div class="control-icon echtoggle"><i class="ech-swords"></i></div>`);
+  $tokenHUDButton.toggleClass('active', $('.control-tool[data-tool="echtoggle"]').hasClass('active'));
+
+  html.find('.col.left').prepend($tokenHUDButton);
+  html.find('.col.left').on('click', '.control-icon.echtoggle', (event) => {
+    $('.control-tool[data-tool="echtoggle"]').trigger('click');
+  })
 });

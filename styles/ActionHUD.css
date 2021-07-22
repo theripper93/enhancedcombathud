@@ -1,5 +1,3 @@
-
-
 .action-hud {
   align-items: flex-end;
   display: flex;
@@ -72,7 +70,7 @@
   background-size: cover;
 }
 
-.action-element[data-item-count]:before {
+.action-element.has-count:before {
   border-top: 4rem solid var(--ech-color);
   border-right: 4rem solid transparent;
   content: "";
@@ -83,7 +81,7 @@
   top: 0px;
   width: 0;
 }
-.action-element[data-item-count]:after {
+.action-element.has-count:after {
   align-items: center;
   content: attr(data-item-count);
   display: flex;
@@ -148,6 +146,30 @@
   height: 2rem;
   text-transform: lowercase;
 }
+
+/* DO NOT LIKE
+.actions-container {
+  width: calc(175px + 1rem);
+  transition: width 0.3s ease-in-out;
+}
+.actions-container > .action-element,
+.actions-container > .action-element-container {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+.actions-container > .action-element.primary-element {
+  transform: scaleX(1) !important;
+}
+
+.actions-container.expand {
+  width: auto;
+}
+.actions-container.expand > .action-element,
+.actions-container.expand > .action-element-container {
+  transform: scaleX(1);
+}
+*/
 
 .features-container {
   bottom: 270px;
@@ -233,7 +255,7 @@
   margin-right: 0rem;
 }
 
-.feature-element[data-item-count]:before {
+.feature-element.has-count:before {
   border-top: 4rem solid var(--ech-color);
   border-right: 4rem solid transparent;
   content: "";
@@ -244,7 +266,7 @@
   top: 0px;
   width: 0;
 }
-.feature-element[data-item-count]:after {
+.feature-element.has-count:after {
   align-items: center;
   content: attr(data-item-count);
   display: flex;
