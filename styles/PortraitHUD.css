@@ -55,3 +55,86 @@
     width: 100%;
     white-space: nowrap;
 }
+
+.weapon-sets {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: calc((-50px - 1rem));
+}
+
+.weapon-set {
+    align-items: center;
+    backdrop-filter: blur(6px);
+    background-color: rgb(0 0 0 / 50%);
+    border: 1px solid var(--ech-border-color);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 15px; 
+
+    pointer-events: all;
+}
+.weapon-set:before {
+    background-color: rgba(0 0 0 / 0.7);
+    border-radius: 0%;
+    border: 1px solid var(--ech-border-color);
+    content: '';
+    height: 0px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-in-out;
+    width: 0px;
+}
+.weapon-set:hover:before,
+.weapon-set.active:before {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+}
+.weapon-set.active:after {
+    background-color: var(--ech-border-color);
+    border-radius: 50%;
+    content: '';
+    height: 15px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+}
+.weapon-set > .set {
+    background: no-repeat center;
+    background-origin: border-box;
+    background-size: cover;
+    height: 50px;
+    min-width: 50px;
+}
+
+.weapon-set > .set.set-primary:before,
+.weapon-set > .set.set-primary:after {
+    border-left: 2px solid var(--ech-border-color);
+    content: '';
+    height: 25px;
+    left: 50%;
+    position: absolute;
+    top: 0px;
+    transform: translateX(-50%);
+    width: 0px;
+}
+.weapon-set > .set.set-primary:after {
+    transform: translate(-50%, 25px);
+}
+.weapon-set:hover > .set.set-primary:before,
+.weapon-set:hover > .set.set-primary:after,
+.weapon-set.active > .set.set-primary:before,
+.weapon-set.active > .set.set-primary:after {
+    height: 12.5px;
+}
+.weapon-set:hover > .set.set-primary:after,
+.weapon-set.active > .set.set-primary:after {
+    transform: translate(-50%, 37.5px);
+}

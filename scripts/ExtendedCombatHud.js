@@ -256,6 +256,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         .find(`div[class="features-container ${category}"]`)
         .toggleClass("show", $(event.currentTarget).hasClass('active'));
     });
+    this.element.on("click", '[data-type="switchWeapons"]', async (event) => {
+      let $element = $(event.currentTarget);
+
+      if (!$element.hasClass('active')) {
+        $(this.element).find('[data-type="switchWeapons"].active').removeClass('active');
+        $element.addClass('active');
+        this.switchSets();
+      }
+    });
   }
 
   rigAccordion() {

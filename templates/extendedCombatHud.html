@@ -1,5 +1,15 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
+	<div class="weapon-sets">
+		<div class="weapon-set active" data-type="switchWeapons" data-value="primary">
+			<div class="set set-primary" style="background-image: url({{hudData.sets.set1.primary.data.img}})"></div>
+			<div class="set set-secondary" style="background-image: url({{hudData.sets.set1.secondary.data.img}})"></div>
+		</div>
+		<div class="weapon-set" data-type="switchWeapons" data-value="secondary">
+			<div class="set set-primary" style="background-image: url({{hudData.sets.set2.primary.data.img}})"></div>
+			<div class="set set-secondary" style="background-image: url({{hudData.sets.set2.secondary.data.img}})"></div>
+		</div>
+	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
 		<div class="portrait-stat-block">
 			<span>HP</span> 

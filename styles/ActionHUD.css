@@ -72,7 +72,7 @@
   background-size: cover;
 }
 
-.action-element.has-count:before {
+.action-element[data-item-count]:before {
   border-top: 4rem solid var(--ech-color);
   border-right: 4rem solid transparent;
   content: "";
@@ -83,7 +83,7 @@
   top: 0px;
   width: 0;
 }
-.action-element.has-count:after {
+.action-element[data-item-count]:after {
   align-items: center;
   content: attr(data-item-count);
   display: flex;
@@ -233,7 +233,7 @@
   margin-right: 0rem;
 }
 
-.feature-element.has-count:before {
+.feature-element[data-item-count]:before {
   border-top: 4rem solid var(--ech-color);
   border-right: 4rem solid transparent;
   content: "";
@@ -244,7 +244,7 @@
   top: 0px;
   width: 0;
 }
-.feature-element.has-count:after {
+.feature-element[data-item-count]:after {
   align-items: center;
   content: attr(data-item-count);
   display: flex;
