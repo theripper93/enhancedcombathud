@@ -87,7 +87,11 @@ class CombatHud {
     this.sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
       ? this.sets[`set${this.actor.data.flags.enhancedcombathud?.activeSet}`]
       : this.sets.set1;
-    this.test = "test";
+    this.resources = {
+      action: true,
+      bonus: true,
+      reaction: true,
+    };
     console.log(this);
   }
   getClassesAsString() {
@@ -146,16 +150,48 @@ class CombatHud {
   }
   getSets() {
     let items = this.actor.data.items;
-    let set1 = [];
-    let set2 = [];
+    let sets = {
+      set1: {
+        primary: null,
+        secondary: null,
+      },
+      set2: {
+        primary: null,
+        secondary: null,
+      },
+    };
     for (let item of items) {
-      if (item.data.flags.enhancedcombathud?.set1) set1.push(item);
-      if (item.data.flags.enhancedcombathud?.set2) set2.push(item);
+      if (item.data.flags.enhancedcombathud?.set1p) sets.set1.primary = item;
+      if (item.data.flags.enhancedcombathud?.set2p) sets.set2.primary = item;
+      if (item.data.flags.enhancedcombathud?.set1s) sets.set1.secondary = item;
+      if (item.data.flags.enhancedcombathud?.set2s) sets.set2.secondary = item;
     }
-    return { set1: set1, set2: set2 };
+    return sets;
   }
   _render() {
     canvas.hud.enhancedcombathud.bind(this.token);
+  }
+  switchSets() {
+    if (this.sets.active == this.sets.set1) {
+      this.sets.active = this.sets.set2;
+    } else {
+      this.sets.active = this.sets.set1;
+    }
+  }
+  set hasAction(value) {
+    $(canvas.hud.enhancedcombathud.element)
+      .find('.actions-container.has-actions[data-actionbartype="action"]')
+      .toggleClass("actions-used", !value);
+  }
+  set hasReaction(value) {
+    $(canvas.hud.enhancedcombathud.element)
+      .find('.actions-container.has-actions[data-actionbartype="reaction"]')
+      .toggleClass("actions-used", !value);
+  }
+  set hasBonus(value) {
+    $(canvas.hud.enhancedcombathud.element)
+      .find('.actions-container.has-actions[data-actionbartype="bonus"]')
+      .toggleClass("actions-used", !value);
   }
 }
 
@@ -201,8 +237,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = event.currentTarget.dataset.itemname;
-      await game.dnd5e.rollItemMacro(itemName);
-      let item = _this.hudData.findItemByName(itemName);
+      debugger
+      await this.addSpecialItem(itemName)
+      await game.dnd5e.rollItemMacro(itemName); 
+      let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
+      this.updateActionEconomy(item.data?.data?.activation?.type ?? item.data.activation.type);
       if (!item) {
         $(event.currentTarget).remove();
       } else {
@@ -274,6 +313,46 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       }
     }
   }
+
+  switchSets() {
+    this.hudData.switchSets();
+    let primary = $(this.element).find('div[data-set="setp"]');
+    let secondary = $(this.element).find('div[data-set="sets"]');
+    this.updateSetElement(primary, this.hudData.sets.active.primary);
+    //this.updateSetElement(secondary, this.hudData.sets.active.secondary);
+  }
+  updateSetElement(element, item) {
+    element
+      .data("itemname", item.name)
+      .css({ "background-image": `url(${item.data.img})` })
+      .find(".action-element-title")
+      .text(item.name);
+  }
+
+  resetActionsUses() {
+    this.hudData.hasAction = true;
+    this.hudData.hasBonus = true;
+    this.hudData.hasReaction = true;
+  }
+
+  updateActionEconomy(actionType) {
+    switch (actionType) {
+      case "action":
+        this.hudData.hasAction = false;
+        break;
+      case "bonus":
+        this.hudData.hasBonus = false;
+        break;
+      case "reaction":
+        this.hudData.hasReaction = false;
+        break;
+    }
+  }
+
+  async addSpecialItem(itemName){
+    if(!ECHItems[itemName]) return
+    await this.hudData.actor.createOwnedItem(ECHItems[itemName])
+  }
 }
 
 Hooks.once("init", () => {
@@ -282,3 +361,5 @@ Hooks.once("init", () => {
     canvas.hud.enhancedcombathud = new CombatHudCanvasElement();
   });
 });
+
+

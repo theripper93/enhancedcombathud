@@ -20,7 +20,8 @@
   "scripts": [
       "./scripts/main.js",
       "./scripts/config.js",
-      "./scripts/ExtendedCombatHud.js"
+      "./scripts/ExtendedCombatHud.js",
+      "./scripts/items.js"
   ],
   "styles": [
       "./styles/CombatHUD.css",

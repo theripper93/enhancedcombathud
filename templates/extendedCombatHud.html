@@ -29,41 +29,41 @@
       	</div>
 		{{/each}}
   	</div>
-	<div class="actions-container has-actions" data-title="Main Actions">
-		<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
-			<span class="action-element-title">Attact</span>
+	<div class="actions-container has-actions" data-actionbartype="action" data-title="Main Actions">
+		<div class="action-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
+			<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
       	</div>
       	<div class="action-element-container">
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
 				<span class="action-element-title">disengage</span>
       		</div>
-          	<div class="action-element" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+          	<div class="action-element" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
 				<span class="action-element-title">dodge</span>
       		</div>
       	</div>
-      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 			<span class="action-element-title">Cast Spell</span>
       	</div>
-      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
 			<span class="action-element-title">Use Power</span>
       	</div>
 		  <div class="action-element-container">
-      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
 			<span class="action-element-title">Ready</span>
       	</div>
-      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+      	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
 			<span class="action-element-title">Hide</span>
       	</div>
 	</div>
       	<div class="action-element-container">
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dash}}" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dash}}" style="background-image: url(modules/enhancedcombathud/icons/walking-boot.svg)">
 				<span class="action-element-title">dash</span>
       		</div>
-          	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.shove}}" style="background-image: url(https://cdn.streamelements.com/uploads/1a5fdeb0-9a35-45b9-a4a5-2662229304a5.png)">
+          	<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.shove}}" style="background-image: url(modules/enhancedcombathud/icons/shield-bash.svg)">
 				<span class="action-element-title">shove</span>
       		</div>
       	</div>
-      	<div class="action-element has-count"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables"  data-item-count="3" style="background-image: url(https://cdn.streamelements.com/uploads/dcb630cd-1f3f-4c94-bd33-6008fe46e646.png)">
+      	<div class="action-element"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables" style="background-image: url(modules/enhancedcombathud/icons/drink-me.svg)">
 			<span class="action-element-title">Use Item</span>
       	</div>
   	</div>

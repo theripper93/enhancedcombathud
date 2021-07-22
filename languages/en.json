@@ -1,5 +1,7 @@
 {
     "enhancedcombathud.itemconfig.sets.text":"Weapon Sets",
-    "enhancedcombathud.itemconfig.set1.text":"Set 1",
-    "enhancedcombathud.itemconfig.set2.text":"Set 2"
+    "enhancedcombathud.itemconfig.set1p.text":"Set 1 (Primary)",
+    "enhancedcombathud.itemconfig.set2p.text":"Set 2 (Primary)",
+    "enhancedcombathud.itemconfig.set1s.text": "Set 1 (Secondary)",
+    "enhancedcombathud.itemconfig.set2s.text": "Set 2 (Secondary)"
 }

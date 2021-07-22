@@ -93,6 +93,12 @@
   position: relative;
   transition: all 0.3s ease-in-out;
 }
+
+.action-element[data-set=setp]{
+  background-origin: border-box;
+  background-size: cover;
+}
+
 .action-element.has-count:before {
   border-top: 4rem solid var(--theme-color);
   border-right: 4rem solid transparent;
@@ -141,6 +147,20 @@
   text-transform: uppercase;
   width: 100%;
 }
+
+.action-element[data-set=setp] .action-element-title{
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background-color: rgb(0 0 0 / 30%);
+  border-top: 1px solid var(--theme-border-color);
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  position: absolute;
+  width: 100%;
+}
+
 .action-element-container {
   display: flex;
   flex-direction: column;
