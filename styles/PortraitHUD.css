@@ -32,6 +32,15 @@
 .portrait-stat-block > span {
     padding: 0.2rem 0rem;
 }
+.portrait-stat-block [data-hp-value]:after {
+    content: attr(data-hp-value);
+}
+.portrait-stat-block [data-hp-max]:after {
+    content: "of " attr(data-hp-value) " HP";
+}
+.portrait-stat-block [data-ac-value]:after {
+    content: attr(data-ac-value);
+}
 .portrait-stat-block.player-details {
     align-items: flex-start;
     background-color: rgba(0 0 0 / 0.1);
