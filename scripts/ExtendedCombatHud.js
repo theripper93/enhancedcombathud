@@ -374,6 +374,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
+  updatePortrait(hp,maxhp,ac){
+    let acelement = $(this.element).find("test")
+    let hpelemetn = $(this.element).find("test2")
+
+  }
+
   async addSpecialItem(itemName){
     if(!ECHItems[itemName]) return
     await this.hudData.actor.createOwnedItem(ECHItems[itemName])
@@ -387,4 +393,21 @@ Hooks.once("init", () => {
   });
 });
 
+Hooks.on("updateActor",(actor,updates)=>{
+  if( actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id && ("data.attributes.ac.value" in updates || "data.attributes.hp.value" in updates || "data.attributes.hp.max" in updates)){
+    let ad = actor.data.data.attributes
+    canvas.hud.enhancedcombathud.updatePortrait(ad.hp.value,ad.hp.max,ad.ac.value)
+  }
+})
 
+Hooks.on("updateActiveEffect",(activeEffect,updates)=>{
+  let actor = activeEffect.parent
+  if(!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id) return
+  let ad = actor.data.data.attributes
+  for(let change of activeEffect.data.changes[0]){
+    if(change.key == "data.attributes.ac.value"){
+      canvas.hud.enhancedcombathud.updatePortrait(ad.hp.value,ad.hp.max,ad.ac.value)
+      return
+    }
+  }
+})
