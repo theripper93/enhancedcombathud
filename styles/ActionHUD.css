@@ -65,7 +65,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.action-element[data-set=setp]{
+.action-element[data-set=setp],.action-element[data-set=sets]{
   background-origin: border-box;
   background-size: cover;
 }

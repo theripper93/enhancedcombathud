@@ -30,7 +30,7 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["bonus"], itemType: ["weapone"] }),
+      special: this.getItems({ actionType: ["bonus"], itemType: ["weapon"] }),
       consumables: this.getItems({
         actionType: ["bonus"],
         itemType: ["consumable"],
@@ -49,14 +49,16 @@ class CombatHud {
       }),
       special: this.getItems({
         actionType: ["reaction"],
-        itemType: ["weapone"],
+        itemType: ["weapon"],
       }),
       consumables: this.getItems({
         actionType: ["reaction"],
         itemType: ["consumable"],
       }),
     };
-    this.special = {};
+    this.free = {
+      special: this.getItems({ actionType: ["special"], itemType: ["feat"] }),
+    };
     this.other = {
       portrait: this.actor.data.img,
       name: this.actor.data.name,
@@ -171,12 +173,19 @@ class CombatHud {
   _render() {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
-  switchSets() {
+  async switchSets() {
     if (this.sets.active == this.sets.set1) {
+      await this.sets.set1.primary.update({"data.equipped": false})
+      await this.sets.set1.secondary.update({"data.equipped": false})
       this.sets.active = this.sets.set2;
     } else {
+      await this.sets.set2.primary.update({"data.equipped": false})
+      await this.sets.set2.secondary.update({"data.equipped": false})
       this.sets.active = this.sets.set1;
     }
+
+    await this.sets.active.primary.update({"data.equipped": true})
+    await this.sets.active.secondary.update({"data.equipped": true})
   }
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
@@ -217,7 +226,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.rigHtml();
     const position = {
       "z-index": 100,
-      transform: "scale(1)",
+      transform: "scale(0.5)",
     };
     this.element.css(position);
   }
@@ -245,16 +254,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
+      let actionType = event.currentTarget.dataset.actiontype;
+      let isActive = $(event.currentTarget).hasClass("active");
+      // data-containeractiontype="actions"
+      //data-actiontype="bonus" 
       // Hide Open Menus
-      $(_this.element).find('div[data-iscontainer="true"]').removeClass("show");
+      $(_this.element).find(`div[data-iscontainer="true"]`).removeClass("show");
       // Remove Active State from Menu Toggle
       $(_this.element).find('div[data-type="menu"]').removeClass("active");
       // Add Active State to Clicked Menu
-      $(event.currentTarget).toggleClass('active');
+      $(event.currentTarget).toggleClass('active', !isActive);
       // Show Active Menu
       $(_this.element)
-        .find(`div[class="features-container ${category}"]`)
-        .toggleClass("show", $(event.currentTarget).hasClass('active'));
+        .find(`div[class="features-container ${category}"][data-containeractiontype="${actionType}"]`)
+        .toggleClass("show", $(event.currentTarget).hasClass('active') && !isActive);
     });
     this.element.on("click", '[data-type="switchWeapons"]', async (event) => {
       let $element = $(event.currentTarget);
@@ -329,7 +342,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let primary = $(this.element).find('div[data-set="setp"]');
     let secondary = $(this.element).find('div[data-set="sets"]');
     this.updateSetElement(primary, this.hudData.sets.active.primary);
-    //this.updateSetElement(secondary, this.hudData.sets.active.secondary);
+    this.updateSetElement(secondary, this.hudData.sets.active.secondary);
   }
   updateSetElement(element, item) {
     console.log(element, item);
