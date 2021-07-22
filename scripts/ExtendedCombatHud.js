@@ -216,12 +216,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     if (!this.object) return;
     this.rigHtml();
     const position = {
-      bottom: "15px",
-      position: "absolute",
-      left: "15px",
       "z-index": 100,
-      transform: "scale(0.8)",
-      "transform-origin": "left bottom",
+      transform: "scale(1)",
     };
     this.element.css(position);
   }
@@ -236,8 +232,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let _this = this;
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
-      let itemName = event.currentTarget.dataset.itemname;
-      debugger
+      let itemName = $(event.currentTarget).data('itemname');
       await this.addSpecialItem(itemName)
       await game.dnd5e.rollItemMacro(itemName); 
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
@@ -250,15 +245,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
+      // Hide Open Menus
       $(_this.element).find('div[data-iscontainer="true"]').removeClass("show");
+      // Remove Active State from Menu Toggle
+      $(_this.element).find('div[data-type="menu"]').removeClass("active");
+      // Add Active State to Clicked Menu
+      $(event.currentTarget).toggleClass('active');
+      // Show Active Menu
       $(_this.element)
         .find(`div[class="features-container ${category}"]`)
-        .addClass("show");
+        .toggleClass("show", $(event.currentTarget).hasClass('active'));
+    });
+    this.element.on("click", '[data-type="switchWeapons"]', async (event) => {
+      let $element = $(event.currentTarget);
+
+      if (!$element.hasClass('active')) {
+        $(this.element).find('[data-type="switchWeapons"].active').removeClass('active');
+        $element.addClass('active');
+        this.switchSets();
+      }
     });
   }
 
   rigAccordion() {
-    let spellHudWidth = 0;
+    let spellHudWidth = 375;
     this.element.find(".features-accordion").each((index, element) => {
       let $element = $(element);
       let numberOfFeatures = $element.find(".feature-element").length;
@@ -282,7 +292,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       .toggleClass("show", spellHudWidth < $(window).width());
 
     // If container is larger than window, allow accordion usage
-    if (spellHudWidth > $(window).width()) {
+    //if (spellHudWidth > $(window).width()) {
       this.element.on("click", ".feature-accordion-title", (event) => {
         let $element = $(event.currentTarget);
         let $accordion = $element.closest(".features-accordion");
@@ -294,7 +304,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
         $accordion.toggleClass("show");
       });
-    }
+    //}
   }
 
   clearEmpty() {
@@ -322,8 +332,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     //this.updateSetElement(secondary, this.hudData.sets.active.secondary);
   }
   updateSetElement(element, item) {
+    console.log(element, item);
     element
       .data("itemname", item.name)
+      .prop('data-itemname', item.name)
       .css({ "background-image": `url(${item.data.img})` })
       .find(".action-element-title")
       .text(item.name);
