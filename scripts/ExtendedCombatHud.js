@@ -2,6 +2,29 @@ class CombatHud {
   constructor(token) {
     this.token = token;
     this.actor = token.actor;
+    this.settings = {
+      spellMode: game.settings.get("enhancedcombathud", "preparedSpells"),
+      localize: {
+        mainactions: game.i18n.localize(
+          "enhancedcombathud.hud.mainactions.name"
+        ),
+        castspell: game.i18n.localize("enhancedcombathud.hud.castspell.name"),
+        usepower: game.i18n.localize("enhancedcombathud.hud.usepower.name"),
+        useitem: game.i18n.localize("enhancedcombathud.hud.useitem.name"),
+        bonusaction: game.i18n.localize(
+          "enhancedcombathud.hud.bonusaction.name"
+        ),
+        reaction: game.i18n.localize("enhancedcombathud.hud.reaction.name"),
+        specialaction: game.i18n.localize(
+          "enhancedcombathud.hud.specialaction.name"
+        ),
+        pass: game.i18n.localize("enhancedcombathud.hud.pass.name"),
+        endturn: game.i18n.localize("enhancedcombathud.hud.endturn.name"),
+        hp: game.i18n.localize("enhancedcombathud.hud.hp.name"),
+        ac: game.i18n.localize("enhancedcombathud.hud.ac.name"),
+        of: game.i18n.localize("enhancedcombathud.hud.of.name"),
+      },
+    };
     this.actions = {
       attack: this.getItems({
         actionType: ["action"],
@@ -64,19 +87,19 @@ class CombatHud {
       name: this.actor.data.name,
       maxHp: this.actor.data.data.attributes.hp.max,
       currHp: this.actor.data.data.attributes.hp.value,
-      movement: Math.round(
-        this.actor.data.data.attributes.movement.walk /
-          canvas.dimensions.distance
-      ),
+      movement: {
+        max: Math.round(this.actor.data.data.attributes.movement.walk / canvas.dimensions.distance),
+        current: Math.round(this.actor.data.data.attributes.movement.walk / canvas.dimensions.distance),
+      },
       ac: this.actor.data.data.attributes.ac.value,
       classes: this.getClassesAsString(),
       specialItemsNames: {
-        disengage: "Disengage",
-        hide: "Hide",
-        shove: "Shove",
-        dash: "Dash",
-        dodge: "Dodge",
-        ready: "Ready",
+        disengage: game.i18n.localize("enhancedcombathud.items.disengage.name"),
+        hide: game.i18n.localize("enhancedcombathud.items.hide.name"),
+        shove: game.i18n.localize("enhancedcombathud.items.shove.name"),
+        dash: game.i18n.localize("enhancedcombathud.items.dash.name"),
+        dodge: game.i18n.localize("enhancedcombathud.items.dodge.name"),
+        ready: game.i18n.localize("enhancedcombathud.items.ready.name"),
       },
     };
     this.spellSlots = this.actor.data.data.spells;
@@ -87,17 +110,21 @@ class CombatHud {
     };
     this.sets = this.getSets();
     this.sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
-      ? this.sets[`set${this.actor.data.flags.enhancedcombathud?.activeSet}`]
+      ? this.sets[`${this.actor.data.flags.enhancedcombathud?.activeSet}`]
       : this.sets.set1;
     this.resources = {
       action: true,
       bonus: true,
       reaction: true,
     };
+
     console.log(this);
   }
   getClassesAsString() {
     let classes = this.actor.data.data.classes;
+    if (!classes) return "";
+    if (Object.keys(classes).length === 0)
+      return this.actor.labels.creatureType;
     let string = "";
     for (let [key, value] of Object.entries(classes)) {
       string += "lvl " + value.levels + " ";
@@ -106,7 +133,7 @@ class CombatHud {
         ? " (" +
           value.subclass[0].toUpperCase() +
           value.subclass.substring(1) +
-          ")"
+          ") "
         : "";
     }
     return string;
@@ -120,7 +147,11 @@ class CombatHud {
     let filteredItems = items.filter((i) => {
       let itemData = i.data;
       if (equipped === true && !itemData.data.equipped) return false;
-      if (prepared === true && itemData.data.preparation?.prepared === false)
+      if (
+        this.settings.spellMode &&
+        prepared === true &&
+        itemData.data.preparation?.prepared === false
+      )
         return false;
       if (
         actionType &&
@@ -191,6 +222,7 @@ class CombatHud {
       await this.sets.set3.secondary?.update({ "data.equipped": false });
     }
     this.sets.active = this.sets[active];
+    this.actor.setFlag("enhancedcombathud", "activeSet", active);
     await this.sets.active.primary?.update({ "data.equipped": true });
     await this.sets.active.secondary?.update({ "data.equipped": true });
   }
@@ -228,32 +260,42 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     return data;
   }
 
+  close() {
+    super.close();
+    this.toggleMacroPlayers(true);
+  }
+
   setPosition() {
     if (!this.object) return;
     this.rigHtml();
     const position = {
-      "z-index": 100
+      "z-index": 100,
+      left: game.settings.get("enhancedcombathud", "leftPos") + "px",
+      bottom: game.settings.get("enhancedcombathud", "botPos") + "px",
     };
     this.element.css(position);
+    this.toggleMacroPlayers(false);
   }
 
   rigHtml() {
     this.clearEmpty();
     this.rigButtons();
     this.rigAccordion();
-
+    this.initSets();
     this.rigAutoScale();
   }
 
   rigAutoScale() {
-    console.log('ECH: Autoscale');
-    let echHUDWidth = $('.extended-combat-hud').outerWidth();
+    console.log("ECH: Autoscale");
+    let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
-    let scale = 1 / (echHUDWidth / windowWidth);
+    let scale =
+      (1 / (echHUDWidth / windowWidth)) *
+      game.settings.get("enhancedcombathud", "scale");
 
-    $('.extended-combat-hud').css({
-      'transform': `scale(${scale > 1 ? 1 : scale})`
-    })
+    $(".extended-combat-hud").css({
+      transform: `scale(${scale > 1 ? 1 : scale})`,
+    });
   }
 
   rigButtons() {
@@ -262,16 +304,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       await this.addSpecialItem(itemName);
-      await game.dnd5e.rollItemMacro(itemName);
+      let confimed = await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
-      this.updateActionEconomy(
-        item.data?.data?.activation?.type ?? item.data.activation.type
-      );
+      if (confimed)
+        this.updateActionEconomy(
+          item.data?.data?.activation?.type ?? item.data.activation.type
+        );
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        event.currentTarget.dataset.itemCount = item.data.data.quantity || item.data.data.uses.value;
+        event.currentTarget.dataset.itemCount =
+          item.data.data.quantity || item.data.data.uses.value;
       }
+    });
+    this.element.on("click", '[data-pass="true"]', async (event) => {
+      console.log("Pass turn");
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
@@ -373,13 +420,25 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.updateSetElement(secondary, this.hudData.sets.active.secondary);
   }
   updateSetElement(element, item) {
-    if(!item) return
+    if (!item) {
+      element.css({ display: "none" });
+      return;
+    }
     element
       .data("itemname", item.name)
       .prop("data-itemname", item.name)
-      .css({ "background-image": `url(${item.data.img})` })
+      .css({ "background-image": `url(${item.data.img})`, display: "flex" })
       .find(".action-element-title")
       .text(item.name);
+  }
+  initSets() {
+    let set =
+      this.hudData.actor.data.flags.enhancedcombathud?.activeSet || "set1";
+    this.switchSets(set);
+    $(this.element)
+      .find('div[data-type="switchWeapons"]')
+      .removeClass("active");
+    $(this.element).find(`div[data-value="${set}"]`).addClass("active");
   }
 
   resetActionsUses() {
@@ -414,6 +473,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   async addSpecialItem(itemName) {
     if (!ECHItems[itemName]) return;
     await this.hudData.actor.createOwnedItem(ECHItems[itemName]);
+  }
+
+  toggleMacroPlayers(togg) {
+    $("#players").css("display", togg ? "block" : "none");
+    $("#hotbar").css("display", togg ? "flex" : "none");
   }
 }
 
@@ -454,5 +518,14 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
       );
       return;
     }
+  }
+});
+
+Hooks.on("controlToken", (token, controlled) => {
+  if (controlled && canvas.hud.enhancedcombathud?.rendered) {
+    canvas.hud.enhancedcombathud.close();
+    setTimeout(() => {
+      canvas.hud.enhancedcombathud.bind(canvas.tokens.get(token.id));
+    }, 250);
   }
 });
