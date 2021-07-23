@@ -456,6 +456,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.hudData.hasReaction = true;
   }
 
+  newRound(){
+    this.resetActionsUses()
+  }
+
   updateActionEconomy(actionType) {
     switch (actionType) {
       case "action":
@@ -540,11 +544,18 @@ Hooks.on("controlToken", (token, controlled) => {
 });
 
 Hooks.on("preUpdateToken", (token, updates) => {
-  if (canvas.hud.enhancedcombathud?.hudData.actor.id == token.actor.id && ("x" in updates || "y" in updates)) {
+  if (canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id && ("x" in updates || "y" in updates)) {
     let newX = updates.x || token.x
     let newY = updates.y || token.y
     let oldX = token.x;
     let oldY = token.y;
     
+  }
+});
+
+Hooks.on("updateCombat", (combat, updates) => {
+  debugger
+  if (canvas.hud.enhancedcombathud?.hudData && "round" in updates) {
+    canvas.hud.enhancedcombathud.newRound()
   }
 });

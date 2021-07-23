@@ -1,6 +1,6 @@
 const ECHItems = {
     Disengage: {
-        "name": game.i18n.localize("enhancedcombathud.items.disengage.name"),
+        "name": "Disengage",
         "type": "consumable",
         "img": "icons/svg/item-bag.svg",
         "data": {
