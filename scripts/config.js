@@ -52,8 +52,7 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
     start: `<div class="form-group stacked" id="test">
     <label>${game.i18n.localize(
       "enhancedcombathud.itemconfig.sets.text"
-    )}</label>
-    <div class="form-fields">`,
+    )}</label>`,
     set1p: `<label class="checkbox">
             <input type="checkbox" ${
               echFlags?.set1p ? "checked" : ""
@@ -96,7 +95,7 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
       "enhancedcombathud.itemconfig.set3s.text"
     )}
     </label>`,
-    end: `</div>
+    end: `
     </div>`,
   };
 
