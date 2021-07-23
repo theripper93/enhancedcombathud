@@ -1,13 +1,17 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
 	<div class="weapon-sets">
-		<div class="weapon-set active" data-type="switchWeapons" data-value="primary">
+		<div class="weapon-set active" data-type="switchWeapons" data-value="set1">
 			<div class="set set-primary" style="background-image: url({{hudData.sets.set1.primary.data.img}})"></div>
 			<div class="set set-secondary" style="background-image: url({{hudData.sets.set1.secondary.data.img}})"></div>
 		</div>
-		<div class="weapon-set" data-type="switchWeapons" data-value="secondary">
+		<div class="weapon-set" data-type="switchWeapons" data-value="set2">
 			<div class="set set-primary" style="background-image: url({{hudData.sets.set2.primary.data.img}})"></div>
 			<div class="set set-secondary" style="background-image: url({{hudData.sets.set2.secondary.data.img}})"></div>
+		</div>
+		<div class="weapon-set" data-type="switchWeapons" data-value="set3">
+			<div class="set set-primary" style="background-image: url({{hudData.sets.set3.primary.data.img}})"></div>
+			<div class="set set-secondary" style="background-image: url({{hudData.sets.set3.secondary.data.img}})"></div>
 		</div>
 	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
@@ -22,11 +26,9 @@
 		</div>
 		<div class="portrait-stat-block player-details">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
-			{{#each hudData.actor.data.data.classes}}
 				<span class="player-detail">
-					LVL {{levels}} {{@key}} ({{subclass}})
+					{{hudData.other.classes}}
 				</span>
-			{{/each}}
 		</div>
 	</div>
 	<div class="action-hud">
@@ -147,7 +149,7 @@
 		</div>
 		
 		
-		<div class="actions-container" data-title="Bonus">
+		<div class="actions-container  has-actions" data-title="Bonus">
 			<div class="action-element primary-element" data-type="trigger" data-set="sets" data-itemname="{{hudData.sets.active.secondary.data.name}}" style="background-image: url({{hudData.sets.active.secondary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.secondary.data.name}}</span>
 			</div>
@@ -163,7 +165,7 @@
 				<span class="action-element-title">Use Power</span>
 			</div>
 		</div>
-		<div class="actions-container" data-title="Reactions">
+		<div class="actions-container has-actions" data-title="Reactions">
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>

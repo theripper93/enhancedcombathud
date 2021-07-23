@@ -161,31 +161,38 @@ class CombatHud {
         primary: null,
         secondary: null,
       },
+      set3: {
+        primary: null,
+        secondary: null,
+      },
     };
     for (let item of items) {
       if (item.data.flags.enhancedcombathud?.set1p) sets.set1.primary = item;
       if (item.data.flags.enhancedcombathud?.set2p) sets.set2.primary = item;
+      if (item.data.flags.enhancedcombathud?.set3p) sets.set3.primary = item;
       if (item.data.flags.enhancedcombathud?.set1s) sets.set1.secondary = item;
       if (item.data.flags.enhancedcombathud?.set2s) sets.set2.secondary = item;
+      if (item.data.flags.enhancedcombathud?.set3s) sets.set3.secondary = item;
     }
     return sets;
   }
   _render() {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
-  async switchSets() {
+  async switchSets(active) {
     if (this.sets.active == this.sets.set1) {
-      await this.sets.set1.primary.update({"data.equipped": false})
-      await this.sets.set1.secondary.update({"data.equipped": false})
-      this.sets.active = this.sets.set2;
-    } else {
-      await this.sets.set2.primary.update({"data.equipped": false})
-      await this.sets.set2.secondary.update({"data.equipped": false})
-      this.sets.active = this.sets.set1;
+      await this.sets.set1.primary?.update({ "data.equipped": false });
+      await this.sets.set1.secondary?.update({ "data.equipped": false });
+    } else if (this.sets.active == this.sets.set2) {
+      await this.sets.set2.primary?.update({ "data.equipped": false });
+      await this.sets.set2.secondary?.update({ "data.equipped": false });
+    } else if (this.sets.active == this.sets.set3) {
+      await this.sets.set3.primary?.update({ "data.equipped": false });
+      await this.sets.set3.secondary?.update({ "data.equipped": false });
     }
-
-    await this.sets.active.primary.update({"data.equipped": true})
-    await this.sets.active.secondary.update({"data.equipped": true})
+    this.sets.active = this.sets[active];
+    await this.sets.active.primary?.update({ "data.equipped": true });
+    await this.sets.active.secondary?.update({ "data.equipped": true });
   }
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
@@ -241,11 +248,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let _this = this;
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
-      let itemName = $(event.currentTarget).data('itemname');
-      await this.addSpecialItem(itemName)
-      await game.dnd5e.rollItemMacro(itemName); 
+      let itemName = $(event.currentTarget).data("itemname");
+      await this.addSpecialItem(itemName);
+      await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
-      this.updateActionEconomy(item.data?.data?.activation?.type ?? item.data.activation.type);
+      this.updateActionEconomy(
+        item.data?.data?.activation?.type ?? item.data.activation.type
+      );
       if (!item) {
         $(event.currentTarget).remove();
       } else {
@@ -257,25 +266,32 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let actionType = event.currentTarget.dataset.actiontype;
       let isActive = $(event.currentTarget).hasClass("active");
       // data-containeractiontype="actions"
-      //data-actiontype="bonus" 
+      //data-actiontype="bonus"
       // Hide Open Menus
       $(_this.element).find(`div[data-iscontainer="true"]`).removeClass("show");
       // Remove Active State from Menu Toggle
       $(_this.element).find('div[data-type="menu"]').removeClass("active");
       // Add Active State to Clicked Menu
-      $(event.currentTarget).toggleClass('active', !isActive);
+      $(event.currentTarget).toggleClass("active", !isActive);
       // Show Active Menu
       $(_this.element)
-        .find(`div[class="features-container ${category}"][data-containeractiontype="${actionType}"]`)
-        .toggleClass("show", $(event.currentTarget).hasClass('active') && !isActive);
+        .find(
+          `div[class="features-container ${category}"][data-containeractiontype="${actionType}"]`
+        )
+        .toggleClass(
+          "show",
+          $(event.currentTarget).hasClass("active") && !isActive
+        );
     });
     this.element.on("click", '[data-type="switchWeapons"]', async (event) => {
       let $element = $(event.currentTarget);
 
-      if (!$element.hasClass('active')) {
-        $(this.element).find('[data-type="switchWeapons"].active').removeClass('active');
-        $element.addClass('active');
-        this.switchSets();
+      if (!$element.hasClass("active")) {
+        $(this.element)
+          .find('[data-type="switchWeapons"].active')
+          .removeClass("active");
+        $element.addClass("active");
+        this.switchSets($element[0].dataset.value);
       }
     });
   }
@@ -306,17 +322,17 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
     // If container is larger than window, allow accordion usage
     //if (spellHudWidth > $(window).width()) {
-      this.element.on("click", ".feature-accordion-title", (event) => {
-        let $element = $(event.currentTarget);
-        let $accordion = $element.closest(".features-accordion");
-        let $container = $element.closest(".features-container");
+    this.element.on("click", ".feature-accordion-title", (event) => {
+      let $element = $(event.currentTarget);
+      let $accordion = $element.closest(".features-accordion");
+      let $container = $element.closest(".features-container");
 
-        if ($container.width() + 503 > $(window).width()) {
-          $container.find(".features-accordion").removeClass("show");
-        }
+      if ($container.width() + 503 > $(window).width()) {
+        $container.find(".features-accordion").removeClass("show");
+      }
 
-        $accordion.toggleClass("show");
-      });
+      $accordion.toggleClass("show");
+    });
     //}
   }
 
@@ -337,18 +353,18 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
-  switchSets() {
-    this.hudData.switchSets();
+  async switchSets(set) {
+    await this.hudData.switchSets(set);
     let primary = $(this.element).find('div[data-set="setp"]');
     let secondary = $(this.element).find('div[data-set="sets"]');
     this.updateSetElement(primary, this.hudData.sets.active.primary);
     this.updateSetElement(secondary, this.hudData.sets.active.secondary);
   }
   updateSetElement(element, item) {
-    console.log(element, item);
+    if(!item) return
     element
       .data("itemname", item.name)
-      .prop('data-itemname', item.name)
+      .prop("data-itemname", item.name)
       .css({ "background-image": `url(${item.data.img})` })
       .find(".action-element-title")
       .text(item.name);
@@ -374,15 +390,18 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
-  updatePortrait(hp,maxhp,ac){
-    let acelement = $(this.element).find("test")
-    let hpelemetn = $(this.element).find("test2")
-
+  updatePortrait(hp, maxhp, ac) {
+    let hpelel = $(this.element).find("span[data-hp-value]");
+    let maxhpel = $(this.element).find("span[data-hp-max]");
+    let acelel = $(this.element).find("span[data-ac-value]");
+    hpelel[0].dataset.hpValue = hp;
+    maxhpel[0].dataset.hpMax = maxhp;
+    acelel[0].dataset.acValue = ac;
   }
 
-  async addSpecialItem(itemName){
-    if(!ECHItems[itemName]) return
-    await this.hudData.actor.createOwnedItem(ECHItems[itemName])
+  async addSpecialItem(itemName) {
+    if (!ECHItems[itemName]) return;
+    await this.hudData.actor.createOwnedItem(ECHItems[itemName]);
   }
 }
 
@@ -393,21 +412,35 @@ Hooks.once("init", () => {
   });
 });
 
-Hooks.on("updateActor",(actor,updates)=>{
-  if( actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id && ("data.attributes.ac.value" in updates || "data.attributes.hp.value" in updates || "data.attributes.hp.max" in updates)){
-    let ad = actor.data.data.attributes
-    canvas.hud.enhancedcombathud.updatePortrait(ad.hp.value,ad.hp.max,ad.ac.value)
+Hooks.on("updateActor", (actor, updates) => {
+  if (
+    actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id &&
+    (updates?.data?.attributes?.ac?.value ||
+      updates?.data?.attributes?.hp?.value ||
+      updates?.data?.attributes?.hp?.max)
+  ) {
+    let ad = actor.data.data.attributes;
+    canvas.hud.enhancedcombathud.updatePortrait(
+      ad.hp.value,
+      ad.hp.max,
+      ad.ac.value
+    );
   }
-})
+});
 
-Hooks.on("updateActiveEffect",(activeEffect,updates)=>{
-  let actor = activeEffect.parent
-  if(!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id) return
-  let ad = actor.data.data.attributes
-  for(let change of activeEffect.data.changes[0]){
-    if(change.key == "data.attributes.ac.value"){
-      canvas.hud.enhancedcombathud.updatePortrait(ad.hp.value,ad.hp.max,ad.ac.value)
-      return
+Hooks.on("updateActiveEffect", (activeEffect, updates) => {
+  let actor = activeEffect.parent;
+  if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
+    return;
+  let ad = actor.data.data.attributes;
+  for (let change of activeEffect.data.changes) {
+    if (change.key == "data.attributes.ac.value") {
+      canvas.hud.enhancedcombathud.updatePortrait(
+        ad.hp.value,
+        ad.hp.max,
+        ad.ac.value
+      );
+      return;
     }
   }
-})
+});

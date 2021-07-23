@@ -25,6 +25,13 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
       "enhancedcombathud.itemconfig.set2p.text"
     )}
   </label>`,
+  set3p: `<label class="checkbox">
+  <input type="checkbox" ${
+    echFlags?.set3p ? "checked" : ""
+  } name="flags.enhancedcombathud.set3p"> ${game.i18n.localize(
+    "enhancedcombathud.itemconfig.set3p.text"
+  )}
+</label>`,
     set1s: ` <label class="checkbox">
     <input type="checkbox" ${
       echFlags?.set1s ? "checked" : ""
@@ -39,6 +46,13 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
       "enhancedcombathud.itemconfig.set2s.text"
     )}
     </label>`,
+    set3s: `<label class="checkbox">
+    <input type="checkbox" ${
+      echFlags?.set3s ? "checked" : ""
+    } name="flags.enhancedcombathud.set3s"> ${game.i18n.localize(
+      "enhancedcombathud.itemconfig.set3s.text"
+    )}
+    </label>`,
     end: `</div>
     </div>`,
   };
@@ -48,10 +62,12 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
   if(actionType === "action" || itemType === "weapon" || itemType === "consumable") {
     confightml += configHtmlElements.set1p;
     confightml += configHtmlElements.set2p;
+    confightml += configHtmlElements.set3p;
   }
   if(actionType === "bonus" || itemType === "weapon" || itemType === "equipment"){
     confightml += configHtmlElements.set1s;
     confightml += configHtmlElements.set2s;
+    confightml += configHtmlElements.set3s;
   }
 
 
@@ -71,7 +87,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
         if (toggle) {
           canvas.hud.enhancedcombathud.bind(_token);
         } else {
-          canvas.hud.enhancedcombathud.clear();
+          canvas.hud.enhancedcombathud.close();
         }
 
         $(".ech-swords").parent().toggleClass("active", toggle);

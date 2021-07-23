@@ -36,7 +36,7 @@
     content: attr(data-hp-value);
 }
 .portrait-stat-block [data-hp-max]:after {
-    content: "of " attr(data-hp-value) " HP";
+    content: "of " attr(data-hp-max) " HP";
 }
 .portrait-stat-block [data-ac-value]:after {
     content: attr(data-ac-value);
