@@ -183,7 +183,7 @@
   padding: 0px 0.5rem;
   position: absolute;
   transition: all 0.3s ease-in-out;
-  transform: translateY(100%);
+  transform: translateY(1000%);
 }
 .features-container.show {
   opacity: 1;
@@ -233,6 +233,63 @@
     left: -22px;
   
     pointer-events: all;
+}
+/* SPELL SLOT USAGE */
+.features-accordion-content {
+  margin-bottom: 75px;
+}
+.feature-spell-slots {
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background-color: rgb(0 0 0 / 30%);
+  border: 1px solid var(--ech-border-color);
+  display: flex;
+  height: 75px;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  transform-origin: bottom;
+  position: absolute;
+  bottom: -75px;
+  left: 0px;
+  width: 100%;
+  pointer-events: all;
+}
+.feature-spell-slots .spell-slot {
+    background-color: rgb(180, 210, 225);
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px 0px rgb(200 230 245 / 80%);
+    content: "";
+    height: 25px;
+    margin: 0rem 0.5rem;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    width: 25px;
+}
+.feature-spell-slots .spell-slot.spell-used {
+  background-color: rgb(120, 130, 145);
+  box-shadow: none;
+}
+.feature-spell-slots .spell-slot.spell-used:after {
+  color: red;
+  content: "\f00d";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.5rem;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+.feature-spell-slots .spell-slot.spell-cantrip {
+  background: transparent;
+  box-shadow: none;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0px;
+  width: auto;
+  height: auto;
 }
 
 .feature-element {
