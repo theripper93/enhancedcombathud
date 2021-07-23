@@ -232,8 +232,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     if (!this.object) return;
     this.rigHtml();
     const position = {
-      "z-index": 100,
-      transform: "scale(0.5)",
+      "z-index": 100
     };
     this.element.css(position);
   }
@@ -242,6 +241,19 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.clearEmpty();
     this.rigButtons();
     this.rigAccordion();
+
+    this.rigAutoScale();
+  }
+
+  rigAutoScale() {
+    console.log('ECH: Autoscale');
+    let echHUDWidth = $('.extended-combat-hud').outerWidth();
+    let windowWidth = $(window).width() - 340;
+    let scale = 1 / (echHUDWidth / windowWidth);
+
+    $('.extended-combat-hud').css({
+      'transform': `scale(${scale > 1 ? 1 : scale})`
+    })
   }
 
   rigButtons() {
