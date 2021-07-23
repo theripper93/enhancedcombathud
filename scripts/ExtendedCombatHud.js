@@ -165,14 +165,15 @@ class CombatHud {
     let spells = {};
     if (prepared) {
       for (let item of filteredItems) {
+      let key = item.data.data.preparation.mode == "pact" ? "Pact Magic" : item.labels.level
         if(item.data.data.preparation.mode == "pact"){
-          if(!spells["pact"]) spells["pact"] = [item];
-          else spells["pact"].push(item);
+          if(!spells[key]) spells[key] = [item];
+          else spells[key].push(item);
           continue
         }
-        if (!spells[`${item.data.data.level}`])
-          spells[`${item.data.data.level}`] = [];
-        spells[`${item.data.data.level}`].push(item);
+        if (!spells[key])
+          spells[key] = [];
+        spells[key].push(item);
       }
     }
     if (filters.prepared === true) {
