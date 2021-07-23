@@ -285,6 +285,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   rigHtml() {
     this.clearEmpty();
+    this.updatePass();
     this.rigButtons();
     this.rigAccordion();
     this.initSets();
@@ -324,7 +325,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       }
     });
     this.element.on("click", '[data-pass="true"]', async (event) => {
-      console.log("Pass turn");
+      if(game.combat?.current?.tokenId== this.hudData.token.id) game.combat?.nextTurn()
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
@@ -488,6 +489,16 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     await this.hudData.actor.createOwnedItem(ECHItems[itemName]);
   }
 
+  updatePass(){
+    let element = $(this.element).find("div[data-pass]")
+    if(this.hudData.token.id == game.combat?.current?.tokenId)
+    {
+      element.css({ display: "flex" });
+    }else{
+      element.css({ display: "none" });
+    }
+  }
+
   toggleMacroPlayers(togg) {
     $("#players").css("display", togg ? "block" : "none");
     $("#hotbar").css("display", togg ? "flex" : "none");
@@ -554,8 +565,8 @@ Hooks.on("preUpdateToken", (token, updates) => {
 });
 
 Hooks.on("updateCombat", (combat, updates) => {
-  debugger
   if (canvas.hud.enhancedcombathud?.hudData && "round" in updates) {
     canvas.hud.enhancedcombathud.newRound()
   }
+  canvas.hud.enhancedcombathud?.updatePass()
 });

@@ -95,6 +95,7 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
       "enhancedcombathud.itemconfig.set3s.text"
     )}
     </label>`,
+    end: `</div>`
 
   };
 
