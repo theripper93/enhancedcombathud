@@ -270,7 +270,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        event.currentTarget.dataset.itemCount = item.data.data.quantity;
+        event.currentTarget.dataset.itemCount = item.data.data.quantity || item.data.data.uses.value;
       }
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
