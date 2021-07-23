@@ -165,6 +165,11 @@ class CombatHud {
     let spells = {};
     if (prepared) {
       for (let item of filteredItems) {
+        if(item.data.data.preparation.mode == "pact"){
+          if(!spells["pact"]) spells["pact"] = [item];
+          else spells["pact"].push(item);
+          continue
+        }
         if (!spells[`${item.data.data.level}`])
           spells[`${item.data.data.level}`] = [];
         spells[`${item.data.data.level}`].push(item);
@@ -527,5 +532,15 @@ Hooks.on("controlToken", (token, controlled) => {
     setTimeout(() => {
       canvas.hud.enhancedcombathud.bind(canvas.tokens.get(token.id));
     }, 250);
+  }
+});
+
+Hooks.on("preUpdateToken", (token, updates) => {
+  if (canvas.hud.enhancedcombathud?.hudData.actor.id == token.actor.id && ("x" in updates || "y" in updates)) {
+    let newX = updates.x || token.x
+    let newY = updates.y || token.y
+    let oldX = token.x;
+    let oldY = token.y;
+    
   }
 });
