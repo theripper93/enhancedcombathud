@@ -356,28 +356,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigAccordion() {
-    let spellHudWidth = 375;
-    this.element.find(".features-accordion").each((index, element) => {
-      let $element = $(element);
-      let numberOfFeatures = $element.find(".feature-element").length;
-
-      spellHudWidth +=
-        numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53;
-
-      $element.css({
-        width: `${
-          numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53
-        }px`,
+    this.element.find('.features-container').each((index, featureContainer) => {
+      let spellHudWidth = 375;
+      $(featureContainer).find(".features-accordion").each((index, element) => {
+        let $element = $(element);
+        let numberOfFeatures = $element.find(".feature-element").length;
+  
+        spellHudWidth += numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53;
+  
+        $element.css({
+          width: `${
+            numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53
+          }px`,
+        });
+        $element.find(".features-accordion-content").css({
+          "min-width": `${numberOfFeatures > 3 ? 450 : numberOfFeatures * 150}px`,
+        });
       });
-      $element.find(".features-accordion-content").css({
-        "min-width": `${numberOfFeatures > 3 ? 450 : numberOfFeatures * 150}px`,
-      });
-    });
+      // If container is smaller than window size, then open containers.
+      this.element
+        .find(".features-accordion")
+        .toggleClass("show", spellHudWidth < $(window).width());
+    })
 
-    // If container is smaller than window size, then open containers.
-    this.element
-      .find(".features-accordion")
-      .toggleClass("show", spellHudWidth < $(window).width());
+
 
     // If container is larger than window, allow accordion usage
     //if (spellHudWidth > $(window).width()) {
