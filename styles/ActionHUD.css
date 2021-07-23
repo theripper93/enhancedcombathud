@@ -250,6 +250,9 @@
   
   pointer-events: all;
 }
+.feature-element:hover, .feature-element:active, .feature-element:focus, .feature-element.active {
+  filter: var(--ech-hover-brightness);
+}
 
 .features-container.is-spells .feature-element {
   margin-right: 0rem;

@@ -52,8 +52,7 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
     start: `<div class="form-group stacked" id="test">
     <label>${game.i18n.localize(
       "enhancedcombathud.itemconfig.sets.text"
-    )}</label>
-    <div class="form-fields">`,
+    )}</label>`,
     set1p: `<label class="checkbox">
             <input type="checkbox" ${
               echFlags?.set1p ? "checked" : ""
@@ -96,21 +95,24 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
       "enhancedcombathud.itemconfig.set3s.text"
     )}
     </label>`,
-    end: `</div>
-    </div>`,
+    end: `</div>`,
   };
 
   let confightml = configHtmlElements.start;
 
   if(actionType === "action" || itemType === "weapon" || itemType === "consumable") {
+    confightml += `<div class="form-fields">`;
     confightml += configHtmlElements.set1p;
     confightml += configHtmlElements.set2p;
     confightml += configHtmlElements.set3p;
+    confightml += `</div>`;
   }
   if(actionType === "bonus" || itemType === "weapon" || itemType === "equipment"){
+    confightml += `<div class="form-fields">`;
     confightml += configHtmlElements.set1s;
     confightml += configHtmlElements.set2s;
     confightml += configHtmlElements.set3s;
+    confightml += `</div>`;
   }
 
 
