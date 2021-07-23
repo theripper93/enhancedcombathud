@@ -143,7 +143,9 @@ class CombatHud {
     const itemType = filters.itemType;
     const equipped = filters.equipped;
     const prepared = filters.prepared;
+
     let items = this.actor.data.items;
+
     let filteredItems = items.filter((i) => {
       let itemData = i.data;
       if (equipped === true && !itemData.data.equipped) return false;
@@ -162,7 +164,19 @@ class CombatHud {
         return true;
       return false;
     });
-    let spells = {};
+    let spells = {
+      "Cantrip": [],
+      "Pact Magic": [],
+      "1st Level": [],
+      "2nd Level": [],
+      "3rd Level": [],
+      "4th Level": [],
+      "5th Level": [],
+      "6th Level": [],
+      "7th Level": [],
+      "8th Level": [],
+      "9th Level": []
+    };
     if (prepared) {
       for (let item of filteredItems) {
       let key = item.data.data.preparation.mode == "pact" ? "Pact Magic" : item.labels.level
@@ -171,11 +185,21 @@ class CombatHud {
           else spells[key].push(item);
           continue
         }
+
         if (!spells[key])
           spells[key] = [];
+
         spells[key].push(item);
       }
+
+      for (let spellLevel of Object.keys(spells)) {
+        if (spells[spellLevel].length == 0) {
+          delete spells[spellLevel];
+        }
+      }
+      
     }
+
     if (filters.prepared === true) {
       return spells;
     } else {
@@ -293,7 +317,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigAutoScale() {
-    console.log("ECH: Autoscale");
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
     let scale =
@@ -381,8 +404,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           "min-width": `${numberOfFeatures > 3 ? 450 : numberOfFeatures * 150}px`,
         });
       });
+
       // If container is smaller than window size, then open containers.
-      this.element
+      $(featureContainer)
         .find(".features-accordion")
         .toggleClass("show", spellHudWidth < $(window).width());
     })
