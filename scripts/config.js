@@ -1,4 +1,47 @@
-Hooks.once("init", function () {});
+Hooks.once("init", function () {
+
+
+  game.settings.register("enhancedcombathud", "scale", {
+    name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
+    scope: "client",
+    config: true,
+    range: {
+      min: 0.1,
+      max: 2,
+      step: 0.1,
+    },
+    type: Number,
+    default: 1,
+  });
+
+  game.settings.register("enhancedcombathud", "leftPos", {
+    name: game.i18n.localize("enhancedcombathud.settings.leftPos.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.leftPos.hint"),
+    scope: "client",
+    config: true,
+    type: Number,
+    default: 15,
+  });
+
+  game.settings.register("enhancedcombathud", "botPos", {
+    name: game.i18n.localize("enhancedcombathud.settings.botPos.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.botPos.hint"),
+    scope: "client",
+    config: true,
+    type: Number,
+    default: 15,
+  });
+
+  game.settings.register("enhancedcombathud", "preparedSpells", {
+    name: game.i18n.localize("enhancedcombathud.settings.preparedSpells.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.preparedSpells.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+});
 
 Hooks.on("renderItemSheet", (itemsheet, html) => {
   let actionType = itemsheet.object.data.data.activation.type;

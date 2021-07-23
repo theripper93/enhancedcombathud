@@ -115,70 +115,70 @@
 			</div>
 			<div class="action-element-container">
 				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
-					<span class="action-element-title">disengage</span>
+					<span class="action-element-title">{{hudData.other.specialItemsNames.disengage}}</span>
 				</div>
 				<div class="action-element" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
-					<span class="action-element-title">dodge</span>
+					<span class="action-element-title">{{hudData.other.specialItemsNames.dodge}}</span>
 				</div>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
-				<span class="action-element-title">Cast Spell</span>
+				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
-				<span class="action-element-title">Use Power</span>
+				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 			<div class="action-element-container">
 			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
-				<span class="action-element-title">Ready</span>
+				<span class="action-element-title">{{hudData.other.specialItemsNames.ready}}</span>
 			</div>
 			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
-				<span class="action-element-title">Hide</span>
+				<span class="action-element-title">{{hudData.other.specialItemsNames.hide}}</span>
 			</div>
 		</div>
 			<div class="action-element-container">
 				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dash}}" style="background-image: url(modules/enhancedcombathud/icons/walking-boot.svg)">
-					<span class="action-element-title">dash</span>
+					<span class="action-element-title">{{hudData.other.specialItemsNames.dash}}</span>
 				</div>
 				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.shove}}" style="background-image: url(modules/enhancedcombathud/icons/shield-bash.svg)">
-					<span class="action-element-title">shove</span>
+					<span class="action-element-title">{{hudData.other.specialItemsNames.shove}}</span>
 				</div>
 			</div>
 			<div class="action-element"  data-type="menu" data-actiontype="actions" data-itemtype="consumables" data-menu="is-consumables" style="background-image: url(modules/enhancedcombathud/icons/drink-me.svg)">
-				<span class="action-element-title">Use Item</span>
+				<span class="action-element-title">{{hudData.settings.localize.useitem}}</span>
 			</div>
 		</div>
 		
 		
-		<div class="actions-container  has-actions" data-title="Bonus">
+		<div class="actions-container  has-actions" data-actionbartype="bonus" data-title="{{hudData.settings.localize.bonusaction}}">
 			<div class="action-element primary-element" data-type="trigger" data-set="sets" data-itemname="{{hudData.sets.active.secondary.data.name}}" style="background-image: url({{hudData.sets.active.secondary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.secondary.data.name}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
-				<span class="action-element-title">Cast Spell</span>
+				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
-				<span class="action-element-title">Use Power</span>
+				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container" data-title="Free">
+		<div class="actions-container" data-title="{{hudData.settings.localize.specialaction}}">
 			<div class="action-element" data-type="menu" data-actiontype="free" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
-				<span class="action-element-title">Use Power</span>
+				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container has-actions" data-title="Reactions">
+		<div class="actions-container has-actions" data-actionbartype="reaction" data-title="{{hudData.settings.localize.reaction}}">
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
-				<span class="action-element-title">Cast Spell</span>
+				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
-				<span class="action-element-title">Use Power</span>
+				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container" data-title="Pass">
-			<div class="action-element end-turn">
-				<span class="action-element-title">End Turn</span>
+		<div class="actions-container"data-title="{{hudData.settings.localize.pass}}">
+			<div class="action-element end-turn" data-pass="true" style="background-image: url(modules/enhancedcombathud/icons/duration.svg)">
+				<span class="action-element-title">{{hudData.settings.localize.endturn}}</span>
 			</div>
 		</div>
 	</div>

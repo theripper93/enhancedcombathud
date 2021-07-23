@@ -5,5 +5,27 @@
     "enhancedcombathud.itemconfig.set3p.text":"Set 3 (Primary)",
     "enhancedcombathud.itemconfig.set1s.text": "Set 1 (Secondary)",
     "enhancedcombathud.itemconfig.set2s.text": "Set 2 (Secondary)",
-    "enhancedcombathud.itemconfig.set3s.text": "Set 3 (Secondary)"
+    "enhancedcombathud.itemconfig.set3s.text": "Set 3 (Secondary)",
+
+
+    "enhancedcombathud.hud.mainactions.name": "Main Action",
+    "enhancedcombathud.hud.castspell.name":"Cast Spell",
+    "enhancedcombathud.hud.usepower.name":"Use Power",
+    "enhancedcombathud.hud.useitem.name":"Use Item",
+    "enhancedcombathud.hud.bonusaction.name":"Bonus",
+    "enhancedcombathud.hud.reaction.name":"Reaction",
+    "enhancedcombathud.hud.specialaction.name":"Free",
+    "enhancedcombathud.hud.pass.name":"Pass",
+    "enhancedcombathud.hud.endturn.name":"End Turn",
+    "enhancedcombathud.hud.hp.name":"HP",
+    "enhancedcombathud.hud.ac.name":"AC",
+    "enhancedcombathud.hud.of.name":"of",
+
+    "enhancedcombathud.items.disengage.name": "Disengage",
+    "enhancedcombathud.items.hide.name": "Hide",
+    "enhancedcombathud.items.shove.name": "Shove",
+    "enhancedcombathud.items.dash.name": "Dash",
+    "enhancedcombathud.items.dodge.name": "Dodge",
+    "enhancedcombathud.items.ready.name": "Ready"
+
 }
