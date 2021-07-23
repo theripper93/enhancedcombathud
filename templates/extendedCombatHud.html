@@ -35,7 +35,7 @@
 		<div class="features-container is-spells" data-iscontainer="true" data-containeractiontype="actions" >
 			{{#each hudData.actions.spells}}
 			<div class="features-accordion">
-				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
+				<span class="feature-accordion-title">{{@key}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
 					<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">

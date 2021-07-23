@@ -363,7 +363,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   rigAccordion() {
     this.element.find('.features-container').each((index, featureContainer) => {
-      let spellHudWidth = 375;
+      // 375 = Portrait | 320 = Sidebar
+      let spellHudWidth = 375 + 320;
       $(featureContainer).find(".features-accordion").each((index, element) => {
         let $element = $(element);
         let numberOfFeatures = $element.find(".feature-element").length;
