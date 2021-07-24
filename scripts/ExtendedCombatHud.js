@@ -23,6 +23,21 @@ class CombatHud {
         hp: game.i18n.localize("enhancedcombathud.hud.hp.name"),
         ac: game.i18n.localize("enhancedcombathud.hud.ac.name"),
         of: game.i18n.localize("enhancedcombathud.hud.of.name"),
+        spells: {
+          0: game.i18n.localize("enhancedcombathud.hud.spells.cantrip"),
+          pact: game.i18n.localize("enhancedcombathud.hud.spells.pact"),
+          will: game.i18n.localize("enhancedcombathud.hud.spells.will"),
+          innate: game.i18n.localize("enhancedcombathud.hud.spells.innate"),
+          1: game.i18n.localize("enhancedcombathud.hud.spells.1"),
+          2: game.i18n.localize("enhancedcombathud.hud.spells.2"),
+          3: game.i18n.localize("enhancedcombathud.hud.spells.3"),
+          4: game.i18n.localize("enhancedcombathud.hud.spells.4"),
+          5: game.i18n.localize("enhancedcombathud.hud.spells.5"),
+          6: game.i18n.localize("enhancedcombathud.hud.spells.6"),
+          7: game.i18n.localize("enhancedcombathud.hud.spells.7"),
+          8: game.i18n.localize("enhancedcombathud.hud.spells.8"),
+          9: game.i18n.localize("enhancedcombathud.hud.spells.9"),
+        },
       },
     };
     this.actions = {
@@ -88,8 +103,15 @@ class CombatHud {
       maxHp: this.actor.data.data.attributes.hp.max,
       currHp: this.actor.data.data.attributes.hp.value,
       movement: {
-        max: Math.round(this.actor.data.data.attributes.movement.walk / canvas.dimensions.distance),
-        current: Math.round(this.actor.data.data.attributes.movement.walk / canvas.dimensions.distance),
+        max: Math.round(
+          this.actor.data.data.attributes.movement.walk /
+            canvas.dimensions.distance
+        ),
+        current: Math.round(
+          this.actor.data.data.attributes.movement.walk /
+            canvas.dimensions.distance
+        ),
+        moved: 0,
       },
       ac: this.actor.data.data.attributes.ac.value,
       classes: this.getClassesAsString(),
@@ -102,7 +124,6 @@ class CombatHud {
         ready: game.i18n.localize("enhancedcombathud.items.ready.name"),
       },
     };
-    this.spellSlots = this.actor.data.data.spells;
     this.resources = {
       action: true,
       bonus: true,
@@ -152,7 +173,8 @@ class CombatHud {
       if (
         this.settings.spellMode &&
         prepared === true &&
-        itemData.data.preparation?.prepared === false
+        itemData.data.preparation?.prepared === false &&
+        itemData.data.preparation?.prepared != "always"
       )
         return false;
       if (
@@ -164,31 +186,36 @@ class CombatHud {
         return true;
       return false;
     });
-    let spells = {
-      "Cantrip": [],
-      "Pact Magic": [],
-      "1st Level": [],
-      "2nd Level": [],
-      "3rd Level": [],
-      "4th Level": [],
-      "5th Level": [],
-      "6th Level": [],
-      "7th Level": [],
-      "8th Level": [],
-      "9th Level": []
-    };
+    let spells = {};
+    spells[this.settings.localize.spells["0"]] = [];
+    spells[this.settings.localize.spells["innate"]] = [];
+    spells[this.settings.localize.spells["will"]] = [];
+    spells[this.settings.localize.spells["pact"]] = [];
+    spells[this.settings.localize.spells["1"]] = [];
+    spells[this.settings.localize.spells["2"]] = [];
+    spells[this.settings.localize.spells["3"]] = [];
+    spells[this.settings.localize.spells["4"]] = [];
+    spells[this.settings.localize.spells["5"]] = [];
+    spells[this.settings.localize.spells["6"]] = [];
+    spells[this.settings.localize.spells["7"]] = [];
+    spells[this.settings.localize.spells["8"]] = [];
+    spells[this.settings.localize.spells["9"]] = [];
     if (prepared) {
       for (let item of filteredItems) {
-      let key = item.data.data.preparation.mode == "pact" ? "Pact Magic" : item.labels.level
-        if(item.data.data.preparation.mode == "pact"){
-          if(!spells[key]) spells[key] = [item];
-          else spells[key].push(item);
-          continue
+        let key = item.labels.level;
+        switch (item.data.data.preparation.mode) {
+          case "innate":
+            key = this.settings.localize.spells["innate"];
+            break;
+
+          case "atwill":
+            key = this.settings.localize.spells["will"];
+            break;
+
+          case "pact":
+            key = this.settings.localize.spells["pact"];
+            break;
         }
-
-        if (!spells[key])
-          spells[key] = [];
-
         spells[key].push(item);
       }
 
@@ -197,7 +224,6 @@ class CombatHud {
           delete spells[spellLevel];
         }
       }
-      
     }
 
     if (filters.prepared === true) {
@@ -270,6 +296,12 @@ class CombatHud {
     $(canvas.hud.enhancedcombathud.element)
       .find('.actions-container.has-actions[data-actionbartype="bonus"]')
       .toggleClass("actions-used", !value);
+  }
+  get spellSlots() {
+    return this.actor.data.data.spells;
+  }
+  get movementColor(){
+
   }
 }
 
@@ -346,9 +378,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         event.currentTarget.dataset.itemCount =
           item.data.data.quantity || item.data.data.uses.value;
       }
+      this.updateSpellSlots();
     });
     this.element.on("click", '[data-pass="true"]', async (event) => {
-      if(game.combat?.current?.tokenId== this.hudData.token.id) game.combat?.nextTurn()
+      if (game.combat?.current?.tokenId == this.hudData.token.id)
+        game.combat?.nextTurn();
     });
     this.element.on("click", '[data-type="menu"]', (event) => {
       let category = event.currentTarget.dataset.menu;
@@ -386,32 +420,35 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigAccordion() {
-    this.element.find('.features-container').each((index, featureContainer) => {
+    this.element.find(".features-container").each((index, featureContainer) => {
       // 375 = Portrait | 320 = Sidebar
       let spellHudWidth = 375 + 320;
-      $(featureContainer).find(".features-accordion").each((index, element) => {
-        let $element = $(element);
-        let numberOfFeatures = $element.find(".feature-element").length;
-  
-        spellHudWidth += numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53;
-  
-        $element.css({
-          width: `${
-            numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53
-          }px`,
+      $(featureContainer)
+        .find(".features-accordion")
+        .each((index, element) => {
+          let $element = $(element);
+          let numberOfFeatures = $element.find(".feature-element").length;
+
+          spellHudWidth +=
+            numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53;
+
+          $element.css({
+            width: `${
+              numberOfFeatures > 3 ? 450 + 53 : numberOfFeatures * 150 + 53
+            }px`,
+          });
+          $element.find(".features-accordion-content").css({
+            "min-width": `${
+              numberOfFeatures > 3 ? 450 : numberOfFeatures * 150
+            }px`,
+          });
         });
-        $element.find(".features-accordion-content").css({
-          "min-width": `${numberOfFeatures > 3 ? 450 : numberOfFeatures * 150}px`,
-        });
-      });
 
       // If container is smaller than window size, then open containers.
       $(featureContainer)
         .find(".features-accordion")
         .toggleClass("show", spellHudWidth < $(window).width());
-    })
-
-
+    });
 
     // If container is larger than window, allow accordion usage
     //if (spellHudWidth > $(window).width()) {
@@ -481,8 +518,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.hudData.hasReaction = true;
   }
 
-  newRound(){
-    this.resetActionsUses()
+  newRound() {
+    this.resetActionsUses();
+    this.hudData.other.movement.current = this.hudData.other.movement.max;
+    this.hudData.other.movement.moved = 0;
+    this.updateMovement();
   }
 
   updateActionEconomy(actionType) {
@@ -499,6 +539,23 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
+  updateMovement(bars=0) {
+    let movementColor
+    switch(bars){
+      case 0:
+        movementColor = "#00FF00";
+        break;
+      case 1:
+        movementColor = "#FF0000";
+        break;
+      case 2:
+        movementColor = "#FFA500";
+        break;
+    }
+    let barsNumber = this.hudData.other.movement.current;
+    
+  }
+
   updatePortrait(hp, maxhp, ac) {
     let hpelel = $(this.element).find("span[data-hp-value]");
     let maxhpel = $(this.element).find("span[data-hp-max]");
@@ -513,12 +570,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     await this.hudData.actor.createOwnedItem(ECHItems[itemName]);
   }
 
-  updatePass(){
-    let element = $(this.element).find("div[data-pass]")
-    if(this.hudData.token.id == game.combat?.current?.tokenId)
-    {
+  updatePass() {
+    let element = $(this.element).find("div[data-pass]");
+    if (this.hudData.token.id == game.combat?.current?.tokenId) {
       element.css({ display: "flex" });
-    }else{
+    } else {
       element.css({ display: "none" });
     }
   }
@@ -526,6 +582,47 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   toggleMacroPlayers(togg) {
     $("#players").css("display", togg ? "block" : "none");
     $("#hotbar").css("display", togg ? "flex" : "none");
+  }
+
+  static generateSpells(obj) {
+    let _this = canvas.hud.enhancedcombathud.hudData;
+    let convertSpellSlot;
+    if (obj == _this.settings.localize.spells.pact) {
+      convertSpellSlot = "pact";
+    } else if(obj.match("/d+/g")) {
+      convertSpellSlot = "spell" + obj.match("/d+/g")[0];
+    }
+    let spellSlots = "";
+    if (
+      obj == _this.settings.localize.spells["0"] ||
+      obj == _this.settings.localize.spells.will ||
+      obj == _this.settings.localize.spells.innate
+    ) {
+      spellSlots =
+        '<span class="spell-slot spell-cantrip"><i class="fas fa-infinity"></i></span>';
+    } else {
+      let spellSlotDetails = _this.spellSlots[convertSpellSlot];
+
+      for (let index = 0; index < spellSlotDetails.max; index++) {
+        //spellSlots.push(index < spellSlotDetails.value);
+        spellSlots += `<span class="spell-slot spell-${
+          index < spellSlotDetails.max - spellSlotDetails.value
+            ? "used"
+            : "available"
+        }"></span>`;
+      }
+    }
+    return spellSlots;
+  }
+
+  updateSpellSlots() {
+    $(this.element)
+      .find(".feature-spell-slots")
+      .each((index, element) => {
+        let spellSlot = element.dataset.type;
+        console.log(CombatHudCanvasElement.generateSpells(spellSlot));
+        element.innerHTML = CombatHudCanvasElement.generateSpells(spellSlot);
+      });
   }
 }
 
@@ -579,18 +676,28 @@ Hooks.on("controlToken", (token, controlled) => {
 });
 
 Hooks.on("preUpdateToken", (token, updates) => {
-  if (canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id && ("x" in updates || "y" in updates)) {
-    let newX = updates.x || token.x
-    let newY = updates.y || token.y
-    let oldX = token.x;
-    let oldY = token.y;
-    
+  if (
+    canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id &&
+    ("x" in updates || "y" in updates)
+  ) {
+    let ttoken = canvas.tokens.get(token.id);
+    let newX = updates.x || ttoken.x;
+    let newY = updates.y || ttoken.y;
+    let oldX = ttoken.x;
+    let oldY = ttoken.y;
+    let distance =
+      canvas.grid.measureDistance({ x: oldX, y: oldY }, { x: newX, y: newY }) /
+      canvas.dimensions.distance;
+    canvas.hud.enhancedcombathud.hudData.other.movement.moved += distance;
+    const bars = Math.floor(canvas.hud.enhancedcombathud.hudData.other.movement.moved/canvas.hud.enhancedcombathud.hudData.other.movement.max)
+    canvas.hud.enhancedcombathud.hudData.other.movement.current =  canvas.hud.enhancedcombathud.hudData.other.movement.moved - bars*canvas.hud.enhancedcombathud.hudData.other.movement.max;
+    canvas.hud.enhancedcombathud.updateMovement(bars);
   }
 });
 
 Hooks.on("updateCombat", (combat, updates) => {
   if (canvas.hud.enhancedcombathud?.hudData && "round" in updates) {
-    canvas.hud.enhancedcombathud.newRound()
+    canvas.hud.enhancedcombathud.newRound();
   }
-  canvas.hud.enhancedcombathud?.updatePass()
+  canvas.hud.enhancedcombathud?.updatePass();
 });

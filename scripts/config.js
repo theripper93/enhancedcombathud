@@ -158,17 +158,5 @@ Hooks.on("renderTokenHUD", (app, html, data) => {
 
 
 Handlebars.registerHelper('spellSlots', function (obj) {
-  let convertSpellSlot = obj == 'Pact Magic' ? 'pact' : `spell${obj.substr(0, 1)}`;
-  let spellSlots = '';
-  if (obj != 'Cantrip') {
-    let spellSlotDetails = canvas.hud.enhancedcombathud.hudData.spellSlots[convertSpellSlot];
-
-    for (let index = 0; index < spellSlotDetails.max; index++) {
-      //spellSlots.push(index < spellSlotDetails.value);
-      spellSlots += `<span class="spell-slot spell-${index < (spellSlotDetails.max - spellSlotDetails.value)  ? 'used' : 'available'}"></span>`
-    }
-  }else if (obj == 'Cantrip') {
-    spellSlots = '<span class="spell-slot spell-cantrip"><i class="fas fa-infinity"></i></span>';
-  }
-  return spellSlots
+  return CombatHudCanvasElement.generateSpells(obj);
 })

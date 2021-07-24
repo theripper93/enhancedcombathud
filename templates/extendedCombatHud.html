@@ -42,7 +42,7 @@
 						<span class="feature-element-title">{{data.name}}</span>
 					</div>
 				{{/each}}
-					<div class="feature-spell-slots">
+					<div class="feature-spell-slots" data-type="{{@key}}">
 						{{{spellSlots @key}}}
 					</div>
 				</div>
@@ -172,7 +172,7 @@
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>
-			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
+			<div class="action-element" data-type="menu" data-actiontype="reactions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
