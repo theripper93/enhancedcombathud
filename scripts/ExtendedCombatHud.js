@@ -466,6 +466,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   clearEmpty() {
     let menuButtons = $(this.element).find('[data-type="menu"]');
+    debugger
     for (let button of menuButtons) {
       let category = button.dataset.actiontype;
       let itemType = button.dataset.itemtype;
@@ -696,8 +697,10 @@ Hooks.on("preUpdateToken", (token, updates) => {
     let newY = updates.y || ttoken.y;
     let oldX = ttoken.x;
     let oldY = ttoken.y;
+    const ray = new Ray({ x: oldX, y: oldY }, { x: newX, y: newY });
+    const segments = [{ray}];
     let distance =
-      Math.floor(canvas.grid.measureDistance({ x: oldX, y: oldY }, { x: newX, y: newY }) /
+      Math.floor(canvas.grid.measureDistances(segments,{gridSpaces:true}) /
       canvas.dimensions.distance);
     canvas.hud.enhancedcombathud.hudData.other.movement.moved += distance;
     const bars = Math.floor(canvas.hud.enhancedcombathud.hudData.other.movement.moved/canvas.hud.enhancedcombathud.hudData.other.movement.max)
