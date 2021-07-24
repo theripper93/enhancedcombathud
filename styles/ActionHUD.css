@@ -97,6 +97,12 @@
 .action-element.bonus-action {
   background-color: var(--ech-color-bonus-action);
 }
+.action-element.reaction {
+  background-color: var(--ech-color-reaction);
+}
+.action-element.free-action {
+  background-color: var(--ech-color-free-action);
+}
 .action-element.end-turn {
   background-color: var(--ech-color-end-turn);
 }

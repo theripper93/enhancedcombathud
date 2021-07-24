@@ -538,7 +538,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   updateMovement(bars=0) {
-    debugger
     let movementColor
     switch(bars){
       case 0:
