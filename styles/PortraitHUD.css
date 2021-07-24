@@ -187,9 +187,9 @@
     width: 100%;
 }
 .movement-spaces .movement-space {
-    background-color: rgb(90, 190, 245);
+    background-color: rgb(125, 135, 145, 0.5);
     border-radius: 3px;
-    box-shadow: 0px 0px 10px 0px rgb(110 210 255 / 80%);
+    box-shadow: none;
     height: 25px;
     margin: 0.5rem 0.3rem;
     position: relative;
@@ -198,8 +198,8 @@
     width: 100%;
 }
 .movement-spaces .movement-space.base-movement {
-    background-color: rgb(90, 200, 100);
-    box-shadow: 0px 0px 10px 0px rgb(110 220 120 / 80%);
+    background-color: rgb(90, 190, 245);
+    box-shadow: 0px 0px 10px 0px rgb(110 210 255 / 80%);
 }
 .movement-spaces .movement-space.dash-movement {
     background-color: rgb(200, 200, 90);

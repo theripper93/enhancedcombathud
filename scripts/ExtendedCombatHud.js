@@ -107,10 +107,7 @@ class CombatHud {
           this.actor.data.data.attributes.movement.walk /
             canvas.dimensions.distance
         ),
-        current: Math.round(
-          this.actor.data.data.attributes.movement.walk /
-            canvas.dimensions.distance
-        ),
+        current: 0,
         moved: 0,
       },
       ac: this.actor.data.data.attributes.ac.value,
@@ -342,6 +339,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   rigHtml() {
     this.clearEmpty();
     this.updatePass();
+    this.updateMovement();
     this.rigButtons();
     this.rigAccordion();
     this.initSets();
@@ -540,19 +538,32 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   updateMovement(bars=0) {
+    debugger
     let movementColor
     switch(bars){
       case 0:
-        movementColor = "#00FF00";
+        movementColor = "base-movement";
         break;
       case 1:
-        movementColor = "#FF0000";
+        movementColor = "dash-movement";
         break;
       case 2:
-        movementColor = "#FFA500";
+        movementColor = "danger-movement";
         break;
     }
-    let barsNumber = this.hudData.other.movement.current;
+    let disabledBars = this.hudData.other.movement.current;
+    let barsNumber = this.hudData.other.movement.max-disabledBars;
+    let $element = $(this.element).find(".movement-spaces")
+    let newHtml = ""
+    for (let i = 0; i < barsNumber; i++) {
+      newHtml += `<div class="movement-space  ${movementColor}"></div>`
+    }
+    for (let i = 0; i < disabledBars; i++) {
+      newHtml += `<div class="movement-space"></div>`
+    }
+    $(this.element).find(".movement-current").text(barsNumber);
+    $(this.element).find(".movement-max").text((bars+1)*this.hudData.other.movement.max);
+    $element.html(newHtml);
     
   }
 
@@ -589,8 +600,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let convertSpellSlot;
     if (obj == _this.settings.localize.spells.pact) {
       convertSpellSlot = "pact";
-    } else if(obj.match("/d+/g")) {
-      convertSpellSlot = "spell" + obj.match("/d+/g")[0];
+    } else if(obj.match(/\d+/)) {
+      convertSpellSlot = "spell" + obj.match(/\d+/)[0];
     }
     let spellSlots = "";
     if (
@@ -686,8 +697,8 @@ Hooks.on("preUpdateToken", (token, updates) => {
     let oldX = ttoken.x;
     let oldY = ttoken.y;
     let distance =
-      canvas.grid.measureDistance({ x: oldX, y: oldY }, { x: newX, y: newY }) /
-      canvas.dimensions.distance;
+      Math.floor(canvas.grid.measureDistance({ x: oldX, y: oldY }, { x: newX, y: newY }) /
+      canvas.dimensions.distance);
     canvas.hud.enhancedcombathud.hudData.other.movement.moved += distance;
     const bars = Math.floor(canvas.hud.enhancedcombathud.hudData.other.movement.moved/canvas.hud.enhancedcombathud.hudData.other.movement.max)
     canvas.hud.enhancedcombathud.hudData.other.movement.current =  canvas.hud.enhancedcombathud.hudData.other.movement.moved - bars*canvas.hud.enhancedcombathud.hudData.other.movement.max;
