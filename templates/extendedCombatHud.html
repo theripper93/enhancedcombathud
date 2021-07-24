@@ -53,7 +53,7 @@
 				<span class="feature-accordion-title">{{@key}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 						<span class="feature-element-title">{{data.name}}</span>
 					</div>
 				{{/each}}
@@ -70,10 +70,13 @@
 				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 						<span class="feature-element-title">{{data.name}}</span>
 					</div>
 				{{/each}}
+				<div class="feature-spell-slots" data-type="{{@key}}">
+					{{{spellSlots @key}}}
+				</div>
 				</div>
 			</div>
 			{{/each}}
@@ -84,50 +87,53 @@
 				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div class="feature-element" data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 						<span class="feature-element-title">{{data.name}}</span>
 					</div>
 				{{/each}}
+				<div class="feature-spell-slots" data-type="{{@key}}">
+					{{{spellSlots @key}}}
+				</div>
 				</div>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-consumables" data-iscontainer="true" data-containeractiontype="actions">
 			{{#each hudData.actions.consumables}}
-			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.quantity}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 			<span class="feature-element-title">{{data.name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="actions">
 			{{#each hudData.actions.special}}
-			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 			<span class="feature-element-title">{{data.name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="bonus">
 			{{#each hudData.bonus.special}}
-			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 			<span class="feature-element-title">{{data.name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="reactions">
 			{{#each hudData.reactions.special}}
-			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 			<span class="feature-element-title">{{data.name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="free">
 			{{#each hudData.free.special}}
-			<div class="feature-element has-count" data-type="trigger" data-item-count="{{data.data.uses.value}}" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
+			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
 			<span class="feature-element-title">{{data.name}}</span>
 			</div>
 			{{/each}}
 		</div>
-		<div class="actions-container has-actions" data-actionbartype="action" data-title="Main Actions">
+		<div class="actions-container has-actions" data-actionbartype="actions" data-title="Main Actions">
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>
@@ -178,12 +184,12 @@
 				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container" data-title="{{hudData.settings.localize.specialaction}}">
+		<div class="actions-container" data-actionbartype="free" data-title="{{hudData.settings.localize.specialaction}}">
 			<div class="action-element free-action" data-type="menu" data-actiontype="free" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container has-actions" data-actionbartype="reaction" data-title="{{hudData.settings.localize.reaction}}">
+		<div class="actions-container has-actions" data-actionbartype="reactions" data-title="{{hudData.settings.localize.reaction}}">
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>
@@ -194,7 +200,7 @@
 				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 		</div>
-		<div class="actions-container"data-title="{{hudData.settings.localize.pass}}">
+		<div class="actions-container" data-passcont="true" data-title="{{hudData.settings.localize.pass}}">
 			<div class="action-element end-turn" data-pass="true" style="background-image: url(modules/enhancedcombathud/icons/duration.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.endturn}}</span>
 			</div>

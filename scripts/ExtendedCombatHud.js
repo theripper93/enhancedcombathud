@@ -466,7 +466,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   clearEmpty() {
     let menuButtons = $(this.element).find('[data-type="menu"]');
-    debugger
     for (let button of menuButtons) {
       let category = button.dataset.actiontype;
       let itemType = button.dataset.itemtype;
@@ -475,11 +474,24 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         objectToCheck == [] ||
         objectToCheck == {} ||
         !objectToCheck ||
-        objectToCheck.length == 0
+        objectToCheck.length == 0 ||
+        Object.keys(objectToCheck).length === 0 
       ) {
         $(button).remove();
       }
     }
+    let categroyContainers = $(this.element).find('[data-actionbartype]')
+    for (let container of categroyContainers) {
+      let actiontype = container.dataset.actionbartype;
+      let remove = true;
+      for(let [key,value] of Object.entries(this.hudData[actiontype])) {
+        if (!(value == [] || value == {} || !value || value.length == 0 || Object.keys(value).length === 0)) {
+          remove = false;
+        }
+    }
+    if(remove) $(container).remove();
+  }
+
   }
 
   async switchSets(set) {
@@ -582,7 +594,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   updatePass() {
-    let element = $(this.element).find("div[data-pass]");
+    let element = $(this.element).find("div[data-passcont]");
     if (this.hudData.token.id == game.combat?.current?.tokenId) {
       element.css({ display: "flex" });
     } else {

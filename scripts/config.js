@@ -43,6 +43,60 @@ Hooks.once("init", function () {
   });
 });
 
+//Color Settings
+
+
+Hooks.once("ready", function () {
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "fore-color", {
+    name: game.i18n.localize("enhancedcombathud.settings.fore-color.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.fore-color.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#B4D2DCFF",
+    scope: "world",
+  });
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color", {
+    name: game.i18n.localize("enhancedcombathud.settings.color.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#414B55E6",
+    scope: "world",
+  });
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-bonus-action", {
+    name: game.i18n.localize("enhancedcombathud.settings.color-bonus-action.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color-bonus-action.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#453B75E6",
+    scope: "world",
+  });
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-free-action", {
+    name: game.i18n.localize("enhancedcombathud.settings.color-free-action.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color-free-action.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#3B5875E6",
+    scope: "world",
+  });
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-reaction", {
+    name: game.i18n.localize("enhancedcombathud.settings.color-reaction.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color-reaction.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#753B3BE6",
+    scope: "world",
+  });
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-end-turn", {
+    name: game.i18n.localize("enhancedcombathud.settings.color-end-turn.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color-end-turn.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#374B3CE6",
+    scope: "world",
+  });
+});
+
 Hooks.on("renderItemSheet", (itemsheet, html) => {
   let actionType = itemsheet.object.data.data.activation.type;
   let itemType = itemsheet.object.data.type;
@@ -123,4 +177,14 @@ Hooks.on("renderTokenHUD", (app, html, data) => {
 
 Handlebars.registerHelper('spellSlots', function (obj) {
   return CombatHudCanvasElement.generateSpells(obj);
+})
+
+Handlebars.registerHelper('hasUses', function (data) {
+  debugger
+  let max = data.data.uses.max
+  let current = data.data.uses.value
+  let quantity = data.data.quantity
+  if(quantity) return `class="feature-element has-count" data-item-count="${quantity}"`
+  if(current) return `class="feature-element has-count" data-item-count="${current}"`
+  return `class="feature-element"`
 })

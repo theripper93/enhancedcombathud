@@ -40,6 +40,29 @@
     "enhancedcombathud.hud.spells.6": "6th Level",
     "enhancedcombathud.hud.spells.7": "7th Level",
     "enhancedcombathud.hud.spells.8": "8th Level",
-    "enhancedcombathud.hud.spells.9": "9th Level"
+    "enhancedcombathud.hud.spells.9": "9th Level",
+
+    "enhancedcombathud.settings.color.label" : "Color",
+    "enhancedcombathud.settings.fore-color.text" : "Text Color",
+    "enhancedcombathud.settings.fore-color.hint" : "Text color",
+    "enhancedcombathud.settings.color.text" : "Main Color",
+    "enhancedcombathud.settings.color.hint" : "Color of the actions tab and other main features of the HUD",
+    "enhancedcombathud.settings.color-bonus-action.text" : "Bonus Action Color",
+    "enhancedcombathud.settings.color-bonus-action.hint" : "Color of the bonus action tab",
+    "enhancedcombathud.settings.color-free-action.text" : "Free Action Color",
+    "enhancedcombathud.settings.color-free-action.hint" : "Color of the free action tab",
+    "enhancedcombathud.settings.color-reaction.text" : "Reaction Color",
+    "enhancedcombathud.settings.color-reaction.hint" : "Color of the reaction tab",
+    "enhancedcombathud.settings.color-end-turn.text" : "End Turn Color",
+    "enhancedcombathud.settings.color-end-turn.hint" : "Color of the end turn tab",
+
+    "enhancedcombathud.settings.scale.name" : "Scale",
+    "enhancedcombathud.settings.scale.hint" : "HUD Scale",
+    "enhancedcombathud.settings.leftPos.name" : "Left Position",
+    "enhancedcombathud.settings.leftPos.hint" : "Distance from the left border in pixels",
+    "enhancedcombathud.settings.botPos.name" : "Bottom Position",
+    "enhancedcombathud.settings.botPos.hint" : "Distance from the bottom border in pixels",
+    "enhancedcombathud.settings.preparedSpells.name" : "Prepared Spells Only",
+    "enhancedcombathud.settings.preparedSpells.hint" : "Show only prepared spells"
 
 }
