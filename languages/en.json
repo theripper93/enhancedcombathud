@@ -26,6 +26,20 @@
     "enhancedcombathud.items.shove.name": "Shove",
     "enhancedcombathud.items.dash.name": "Dash",
     "enhancedcombathud.items.dodge.name": "Dodge",
-    "enhancedcombathud.items.ready.name": "Ready"
+    "enhancedcombathud.items.ready.name": "Ready",
+
+    "enhancedcombathud.hud.spells.cantrip": "Cantrip",
+    "enhancedcombathud.hud.spells.pact": "Pact Magic",
+    "enhancedcombathud.hud.spells.will": "At Will",
+    "enhancedcombathud.hud.spells.innate": "Innate",
+    "enhancedcombathud.hud.spells.1": "1st Level",
+    "enhancedcombathud.hud.spells.2": "2nd Level",
+    "enhancedcombathud.hud.spells.3": "3rd Level",
+    "enhancedcombathud.hud.spells.4": "4th Level",
+    "enhancedcombathud.hud.spells.5": "5th Level",
+    "enhancedcombathud.hud.spells.6": "6th Level",
+    "enhancedcombathud.hud.spells.7": "7th Level",
+    "enhancedcombathud.hud.spells.8": "8th Level",
+    "enhancedcombathud.hud.spells.9": "9th Level"
 
 }
