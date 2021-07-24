@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
 
-    margin-right: 150px;
+    margin-right: 115px;
 
     min-height: 375px;
     min-width: 375px;
@@ -37,12 +37,14 @@
     padding: 0.2rem 0rem;
 }
 .portrait-stat-block [data-hp-value]:after {
+    color: rgb(90, 180, 150);
     content: attr(data-hp-value);
 }
 .portrait-stat-block [data-hp-max]:after {
     content: "of " attr(data-hp-max) " HP";
 }
 .portrait-stat-block [data-ac-value]:after {
+    color: rgb(90, 190, 245);
     content: attr(data-ac-value);
 }
 .portrait-stat-block.player-details {
@@ -168,9 +170,12 @@
     position: absolute;
     text-align: center;
     top: 0px;
-    width: 150px;
+    width: 115px;
 
     pointer-events: all;
+}
+.movement-hud .movement-current {
+    color: rgb(90, 190, 245);
 }
 .movement-hud .movement-current,
 .movement-hud i.fas {
@@ -183,13 +188,13 @@
     flex-flow: wrap;
     flex-direction: column-reverse;
     margin-bottom: 0.5rem;
-    max-height: 287px;
+    max-height: 246px;
     width: 100%;
 }
 .movement-spaces .movement-space {
-    background-color: rgb(90, 190, 245);
+    background-color: rgba(125, 135, 145, 0.5);
     border-radius: 3px;
-    box-shadow: 0px 0px 10px 0px rgb(110 210 255 / 80%);
+    box-shadow: none;
     height: 25px;
     margin: 0.5rem 0.3rem;
     position: relative;
@@ -198,8 +203,8 @@
     width: 100%;
 }
 .movement-spaces .movement-space.base-movement {
-    background-color: rgb(90, 200, 100);
-    box-shadow: 0px 0px 10px 0px rgb(110 220 120 / 80%);
+    background-color: rgb(90, 190, 245);
+    box-shadow: 0px 0px 10px 0px rgb(110 210 255 / 80%);
 }
 .movement-spaces .movement-space.dash-movement {
     background-color: rgb(200, 200, 90);

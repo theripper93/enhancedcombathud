@@ -1,5 +1,5 @@
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <div class="extended-combat-hud">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 	<div class="weapon-sets">
 		<div class="weapon-set active" data-type="switchWeapons" data-value="set1">
 			<div class="set set-primary" style="background-image: url({{hudData.sets.set1.primary.data.img}})"></div>
@@ -36,11 +36,11 @@
 			<span class="movement-space"></span>
 			<span class="movement-space"></span>
 			<span class="movement-space"></span>
-			<span class="movement-space base-movement"></span>
-			<span class="movement-space dash-movement"></span>
-			<span class="movement-space danger-movement"></span>
+			<span class="movement-space"></span>
+			<span class="movement-space"></span>
+			<span class="movement-space"></span>
 		</div>
-		<div class="movement-text"><span class="movement-current">6</span> <i class="fas fa-cube"></i><br/> of <span class="movement-max">6</span></div>
+		<div class="movement-text"><span class="movement-current">6</span> <i class="fas fa-cube"></i><br/> {{hudData.settings.localize.of}} <span class="movement-max">6</span></div>
 	</div>
 	<div class="action-hud">
 		<div class="features-container is-spells" data-iscontainer="true" data-containeractiontype="actions" >
@@ -53,7 +53,7 @@
 						<span class="feature-element-title">{{data.name}}</span>
 					</div>
 				{{/each}}
-					<div class="feature-spell-slots">
+					<div class="feature-spell-slots" data-type="{{@key}}">
 						{{{spellSlots @key}}}
 					</div>
 				</div>
@@ -183,7 +183,7 @@
 			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
 			</div>
-			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
+			<div class="action-element" data-type="menu" data-actiontype="reactions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
 			<div class="action-element" data-type="menu" data-actiontype="bonus" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
