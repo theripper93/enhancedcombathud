@@ -15,6 +15,7 @@
 		</div>
 	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
+		<div class="ech-close" onclick="$(`.control-tool[data-tool='echtoggle']`).trigger('click')"><i class="fas fa-sort-down"></i></div>
 		<div class="portrait-stat-block">
 			<span>HP</span> 
 			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}" style="font-size: 1.5rem;"></span>
@@ -23,6 +24,9 @@
 		<div class="portrait-stat-block">
 			<span>AC</span> 
 			<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}" style="font-size: 1.5rem;"></span>
+		</div>
+		<div class="portrait-stat-block portrait-stat-block-button" onclick="canvas.hud.enhancedcombathud.hudData.actor.sheet.render(true);">
+			Inventory
 		</div>
 		<div class="portrait-stat-block player-details">
 			<span class="player-name">{{hudData.actor.data.name}}</span>

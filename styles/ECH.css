@@ -4,8 +4,10 @@
 	/* BACKGROUND COLORS */
 	--ech-color: rgba(65 75 85 / 90%);
   	--ech-hover-brightness: brightness(150%);
-  	--ech-color-bonus-action: rgba(95 75 70 / 90%);
-  	--ech-color-end-turn: rgba(55 75 60 / 90%);
+    --ech-color-bonus-action: rgb(69 59 117 / 90%);
+    --ech-color-free-action: rgba(59 88 117 / 90%);
+    --ech-color-reaction: rgb(117 59 59 / 90%);
+    --ech-color-end-turn: rgba(55 75 60 / 90%);
 	/* BORDER COLORS */  
   	--ech-border-color: rgb(117, 127, 137);
 	/* SETTINGS */
@@ -34,7 +36,23 @@
   transform-origin: bottom left;
   /* USED TO ALLOW USERS TO CLICK THROUGH AND AROUND ECH*/
   pointer-events: none;
+}
 
+.ech-close {
+  backdrop-filter: blur(6px);
+  background-color: rgb(0 0 0 / 50%);
+  border: 1px solid var(--ech-border-color);
+  color: rgb(255, 255, 255);
+  display: flex;
+  font-size: 2rem;
+  height: 50px;
+  justify-content: center;
+  position: absolute;
+  right: -115px;
+  top: calc((-50px - 1rem));
+  width: 50px;
+  
+  pointer-events: all;
 }
 
 .extended-combat-hud *,
