@@ -281,12 +281,12 @@ class CombatHud {
   }
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
-      .find('.actions-container.has-actions[data-actionbartype="action"]')
+      .find('.actions-container.has-actions[data-actionbartype="actions"]')
       .toggleClass("actions-used", !value);
   }
   set hasReaction(value) {
     $(canvas.hud.enhancedcombathud.element)
-      .find('.actions-container.has-actions[data-actionbartype="reaction"]')
+      .find('.actions-container.has-actions[data-actionbartype="reactions"]')
       .toggleClass("actions-used", !value);
   }
   set hasBonus(value) {
@@ -297,9 +297,7 @@ class CombatHud {
   get spellSlots() {
     return this.actor.data.data.spells;
   }
-  get movementColor(){
-
-  }
+  get movementColor() {}
 }
 
 class CombatHudCanvasElement extends BasePlaceableHUD {
@@ -363,13 +361,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.unbind("click");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
+      let actionDataSet = event.currentTarget.dataset.atype;
       await this.addSpecialItem(itemName);
       let confimed = await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
-      if (confimed)
-        this.updateActionEconomy(
-          item.data?.data?.activation?.type ?? item.data.activation.type
-        );
+      if (confimed && game.combat?.started) {
+        if (actionDataSet) {
+          this.updateActionEconomy(actionDataSet);
+        } else {
+          this.updateActionEconomy(
+            item.data?.data?.activation?.type ?? item.data.activation.type
+          );
+        }
+      }
+
       if (!item) {
         $(event.currentTarget).remove();
       } else {
@@ -475,23 +480,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         objectToCheck == {} ||
         !objectToCheck ||
         objectToCheck.length == 0 ||
-        Object.keys(objectToCheck).length === 0 
+        Object.keys(objectToCheck).length === 0
       ) {
         $(button).remove();
       }
     }
-    let categroyContainers = $(this.element).find('[data-actionbartype]')
+    let categroyContainers = $(this.element).find("[data-actionbartype]");
     for (let container of categroyContainers) {
       let actiontype = container.dataset.actionbartype;
       let remove = true;
-      for(let [key,value] of Object.entries(this.hudData[actiontype])) {
-        if (!(value == [] || value == {} || !value || value.length == 0 || Object.keys(value).length === 0)) {
+      for (let [key, value] of Object.entries(this.hudData[actiontype])) {
+        if (
+          !(
+            value == [] ||
+            value == {} ||
+            !value ||
+            value.length == 0 ||
+            Object.keys(value).length === 0
+          )
+        ) {
           remove = false;
         }
+      }
+      if (remove) $(container).remove();
     }
-    if(remove) $(container).remove();
-  }
-
   }
 
   async switchSets(set) {
@@ -533,7 +545,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.resetActionsUses();
     this.hudData.other.movement.current = this.hudData.other.movement.max;
     this.hudData.other.movement.moved = 0;
-    this.updateMovement();
+    this.updateMovement(0, true);
   }
 
   updateActionEconomy(actionType) {
@@ -550,9 +562,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
-  updateMovement(bars=0) {
-    let movementColor
-    switch(bars){
+  updateMovement(bars = 0, reset = false) {
+    bars = game.combat?.started && !reset ? bars : 0;
+    let movementColor;
+    switch (bars) {
       case 0:
         movementColor = "base-movement";
         break;
@@ -563,20 +576,25 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         movementColor = "danger-movement";
         break;
     }
-    let disabledBars = this.hudData.other.movement.current;
-    let barsNumber = this.hudData.other.movement.max-disabledBars;
-    let $element = $(this.element).find(".movement-spaces")
-    let newHtml = ""
+    let disabledBars =
+      game.combat?.started && !reset ? this.hudData.other.movement.current : 0;
+    let barsNumber =
+      game.combat?.started && !reset
+        ? this.hudData.other.movement.max - disabledBars
+        : this.hudData.other.movement.max;
+    let $element = $(this.element).find(".movement-spaces");
+    let newHtml = "";
     for (let i = 0; i < barsNumber; i++) {
-      newHtml += `<div class="movement-space  ${movementColor}"></div>`
+      newHtml += `<div class="movement-space  ${movementColor}"></div>`;
     }
     for (let i = 0; i < disabledBars; i++) {
-      newHtml += `<div class="movement-space"></div>`
+      newHtml += `<div class="movement-space"></div>`;
     }
     $(this.element).find(".movement-current").text(barsNumber);
-    $(this.element).find(".movement-max").text((bars+1)*this.hudData.other.movement.max);
+    $(this.element)
+      .find(".movement-max")
+      .text((bars + 1) * this.hudData.other.movement.max);
     $element.html(newHtml);
-    
   }
 
   updatePortrait(hp, maxhp, ac) {
@@ -612,7 +630,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let convertSpellSlot;
     if (obj == _this.settings.localize.spells.pact) {
       convertSpellSlot = "pact";
-    } else if(obj.match(/\d+/)) {
+    } else if (obj.match(/\d+/)) {
       convertSpellSlot = "spell" + obj.match(/\d+/)[0];
     }
     let spellSlots = "";
@@ -701,6 +719,7 @@ Hooks.on("controlToken", (token, controlled) => {
 Hooks.on("preUpdateToken", (token, updates) => {
   if (
     canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id &&
+    game.combat?.started &&
     ("x" in updates || "y" in updates)
   ) {
     let ttoken = canvas.tokens.get(token.id);
@@ -709,13 +728,19 @@ Hooks.on("preUpdateToken", (token, updates) => {
     let oldX = ttoken.x;
     let oldY = ttoken.y;
     const ray = new Ray({ x: oldX, y: oldY }, { x: newX, y: newY });
-    const segments = [{ray}];
-    let distance =
-      Math.floor(canvas.grid.measureDistances(segments,{gridSpaces:true}) /
-      canvas.dimensions.distance);
+    const segments = [{ ray }];
+    let distance = Math.floor(
+      canvas.grid.measureDistances(segments, { gridSpaces: true }) /
+        canvas.dimensions.distance
+    );
     canvas.hud.enhancedcombathud.hudData.other.movement.moved += distance;
-    const bars = Math.floor(canvas.hud.enhancedcombathud.hudData.other.movement.moved/canvas.hud.enhancedcombathud.hudData.other.movement.max)
-    canvas.hud.enhancedcombathud.hudData.other.movement.current =  canvas.hud.enhancedcombathud.hudData.other.movement.moved - bars*canvas.hud.enhancedcombathud.hudData.other.movement.max;
+    const bars = Math.floor(
+      canvas.hud.enhancedcombathud.hudData.other.movement.moved /
+        canvas.hud.enhancedcombathud.hudData.other.movement.max
+    );
+    canvas.hud.enhancedcombathud.hudData.other.movement.current =
+      canvas.hud.enhancedcombathud.hudData.other.movement.moved -
+      bars * canvas.hud.enhancedcombathud.hudData.other.movement.max;
     canvas.hud.enhancedcombathud.updateMovement(bars);
   }
 });
@@ -725,4 +750,8 @@ Hooks.on("updateCombat", (combat, updates) => {
     canvas.hud.enhancedcombathud.newRound();
   }
   canvas.hud.enhancedcombathud?.updatePass();
+});
+
+Hooks.on("deleteCombat", (combat, updates) => {
+  canvas.hud.enhancedcombathud?.newRound();
 });
