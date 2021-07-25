@@ -180,7 +180,6 @@ Handlebars.registerHelper('spellSlots', function (obj) {
 })
 
 Handlebars.registerHelper('hasUses', function (data) {
-  debugger
   let max = data.data.uses.max
   let current = data.data.uses.value
   let quantity = data.data.quantity
