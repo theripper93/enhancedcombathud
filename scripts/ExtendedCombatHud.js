@@ -365,7 +365,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
-      await this.addSpecialItem(itemName);
+      if(!_this.hudData.findItemByName(itemName))await this.addSpecialItem(itemName);
       let confimed = await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
       if (confimed && game.combat?.started) {
@@ -677,7 +677,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   drawTooltip(itemName) {
-    debugger
     let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
     if (!item) {
       item = {}
