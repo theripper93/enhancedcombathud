@@ -348,7 +348,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   setColorSettings() {
-    console.log('ECH:', game.settings.get("enhancedcombathud", "color"))
     document.documentElement.style.setProperty('--ech-fore-color', game.settings.get("enhancedcombathud", "fore-color"));
     document.documentElement.style.setProperty('--ech-color', game.settings.get("enhancedcombathud", "color"));
     document.documentElement.style.setProperty('--ech-bonus-action', game.settings.get("enhancedcombathud", "color-bonus-action"));
@@ -398,11 +397,31 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       this.updateSpellSlots();
     });
     this.element.on("mouseenter", '[data-type="trigger"]', (event) => {
+      let $element = $(event.currentTarget);
       let itemName = $(event.currentTarget).data("itemname");
-      this.drawTooltip(itemName);
+
+      const offset = $element.offset()
+
+      $(".ech-tooltip").remove();
+
+      setTimeout(() => {
+        this.drawTooltip(itemName, {
+          top: offset.top - $(document).scrollTop(),
+          left: offset.left - $(document).scrollLeft()
+        });
+      }, 100)
     });
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
-      $(".tooltip").remove();
+      // Allow User to hover over Tooltip
+      setTimeout(() => {
+        $(".ech-tooltip:not(.is-hover)").remove();
+      }, 100)
+    });
+    $('body').on('mouseenter', '.ech-tooltip', (event) => {
+      $(event.currentTarget).addClass('is-hover');
+    })
+    $('body').on('mouseleave', '.ech-tooltip.is-hover', (event) => { 
+      $(event.currentTarget).remove();
     });
     this.element.on("click", '[data-pass="true"]', async (event) => {
       if (game.combat?.current?.tokenId == this.hudData.token.id)
@@ -682,12 +701,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       .find(".feature-spell-slots")
       .each((index, element) => {
         let spellSlot = element.dataset.type;
-        console.log(CombatHudCanvasElement.generateSpells(spellSlot));
         element.innerHTML = CombatHudCanvasElement.generateSpells(spellSlot);
       });
   }
 
-  drawTooltip(itemName) {
+  drawTooltip(itemName, offset) {
     let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
     if (!item) {
       item = {}
@@ -729,22 +747,49 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
         break;
     }
-    let html = `<div class="tooltip">
-    <div class=""><h2>${title}</h2></div>
-    <div class=""><h3>${subtitle}</h3></div>
-    <div class=""><p>${description}</p></div>
-    <div class=""><h3>Range: ${range}</h3></div>
-    <div class=""><h3>Target: ${target}</h3></div>
-    <div class="">
-        `
-        for(let damt of damageTypes){
-          if(damt)html += `<div class="">${damt}</span>`
-        }
-        for(let prop of properties){
-          if(prop)html += `<div class="">${prop}</span>`
-        }
-        html+=   `</div></div>`
-    $("body").append(html);
+
+    const tooltip = ({title, subtitle, description, target, range, properties, offset}) => {
+      return `<div class="ech-tooltip" style="top: ${offset.top}px; left: ${offset.left}px;">
+          <div class="ech-tooltip-header">
+            <h2>${title}</h2>
+          </div>
+          <div class="ech-tooltip-body">
+            <h4 class="ech-tooltip-subtitle">${subtitle}</h4>
+            <div class="ech-tooltip-description">${description}</div>
+            <div class="ech-tooltip-details">
+              <div>
+                <span>Target</span>
+                <span>${target}</span>
+              </div>
+              <div>
+                <span>Range</span>
+                <span>${range}</span></div>
+              </div>
+            <div class="ech-tooltip-properties">
+              <h3>Properties</h3>
+              ${properties.join('\n')}
+            </div>
+          </div>
+        </div>`
+    }
+
+    let listOfProperties = [];
+    for(let damt of damageTypes){
+      if(damt) listOfProperties.push(`<span class="ech-tooltip-badge damt">${damt}</span>`);
+    }
+    for(let prop of properties){
+      if(prop) listOfProperties.push(`<span class="ech-tooltip-badge prop">${prop}</span>`);
+    }
+
+    $('.extended-combat-hud').before(tooltip({
+      title: title, 
+      subtitle: subtitle, 
+      description: description, 
+      target: target,
+      range: range,
+      properties: listOfProperties,
+      offset: offset
+    }))
   }
 }
 

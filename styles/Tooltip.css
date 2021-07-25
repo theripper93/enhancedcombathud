@@ -1,22 +1,97 @@
-:root {
-    --mouse-x: 0px;
-    --mouse-y: 0px;
-  }
-
-.tooltip {
-    display:inline-block;
-    position:absolute;
-    max-width: 20%;
-    text-align:left;
-    color: var(--ech-fore-color);
-    left: var(--mouse-x);
-    top: var(--mouse-y);
-    backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 30%);
+.ech-tooltip {
     border: 1px solid var(--ech-border-color);
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgb(0 0 0);
+    color: var(--ech-fore-color);
+    display:inline-block;
+    font-size: 16px;
     height: fit-content;
-    justify-content: center;
-    margin-right: -75px;
-    padding: 1rem 0.5rem;
+    max-width: 400px;
+    min-width: 400px;
+    position:absolute;
+    text-align:left;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(calc(-50% + 75px), calc(-100% - 10px));
+
     z-index: 10000;
+
+    pointer-events: all;
+}
+.ech-tooltip .ech-tooltip-header {
+  backdrop-filter: blur(6px);
+  background-color: rgb(255 255 255 / 80%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: rgb(65, 65, 70);
+  padding: 1rem 0.5rem 2rem;
+  position: relative;
+  text-align: center;
+}
+.ech-tooltip .ech-tooltip-header h2 {
+  border-width: 0px;
+}
+.ech-tooltip .ech-tooltip-subtitle {
+  background-color: rgb(50, 80, 90);
+  border-radius: 3px;
+  left: 50%;
+  margin-bottom: 0px;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 0px;
+  transform: translate(-50%, -17.5px);
+  z-index: 10000;
+}
+.ech-tooltip .ech-tooltip-body {
+  backdrop-filter: blur(6px);
+  background-color: rgb(90 120 150 / 70%);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: rgb(255, 255, 255);
+  padding: 2rem 1rem 1rem;
+  text-align: left;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description {
+  margin-bottom: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  max-height: 200px;
+  padding: 0rem 1rem;
+  overflow: auto;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div > span {
+  padding: 0.5rem 0rem;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-properties {
+  margin-top: 1rem;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
+  background-color: rgb(80 150 195); 
+  border-radius: .25rem;
+  color: rgb(255 255 255);
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  margin-right: 0.25rem;
+  padding: .35em .65em;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge:first-of-type {
+  background-color: rgb(85 190 245); 
 }
