@@ -239,7 +239,8 @@ class CombatHud {
   }
   getSets() {
     let items = this.actor.data.items;
-    let sets = {
+    let sets;
+    sets = {
       set1: {
         primary: null,
         secondary: null,
@@ -253,6 +254,22 @@ class CombatHud {
         secondary: null,
       },
     };
+    if (this.actor.type == "npc") {
+      sets = {
+        set1: {
+          primary: this.actions.attack[0],
+          secondary: this.bonus.attack[0],
+        },
+        set2: {
+          primary: this.actions.attack[1],
+          secondary: this.bonus.attack[1],
+        },
+        set3: {
+          primary: this.actions.attack[2],
+          secondary: this.bonus.attack[2],
+        },
+      };
+    }
     for (let item of items) {
       if (item.data.flags.enhancedcombathud?.set1p) sets.set1.primary = item;
       if (item.data.flags.enhancedcombathud?.set2p) sets.set2.primary = item;
@@ -261,6 +278,7 @@ class CombatHud {
       if (item.data.flags.enhancedcombathud?.set2s) sets.set2.secondary = item;
       if (item.data.flags.enhancedcombathud?.set3s) sets.set3.secondary = item;
     }
+
     return sets;
   }
   _render() {
@@ -412,11 +430,17 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        let uses = item.data.data.quantity || item.data.data.uses.value
+        let uses = item.data.data.quantity || item.data.data.uses.value;
         let isAmmo = item.data.data.consume?.type == "ammo";
-        let ammoItem = isAmmo ? this.hudData.actor.items.find(i => i.id == item.data.data.consume?.target) : null;
-        let ammoCount = confimed ? ammoItem?.data?.data?.quantity-item.data.data.consume?.amount : ammoItem?.data?.data?.quantity;
-        event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses
+        let ammoItem = isAmmo
+          ? this.hudData.actor.items.find(
+              (i) => i.id == item.data.data.consume?.target
+            )
+          : null;
+        let ammoCount = confimed
+          ? ammoItem?.data?.data?.quantity - item.data.data.consume?.amount
+          : ammoItem?.data?.data?.quantity;
+        event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses;
       }
       this.updateSpellSlots();
     });
@@ -583,10 +607,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       return;
     }
     let isAmmo = item.data.data.consume?.type == "ammo";
-    let ammoItem = isAmmo ? this.hudData.actor.items.find(i => i.id == item.data.data.consume?.target) : null;
+    let ammoItem = isAmmo
+      ? this.hudData.actor.items.find(
+          (i) => i.id == item.data.data.consume?.target
+        )
+      : null;
     element.toggleClass("has-count", isAmmo);
-    element[0].dataset.itemCount = ammoItem?.data?.data?.quantity
-    if(element[1])element[1].dataset.itemCount = ammoItem?.data?.data?.quantity
+    element[0].dataset.itemCount = ammoItem?.data?.data?.quantity;
+    if (element[1])
+      element[1].dataset.itemCount = ammoItem?.data?.data?.quantity;
     element
       .data("itemname", item.name)
       .prop("data-itemname", item.name)
@@ -780,6 +809,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         for (let comp of item.labels.components) {
           properties.push(game.dnd5e.config.spellComponents[comp]);
         }
+        if (item.labels.materials) properties.push(item.labels.materials);
         break;
       case "consumable":
         subtitle =
