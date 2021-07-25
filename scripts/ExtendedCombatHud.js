@@ -338,12 +338,23 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   rigHtml() {
     this.clearEmpty();
+    this.setColorSettings();
     this.updatePass();
     this.updateMovement();
     this.rigButtons();
     this.rigAccordion();
     this.initSets();
     this.rigAutoScale();
+  }
+
+  setColorSettings() {
+    console.log('ECH:', game.settings.get("enhancedcombathud", "color"))
+    document.documentElement.style.setProperty('--ech-fore-color', game.settings.get("enhancedcombathud", "fore-color"));
+    document.documentElement.style.setProperty('--ech-color', game.settings.get("enhancedcombathud", "color"));
+    document.documentElement.style.setProperty('--ech-bonus-action', game.settings.get("enhancedcombathud", "color-bonus-action"));
+    document.documentElement.style.setProperty('--ech-free-action', game.settings.get("enhancedcombathud", "color-free-action"));
+    document.documentElement.style.setProperty('--ech-reaction', game.settings.get("enhancedcombathud", "color-reaction"));
+    document.documentElement.style.setProperty('--ech-end-turn', game.settings.get("enhancedcombathud", "color-end-turn"));
   }
 
   rigAutoScale() {
