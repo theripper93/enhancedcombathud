@@ -1,16 +1,16 @@
 :root {
-	/* TEXT COLOR */
-	--ech-fore-color: rgb(180, 210, 220);
-	/* BACKGROUND COLORS */
-	--ech-color: rgba(65 75 85 / 90%);
+	  /* TEXT COLOR */
+	  --ech-fore-color: rgb(180, 210, 220);
+	  /* BACKGROUND COLORS */
+	  --ech-color: rgba(65 75 85 / 90%);
   	--ech-hover-brightness: brightness(150%);
     --ech-color-bonus-action: rgb(69 59 117 / 90%);
     --ech-color-free-action: rgba(59 88 117 / 90%);
     --ech-color-reaction: rgb(117 59 59 / 90%);
     --ech-color-end-turn: rgba(55 75 60 / 90%);
-	/* BORDER COLORS */  
+	  /* BORDER COLORS */  
   	--ech-border-color: rgb(117, 127, 137);
-	/* SETTINGS */
+	  /* SETTINGS */
   	--ech-portrait-size: cover;
 }
 
