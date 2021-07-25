@@ -191,7 +191,6 @@ Handlebars.registerHelper('hasUses', function (data) {
 
 let root = document.documentElement;
 root.addEventListener("mousemove", e => {
-  root.style.setProperty('--mouse-x', e.clientX + "px");
-  root.style.setProperty('--mouse-y',  $(".extended-combat-hud").innerHeight()+"px");//$(".extended-combat-hud").outerHeight()
-  $(".tooltip").css({bottom:"500px"})
+  root.style.setProperty('--mouse-x', e.clientX  + 20 + "px");
+  root.style.setProperty('--mouse-y', e.clientY - $(".tooltip").outerHeight() - 20 +"px");//$(".extended-combat-hud").outerHeight()
 });
