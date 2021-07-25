@@ -715,17 +715,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         break;
     }
     let html = `<div class="tooltip">
-        <h2>${title}</h2>
-        <h3>${subtitle}</h3>
-        <p>${description}</p>
-        <h3>Range: ${range}</h3>
-        <h3>Target: ${target}</h3>
-        <i>
+    <div class=""><h2>${title}</h2></div>
+    <div class=""><h3>${subtitle}</h3></div>
+    <div class=""><p>${description}</p></div>
+    <div class=""><h3>Range: ${range}</h3></div>
+    <div class=""><h3>Target: ${target}</h3></div>
+    <div class="">
         `
-        for(let prop of properties){
-          if(prop)html += `<span class="badge badge-light">${prop}</span>`
+        for(let damt of damageTypes){
+          if(damt)html += `<div class="">${damt}</span>`
         }
-        html+=   `</i></div>`
+        for(let prop of properties){
+          if(prop)html += `<div class="">${prop}</span>`
+        }
+        html+=   `</div></div>`
     $("body").append(html);
   }
 }
