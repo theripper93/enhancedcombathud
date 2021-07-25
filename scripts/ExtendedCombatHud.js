@@ -23,6 +23,7 @@ class CombatHud {
         hp: game.i18n.localize("enhancedcombathud.hud.hp.name"),
         ac: game.i18n.localize("enhancedcombathud.hud.ac.name"),
         of: game.i18n.localize("enhancedcombathud.hud.of.name"),
+        inv: game.i18n.localize("enhancedcombathud.hud.inventory.name"),
         spells: {
           0: game.dnd5e.config.spellLevels["0"],
           pact: game.dnd5e.config.spellPreparationModes.pact,
@@ -716,8 +717,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const description = item.data.data.description.value;
     const itemType = item.data.type;
     let subtitle;
-    let target = item.labels?.target;
-    let range = item.labels?.range;
+    let target = item.labels?.target || "-";
+    let range = item.labels?.range || "-";
     let properties = [];
     let dt = item.labels?.damageTypes?.split(", ")
     let damageTypes = dt && dt.length ? dt : [];
@@ -758,15 +759,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
             <div class="ech-tooltip-description">${description}</div>
             <div class="ech-tooltip-details">
               <div>
-                <span>Target</span>
+                <span>${game.i18n.localize("enhancedcombathud.tooltip.target.name")}</span>
                 <span>${target}</span>
               </div>
               <div>
-                <span>Range</span>
+                <span>${game.i18n.localize("enhancedcombathud.tooltip.range.name")}</span>
                 <span>${range}</span></div>
               </div>
             <div class="ech-tooltip-properties">
-              <h3>Properties</h3>
+              <h3>${game.i18n.localize("enhancedcombathud.tooltip.properties.name")}</h3>
               ${properties.join('\n')}
             </div>
           </div>
