@@ -677,16 +677,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   drawTooltip(itemName) {
-    const item = this.hudData.actor.items.find((i) => i.data.name == itemName);
-    if (!item) return;
+    debugger
+    let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
+    if (!item) {
+      item = {}
+      item.data = ECHItems[itemName]
+    }
+    if(!item || !item.data) return;
     const title = item.data.name;
     const description = item.data.data.description.value;
     const itemType = item.data.type;
     let subtitle;
-    let target = item.labels.target;
-    let range = item.labels.range;
+    let target = item.labels?.target;
+    let range = item.labels?.range;
     let properties = [];
-    let dt = item.labels.damageTypes?.split(", ")
+    let dt = item.labels?.damageTypes?.split(", ")
     let damageTypes = dt && dt.length ? dt : [];
     switch (itemType) {
       case "weapon":

@@ -1,0 +1,108 @@
+{
+  "name": "Ready",
+  "type": "consumable",
+  "img": "modules/enhancedcombathud/icons/clockwork.svg",
+  "data": {
+    "description": {
+      "value": "<p data-content-chunk-id=\"7cbedb62-3df7-482e-9bee-412289356aca\">Sometimes you want to get the jump on a foe or wait for a particular circumstance before you act. To do so, you can take the Ready action on your turn, which lets you act using your reaction before the start of your next turn.</p>\n<p data-content-chunk-id=\"ef9f90d3-f264-4278-a0f8-0684073c429f\">First, you decide what perceivable circumstance will trigger your reaction. Then, you choose the action you will take in response to that trigger, or you choose to move up to your speed in response to it. Examples include \"If the cultist steps on the trapdoor, I'll pull the lever that opens it,\" and \"If the goblin steps next to me, I move away.\"</p>\n<p data-content-chunk-id=\"6c8b0166-9e42-42fa-9ef6-6c01381032c9\">When the trigger occurs, you can either take your reaction right after the trigger finishes or ignore the trigger. Remember that you can take only one reaction per round.</p>\n<p data-content-chunk-id=\"2783c1c8-74e2-4b36-8eb7-2a7c4ea671e3\">When you ready a spell, you cast it as normal but hold its energy, which you release with your reaction when the trigger occurs. To be readied, a spell must have a casting time of 1 action, and holding onto the spell's magic requires concentration. If your concentration is broken, the spell dissipates without taking effect. For example, if you are concentrating on the&nbsp;web&nbsp;spell and ready&nbsp;magic missile, your&nbsp;web&nbsp;spell ends, and if you take damage before you release&nbsp;magic missile&nbsp;with your reaction, your concentration might be broken.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "",
+    "quantity": 1,
+    "weight": 0,
+    "price": 0,
+    "attuned": false,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "autoDestroy": true
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket"
+  },
+  "effects": [
+    {
+      "_id": "BevDb0J80M9BdoEl",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "turns": 1
+      },
+      "icon": "modules/enhancedcombathud/icons/clockwork.svg",
+      "label": "Ready",
+      "transfer": false,
+      "flags": {
+        "dae": {
+          "stackable": "none",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": false
+        }
+      },
+      "tint": ""
+    }
+  ],
+  "sort": 0,
+  "flags": {
+    "enhancedcombathud": {
+      "set1p": false,
+      "set2p": false,
+      "set3p": false
+    },
+    "midi-qol": {
+      "onUseMacroName": ""
+    },
+    "exportSource": {
+      "world": "test2",
+      "system": "dnd5e",
+      "coreVersion": "0.8.8",
+      "systemVersion": "1.3.6"
+    }
+  }
+}
