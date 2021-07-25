@@ -349,20 +349,39 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   setColorSettings() {
-    document.documentElement.style.setProperty('--ech-fore-color', game.settings.get("enhancedcombathud", "fore-color"));
-    document.documentElement.style.setProperty('--ech-color', game.settings.get("enhancedcombathud", "color"));
-    document.documentElement.style.setProperty('--ech-bonus-action', game.settings.get("enhancedcombathud", "color-bonus-action"));
-    document.documentElement.style.setProperty('--ech-free-action', game.settings.get("enhancedcombathud", "color-free-action"));
-    document.documentElement.style.setProperty('--ech-reaction', game.settings.get("enhancedcombathud", "color-reaction"));
-    document.documentElement.style.setProperty('--ech-end-turn', game.settings.get("enhancedcombathud", "color-end-turn"));
+    document.documentElement.style.setProperty(
+      "--ech-fore-color",
+      game.settings.get("enhancedcombathud", "fore-color")
+    );
+    document.documentElement.style.setProperty(
+      "--ech-color",
+      game.settings.get("enhancedcombathud", "color")
+    );
+    document.documentElement.style.setProperty(
+      "--ech-bonus-action",
+      game.settings.get("enhancedcombathud", "color-bonus-action")
+    );
+    document.documentElement.style.setProperty(
+      "--ech-free-action",
+      game.settings.get("enhancedcombathud", "color-free-action")
+    );
+    document.documentElement.style.setProperty(
+      "--ech-reaction",
+      game.settings.get("enhancedcombathud", "color-reaction")
+    );
+    document.documentElement.style.setProperty(
+      "--ech-end-turn",
+      game.settings.get("enhancedcombathud", "color-end-turn")
+    );
   }
 
   rigAutoScale() {
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
-    let scale =
-      (1 / (echHUDWidth / windowWidth)) *
-      game.settings.get("enhancedcombathud", "scale");
+    let scale = game.settings.get("enhancedcombathud", "noAutoscale")
+      ? game.settings.get("enhancedcombathud", "scale")
+      : (1 / (echHUDWidth / windowWidth)) *
+        game.settings.get("enhancedcombathud", "scale");
 
     $(".extended-combat-hud").css({
       transform: `scale(${scale > 1 ? 1 : scale})`,
@@ -376,7 +395,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
-      if(!_this.hudData.findItemByName(itemName))await this.addSpecialItem(itemName);
+      if (!_this.hudData.findItemByName(itemName))
+        await this.addSpecialItem(itemName);
       let confimed = await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
       if (confimed && game.combat?.started) {
@@ -392,8 +412,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        event.currentTarget.dataset.itemCount =
-          item.data.data.quantity || item.data.data.uses.value;
+        let uses = item.data.data.quantity || item.data.data.uses.value
+        let isAmmo = item.data.data.consume?.type == "ammo";
+        let ammoItem = isAmmo ? this.hudData.actor.items.find(i => i.id == item.data.data.consume?.target) : null;
+        let ammoCount = confimed ? ammoItem?.data?.data?.quantity-item.data.data.consume?.amount : ammoItem?.data?.data?.quantity;
+        event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses
       }
       this.updateSpellSlots();
     });
@@ -401,27 +424,27 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let $element = $(event.currentTarget);
       let itemName = $(event.currentTarget).data("itemname");
 
-      const offset = $element.offset()
+      const offset = $element.offset();
 
       $(".ech-tooltip").remove();
 
       setTimeout(() => {
         this.drawTooltip(itemName, {
           top: offset.top - $(document).scrollTop(),
-          left: offset.left - $(document).scrollLeft()
+          left: offset.left - $(document).scrollLeft(),
         });
-      }, 100)
+      }, 100);
     });
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
       // Allow User to hover over Tooltip
       setTimeout(() => {
         $(".ech-tooltip:not(.is-hover)").remove();
-      }, 100)
+      }, 100);
     });
-    $('body').on('mouseenter', '.ech-tooltip', (event) => {
-      $(event.currentTarget).addClass('is-hover');
-    })
-    $('body').on('mouseleave', '.ech-tooltip.is-hover', (event) => { 
+    $("body").on("mouseenter", ".ech-tooltip", (event) => {
+      $(event.currentTarget).addClass("is-hover");
+    });
+    $("body").on("mouseleave", ".ech-tooltip.is-hover", (event) => {
       $(event.currentTarget).remove();
     });
     this.element.on("click", '[data-pass="true"]', async (event) => {
@@ -559,6 +582,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       element.css({ display: "none" });
       return;
     }
+    let isAmmo = item.data.data.consume?.type == "ammo";
+    let ammoItem = isAmmo ? this.hudData.actor.items.find(i => i.id == item.data.data.consume?.target) : null;
+    element.toggleClass("has-count", isAmmo);
+    element[0].dataset.itemCount = ammoItem?.data?.data?.quantity
+    if(element[1])element[1].dataset.itemCount = ammoItem?.data?.data?.quantity
     element
       .data("itemname", item.name)
       .prop("data-itemname", item.name)
@@ -707,12 +735,19 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   drawTooltip(itemName, offset) {
+    const showTooltip = game.settings.get("enhancedcombathud", "showTooltips");
+    const showTooltipSpecial = game.settings.get(
+      "enhancedcombathud",
+      "showTooltipsSpecial"
+    );
+    if (!showTooltip) return;
+    if (!showTooltipSpecial && ECHItems[itemName]) return;
     let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
     if (!item) {
-      item = {}
-      item.data = ECHItems[itemName]
+      item = {};
+      item.data = ECHItems[itemName];
     }
-    if(!item || !item.data) return;
+    if (!item || !item.data) return;
     const title = item.data.name;
     const description = item.data.data.description.value;
     const itemType = item.data.type;
@@ -720,37 +755,61 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let target = item.labels?.target || "-";
     let range = item.labels?.range || "-";
     let properties = [];
-    let dt = item.labels?.damageTypes?.split(", ")
+    let dt = item.labels?.damageTypes?.split(", ");
     let damageTypes = dt && dt.length ? dt : [];
     switch (itemType) {
       case "weapon":
-        subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType]
-        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
-        for(let [key,value] of Object.entries(item.data.data.properties)){
-          let prop = value && game.dnd5e.config.weaponProperties[key] ? game.dnd5e.config.weaponProperties[key] : undefined
-          if(prop) properties.push(prop);
+        subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType];
+        properties.push(
+          game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+        );
+        for (let [key, value] of Object.entries(item.data.data.properties)) {
+          let prop =
+            value && game.dnd5e.config.weaponProperties[key]
+              ? game.dnd5e.config.weaponProperties[key]
+              : undefined;
+          if (prop) properties.push(prop);
         }
-        
+
         break;
       case "spell":
         subtitle = `${item.labels.level} ${item.labels.school}`;
-        properties.push(game.dnd5e.config.spellSchools[item.data.data.school])
-        for(let comp of item.labels.components){
-          properties.push(game.dnd5e.config.spellComponents[comp])
+        properties.push(game.dnd5e.config.spellSchools[item.data.data.school]);
+        properties.push(item.labels.duration);
+        properties.push(item.labels.save);
+        for (let comp of item.labels.components) {
+          properties.push(game.dnd5e.config.spellComponents[comp]);
         }
         break;
       case "consumable":
-        subtitle = game.dnd5e.config.consumableTypes[item.data.data.consumableType] + " " + item.data.data.chatFlavor;
-        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
+        subtitle =
+          game.dnd5e.config.consumableTypes[item.data.data.consumableType] +
+          " " +
+          item.data.data.chatFlavor;
+        properties.push(
+          game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+        );
         break;
       case "feat":
-        subtitle = item.data.data.requirements
-        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
+        subtitle = item.data.data.requirements;
+        properties.push(
+          game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+        );
         break;
     }
 
-    const tooltip = ({title, subtitle, description, target, range, properties, offset}) => {
-      return `<div class="ech-tooltip" style="top: ${offset.top}px; left: ${offset.left}px;">
+    const tooltip = ({
+      title,
+      subtitle,
+      description,
+      target,
+      range,
+      properties,
+      offset,
+    }) => {
+      return `<div class="ech-tooltip" style="top: ${offset.top}px; left: ${
+        offset.left
+      }px;">
           <div class="ech-tooltip-header">
             <h2>${title}</h2>
           </div>
@@ -759,38 +818,52 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
             <div class="ech-tooltip-description">${description}</div>
             <div class="ech-tooltip-details">
               <div>
-                <span>${game.i18n.localize("enhancedcombathud.tooltip.target.name")}</span>
+                <span>${game.i18n.localize(
+                  "enhancedcombathud.tooltip.target.name"
+                )}</span>
                 <span>${target}</span>
               </div>
               <div>
-                <span>${game.i18n.localize("enhancedcombathud.tooltip.range.name")}</span>
+                <span>${game.i18n.localize(
+                  "enhancedcombathud.tooltip.range.name"
+                )}</span>
                 <span>${range}</span></div>
               </div>
             <div class="ech-tooltip-properties">
-              <h3>${game.i18n.localize("enhancedcombathud.tooltip.properties.name")}</h3>
-              ${properties.join('\n')}
+              <h3>${game.i18n.localize(
+                "enhancedcombathud.tooltip.properties.name"
+              )}</h3>
+              ${properties.join("\n")}
             </div>
           </div>
-        </div>`
-    }
+        </div>`;
+    };
 
     let listOfProperties = [];
-    for(let damt of damageTypes){
-      if(damt) listOfProperties.push(`<span class="ech-tooltip-badge damt">${damt}</span>`);
+    for (let damt of damageTypes) {
+      if (damt)
+        listOfProperties.push(
+          `<span class="ech-tooltip-badge damt">${damt}</span>`
+        );
     }
-    for(let prop of properties){
-      if(prop) listOfProperties.push(`<span class="ech-tooltip-badge prop">${prop}</span>`);
+    for (let prop of properties) {
+      if (prop)
+        listOfProperties.push(
+          `<span class="ech-tooltip-badge prop">${prop}</span>`
+        );
     }
 
-    $('.extended-combat-hud').before(tooltip({
-      title: title, 
-      subtitle: subtitle, 
-      description: description, 
-      target: target,
-      range: range,
-      properties: listOfProperties,
-      offset: offset
-    }))
+    $(".extended-combat-hud").before(
+      tooltip({
+        title: title,
+        subtitle: subtitle,
+        description: description,
+        target: target,
+        range: range,
+        properties: listOfProperties,
+        offset: offset,
+      })
+    );
   }
 }
 

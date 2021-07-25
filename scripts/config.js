@@ -15,6 +15,15 @@ Hooks.once("init", function () {
     default: 1,
   });
 
+  game.settings.register("enhancedcombathud", "noAutoscale", {
+    name: game.i18n.localize("enhancedcombathud.settings.noAutoscale.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.noAutoscale.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("enhancedcombathud", "leftPos", {
     name: game.i18n.localize("enhancedcombathud.settings.leftPos.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.leftPos.hint"),
@@ -40,6 +49,24 @@ Hooks.once("init", function () {
     config: true,
     type: Boolean,
     default: false,
+  });
+
+  game.settings.register("enhancedcombathud", "showTooltips", {
+    name: game.i18n.localize("enhancedcombathud.settings.showTooltips.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showTooltips.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
+  game.settings.register("enhancedcombathud", "showTooltipsSpecial", {
+    name: game.i18n.localize("enhancedcombathud.settings.showTooltipsSpecial.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsSpecial.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
   });
 });
 
