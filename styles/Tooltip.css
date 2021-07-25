@@ -1,11 +1,16 @@
+:root {
+    --mouse-x: 0px;
+    --mouse-y: 0px;
+  }
+
 .tooltip {
     display:inline-block;
-    position:relative;
+    position:absolute;
     max-width: 20%;
     text-align:left;
     color: var(--ech-fore-color);
-    left: 50%;
-    top: 50%;
+    left: var(--mouse-x);
+    bottom: var(--mouse-y);
     backdrop-filter: blur(6px);
     background-color: rgb(0 0 0 / 30%);
     border: 1px solid var(--ech-border-color);

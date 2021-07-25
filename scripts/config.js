@@ -187,3 +187,11 @@ Handlebars.registerHelper('hasUses', function (data) {
   if(current) return `class="feature-element has-count" data-item-count="${current}"`
   return `class="feature-element"`
 })
+
+
+let root = document.documentElement;
+root.addEventListener("mousemove", e => {
+  root.style.setProperty('--mouse-x', e.clientX + "px");
+  root.style.setProperty('--mouse-y',  $(".extended-combat-hud").innerHeight()+"px");//$(".extended-combat-hud").outerHeight()
+  $(".tooltip").css({bottom:"500px"})
+});
