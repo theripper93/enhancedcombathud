@@ -69,7 +69,7 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["bonus"], itemType: ["weapon"] }),
+      special: this.getItems({ actionType: ["bonus"], itemType: ["feat"] }),
       consumables: this.getItems({
         actionType: ["bonus"],
         itemType: ["consumable"],
@@ -88,7 +88,7 @@ class CombatHud {
       }),
       special: this.getItems({
         actionType: ["reaction"],
-        itemType: ["weapon"],
+        itemType: ["feat"],
       }),
       consumables: this.getItems({
         actionType: ["reaction"],
