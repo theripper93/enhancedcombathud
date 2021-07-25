@@ -24,19 +24,19 @@ class CombatHud {
         ac: game.i18n.localize("enhancedcombathud.hud.ac.name"),
         of: game.i18n.localize("enhancedcombathud.hud.of.name"),
         spells: {
-          0: game.i18n.localize("enhancedcombathud.hud.spells.cantrip"),
-          pact: game.i18n.localize("enhancedcombathud.hud.spells.pact"),
-          will: game.i18n.localize("enhancedcombathud.hud.spells.will"),
+          0: game.dnd5e.config.spellLevels["0"],
+          pact: game.dnd5e.config.spellPreparationModes.pact,
+          will: game.dnd5e.config.spellPreparationModes.atwill,
           innate: game.i18n.localize("enhancedcombathud.hud.spells.innate"),
-          1: game.i18n.localize("enhancedcombathud.hud.spells.1"),
-          2: game.i18n.localize("enhancedcombathud.hud.spells.2"),
-          3: game.i18n.localize("enhancedcombathud.hud.spells.3"),
-          4: game.i18n.localize("enhancedcombathud.hud.spells.4"),
-          5: game.i18n.localize("enhancedcombathud.hud.spells.5"),
-          6: game.i18n.localize("enhancedcombathud.hud.spells.6"),
-          7: game.i18n.localize("enhancedcombathud.hud.spells.7"),
-          8: game.i18n.localize("enhancedcombathud.hud.spells.8"),
-          9: game.i18n.localize("enhancedcombathud.hud.spells.9"),
+          1: game.dnd5e.config.spellLevels["1"],
+          2: game.dnd5e.config.spellLevels["2"],
+          3: game.dnd5e.config.spellLevels["3"],
+          4: game.dnd5e.config.spellLevels["4"],
+          5: game.dnd5e.config.spellLevels["5"],
+          6: game.dnd5e.config.spellLevels["6"],
+          7: game.dnd5e.config.spellLevels["7"],
+          8: game.dnd5e.config.spellLevels["8"],
+          9: game.dnd5e.config.spellLevels["9"],
         },
       },
     };
@@ -135,6 +135,8 @@ class CombatHud {
       bonus: true,
       reaction: true,
     };
+    this.skills = game.dnd5e.config.skills;
+    this.saves = game.dnd5e.config.abilities;
 
     console.log(this);
   }
@@ -370,10 +372,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   rigButtons() {
     let _this = this;
     this.element.unbind("click");
+    this.element.unbind("mouseenter");
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
-      await this.addSpecialItem(itemName);
+      if(!_this.hudData.findItemByName(itemName))await this.addSpecialItem(itemName);
       let confimed = await game.dnd5e.rollItemMacro(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
       if (confimed && game.combat?.started) {
@@ -393,6 +396,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           item.data.data.quantity || item.data.data.uses.value;
       }
       this.updateSpellSlots();
+    });
+    this.element.on("mouseenter", '[data-type="trigger"]', (event) => {
+      let itemName = $(event.currentTarget).data("itemname");
+      this.drawTooltip(itemName);
+    });
+    this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
+      $(".tooltip").remove();
     });
     this.element.on("click", '[data-pass="true"]', async (event) => {
       if (game.combat?.current?.tokenId == this.hudData.token.id)
@@ -675,6 +685,66 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         console.log(CombatHudCanvasElement.generateSpells(spellSlot));
         element.innerHTML = CombatHudCanvasElement.generateSpells(spellSlot);
       });
+  }
+
+  drawTooltip(itemName) {
+    let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
+    if (!item) {
+      item = {}
+      item.data = ECHItems[itemName]
+    }
+    if(!item || !item.data) return;
+    const title = item.data.name;
+    const description = item.data.data.description.value;
+    const itemType = item.data.type;
+    let subtitle;
+    let target = item.labels?.target;
+    let range = item.labels?.range;
+    let properties = [];
+    let dt = item.labels?.damageTypes?.split(", ")
+    let damageTypes = dt && dt.length ? dt : [];
+    switch (itemType) {
+      case "weapon":
+        subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType]
+        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
+        for(let [key,value] of Object.entries(item.data.data.properties)){
+          let prop = value && game.dnd5e.config.weaponProperties[key] ? game.dnd5e.config.weaponProperties[key] : undefined
+          if(prop) properties.push(prop);
+        }
+        
+        break;
+      case "spell":
+        subtitle = `${item.labels.level} ${item.labels.school}`;
+        properties.push(game.dnd5e.config.spellSchools[item.data.data.school])
+        for(let comp of item.labels.components){
+          properties.push(game.dnd5e.config.spellComponents[comp])
+        }
+        break;
+      case "consumable":
+        subtitle = game.dnd5e.config.consumableTypes[item.data.data.consumableType] + " " + item.data.data.chatFlavor;
+        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
+        break;
+      case "feat":
+        subtitle = item.data.data.requirements
+        properties.push(game.dnd5e.config.itemActionTypes[item.data.data.actionType])
+        break;
+    }
+    let html = `<div class="tooltip">
+    <div class=""><h2>${title}</h2></div>
+    <div class=""><h3>${subtitle}</h3></div>
+    <div class=""><p>${description}</p></div>
+    <div class=""><h3>Range: ${range}</h3></div>
+    <div class=""><h3>Target: ${target}</h3></div>
+    <div class="">
+        `
+        for(let damt of damageTypes){
+          if(damt)html += `<div class="">${damt}</span>`
+        }
+        for(let prop of properties){
+          if(prop)html += `<div class="">${prop}</span>`
+        }
+        html+=   `</div></div>`
+    $("body").append(html);
   }
 }
 

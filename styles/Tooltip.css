@@ -1,0 +1,16 @@
+.tooltip {
+    display:inline-block;
+    position:relative;
+    max-width: 20%;
+    text-align:left;
+    color: var(--ech-fore-color);
+    left: 50%;
+    top: 50%;
+    backdrop-filter: blur(6px);
+    background-color: rgb(0 0 0 / 30%);
+    border: 1px solid var(--ech-border-color);
+    height: fit-content;
+    justify-content: center;
+    margin-right: -75px;
+    padding: 1rem 0.5rem;
+}

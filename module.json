@@ -27,7 +27,8 @@
       "./styles/ECH.css",
       "./styles/CombatHUD.css",
       "./styles/ActionHUD.css",
-      "./styles/PortraitHUD.css"
+      "./styles/PortraitHUD.css",
+      "./styles/Tooltip.css"
   ],
   "packs": [
   ],
