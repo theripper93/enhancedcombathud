@@ -104,12 +104,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
@@ -215,12 +209,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
@@ -301,12 +289,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
@@ -409,12 +391,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
@@ -518,12 +494,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
@@ -626,12 +596,6 @@ Hooks.once("ready",()=>{
       },
       "midi-qol": {
         "onUseMacroName": ""
-      },
-      "exportSource": {
-        "world": "test2",
-        "system": "dnd5e",
-        "coreVersion": "0.8.8",
-        "systemVersion": "1.3.6"
       }
     }
   }
