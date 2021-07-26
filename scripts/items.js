@@ -3,7 +3,7 @@ let ECHItems = {}
 Hooks.once("ready",()=>{
   ECHItems[game.i18n.localize("enhancedcombathud.items.disengage.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.disengage.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/journey.svg",
     "data": {
       "description": {
@@ -39,12 +39,6 @@ Hooks.once("ready",()=>{
         "value": null,
         "long": null,
         "units": ""
-      },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
       },
       "consume": {
         "type": "",
@@ -109,7 +103,7 @@ Hooks.once("ready",()=>{
   }
   ECHItems[game.i18n.localize("enhancedcombathud.items.hide.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.hide.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/cloak-dagger.svg",
     "data": {
       "description": {
@@ -146,12 +140,7 @@ Hooks.once("ready",()=>{
         "long": null,
         "units": ""
       },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
-      },
+
       "consume": {
         "type": "",
         "target": "",
@@ -214,7 +203,7 @@ Hooks.once("ready",()=>{
   }
   ECHItems[game.i18n.localize("enhancedcombathud.items.shove.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.shove.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/shield-bash.svg",
     "data": {
       "description": {
@@ -251,12 +240,7 @@ Hooks.once("ready",()=>{
         "long": null,
         "units": "touch"
       },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
-      },
+
       "consume": {
         "type": "",
         "target": "",
@@ -294,7 +278,7 @@ Hooks.once("ready",()=>{
   }
   ECHItems[game.i18n.localize("enhancedcombathud.items.dash.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.dash.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/walking-boot.svg",
     "data": {
       "description": {
@@ -331,12 +315,7 @@ Hooks.once("ready",()=>{
         "long": null,
         "units": ""
       },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
-      },
+
       "consume": {
         "type": "",
         "target": "",
@@ -396,7 +375,7 @@ Hooks.once("ready",()=>{
   }
   ECHItems[game.i18n.localize("enhancedcombathud.items.dodge.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.dodge.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/armor-upgrade.svg",
     "data": {
       "description": {
@@ -433,12 +412,7 @@ Hooks.once("ready",()=>{
         "long": null,
         "units": ""
       },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
-      },
+
       "consume": {
         "type": "",
         "target": "",
@@ -499,7 +473,7 @@ Hooks.once("ready",()=>{
   }
   ECHItems[game.i18n.localize("enhancedcombathud.items.ready.name")] = {
     "name": game.i18n.localize("enhancedcombathud.items.ready.name"),
-    "type": "consumable",
+    "type": "feat",
     "img": "modules/enhancedcombathud/icons/clockwork.svg",
     "data": {
       "description": {
@@ -536,12 +510,7 @@ Hooks.once("ready",()=>{
         "long": null,
         "units": ""
       },
-      "uses": {
-        "value": 1,
-        "max": "1",
-        "per": "charges",
-        "autoDestroy": true
-      },
+
       "consume": {
         "type": "",
         "target": "",

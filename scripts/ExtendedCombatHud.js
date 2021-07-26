@@ -461,10 +461,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
+      let specialItem
       if (!_this.hudData.findItemByName(itemName))
-        await this.addSpecialItem(itemName);
-      let confimed = await this.roller.rollItem(itemName);
-      let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
+          specialItem = this.getSpecialItem(itemName);
+      let confimed = specialItem ? await specialItem.roll() : await this.roller.rollItem(itemName);
+      let item = specialItem || _this.hudData.findItemByName(itemName);
       if (confimed && game.combat?.started) {
         if (actionDataSet) {
           this.updateActionEconomy(actionDataSet);
@@ -752,9 +753,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     acelel[0].dataset.acValue = ac;
   }
 
-  async addSpecialItem(itemName) {
-    if (!ECHItems[itemName]) return;
-    await this.hudData.actor.createOwnedItem(ECHItems[itemName]);
+  getSpecialItem(itemName) {
+    if (!ECHItems[itemName]) return false;
+    return new CONFIG.Item.documentClass(ECHItems[itemName],{parent:this.hudData.actor})
   }
 
   updatePass() {
