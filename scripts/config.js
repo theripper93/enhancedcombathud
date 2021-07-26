@@ -1,6 +1,26 @@
 Hooks.once("init", function () {
 
 
+  game.settings.register("enhancedcombathud", "theme", {
+    name: game.i18n.localize("enhancedcombathud.settings.theme.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.theme.hint"),
+    scope: "client",
+    config: true,
+    choices: {
+      "custom": game.i18n.localize("enhancedcombathud.settings.theme.custom"),
+      "helium": game.i18n.localize("enhancedcombathud.settings.theme.helium"),
+      "neon": game.i18n.localize("enhancedcombathud.settings.theme.neon"),
+      "argon": game.i18n.localize("enhancedcombathud.settings.theme.argon"),
+      "krypton":  game.i18n.localize("enhancedcombathud.settings.theme.krypton"),
+      "xenon": game.i18n.localize("enhancedcombathud.settings.theme.xenon"),
+      "radon": game.i18n.localize("enhancedcombathud.settings.theme.radon"),
+      "oganesson": game.i18n.localize("enhancedcombathud.settings.theme.oganesson"),
+    },
+    type: String,
+    default: "custom",
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
+  });
+
   game.settings.register("enhancedcombathud", "scale", {
     name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
@@ -81,7 +101,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#B4D2DCFF",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-fore-color', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
   new window.Ardittristan.ColorSetting("enhancedcombathud", "color", {
     name: game.i18n.localize("enhancedcombathud.settings.color.text"),
@@ -90,7 +110,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#414B55E6",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-color', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
   new window.Ardittristan.ColorSetting("enhancedcombathud", "color-bonus-action", {
     name: game.i18n.localize("enhancedcombathud.settings.color-bonus-action.text"),
@@ -99,7 +119,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#453B75E6",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-bonus-action', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
   new window.Ardittristan.ColorSetting("enhancedcombathud", "color-free-action", {
     name: game.i18n.localize("enhancedcombathud.settings.color-free-action.text"),
@@ -108,7 +128,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#3B5875E6",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-free-action', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
   new window.Ardittristan.ColorSetting("enhancedcombathud", "color-reaction", {
     name: game.i18n.localize("enhancedcombathud.settings.color-reaction.text"),
@@ -117,7 +137,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#753B3BE6",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-reaction', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
   new window.Ardittristan.ColorSetting("enhancedcombathud", "color-end-turn", {
     name: game.i18n.localize("enhancedcombathud.settings.color-end-turn.text"),
@@ -126,7 +146,7 @@ Hooks.once("ready", function () {
     restricted: true,
     defaultColor: "#374B3CE6",
     scope: "world",
-    onChange: (data) => { document.documentElement.style.setProperty('--ech-end-turn', data); }
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
 });
 

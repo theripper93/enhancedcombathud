@@ -68,6 +68,17 @@
     "enhancedcombathud.settings.color-end-turn.text" : "End Turn Color",
     "enhancedcombathud.settings.color-end-turn.hint" : "Color of the end turn tab",
 
+    "enhancedcombathud.settings.theme.name" : "Theme",
+    "enhancedcombathud.settings.theme.hint" : "Theme of the HUD",
+    "enhancedcombathud.settings.theme.custom" : "Custom",
+    "enhancedcombathud.settings.theme.helium" : "Helium",
+    "enhancedcombathud.settings.theme.neon" : "Neon",
+    "enhancedcombathud.settings.theme.argon" : "Argon",
+    "enhancedcombathud.settings.theme.krypton" : "Krypton",
+    "enhancedcombathud.settings.theme.xenon" : "Xenon",
+    "enhancedcombathud.settings.theme.radon" : "Radon",
+    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
+
     "enhancedcombathud.settings.scale.name" : "Scale",
     "enhancedcombathud.settings.scale.hint" : "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale",
     "enhancedcombathud.settings.noAutoscale.name" : "Don't Autoscale",

@@ -335,6 +335,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const data = super.getData();
     data.hudData = new CombatHud(this.object);
     this.hudData = data.hudData;
+    this.roller = new ECHDiceRoller(this.hudData.actor);
     return data;
   }
 
@@ -365,32 +366,79 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.initSets();
     this.rigAutoScale();
   }
-
+  get themes() {
+    return {
+      custom:{
+        "--ech-fore-color":game.settings.get("enhancedcombathud", "fore-color"),
+        "--ech-color":game.settings.get("enhancedcombathud", "color"),
+        "--ech-color-bonus-action":game.settings.get("enhancedcombathud", "color-bonus-action"),
+        "--ech-color-free-action":game.settings.get("enhancedcombathud", "color-free-action"),
+        "--ech-color-reaction":game.settings.get("enhancedcombathud", "color-reaction"),
+        "--ech-color-end-turn":game.settings.get("enhancedcombathud", "color-end-turn"),  
+      },  
+      helium:{
+        "--ech-fore-color":"#d0d0d0ff",
+        "--ech-color":"#3e3e3e7d",
+        "--ech-color-bonus-action":"#3e3e3e7d",
+        "--ech-color-free-action":"#3e3e3e7d",
+        "--ech-color-reaction":"#3e3e3e7d",
+        "--ech-color-end-turn":"#3e3e3e7d",
+      },
+      neon:{
+        "--ech-fore-color":"#e3e3e3de",
+        "--ech-color":"#711c91b9",
+        "--ech-color-bonus-action":"#133e7cc5",
+        "--ech-color-free-action":"#091833c8",
+        "--ech-color-reaction":"#1c3353cd",
+        "--ech-color-end-turn":"#662862be",
+      },
+      argon:{
+        "--ech-fore-color":"#B4D2DCFF",
+        "--ech-color":"#414B55E6",
+        "--ech-color-bonus-action":"#453B75E6",
+        "--ech-color-free-action":"#3B5875E6",
+        "--ech-color-reaction":"#753B3BE6",
+        "--ech-color-end-turn":"#374B3CE6",
+      },
+      krypton:{
+        "--ech-fore-color":"#d1d9bdde",
+        "--ech-color":"#2f661eb9",
+        "--ech-color-bonus-action":"#249a26c5",
+        "--ech-color-free-action":"#249a26c5",
+        "--ech-color-reaction":"#249a26c5",
+        "--ech-color-end-turn":"#2f661eb9",
+      },
+      xenon:{
+        "--ech-fore-color":"#d9e3e3de",
+        "--ech-color":"#688ab6b9",
+        "--ech-color-bonus-action":"#5489ccb9",
+        "--ech-color-free-action":"#3680deb9",
+        "--ech-color-reaction":"#1066d3b9",
+        "--ech-color-end-turn":"#1b3e6ab9",
+      },
+      radon:{
+        "--ech-fore-color":"#e3d9d9de",
+        "--ech-color":"#fc123a5d",
+        "--ech-color-bonus-action":"#f916167d",
+        "--ech-color-free-action":"#f916167d",
+        "--ech-color-reaction":"#f916167d",
+        "--ech-color-end-turn":"#9f12127d",
+      },
+      oganesson:{
+        "--ech-fore-color":"#727272de",
+        "--ech-color":"#ffffff46",
+        "--ech-color-bonus-action":"#ffffff46",
+        "--ech-color-free-action":"#ffffff46",
+        "--ech-color-reaction":"#ffffff46",
+        "--ech-color-end-turn":"#bdbdbd66",
+      },
+    }
+  }
   setColorSettings() {
-    document.documentElement.style.setProperty(
-      "--ech-fore-color",
-      game.settings.get("enhancedcombathud", "fore-color")
-    );
-    document.documentElement.style.setProperty(
-      "--ech-color",
-      game.settings.get("enhancedcombathud", "color")
-    );
-    document.documentElement.style.setProperty(
-      "--ech-bonus-action",
-      game.settings.get("enhancedcombathud", "color-bonus-action")
-    );
-    document.documentElement.style.setProperty(
-      "--ech-free-action",
-      game.settings.get("enhancedcombathud", "color-free-action")
-    );
-    document.documentElement.style.setProperty(
-      "--ech-reaction",
-      game.settings.get("enhancedcombathud", "color-reaction")
-    );
-    document.documentElement.style.setProperty(
-      "--ech-end-turn",
-      game.settings.get("enhancedcombathud", "color-end-turn")
-    );
+    let theme = this.themes[game.settings.get("enhancedcombathud", "theme")];
+    for(let [key, value] of Object.entries(theme)) {
+      document.documentElement.style.setProperty(key,value);
+    }
   }
 
   rigAutoScale() {
@@ -415,7 +463,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let actionDataSet = event.currentTarget.dataset.atype;
       if (!_this.hudData.findItemByName(itemName))
         await this.addSpecialItem(itemName);
-      let confimed = await game.dnd5e.rollItemMacro(itemName);
+      let confimed = await this.roller.rollItem(itemName);
       let item = _this.hudData.findItemByName(itemName) ?? ECHItems[itemName];
       if (confimed && game.combat?.started) {
         if (actionDataSet) {
@@ -894,6 +942,100 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         offset: offset,
       })
     );
+  }
+}
+
+class ECHDiceRoller {
+  constructor(actor) {
+    this.actor = actor;
+    this.modules = {
+      betterRolls: game.modules.get("betterrolls5e")?.active,
+    };
+  }
+  async rollItem(itemName) {
+    if (this.modules.betterRolls)
+      return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
+    return await game.dnd5e.rollItemMacro(itemName);
+  }
+  async rollSave(ability) {
+    if (this.modules.betterRolls)
+      return await BetterRolls.rollSave(this.actor, ability);
+    return await this.actor.rollAbilitySave(ability);
+  }
+  async rollSkill(skill, ability) {
+    if (skl.ability == ability && this.modules.betterRolls)
+      return await BetterRolls.rollSkill(this.actor, skill);
+    const skl = this.actor.data.data.skills[skill];
+    const abl = this.actor.data.data.abilities[ability];
+    const data = { mod: abl.mod + skl.prof };
+    if (skl.ability != ability)
+      libWrapper.register(
+        "enhancedcombathud",
+        "game.dnd5e.entities.Actor5e.prototype.rollSkill",
+        ECHDiceRoller.dnd5eRollSkill,
+        "OVERRIDE"
+      );
+    let roll = await this.actor.rollSkill(skill, { data: data });
+    libWrapper.unregister(
+      "enhancedcombathud",
+      "game.dnd5e.entities.Actor5e.prototype.rollSkill",
+      false
+    );
+    return roll;
+  }
+  async rollCheck(ability) {
+    if (this.modules.betterRolls)
+      return await BetterRolls.rollCheck(this.actor, ability);
+    return await this.actor.rollAbilityTest(ability);
+  }
+
+  static dnd5eRollSkill(skillId, options = {}) {
+    const skl = this.data.data.skills[skillId];
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+
+    // Compose roll parts and data
+    const parts = ["@mod"];
+    const data = { mod: skl.mod + skl.prof };
+
+    // Ability test bonus
+    if (bonuses.check) {
+      data["checkBonus"] = bonuses.check;
+      parts.push("@checkBonus");
+    }
+
+    // Skill check bonus
+    if (bonuses.skill) {
+      data["skillBonus"] = bonuses.skill;
+      parts.push("@skillBonus");
+    }
+
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
+
+    // Reliable Talent applies to any skill check we have full or better proficiency in
+    const reliableTalent =
+      skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent");
+
+    // Roll and return
+    const rollData = foundry.utils.mergeObject(
+      {
+        parts: parts,
+        data: data,
+        title: game.i18n.format("DND5E.SkillPromptTitle", {
+          skill: CONFIG.DND5E.skills[skillId],
+        }),
+        halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+        reliableTalent: reliableTalent,
+        messageData: {
+          speaker: options.speaker || ChatMessage.getSpeaker({ actor: this }),
+          "flags.dnd5e.roll": { type: "skill", skillId },
+        },
+      },
+      options
+    );
+    return game.dnd5e.dice.d20Roll(rollData);
   }
 }
 

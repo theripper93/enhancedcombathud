@@ -31,6 +31,13 @@
       "./styles/Tooltip.css"
   ],
   "packs": [
+    {
+        "name": "argonmacros",
+        "label": "Argon Combat HUD Macros",
+        "path": "packs/macros.db",
+        "entity": "Macro",
+        "module": "enhancedcombathud"
+    }
   ],
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.8",
@@ -39,5 +46,11 @@
   "download": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.zip",
   "socket":true,
   "dependencies": [
+    {
+        "name": "colorsettings"
+    },
+    {
+        "name": "lib-wrapper"
+    }
   ]
 }

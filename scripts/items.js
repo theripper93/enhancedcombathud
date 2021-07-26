@@ -600,3 +600,63 @@ Hooks.once("ready",()=>{
     }
   }
 })
+
+const themes = {
+  
+  helium:{
+    "--ech-fore-color":"#d0d0d0ff",
+    "--ech-color":"#3e3e3e7d",
+    "--ech-color-bonus-action":"#3e3e3e7d",
+    "--ech-color-free-action":"#3e3e3e7d",
+    "--ech-color-reaction":"#3e3e3e7d",
+    "--ech-color-end-turn":"#3e3e3e7d",
+  },
+  neon:{
+    "--ech-fore-color":"#e3e3e3de",
+    "--ech-color":"#711c91b9",
+    "--ech-color-bonus-action":"#133e7cc5",
+    "--ech-color-free-action":"#091833c8",
+    "--ech-color-reaction":"#1c3353cd",
+    "--ech-color-end-turn":"#662862be",
+  },
+  argon:{
+    "--ech-fore-color":"#B4D2DCFF",
+    "--ech-color":"#414B55E6",
+    "--ech-color-bonus-action":"#453B75E6",
+    "--ech-color-free-action":"#3B5875E6",
+    "--ech-color-reaction":"#753B3BE6",
+    "--ech-color-end-turn":"#374B3CE6",
+  },
+  krypton:{
+    "--ech-fore-color":"#d1d9bdde",
+    "--ech-color":"#2f661eb9",
+    "--ech-color-bonus-action":"#249a26c5",
+    "--ech-color-free-action":"#249a26c5",
+    "--ech-color-reaction":"#249a26c5",
+    "--ech-color-end-turn":"#2f661eb9",
+  },
+  xenon:{
+    "--ech-fore-color":"#d9e3e3de",
+    "--ech-color":"#688ab6b9",
+    "--ech-color-bonus-action":"#5489ccb9",
+    "--ech-color-free-action":"#3680deb9",
+    "--ech-color-reaction":"#1066d3b9",
+    "--ech-color-end-turn":"#1b3e6ab9",
+  },
+  radon:{
+    "--ech-fore-color":"#e3d9d9de",
+    "--ech-color":"#fc123a5d",
+    "--ech-color-bonus-action":"#f916167d",
+    "--ech-color-free-action":"#f916167d",
+    "--ech-color-reaction":"#f916167d",
+    "--ech-color-end-turn":"#9f12127d",
+  },
+  oganesson:{
+    "--ech-fore-color":"#727272de",
+    "--ech-color":"#ffffff46",
+    "--ech-color-bonus-action":"#ffffff46",
+    "--ech-color-free-action":"#ffffff46",
+    "--ech-color-reaction":"#ffffff46",
+    "--ech-color-end-turn":"#bdbdbd66",
+  },
+}
