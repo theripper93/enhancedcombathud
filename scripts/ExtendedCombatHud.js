@@ -835,6 +835,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let properties = [];
     let dt = item.labels?.damageTypes?.split(", ");
     let damageTypes = dt && dt.length ? dt : [];
+    let materialComponents
     switch (itemType) {
       case "weapon":
         subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType];
@@ -858,7 +859,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         for (let comp of item.labels.components) {
           properties.push(game.dnd5e.config.spellComponents[comp]);
         }
-        if (item.labels.materials) properties.push(item.labels.materials);
+        if (item.labels.materials) materialComponents = item.labels.materials;
         break;
       case "consumable":
         subtitle =
