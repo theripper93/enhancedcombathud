@@ -1,7 +1,7 @@
 /*CHARACTER PORTRAIT CONTAINER*/
 .portrait-hud {
     align-items: start;
-    background: var(--ech-color) center no-repeat;
+    background: var(--ech-color) center top no-repeat;
     background-size: var(--ech-portrait-size);
     border: 1px solid var(--ech-border-color);
     backdrop-filter: blur(6px);

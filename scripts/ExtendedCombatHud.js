@@ -1101,7 +1101,7 @@ Hooks.on("controlToken", (token, controlled) => {
 });
 
 Hooks.on("preUpdateToken", (token, updates) => {
-  if (
+  if (token.actor &&
     canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id &&
     game.combat?.started &&
     ("x" in updates || "y" in updates)
