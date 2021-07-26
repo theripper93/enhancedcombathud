@@ -945,6 +945,16 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       })
     );
   }
+
+  async dragDropSet(set,itemid){
+    let item = this.hudData.actor.data.items.find(i => i.id == itemid)
+    if(!item) return;
+    let ps = set.substring(3, str.length) == "p" ? "primary" : "secondary"
+    let oldSetItem = this.hudData.sets[set.substring(0, str.length - 1)][ps]
+    if(oldSetItem) await oldSetItem.setFlag("enhancedcombathud", set, false)
+    await item.setFlag("enhancedcombathud", set, true)
+    this.initSets()
+  }
 }
 
 class ECHDiceRoller {

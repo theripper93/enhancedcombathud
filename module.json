@@ -3,12 +3,18 @@
   "title": "Argon - Combat HUD",
   "description": "It's Magic",
   "version": "0.1",
+  "author": "theripper93, Mouse0270",
   "authors": [
       {
           "name": "theripper93",
           "email": "tsplab@gmail.com",
           "url": "https://www.patreon.com/theripper93"
-      }
+      },
+      {
+        "name": "Mouse0270",
+        "email": "",
+        "url": ""
+    }
   ],
   "languages": [
       {
