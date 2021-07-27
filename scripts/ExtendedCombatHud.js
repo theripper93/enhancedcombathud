@@ -344,6 +344,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.toggleMacroPlayers(true);
   }
 
+  activateListeners(html) {
+    const el = html[0];
+    this.element.on("drop", (event) => {
+     console.log("drop: ", event);
+    });
+  }
+
   setPosition() {
     if (!this.object) return;
     this.rigHtml();
@@ -644,6 +651,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let categroyContainers = $(this.element).find("[data-actionbartype]");
     for (let container of categroyContainers) {
       let actiontype = container.dataset.actionbartype;
+      if(actiontype == "actions") continue
       let remove = true;
       for (let [key, value] of Object.entries(this.hudData[actiontype])) {
         if (

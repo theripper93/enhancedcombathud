@@ -274,3 +274,7 @@ Handlebars.registerHelper('generateSkills', function (data) {
 
   return html;
 })
+
+document.addEventListener("drop", function(event) {
+  debugger
+})
