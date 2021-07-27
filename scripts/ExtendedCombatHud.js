@@ -136,12 +136,9 @@ class CombatHud {
       bonus: true,
       reaction: true,
     };
-    //this.skills = game.dnd5e.config.skills;
-    //this.saves = game.dnd5e.config.abilities;
-
     this.skills = this.actor.data.data.skills;
     this.saves = this.actor.data.data.abilities;
-    
+    this.tools = this.actor.data.items.filter(i => i.data.type =="tool")//getItems({itemType: ["tool"]})
     console.log(this);
   }
   getClassesAsString() {
@@ -978,9 +975,9 @@ class ECHDiceRoller {
     return await this.actor.rollAbilitySave(ability);
   }
   async rollSkill(skill, ability) {
+    const skl = this.actor.data.data.skills[skill];
     if (skl.ability == ability && this.modules.betterRolls)
       return await BetterRolls.rollSkill(this.actor, skill);
-    const skl = this.actor.data.data.skills[skill];
     const abl = this.actor.data.data.abilities[ability];
     const data = { mod: abl.mod + skl.prof };
     if (skl.ability != ability)

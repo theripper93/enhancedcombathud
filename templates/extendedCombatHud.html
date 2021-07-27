@@ -16,16 +16,8 @@
 	</div>
 	<div class="ability-menu">
 		<ul>
-			{{#each hudData.skills}}
-			<li class="skill proficiency-is-{{prof}}">
-				<span class="ability-code">{{ability}}</span> {{label}} <span style="margin-left: auto;">+{{total}} <span class="ability-passive">({{passive}})</span></span>
-			</li>
-			{{/each}}
-			{{#each hudData.skills}}
-			<li class="skill proficiency-is-{{prof}}">
-				<span class="ability-code">{{ability}}</span> {{label}} <span style="margin-left: auto;">+{{total}} <span class="ability-passive">({{passive}})</span></span>
-			</li>
-			{{/each}}
+			{{{generateSkills hudData.skills}}}
+
 		</ul>
 	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">

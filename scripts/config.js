@@ -240,3 +240,15 @@ Handlebars.registerHelper('hasUses', function (data) {
   if(current) return `class="feature-element has-count" data-item-count="${current}"`
   return `class="feature-element"`
 })
+
+Handlebars.registerHelper('generateSkills', function (data) {
+  let skillsIndex = game.dnd5e.config.skills;
+  let savesIndex = game.dnd5e.config.abilities;
+  let html = '';
+  for(let [key,value] of Object.entries(data)){
+    html += `<li class="skill proficiency-is-{{prof}}">
+       <span class="ability-code">${savesIndex[value.ability].substring(0,3)}</span> ${skillsIndex[key]} <span style="margin-left: auto;">+${value.total} <span class="ability-passive">(${value.passive})</span></span>
+          </li>`
+  }
+  return html;
+})
