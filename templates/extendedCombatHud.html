@@ -14,16 +14,29 @@
 			<div class="set set-secondary" style="background-image: url({{hudData.sets.set3.secondary.data.img}})"></div>
 		</div>
 	</div>
+	<div class="ability-menu">
+		<ul>
+			{{#each hudData.skills}}
+			<li class="skill proficiency-is-{{prof}}">
+				<span class="ability-code">{{ability}}</span> {{label}} <span style="margin-left: auto;">+{{total}} <span class="ability-passive">({{passive}})</span></span>
+			</li>
+			{{/each}}
+			{{#each hudData.skills}}
+			<li class="skill proficiency-is-{{prof}}">
+				<span class="ability-code">{{ability}}</span> {{label}} <span style="margin-left: auto;">+{{total}} <span class="ability-passive">({{passive}})</span></span>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
 		<div class="ech-close" onclick="$(`.control-tool[data-tool='echtoggle']`).trigger('click')"><i class="fas fa-sort-down"></i></div>
 		<div class="portrait-stat-block">
-			<span>HP</span> 
-			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}" style="font-size: 1.5rem;"></span>
-			<span data-hp-max="{{hudData.actor.data.data.attributes.hp.max}}"></span>
+			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}"></span>
+			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.data.data.attributes.hp.max}}"></span>
+			&nbsp;HP
 		</div>
 		<div class="portrait-stat-block">
-			<span>AC</span> 
-			<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}" style="font-size: 1.5rem;"></span>
+			<span>AC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
 		</div>
 		<div class="portrait-stat-block portrait-stat-block-button" onclick="canvas.hud.enhancedcombathud.hudData.actor.sheet.render(true);">
 			{{hudData.settings.localize.inv}}
