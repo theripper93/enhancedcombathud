@@ -241,14 +241,42 @@ Handlebars.registerHelper('hasUses', function (data) {
   return `class="feature-element"`
 })
 
+$('body').on('change', '.ability-menu .skill .ability-code select', (event) => {
+  let $element = $(event.currentTarget);
+  $element.closest('.skill').data('ability', $element.val());
+  $element.closest('.skill').find('.ability-modifier').html('---');
+});
+
 Handlebars.registerHelper('generateSkills', function (data) {
   let skillsIndex = game.dnd5e.config.skills;
   let savesIndex = game.dnd5e.config.abilities;
   let html = '';
-  for(let [key,value] of Object.entries(data)){
-    html += `<li class="skill proficiency-is-{{prof}}">
-       <span class="ability-code">${savesIndex[value.ability].substring(0,3)}</span> ${skillsIndex[key]} <span style="margin-left: auto;">+${value.total} <span class="ability-passive">(${value.passive})</span></span>
+  let prof = {
+    '0': 'not-proficient',
+    '0.5': 'half-proficiency',
+    '1': 'proficient',
+    '2': 'expertise'
+  }
+  let $dropdown = $('<select></select>');
+
+  for (let [key, value] of Object.entries(game.dnd5e.config.abilities)) {
+    $dropdown.append(`<option value="${key}">${value.substring(0,3)}</option>`);
+  }
+
+  html += `<li class="skill skill-title">Skills</li>`;
+
+  for(let [key, value] of Object.entries(data)){
+    $dropdown.find(`[selected]`).removeAttr('selected');
+    $dropdown.find(`[value="${value.ability}"]`).attr('selected', true);
+
+    console.log($dropdown, value.ability);
+    html += `<li class="skill proficiency-is-${prof[value.value]}" data-skill="${key}" data-ability="${value.ability}" >
+       <span class="ability-code">${$dropdown.prop('outerHTML')}</span> <span class="ability-name">${skillsIndex[key]}</span> <span style="margin-left: auto;"><span class="ability-modifier">${value.total < 0 ? value.total : '+'+value.total }</span> <span class="ability-passive">(${value.passive})</span></span>
           </li>`
   }
+
+  
+  html += `<li class="skill skill-title">Tools</li>`;
+
   return html;
 })

@@ -74,38 +74,57 @@
     white-space: nowrap;
 }
 
-.extended-combat-hud .ability-menu {
+.ability-menu {
     bottom: 374px;
-    backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 50%);
-    border: 1px solid var(--ech-border-color);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    left: 75px;
-    overflow-y: auto;
-    max-height: calc(1080px - 375px - 100px - 1rem);
+    font-size: 13px;
+    left: 0px;
+    max-height: calc(1080px - (375px - 100px - 1rem));
     position: absolute;
-    width: 300px;
-
+    width: 375px;
     pointer-events: all;
+    z-index: 1000;
 }
-.extended-combat-hud .ability-menu ul {
+.ability-menu:before {
+    backdrop-filter: blur(6px);
+    background-color: var(--ech-color);
+    border: 1px solid var(--ech-border-color);
+    content: '';
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 0;
+}
+.ability-menu ul {
     font-size: 1rem;
     list-style: none;
     margin: 0px;
+    max-height: calc(1080px - (375px - 100px - 1rem));
+    overflow-y: auto;
     padding: 0px;
+    opacity: 0.99;
 }
-.extended-combat-hud .ability-menu ul > li {
+.ability-menu ul > li {
     border-top: 1px solid var(--ech-border-color);
-    color: rgb(255 255 255);
+    color: var(--ech-fore-color);
     display: flex;
-    padding: 0.75rem;
+    padding: 0.5rem 0.75rem;
 }
-.extended-combat-hud .ability-menu ul > li:first-child {
+.ability-menu ul > li:first-child {
     border-top-width: 0px;
 }
-
-.extended-combat-hud .ability-menu ul > li:before {
+.ability-menu ul > li.skill-title {
+    font-weight: 900;
+    padding-left: 1.3rem;
+    text-transform: uppercase;
+}
+.ability-menu ul > li.proficiency-is-not-proficient:before,
+.ability-menu ul > li.proficiency-is-half-proficiency:before,
+.ability-menu ul > li.proficiency-is-proficient:before,
+.ability-menu ul > li.proficiency-is-expertise:before {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -118,23 +137,44 @@
 
     content: "\f111"
 }
-.extended-combat-hud .ability-menu ul > li.proficiency-is-1:before {
+.ability-menu ul > li.proficiency-is-half-proficiency:before {
     content: "\f042";
     font-weight: 900;
 }
-.extended-combat-hud .ability-menu ul > li.proficiency-is-2:before {
+.ability-menu ul > li.proficiency-is-proficient:before {
     content: "\f00c";
     font-weight: 900;
 }
-.extended-combat-hud .ability-menu ul > li.proficiency-is-4:before {
+.ability-menu ul > li.proficiency-is-expertise:before {
     content: "\f560";
     font-weight: 900;
 }
-.extended-combat-hud .ability-menu ul > li .ability-code,
-.extended-combat-hud .ability-menu ul > li .ability-passive {
+.ability-menu ul > li .ability-code,
+.ability-menu ul > li .ability-passive {
     opacity: 0.6;
     padding: 0rem 0.5rem;
     text-transform: uppercase;
+}
+.ability-menu ul > li .ability-code select {
+    border-width: 0px;
+    color: inherit;
+    height: auto;  
+    text-transform: uppercase;
+}
+.ability-menu ul > li .ability-code select:focus {
+    box-shadow: none;
+}
+.ability-menu ul > li .ability-code select * {
+    background: var(--ech-color);
+    padding: 0.5rem 0.75rem;
+}
+.ability-menu ul > li .ability-name {
+    flex: 1;
+}
+.ability-menu ul > li .ability-name:hover {
+    cursor: pointer;
+    /*text-shadow: 0 0 10px var(--ech-fore-color);*/
+    filter: brightness(150%);
 }
 
 .weapon-sets {
