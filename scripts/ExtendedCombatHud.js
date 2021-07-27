@@ -174,7 +174,7 @@ class CombatHud {
         this.settings.spellMode &&
         prepared === true &&
         itemData.data.preparation?.prepared === false &&
-        itemData.data.preparation?.prepared != "always"
+        itemData.data.preparation?.prepared == "prepared"
       )
         return false;
       if (
@@ -362,6 +362,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.updatePass();
     this.updateMovement();
     this.rigButtons();
+    this.rigSkills();
     this.rigAccordion();
     this.initSets();
     this.rigAutoScale();
@@ -559,6 +560,24 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
   }
 
+  rigSkills(){
+    $(this.element).on('change', '.ability-menu .skill .ability-code select', (event) => {
+      let $element = $(event.currentTarget);
+      let a = $element.closest('.skill')
+      $element.closest('.skill')[0].dataset.ability = $element.val();
+      let newSkill = $element.val();
+      let abil = $element.closest('.skill')[0].dataset.skill
+      let abils = this.hudData.skills[abil]
+      let newTotal = abils.prof + this.hudData.actor.data.data.abilities[newSkill].mod
+      $element.closest('.skill').find('.ability-modifier').html(newTotal);
+    });
+    $(this.element).on('click', '.ability-name', (event) => {
+      let skill = $(event.currentTarget).closest('.skill')[0].dataset.skill
+      let abil = $(event.currentTarget).closest('.skill')[0].dataset.ability
+      this.roller.rollSkill(skill, abil);
+    })
+  }
+
   rigAccordion() {
     this.element.find(".features-container").each((index, featureContainer) => {
       // 375 = Portrait | 320 = Sidebar
@@ -662,6 +681,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         )
       : null;
     element.toggleClass("has-count", isAmmo);
+    if (element[0])
     element[0].dataset.itemCount = ammoItem?.data?.data?.quantity;
     if (element[1])
       element[1].dataset.itemCount = ammoItem?.data?.data?.quantity;
@@ -969,6 +989,11 @@ class ECHDiceRoller {
       return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
     return await game.dnd5e.rollItemMacro(itemName);
   }
+
+  async rollTool(itemName){
+    await this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
+  }
+
   async rollSave(ability) {
     if (this.modules.betterRolls)
       return await BetterRolls.rollSave(this.actor, ability);

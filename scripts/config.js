@@ -241,12 +241,6 @@ Handlebars.registerHelper('hasUses', function (data) {
   return `class="feature-element"`
 })
 
-$('body').on('change', '.ability-menu .skill .ability-code select', (event) => {
-  let $element = $(event.currentTarget);
-  $element.closest('.skill').data('ability', $element.val());
-  $element.closest('.skill').find('.ability-modifier').html('---');
-});
-
 Handlebars.registerHelper('generateSkills', function (data) {
   let skillsIndex = game.dnd5e.config.skills;
   let savesIndex = game.dnd5e.config.abilities;
@@ -271,7 +265,7 @@ Handlebars.registerHelper('generateSkills', function (data) {
 
     console.log($dropdown, value.ability);
     html += `<li class="skill proficiency-is-${prof[value.value]}" data-skill="${key}" data-ability="${value.ability}" >
-       <span class="ability-code">${$dropdown.prop('outerHTML')}</span> <span class="ability-name">${skillsIndex[key]}</span> <span style="margin-left: auto;"><span class="ability-modifier">${value.total < 0 ? value.total : '+'+value.total }</span> <span class="ability-passive">(${value.passive})</span></span>
+       <span class="ability-code">${$dropdown.prop('outerHTML')}</span> <span class="ability-name">${skillsIndex[key]}</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${value.ability}" data-skill="${key}">${value.total < 0 ? value.total : '+'+value.total }</span> <span class="ability-passive">(${value.passive})</span></span>
           </li>`
   }
 
