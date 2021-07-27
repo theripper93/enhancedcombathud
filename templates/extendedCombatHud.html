@@ -16,8 +16,12 @@
 	</div>
 	<div class="ability-menu">
 		<ul>
-			{{{generateSkills hudData.skills}}}
-
+			{{{generateAbilities "saves"}}}
+			{{{generateAbilities "skills"}}}
+			{{{generateAbilities "tools"}}}
+		</ul>
+		<ul class="ability-toggle">
+			<li class="ability ability-title">Saves / Skills / Tools</li>
 		</ul>
 	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">

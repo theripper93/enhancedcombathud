@@ -14,7 +14,7 @@
   	--ech-portrait-size: cover;
 }
 
-@keyframes extendedCombatHUDLoadAnimation {
+/*@keyframes extendedCombatHUDLoadAnimation {
   from {
     bottom: -100%;
     opacity: 0;
@@ -23,7 +23,7 @@
     bottom: 15px;
     opacity: 1;
   }
-}
+}*/
 
 .extended-combat-hud {
   animation: extendedCombatHUDLoadAnimation 0.3s ease-in 1;
