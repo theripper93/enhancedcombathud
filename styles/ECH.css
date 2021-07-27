@@ -36,6 +36,9 @@
   transform-origin: bottom left;
   /* USED TO ALLOW USERS TO CLICK THROUGH AND AROUND ECH*/
   pointer-events: none;
+
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .ech-close {

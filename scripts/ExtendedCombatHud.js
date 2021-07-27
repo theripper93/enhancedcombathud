@@ -136,9 +136,12 @@ class CombatHud {
       bonus: true,
       reaction: true,
     };
-    this.skills = game.dnd5e.config.skills;
-    this.saves = game.dnd5e.config.abilities;
+    //this.skills = game.dnd5e.config.skills;
+    //this.saves = game.dnd5e.config.abilities;
 
+    this.skills = this.actor.data.data.skills;
+    this.saves = this.actor.data.data.abilities;
+    
     console.log(this);
   }
   getClassesAsString() {
