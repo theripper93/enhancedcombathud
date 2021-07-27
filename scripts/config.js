@@ -241,9 +241,12 @@ Handlebars.registerHelper('hasUses', function (data) {
   return `class="feature-element"`
 })
 
-Handlebars.registerHelper('generateSkills', function (data) {
-  let skillsIndex = game.dnd5e.config.skills;
-  let savesIndex = game.dnd5e.config.abilities;
+$('body').on('click', '.ability-menu .ability-toggle', (event) => {
+  $('body').toggleClass('ech-show-ability-menu');
+});
+
+Handlebars.registerHelper('generateAbilities', function (str) {
+  let data = canvas.hud.enhancedcombathud.hudData[str];
   let html = '';
   let prof = {
     '0': 'not-proficient',
@@ -257,20 +260,18 @@ Handlebars.registerHelper('generateSkills', function (data) {
     $dropdown.append(`<option value="${key}">${value.substring(0,3)}</option>`);
   }
 
-  html += `<li class="skill skill-title">Skills</li>`;
+  if (Object.entries(data).length > 0) {
+    html += `<li class="ability ability-title">${str}</li>`
+  }
 
   for(let [key, value] of Object.entries(data)){
     $dropdown.find(`[selected]`).removeAttr('selected');
     $dropdown.find(`[value="${value.ability}"]`).attr('selected', true);
 
-    console.log($dropdown, value.ability);
-    html += `<li class="skill proficiency-is-${prof[value.value]}" data-skill="${key}" data-ability="${value.ability}" >
-       <span class="ability-code">${$dropdown.prop('outerHTML')}</span> <span class="ability-name">${skillsIndex[key]}</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${value.ability}" data-skill="${key}">${value.total < 0 ? value.total : '+'+value.total }</span> <span class="ability-passive">(${value.passive})</span></span>
-          </li>`
+    html += `<li class="ability is-${str.substring(0, str.length - 1)} proficiency-is-${prof[value.proficient]}" data-roll="${str == 'tools' ? value.label : key}" data-modifier="${value.ability}" >
+        <span class="ability-code">${$dropdown.prop('outerHTML')}</span> <span class="ability-name">${value.label}</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${value.ability}" data-skill="${key}">${value.total < 0 ? value.total : '+'+value.total }</span> <span class="ability-passive">(${value.passive})</span></span>
+      </li>`
   }
-
-  
-  html += `<li class="skill skill-title">Tools</li>`;
 
   return html;
 })

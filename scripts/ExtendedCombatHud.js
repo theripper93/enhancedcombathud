@@ -138,7 +138,36 @@ class CombatHud {
     };
     this.skills = this.actor.data.data.skills;
     this.saves = this.actor.data.data.abilities;
-    this.tools = this.actor.data.items.filter(i => i.data.type =="tool")//getItems({itemType: ["tool"]})
+    this.tools = this.actor.data.items.filter(i => i.data.type =="tool").map((item, index) => {
+      let toolAbility = typeof item.data.data.ability == 'string' ? item.data.data.ability  : item.data.data.ability[0] || 'str';
+      let abilityModifiers = this.actor.data.data.abilities[toolAbility];
+      let toolProficiency = Math.ceil(item.data.data.proficient * this.actor.data.data.prof)
+    
+      return {
+        ability: toolAbility,
+        bonus: 0,
+        label: item.data.name,
+        mod: abilityModifiers.mod,
+        passive: 8 + toolProficiency + abilityModifiers.mod,
+        prof: toolProficiency,
+        total: toolProficiency + abilityModifiers.mod,
+        type: "Number",
+        proficient: item.data.data.proficient,
+      }
+    });
+
+    // Localize skills
+    Object.keys(game.dnd5e.config.skills).forEach(skill => {
+      this.skills[skill].label = game.dnd5e.config.skills[skill];
+      this.skills[skill].proficient = this.skills[skill].value
+    });
+
+    // 
+    Object.keys(game.dnd5e.config.abilities).forEach(ability => {
+      this.saves[ability].label = game.dnd5e.config.abilities[ability]; 
+      this.saves[ability].total = this.saves[ability].save;
+    });
+
     console.log(this);
   }
   getClassesAsString() {
@@ -568,20 +597,48 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigSkills(){
-    $(this.element).on('change', '.ability-menu .skill .ability-code select', (event) => {
+    $(this.element).on('change', '.ability-menu .ability  .ability-code select', (event) => {
       let $element = $(event.currentTarget);
-      let a = $element.closest('.skill')
-      $element.closest('.skill')[0].dataset.ability = $element.val();
-      let newSkill = $element.val();
-      let abil = $element.closest('.skill')[0].dataset.skill
-      let abils = this.hudData.skills[abil]
-      let newTotal = abils.prof + this.hudData.actor.data.data.abilities[newSkill].mod
-      $element.closest('.skill').find('.ability-modifier').html(newTotal);
+      let abilityScore = $element.val()
+      let $ability = $element.closest('.ability');
+      let whatToRoll = $element.closest('.ability').data('roll')
+      let data = null;
+
+      // Update Ability
+      $element.closest('.ability').data('modifier', abilityScore);
+
+
+      if ($ability.hasClass('is-save')) {
+        data = this.hudData.saves[whatToRoll];
+      }else if ($ability.hasClass('is-skill')) {
+        data = this.hudData.skills[whatToRoll];
+      }else if ($ability.hasClass('is-tool')) {
+        data = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0]
+      }else{
+        return false;
+      }
+
+      let newTotal = data.prof + this.hudData.saves[abilityScore].mod
+      $element.closest('.ability').find('.ability-modifier').html(newTotal > 0 ? `+${newTotal}` : newTotal);
     });
+
     $(this.element).on('click', '.ability-name', (event) => {
-      let skill = $(event.currentTarget).closest('.skill')[0].dataset.skill
-      let abil = $(event.currentTarget).closest('.skill')[0].dataset.ability
-      this.roller.rollSkill(skill, abil);
+      let whatToRoll = $(event.currentTarget).closest('.ability').data('roll');
+      let abilityScoreToUse = $(event.currentTarget).closest('.ability').data('modifier');
+      let $ability = $(event.currentTarget).closest('.ability');
+  
+      if ($ability.hasClass('is-save')) {
+        this.roller.rollSave(whatToRoll)
+      }else if ($ability.hasClass('is-skill')) {
+        this.roller.rollSkill(whatToRoll, abilityScoreToUse);
+      }else if ($ability.hasClass('is-tool')) {
+        let tool = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0];
+        this.roller.rollItem(tool.label);
+      }else{
+        return false;
+      }
+
+      //this.roller.rollSkill(skill, abil);
     })
   }
 
