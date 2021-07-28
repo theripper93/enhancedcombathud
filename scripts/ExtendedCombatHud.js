@@ -1111,8 +1111,10 @@ class ECHDiceRoller {
 
   async rollTool(itemName, abil, event){
     this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
-        // Set Dialog Position
-        this.hijackDialog(event);
+    Hooks.once("renderDialog", (dialog,html) => {
+      html.find('select[name="ability"]')[0].value = abil
+    } )
+    this.hijackDialog(event);
   }
 
   async rollSave(ability,event) {
