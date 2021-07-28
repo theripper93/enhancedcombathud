@@ -1111,11 +1111,8 @@ class ECHDiceRoller {
 
   async rollTool(itemName, abil, event){
     this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
-    Hooks.once("renderDialog", (dialog,html) => {
-      html.find('select[name="ability"]')[0].value = abil
-
-      html.css({})//setdialogposition
-    } )
+        // Set Dialog Position
+        this.hijackDialog(event);
   }
 
   async rollSave(ability,event) {
@@ -1123,10 +1120,8 @@ class ECHDiceRoller {
       BetterRolls.rollSave(this.actor, ability);
       else{
         this.actor.rollAbilitySave(ability);
-        Hooks.once("renderDialog", (dialog,html) => {
-          html.find('select[name="ability"]')[0].value = abil
-          html.css({})//setdialogposition
-        } )
+        // Set Dialog Position
+      this.hijackDialog(event);
       }
     
   }
@@ -1154,11 +1149,15 @@ class ECHDiceRoller {
     );
 
     // Set Dialog Position
+    this.hijackDialog(event);
+    return roll;
+  }
+  hijackDialog(event) {
     let $element = $(event.currentTarget).closest('.ability');
     const offset = $element.offset();
     offset.left += $element[0].getBoundingClientRect().width;
     offset.left += 10;
-    
+
     // Close Previous Highjacked Windows
     $('.ech-highjack-window .close').trigger('click');
 
@@ -1168,9 +1167,9 @@ class ECHDiceRoller {
         top: offset.top - $(document).scrollTop() - (dialog.position.height / 2),
         left: offset.left - $(document).scrollLeft(),
       }).addClass('ech-highjack-window');
-    })
-    return roll;
+    });
   }
+
   async rollCheck(ability) {
     if (this.modules.betterRolls)
       return await BetterRolls.rollCheck(this.actor, ability);
