@@ -1124,7 +1124,7 @@ class ECHDiceRoller {
     if (skl.ability == ability && this.modules.betterRolls)
       {
         BetterRolls.rollSkill(this.actor, skill);
-        return
+        return;
       }
     const abl = this.actor.data.data.abilities[ability];
     const data = { mod: abl.mod + skl.prof };
