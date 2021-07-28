@@ -1248,7 +1248,7 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
 });
 
 Hooks.on("controlToken", (token, controlled) => {
-  if (controlled && canvas.hud.enhancedcombathud?.rendered) {
+  if (controlled && canvas.hud.enhancedcombathud?.rendered && canvas.hud.enhancedcombathud.hudData.token.id != token.id) {
     canvas.hud.enhancedcombathud.close();
     setTimeout(() => {
       canvas.hud.enhancedcombathud.bind(canvas.tokens.get(token.id));
