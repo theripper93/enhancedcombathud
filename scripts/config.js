@@ -251,6 +251,36 @@ Handlebars.registerHelper('hasUses', function (data) {
   return `class="feature-element"`
 })
 
+Handlebars.registerHelper('generateSavingThrows', (str) => {
+  let data = canvas.hud.enhancedcombathud.hudData[str];
+  let localize = canvas.hud.enhancedcombathud.hudData.settings.localize
+  let html = '';
+  let prof = {
+    '0': 'not-proficient',
+    '0.5': 'half-proficiency',
+    '1': 'proficient',
+    '2': 'expertise'
+  }
+
+  if (Object.entries(data).length > 0) {
+    html += `<li class="ability ability-title">${'Abilities'} <div><span>Check</span><span>Save</span></div></li>`
+  }
+
+  for(let [key, value] of Object.entries(data)) {
+    console.log(value)
+    html += `<li class="ability is-${str.substring(0, str.length - 1)} proficiency-is-${prof[value.proficient]}" data-roll="${str == 'tools' ? value.label : key}" data-modifier="save" >
+        <span class="ability-name">${value.label}</span> 
+        <div style="margin-left: auto;">
+          <span data-type="check">${value.mod < 0 ? value.mod : '+' + value.mod }</span> 
+          <span data-type="save">${value.save < 0 ? value.save : '+' + value.save }</span> 
+        </div>
+      </li>`
+  }
+
+
+  return html;
+})
+
 Handlebars.registerHelper('generateAbilities', function (str) {
   let data = canvas.hud.enhancedcombathud.hudData[str];
   let localize = canvas.hud.enhancedcombathud.hudData.settings.localize

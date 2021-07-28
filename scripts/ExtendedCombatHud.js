@@ -658,14 +658,24 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let newTotal = data.prof + this.hudData.saves[abilityScore].mod
       $element.closest('.ability').find('.ability-modifier').html(newTotal > 0 ? `+${newTotal}` : newTotal);
     });
+    $(this.element).on('click', 'li.is-save > div > span', (event) => {
+      let $element = $(event.currentTarget);
+      let $ability = $element.closest('.ability');
+      let whatToRoll = $ability .data('roll');
 
+      if ($element.data('type') == 'save') {
+        this.roller.rollSave(whatToRoll, event)
+      }else if ($element.data('type') == 'check') {
+        this.roller.rollCheck(whatToRoll, event)
+      }
+    });
     $(this.element).on('click', '.ability-name', (event) => {
       let whatToRoll = $(event.currentTarget).closest('.ability').data('roll');
       let abilityScoreToUse = $(event.currentTarget).closest('.ability').data('modifier');
       let $ability = $(event.currentTarget).closest('.ability');
   
       if ($ability.hasClass('is-save')) {
-        this.roller.rollSave(whatToRoll,event)
+        this.roller.rollSave(whatToRoll, event)
       }else if ($ability.hasClass('is-skill')) {
         this.roller.rollSkill(whatToRoll, abilityScoreToUse,event);
       }else if ($ability.hasClass('is-tool')) {
@@ -1115,13 +1125,13 @@ class ECHDiceRoller {
         this.hijackDialog(event);
   }
 
-  async rollSave(ability,event) {
+  async rollSave(ability, event) {
     if (this.modules.betterRolls)
       BetterRolls.rollSave(this.actor, ability);
       else{
         this.actor.rollAbilitySave(ability);
         // Set Dialog Position
-      this.hijackDialog(event);
+        this.hijackDialog(event);
       }
     
   }
