@@ -1167,22 +1167,23 @@ class ECHDiceRoller {
   hijackDialog(event) {
     let $element = $(event.currentTarget).closest('.ability');
     const offset = $element.offset();
-    offset.left += $element[0].getBoundingClientRect().width;
-    offset.left += 10;
 
     // Close Previous Highjacked Windows
     $('.ech-highjack-window .close').trigger('click');
 
     // Position Windows next to Saves/Skills/Tools Menu
     Hooks.once("renderDialog", (dialog, html) => {
+      offset.top += - $(document).scrollTop() - (dialog.position.height / 2)
+      offset.left += $element[0].getBoundingClientRect().width + 10 - $(document).scrollLeft();
+      
       html.css({
-        top: offset.top - $(document).scrollTop() - (dialog.position.height / 2),
-        left: offset.left - $(document).scrollLeft(),
+        top: offset.top > 0 ? offset.top : 0,
+        left: offset.left,
       }).addClass('ech-highjack-window');
 
       // Update dialog with new position data for dragging.
-      dialog.position.left = offset.left - $(document).scrollLeft();
-      dialog.position.top =  offset.top - $(document).scrollTop() - (dialog.position.height / 2);
+      dialog.position.left = offset.top > 0 ? offset.top : 0;
+      dialog.position.top =  offset.left;
 
       // If Dialog allows you to select Modifier, use modifier from ability modifier by default
       if (!html.find('select[name="ability"]'))
