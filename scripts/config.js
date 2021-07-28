@@ -253,6 +253,7 @@ Handlebars.registerHelper('hasUses', function (data) {
 
 Handlebars.registerHelper('generateAbilities', function (str) {
   let data = canvas.hud.enhancedcombathud.hudData[str];
+  let localize = canvas.hud.enhancedcombathud.hudData.settings.localize
   let html = '';
   let prof = {
     '0': 'not-proficient',
@@ -267,7 +268,7 @@ Handlebars.registerHelper('generateAbilities', function (str) {
   }
 
   if (Object.entries(data).length > 0) {
-    html += `<li class="ability ability-title">${str}</li>`
+    html += `<li class="ability ability-title">${localize[str]}</li>`
   }
 
   for(let [key, value] of Object.entries(data)){

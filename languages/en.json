@@ -21,6 +21,9 @@
     "enhancedcombathud.hud.ac.name":"AC",
     "enhancedcombathud.hud.of.name":"of",
     "enhancedcombathud.hud.inventory.name": "Sheet",
+    "enhancedcombathud.hud.saves.name": "Saves",
+    "enhancedcombathud.hud.skills.name": "Skills",
+    "enhancedcombathud.hud.tools.name": "Tools",
 
 
 
@@ -67,6 +70,8 @@
     "enhancedcombathud.settings.color-reaction.hint" : "Color of the reaction tab",
     "enhancedcombathud.settings.color-end-turn.text" : "End Turn Color",
     "enhancedcombathud.settings.color-end-turn.hint" : "Color of the end turn tab",
+    "enhancedcombathud.settings.color-tooltip.text" : "Tooltip Color",
+    "enhancedcombathud.settings.color-tooltip.hint" : "Color of the tooltips and save/skills/tools popup",
 
     "enhancedcombathud.settings.theme.name" : "Theme",
     "enhancedcombathud.settings.theme.hint" : "Theme of the HUD",

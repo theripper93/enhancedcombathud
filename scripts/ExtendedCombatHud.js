@@ -24,6 +24,9 @@ class CombatHud {
         ac: game.i18n.localize("enhancedcombathud.hud.ac.name"),
         of: game.i18n.localize("enhancedcombathud.hud.of.name"),
         inv: game.i18n.localize("enhancedcombathud.hud.inventory.name"),
+        saves: game.i18n.localize("enhancedcombathud.hud.saves.name"),
+        skills: game.i18n.localize("enhancedcombathud.hud.skills.name"),
+        tools: game.i18n.localize("enhancedcombathud.hud.tools.name"),
         spells: {
           0: game.dnd5e.config.spellLevels["0"],
           pact: game.dnd5e.config.spellPreparationModes.pact,
