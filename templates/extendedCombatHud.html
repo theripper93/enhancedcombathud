@@ -25,7 +25,6 @@
 		</ul>
 	</div>
 	<div class="portrait-hud" style="background-image: url({{hudData.actor.data.img}});">
-		<div class="ech-close" onclick="$(`.control-tool[data-tool='echtoggle']`).trigger('click')"><i class="fas fa-sort-down"></i></div>
 		<div class="portrait-stat-block">
 			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}"></span>
 			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.data.data.attributes.hp.max}}"></span>
@@ -34,14 +33,20 @@
 		<div class="portrait-stat-block">
 			<span>AC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
 		</div>
-		<div class="portrait-stat-block portrait-stat-block-button" style="background-image: url(modules/enhancedcombathud/icons/backpack.svg);"onclick="canvas.hud.enhancedcombathud.hudData.actor.sheet.render(true);">
-			{{hudData.settings.localize.inv}}
+		<div class="portrait-stat-block">
+			<span>Spell DC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.spelldc}}"></span>
 		</div>
 		<div class="portrait-stat-block player-details">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
 				<span class="player-detail">
 					{{hudData.other.classes}}
 				</span>
+		</div>
+		<div class="player-buttons">
+			<div class="player-button" onClick="canvas.hud.enhancedcombathud.hudData.actor.rollInitiative({ rerollInitiative: true, createCombatants: true });"><i class="fas fa-dice-d20"></i></div>
+			<div class="player-button" style="background-image: url(modules/enhancedcombathud/icons/backpack.svg);"onclick="canvas.hud.enhancedcombathud.hudData.actor.sheet.render(true);"></div>
+			<div class="ech-close player-button" onclick="$(`.control-tool[data-tool='echtoggle']`).trigger('click')"><i class="fas fa-sort-down"></i></div>
+
 		</div>
 	</div>
 	<div class="movement-hud">
