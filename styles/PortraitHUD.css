@@ -185,6 +185,14 @@
     padding-left: 1.3rem;
     text-transform: uppercase;
 }
+.ability-menu ul > li.ability-title > div {
+    margin-left: auto;
+}
+.ability-menu ul > li.ability-title > div > span {
+    width: 75px;
+    display: inline-block;
+    text-align: center; 
+}
 .ability-menu ul > li.proficiency-is-not-proficient:before,
 .ability-menu ul > li.proficiency-is-half-proficiency:before,
 .ability-menu ul > li.proficiency-is-proficient:before,
@@ -248,6 +256,18 @@
 }
 .ability-menu ul > li.is-save .ability-modifier {
     padding-right: 1rem;
+}
+.ability-menu ul > li.is-save > div {
+    margin-left: auto;
+}
+.ability-menu ul > li.is-save > div > span {
+    width: 75px;
+    display: inline-block;
+    text-align: center; 
+}
+.ability-menu ul > li.is-save > div > span:hover {
+    cursor: pointer;
+    filter: brightness(150%);
 }
 
 .ech-show-ability-menu .ability-menu ul:first-child {

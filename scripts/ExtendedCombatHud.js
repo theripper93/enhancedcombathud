@@ -655,14 +655,24 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let newTotal = data.prof + this.hudData.saves[abilityScore].mod
       $element.closest('.ability').find('.ability-modifier').html(newTotal > 0 ? `+${newTotal}` : newTotal);
     });
+    $(this.element).on('click', 'li.is-save > div > span', (event) => {
+      let $element = $(event.currentTarget);
+      let $ability = $element.closest('.ability');
+      let whatToRoll = $ability .data('roll');
 
+      if ($element.data('type') == 'save') {
+        this.roller.rollSave(whatToRoll, event)
+      }else if ($element.data('type') == 'check') {
+        this.roller.rollCheck(whatToRoll, event)
+      }
+    });
     $(this.element).on('click', '.ability-name', (event) => {
       let whatToRoll = $(event.currentTarget).closest('.ability').data('roll');
       let abilityScoreToUse = $(event.currentTarget).closest('.ability').data('modifier');
       let $ability = $(event.currentTarget).closest('.ability');
   
       if ($ability.hasClass('is-save')) {
-        this.roller.rollSave(whatToRoll,event)
+        this.roller.rollSave(whatToRoll, event)
       }else if ($ability.hasClass('is-skill')) {
         this.roller.rollSkill(whatToRoll, abilityScoreToUse,event);
       }else if ($ability.hasClass('is-tool')) {
@@ -1114,13 +1124,13 @@ class ECHDiceRoller {
     this.hijackDialog(event);
   }
 
-  async rollSave(ability,event) {
+  async rollSave(ability, event) {
     if (this.modules.betterRolls)
       BetterRolls.rollSave(this.actor, ability);
       else{
         this.actor.rollAbilitySave(ability);
         // Set Dialog Position
-      this.hijackDialog(event);
+        this.hijackDialog(event);
       }
     
   }
@@ -1154,18 +1164,27 @@ class ECHDiceRoller {
   hijackDialog(event) {
     let $element = $(event.currentTarget).closest('.ability');
     const offset = $element.offset();
-    offset.left += $element[0].getBoundingClientRect().width;
-    offset.left += 10;
 
     // Close Previous Highjacked Windows
     $('.ech-highjack-window .close').trigger('click');
 
     // Position Windows next to Saves/Skills/Tools Menu
     Hooks.once("renderDialog", (dialog, html) => {
+      offset.top += - $(document).scrollTop() - (dialog.position.height / 2)
+      offset.left += $element[0].getBoundingClientRect().width + 10 - $(document).scrollLeft();
+      
       html.css({
-        top: offset.top - $(document).scrollTop() - (dialog.position.height / 2),
-        left: offset.left - $(document).scrollLeft(),
+        top: offset.top > 0 ? offset.top : 0,
+        left: offset.left,
       }).addClass('ech-highjack-window');
+
+      // Update dialog with new position data for dragging.
+      dialog.position.left = offset.top > 0 ? offset.top : 0;
+      dialog.position.top =  offset.left;
+
+      // If Dialog allows you to select Modifier, use modifier from ability modifier by default
+      if (!html.find('select[name="ability"]'))
+        html.find('select[name="ability"]').val($element.data('modifier'));
     });
   }
 
