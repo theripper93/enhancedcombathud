@@ -1175,15 +1175,15 @@ class ECHDiceRoller {
     Hooks.once("renderDialog", (dialog, html) => {
       offset.top += - $(document).scrollTop() - (dialog.position.height / 2)
       offset.left += $element[0].getBoundingClientRect().width + 10 - $(document).scrollLeft();
-      
+
       html.css({
         top: offset.top > 0 ? offset.top : 0,
         left: offset.left,
       }).addClass('ech-highjack-window');
 
       // Update dialog with new position data for dragging.
-      dialog.position.left = offset.top > 0 ? offset.top : 0;
-      dialog.position.top =  offset.left;
+      dialog.position.top =  offset.top > 0 ? offset.top : 0;
+      dialog.position.left = offset.left;
 
       // If Dialog allows you to select Modifier, use modifier from ability modifier by default
       if (!html.find('select[name="ability"]'))
