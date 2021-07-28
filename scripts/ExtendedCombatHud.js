@@ -1167,6 +1167,10 @@ class ECHDiceRoller {
         top: offset.top - $(document).scrollTop() - (dialog.position.height / 2),
         left: offset.left - $(document).scrollLeft(),
       }).addClass('ech-highjack-window');
+
+      // If Dialog allows you to select Modifier, use modifier from ability modifier by default
+      if (!html.find('select[name="ability"]'))
+        html.find('select[name="ability"]').val($element.data('modifier'));
     });
   }
 
