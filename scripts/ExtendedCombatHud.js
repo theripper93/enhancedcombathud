@@ -1110,17 +1110,21 @@ class ECHDiceRoller {
   async rollSave(ability) {
     if (this.modules.betterRolls)
       BetterRolls.rollSave(this.actor, ability);
-    this.actor.rollAbilitySave(ability);
-    Hooks.once("renderDialog", (dialog,html) => {
-      html.find('select[name="ability"]')[0].value = abil
-      html.css({})//setdialogposition
-    } )
+      else{
+        this.actor.rollAbilitySave(ability);
+        Hooks.once("renderDialog", (dialog,html) => {
+          html.find('select[name="ability"]')[0].value = abil
+          html.css({})//setdialogposition
+        } )
+      }
+    
   }
   async rollSkill(skill, ability) {
     const skl = this.actor.data.data.skills[skill];
     if (skl.ability == ability && this.modules.betterRolls)
       {
         BetterRolls.rollSkill(this.actor, skill);
+        return
       }
     const abl = this.actor.data.data.abilities[ability];
     const data = { mod: abl.mod + skl.prof };
