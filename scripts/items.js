@@ -60,7 +60,6 @@ Hooks.once("ready",()=>{
         "dc": null,
         "scaling": "spell"
       },
-      "consumableType": "trinket"
     },
     "effects": [
       {
@@ -145,6 +144,10 @@ Hooks.once("ready",()=>{
         "type": "",
         "target": "",
         "amount": null
+      },
+      "recharge": {
+        "value": null,
+        "charged": false
       },
       "ability": "",
       "actionType": "util",

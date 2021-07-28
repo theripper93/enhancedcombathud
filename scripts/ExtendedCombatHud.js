@@ -625,6 +625,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
     this.element.on("dragstart", '.set', async (event) => {
       event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
+      $(".extended-combat-hud").addClass("ech-remove-set")
+    })
+    this.element.on("dragdrop", '.set', async (event) => {
+      event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
+      $(".extended-combat-hud").removeClass("ech-remove-set")
     })
   }
 
