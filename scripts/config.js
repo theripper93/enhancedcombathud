@@ -154,7 +154,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("enhancedcombathud.settings.color-tooltip.hint"),
     label: game.i18n.localize("enhancedcombathud.settings.color.label"),
     restricted: true,
-    defaultColor: "#374B3CE6",
+    defaultColor: "#414B55E6",
     scope: "world",
     onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });

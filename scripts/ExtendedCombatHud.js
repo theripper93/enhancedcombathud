@@ -627,7 +627,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
       $(".extended-combat-hud").addClass("ech-remove-set")
     })
-    this.element.on("dragdrop", '.set', async (event) => {
+    this.element.on("dragend", '.set', async (event) => {
       event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
       $(".extended-combat-hud").removeClass("ech-remove-set")
     })
@@ -665,12 +665,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let $ability = $(event.currentTarget).closest('.ability');
   
       if ($ability.hasClass('is-save')) {
-        this.roller.rollSave(whatToRoll)
+        this.roller.rollSave(whatToRoll,event)
       }else if ($ability.hasClass('is-skill')) {
-        this.roller.rollSkill(whatToRoll, abilityScoreToUse);
+        this.roller.rollSkill(whatToRoll, abilityScoreToUse,event);
       }else if ($ability.hasClass('is-tool')) {
         let tool = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0];
-        this.roller.rollTool(tool.label,abilityScoreToUse);
+        this.roller.rollTool(tool.label,abilityScoreToUse,event);
 
       }else{
         return false;
@@ -1104,7 +1104,7 @@ class ECHDiceRoller {
     return await game.dnd5e.rollItemMacro(itemName);
   }
 
-  async rollTool(itemName,abil){
+  async rollTool(itemName,abil,event){
     this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
     Hooks.once("renderDialog", (dialog,html) => {
       html.find('select[name="ability"]')[0].value = abil
@@ -1112,7 +1112,7 @@ class ECHDiceRoller {
     } )
   }
 
-  async rollSave(ability) {
+  async rollSave(ability,event) {
     if (this.modules.betterRolls)
       BetterRolls.rollSave(this.actor, ability);
       else{
@@ -1124,7 +1124,7 @@ class ECHDiceRoller {
       }
     
   }
-  async rollSkill(skill, ability) {
+  async rollSkill(skill, ability,event) {
     const skl = this.actor.data.data.skills[skill];
     if (skl.ability == ability && this.modules.betterRolls)
       {
