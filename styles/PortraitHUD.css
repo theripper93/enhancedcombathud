@@ -83,7 +83,7 @@
 }
 .ability-menu:before {
     backdrop-filter: blur(6px);
-    background-color: var(--ech-color);
+    background-color: var(--ech-color-tooltip);;
     border: 1px solid var(--ech-border-color);
     content: '';
     height: 100%;
@@ -184,7 +184,7 @@
 }
 
 .ech-show-ability-menu .ability-menu ul:first-child {
-    max-height: calc(100vh - (375px + 100px + 1rem));
+    max-height: calc(100vh - (375px + 37px + 1rem));
 }
 .ability-menu ul.ability-toggle {
     max-height: 100%;

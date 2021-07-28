@@ -127,10 +127,6 @@ class CombatHud {
       bonus: true,
       other: true,
     };
-    this.sets = this.getSets();
-    this.sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
-      ? this.sets[`${this.actor.data.flags.enhancedcombathud?.activeSet}`]
-      : this.sets.set1;
     this.resources = {
       action: true,
       bonus: true,
@@ -266,7 +262,7 @@ class CombatHud {
     let item = items.find((i) => i.data.name == itemName);
     return item;
   }
-  getSets() {
+  get sets() {
     let items = this.actor.data.items;
     let sets;
     sets = {
@@ -308,6 +304,10 @@ class CombatHud {
       if (item.data.flags.enhancedcombathud?.set3s) sets.set3.secondary = item;
     }
 
+    sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
+    ? sets[`${this.actor.data.flags.enhancedcombathud?.activeSet}`]
+    : sets.set1;
+
     return sets;
   }
   _render() {
@@ -324,8 +324,8 @@ class CombatHud {
       await this.sets.set3.primary?.update({ "data.equipped": false });
       await this.sets.set3.secondary?.update({ "data.equipped": false });
     }
-    this.sets.active = this.sets[active];
-    this.actor.setFlag("enhancedcombathud", "activeSet", active);
+    //this.sets.active = this.sets[active];
+    await this.actor.setFlag("enhancedcombathud", "activeSet", active);
     await this.sets.active.primary?.update({ "data.equipped": true });
     await this.sets.active.secondary?.update({ "data.equipped": true });
   }
@@ -356,8 +356,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     options.template =
       "modules/enhancedcombathud/templates/extendedCombatHud.html";
     options.id = "enhancedcombathud";
-
+    options.dragDrop = [{dragSelector: null, dropSelector: null}]
     return options;
+  }
+
+  _canDragDrop(selector) {
+    return true;
   }
 
   getData() {
@@ -374,10 +378,25 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   activateListeners(html) {
-    const el = html[0];
-    this.element.on("drop", (event) => {
-     console.log("drop: ", event);
-    });
+    super.activateListeners(html);
+  }
+
+  async _onDrop(event){
+    event.preventDefault();
+    let set = event.target?.dataset?.set
+    let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+        } catch (err) {
+            //return false;
+        }
+    if(set)
+    {
+      await this.dragDropSet(set,data.data._id,event.target)
+      this.initSets()
+    }else{
+      this.dragDropSetRemove(event.dataTransfer.getData('text'))
+    }
   }
 
   setPosition() {
@@ -412,6 +431,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":game.settings.get("enhancedcombathud", "color-free-action"),
         "--ech-color-reaction":game.settings.get("enhancedcombathud", "color-reaction"),
         "--ech-color-end-turn":game.settings.get("enhancedcombathud", "color-end-turn"),  
+        "--ech-color-tooltip": game.settings.get("enhancedcombathud", "color-tooltip"),
       },  
       helium:{
         "--ech-fore-color":"#d0d0d0ff",
@@ -420,6 +440,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#3e3e3e7d",
         "--ech-color-reaction":"#3e3e3e7d",
         "--ech-color-end-turn":"#3e3e3e7d",
+        "--ech-color-tooltip":"#3e3e3eDC",
       },
       neon:{
         "--ech-fore-color":"#e3e3e3de",
@@ -428,6 +449,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#091833c8",
         "--ech-color-reaction":"#1c3353cd",
         "--ech-color-end-turn":"#662862be",
+        "--ech-color-tooltip":"#711c91b9",
       },
       argon:{
         "--ech-fore-color":"#B4D2DCFF",
@@ -436,6 +458,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#3B5875E6",
         "--ech-color-reaction":"#753B3BE6",
         "--ech-color-end-turn":"#374B3CE6",
+        "--ech-color-tooltip":"#414B55E6",
       },
       krypton:{
         "--ech-fore-color":"#d1d9bdde",
@@ -444,6 +467,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#249a26c5",
         "--ech-color-reaction":"#249a26c5",
         "--ech-color-end-turn":"#2f661eb9",
+        "--ech-color-tooltip":"#2f661eb9",
       },
       xenon:{
         "--ech-fore-color":"#d9e3e3de",
@@ -452,6 +476,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#3680deb9",
         "--ech-color-reaction":"#1066d3b9",
         "--ech-color-end-turn":"#1b3e6ab9",
+        "--ech-color-tooltip":"#688ab6b9",
       },
       radon:{
         "--ech-fore-color":"#e3d9d9de",
@@ -460,14 +485,16 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         "--ech-color-free-action":"#f916167d",
         "--ech-color-reaction":"#f916167d",
         "--ech-color-end-turn":"#9f12127d",
+        "--ech-color-tooltip":"#fc123a5d",
       },
       oganesson:{
-        "--ech-fore-color":"#727272de",
+        "--ech-fore-color":"#f9ffd4de",
         "--ech-color":"#ffffff46",
         "--ech-color-bonus-action":"#ffffff46",
         "--ech-color-free-action":"#ffffff46",
         "--ech-color-reaction":"#ffffff46",
         "--ech-color-end-turn":"#bdbdbd66",
+        "--ech-color-tooltip":"#ffffff7D",
       },
     }
   }
@@ -585,7 +612,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
     this.element.on("click", '[data-type="switchWeapons"]', async (event) => {
       let $element = $(event.currentTarget);
-
       if (!$element.hasClass("active")) {
         $(this.element)
           .find('[data-type="switchWeapons"].active')
@@ -594,6 +620,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         this.switchSets($element[0].dataset.value);
       }
     });
+    this.element.on("dragstart", '.set', async (event) => {
+      event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
+    })
   }
 
   rigSkills(){
@@ -633,7 +662,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         this.roller.rollSkill(whatToRoll, abilityScoreToUse);
       }else if ($ability.hasClass('is-tool')) {
         let tool = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0];
-        this.roller.rollItem(tool.label);
+        this.roller.rollTool(tool.label,abilityScoreToUse);
+
       }else{
         return false;
       }
@@ -1031,14 +1061,25 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     );
   }
 
-  async dragDropSet(set,itemid){
+  async dragDropSet(set,itemid,target){
     let item = this.hudData.actor.data.items.find(i => i.id == itemid)
     if(!item) return;
-    let ps = set.substring(3, str.length) == "p" ? "primary" : "secondary"
-    let oldSetItem = this.hudData.sets[set.substring(0, str.length - 1)][ps]
+    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary"
+    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps]
     if(oldSetItem) await oldSetItem.setFlag("enhancedcombathud", set, false)
     await item.setFlag("enhancedcombathud", set, true)
+    $(target).css({"background-image": `url(${this.hudData.sets[set.substring(0, set.length - 1)][ps].data.img}`})
     this.initSets()
+  }
+
+  async dragDropSetRemove(set,target){
+    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary"
+    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps]
+    if(oldSetItem) {
+      await oldSetItem.setFlag("enhancedcombathud", set, false)
+      $(this.element).find(`[data-set="${set}"]`).css({"background-image": ``})
+  }
+  this.initSets()
   }
 }
 
@@ -1055,19 +1096,29 @@ class ECHDiceRoller {
     return await game.dnd5e.rollItemMacro(itemName);
   }
 
-  async rollTool(itemName){
-    await this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
+  async rollTool(itemName,abil){
+    this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
+    Hooks.once("renderDialog", (dialog,html) => {
+      html.find('select[name="ability"]')[0].value = abil
+      html.css({})//setdialogposition
+    } )
   }
 
   async rollSave(ability) {
     if (this.modules.betterRolls)
-      return await BetterRolls.rollSave(this.actor, ability);
-    return await this.actor.rollAbilitySave(ability);
+      BetterRolls.rollSave(this.actor, ability);
+    this.actor.rollAbilitySave(ability);
+    Hooks.once("renderDialog", (dialog,html) => {
+      html.find('select[name="ability"]')[0].value = abil
+      html.css({})//setdialogposition
+    } )
   }
   async rollSkill(skill, ability) {
     const skl = this.actor.data.data.skills[skill];
     if (skl.ability == ability && this.modules.betterRolls)
-      return await BetterRolls.rollSkill(this.actor, skill);
+      {
+        BetterRolls.rollSkill(this.actor, skill);
+      }
     const abl = this.actor.data.data.abilities[ability];
     const data = { mod: abl.mod + skl.prof };
     if (skl.ability != ability)
@@ -1077,12 +1128,15 @@ class ECHDiceRoller {
         ECHDiceRoller.dnd5eRollSkill,
         "OVERRIDE"
       );
-    let roll = await this.actor.rollSkill(skill, { data: data });
+    let roll = this.actor.rollSkill(skill, { data: data });
     libWrapper.unregister(
       "enhancedcombathud",
       "game.dnd5e.entities.Actor5e.prototype.rollSkill",
       false
     );
+    Hooks.once("renderDialog", (dialog,html) => {
+      html.css({})//setdialogposition
+    } )
     return roll;
   }
   async rollCheck(ability) {

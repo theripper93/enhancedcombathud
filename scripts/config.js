@@ -148,6 +148,16 @@ Hooks.once("ready", function () {
     scope: "world",
     onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
   });
+
+  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-tooltip", {
+    name: game.i18n.localize("enhancedcombathud.settings.color-tooltip.text"),
+    hint: game.i18n.localize("enhancedcombathud.settings.color-tooltip.hint"),
+    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
+    restricted: true,
+    defaultColor: "#374B3CE6",
+    scope: "world",
+    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
+  });
 });
 
 Hooks.on("renderItemSheet", (itemsheet, html) => {
@@ -241,10 +251,6 @@ Handlebars.registerHelper('hasUses', function (data) {
   return `class="feature-element"`
 })
 
-$('body').on('click', '.ability-menu .ability-toggle', (event) => {
-  $('body').toggleClass('ech-show-ability-menu');
-});
-
 Handlebars.registerHelper('generateAbilities', function (str) {
   let data = canvas.hud.enhancedcombathud.hudData[str];
   let html = '';
@@ -276,6 +282,12 @@ Handlebars.registerHelper('generateAbilities', function (str) {
   return html;
 })
 
-document.addEventListener("drop", function(event) {
-  debugger
+$('body').on('click', '.ability-menu .ability-toggle', (event) => {
+  $('body').toggleClass('ech-show-ability-menu');
+  let element = document.querySelector('.extended-combat-hud');
+  let ratio = element.style.transform.replace(/[^0-9.]+/g, '');
+  let scaleHeight = ($(window).height()-$('.portrait-hud').outerHeight()*ratio)/(ratio)-70;
+  $('.ability-menu ul').first().css({
+    'max-height': $('body').hasClass('ech-show-ability-menu') ? `${scaleHeight}px` : '0px'
+  })
 })

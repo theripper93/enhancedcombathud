@@ -46,7 +46,7 @@
 }
 .ech-tooltip .ech-tooltip-body {
   backdrop-filter: blur(6px);
-  background-color: rgb(90 120 150 / 70%);
+  background-color: var(--ech-color-tooltip);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   color: rgb(255, 255, 255);
