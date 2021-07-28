@@ -61,6 +61,13 @@
     "enhancedcombathud.skills.ste.tooltip": "Make a Dexterity (Stealth) check when you attempt to conceal yourself from enemies, slink past guards, slip away without being noticed, or sneak up on someone without being seen or heard.",
     "enhancedcombathud.skills.sur.tooltip": "The DM might ask you to make a Wisdom (Survival) check to follow tracks, hunt wild game, guide your group through frozen wastelands, identify signs that owlbears live nearby, predict the weather, or avoid quicksand and other natural hazards.",
 
+    "enhancedcombathud.skills.cha.tooltip": "",
+    "enhancedcombathud.skills.int.tooltip": "",
+    "enhancedcombathud.skills.str.tooltip": "",
+    "enhancedcombathud.skills.wis.tooltip": "",
+    "enhancedcombathud.skills.con.tooltip": "",
+    "enhancedcombathud.skills.dex.tooltip": "",
+
 
     "enhancedcombathud.hud.spells.cantrip": "Cantrip",
     "enhancedcombathud.hud.spells.pact": "Pact Magic",
