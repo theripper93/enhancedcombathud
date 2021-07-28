@@ -958,7 +958,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let properties = [];
     let dt = item.labels?.damageTypes?.split(", ");
     let damageTypes = dt && dt.length ? dt : [];
-    let materialComponents
+    let materialComponents = ""
     switch (itemType) {
       case "weapon":
         subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType];
@@ -1001,6 +1001,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         break;
     }
 
+    
+
     const tooltip = ({
       title,
       subtitle,
@@ -1008,9 +1010,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       target,
       range,
       properties,
+      materialComponents,
       offset,
     }) => {
-      return `<div class="ech-tooltip" style="top: ${offset.top}px; left: ${
+      return `<div class="ech-tooltip ${!subtitle ? 'hide-subtitle' : ''}" style="top: ${offset.top}px; left: ${
         offset.left
       }px;">
           <div class="ech-tooltip-header">
@@ -1038,6 +1041,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
               )}</h3>
               ${properties.join("\n")}
             </div>
+            <i style="font-size: 0.8rem;">${materialComponents.length > 0 ? '*-' + materialComponents : ''}</i>
           </div>
         </div>`;
     };
@@ -1064,6 +1068,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         target: target,
         range: range,
         properties: listOfProperties,
+        materialComponents: materialComponents,
         offset: offset,
       })
     );
