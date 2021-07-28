@@ -1104,10 +1104,11 @@ class ECHDiceRoller {
     return await game.dnd5e.rollItemMacro(itemName);
   }
 
-  async rollTool(itemName,abil,event){
+  async rollTool(itemName, abil, event){
     this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
     Hooks.once("renderDialog", (dialog,html) => {
       html.find('select[name="ability"]')[0].value = abil
+
       html.css({})//setdialogposition
     } )
   }
@@ -1124,7 +1125,7 @@ class ECHDiceRoller {
       }
     
   }
-  async rollSkill(skill, ability,event) {
+  async rollSkill(skill, ability, event) {
     const skl = this.actor.data.data.skills[skill];
     if (skl.ability == ability && this.modules.betterRolls)
       {
@@ -1146,9 +1147,23 @@ class ECHDiceRoller {
       "game.dnd5e.entities.Actor5e.prototype.rollSkill",
       false
     );
-    Hooks.once("renderDialog", (dialog,html) => {
-      html.css({})//setdialogposition
-    } )
+
+    // Set Dialog Position
+    let $element = $(event.currentTarget).closest('.ability');
+    const offset = $element.offset();
+    offset.left += $element[0].getBoundingClientRect().width;
+    offset.left += 10;
+    
+    // Close Previous Highjacked Windows
+    $('.ech-highjack-window .close').trigger('click');
+
+    // Position Windows next to Saves/Skills/Tools Menu
+    Hooks.once("renderDialog", (dialog, html) => {
+      html.css({
+        top: offset.top - $(document).scrollTop() - (dialog.position.height / 2),
+        left: offset.left - $(document).scrollLeft(),
+      }).addClass('ech-highjack-window');
+    })
     return roll;
   }
   async rollCheck(ability) {
