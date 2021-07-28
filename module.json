@@ -39,7 +39,8 @@
       "./styles/CombatHUD.css",
       "./styles/ActionHUD.css",
       "./styles/PortraitHUD.css",
-      "./styles/Tooltip.css"
+      "./styles/Tooltip.css",
+      "./styles/highjacked-window.css"
   ],
   "packs": [
     {

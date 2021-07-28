@@ -13,6 +13,7 @@
   	--ech-border-color: rgb(117, 127, 137);
 	  /* SETTINGS */
   	--ech-portrait-size: cover;
+    --ech-font-family: "Roboto", sans-serif
 }
 
 /*@keyframes extendedCombatHUDLoadAnimation {
@@ -32,6 +33,7 @@
   color: var(--ech-fore-color);
   display: flex;
   flex-direction: row;
+  font-family: "Roboto", sans-serif;
   left: 15px;
   position: absolute;
   transform-origin: bottom left;
