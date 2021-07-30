@@ -425,85 +425,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.initSets();
     this.rigAutoScale();
   }
-  get theme() {
-  }
-
-  get themes() {
-    return {
-      custom:{
-        "--ech-fore-color":game.settings.get("enhancedcombathud", "fore-color"),
-        "--ech-color":game.settings.get("enhancedcombathud", "color"),
-        "--ech-color-bonus-action":game.settings.get("enhancedcombathud", "color-bonus-action"),
-        "--ech-color-free-action":game.settings.get("enhancedcombathud", "color-free-action"),
-        "--ech-color-reaction":game.settings.get("enhancedcombathud", "color-reaction"),
-        "--ech-color-end-turn":game.settings.get("enhancedcombathud", "color-end-turn"),  
-        "--ech-color-tooltip": game.settings.get("enhancedcombathud", "color-tooltip"),
-      },  
-      helium:{
-        "--ech-fore-color":"#d0d0d0ff",
-        "--ech-color":"#3e3e3e7d",
-        "--ech-color-bonus-action":"#3e3e3e7d",
-        "--ech-color-free-action":"#3e3e3e7d",
-        "--ech-color-reaction":"#3e3e3e7d",
-        "--ech-color-end-turn":"#3e3e3e7d",
-        "--ech-color-tooltip":"#3e3e3eDC",
-      },
-      neon:{
-        "--ech-fore-color":"#e3e3e3de",
-        "--ech-color":"#711c91b9",
-        "--ech-color-bonus-action":"#133e7cc5",
-        "--ech-color-free-action":"#091833c8",
-        "--ech-color-reaction":"#1c3353cd",
-        "--ech-color-end-turn":"#662862be",
-        "--ech-color-tooltip":"#711c91b9",
-      },
-      argon:{
-        "--ech-fore-color":"#B4D2DCFF",
-        "--ech-color":"#414B55E6",
-        "--ech-color-bonus-action":"#453B75E6",
-        "--ech-color-free-action":"#3B5875E6",
-        "--ech-color-reaction":"#753B3BE6",
-        "--ech-color-end-turn":"#374B3CE6",
-        "--ech-color-tooltip":"#414B55E6",
-      },
-      krypton:{
-        "--ech-fore-color":"#d1d9bdde",
-        "--ech-color":"#2f661eb9",
-        "--ech-color-bonus-action":"#249a26c5",
-        "--ech-color-free-action":"#249a26c5",
-        "--ech-color-reaction":"#249a26c5",
-        "--ech-color-end-turn":"#2f661eb9",
-        "--ech-color-tooltip":"#2f661eb9",
-      },
-      xenon:{
-        "--ech-fore-color":"#d9e3e3de",
-        "--ech-color":"#688ab6b9",
-        "--ech-color-bonus-action":"#5489ccb9",
-        "--ech-color-free-action":"#3680deb9",
-        "--ech-color-reaction":"#1066d3b9",
-        "--ech-color-end-turn":"#1b3e6ab9",
-        "--ech-color-tooltip":"#688ab6b9",
-      },
-      radon:{
-        "--ech-fore-color":"#e3d9d9de",
-        "--ech-color":"#fc123a5d",
-        "--ech-color-bonus-action":"#f916167d",
-        "--ech-color-free-action":"#f916167d",
-        "--ech-color-reaction":"#f916167d",
-        "--ech-color-end-turn":"#9f12127d",
-        "--ech-color-tooltip":"#fc123a5d",
-      },
-      oganesson:{
-        "--ech-fore-color":"#f9ffd4de",
-        "--ech-color":"#ffffff46",
-        "--ech-color-bonus-action":"#ffffff46",
-        "--ech-color-free-action":"#ffffff46",
-        "--ech-color-reaction":"#ffffff46",
-        "--ech-color-end-turn":"#bdbdbd66",
-        "--ech-color-tooltip":"#ffffff7D",
-      },
-    }
-  }
   setColorSettings() {
     Object.flatten = function(data) {
       var result = {};
@@ -536,7 +457,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
 
     let theme = game.settings.get("enhancedcombathud", "echThemeData");
-    let themeColors = {};
 
     if (theme.theme == 'custom') {
       setThemeColors(theme.colors);
