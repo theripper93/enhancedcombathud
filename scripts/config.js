@@ -238,7 +238,7 @@ Hooks.on("renderTokenHUD", (app, html, data) => {
 });
 
 
-Handlebars.registerHelper('spellSlots', function (obj) {
+Handlebars.registerHelper('spellSlots', function (obj) {　　　　
   return CombatHudCanvasElement.generateSpells(obj);
 })
 
