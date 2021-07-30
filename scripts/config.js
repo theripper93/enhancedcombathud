@@ -643,7 +643,7 @@ Handlebars.registerHelper('ifObject', function(item, options) {
   }
 });
 
-Handlebars.registerHelper('spellSlots', function (obj) {
+Handlebars.registerHelper('spellSlots', function (obj) {　　　　
   return CombatHudCanvasElement.generateSpells(obj);
 })
 
