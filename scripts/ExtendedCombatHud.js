@@ -137,11 +137,18 @@ class CombatHud {
     };
     this.skills = this.actor.data.data.skills;
     this.saves = this.actor.data.data.abilities;
-    this.tools = this.actor.data.items.filter(i => i.data.type =="tool").map((item, index) => {
-      let toolAbility = typeof item.data.data.ability == 'string' ? item.data.data.ability  : item.data.data.ability[0] || 'str';
+    this.tools = this.actor.data.items
+    .filter((i) => i.data.type == "tool")
+    .map((item, index) => {
+      let toolAbility =
+        typeof item.data.data.ability == "string"
+          ? item.data.data.ability
+          : item.data.data.ability[0] || "str";
       let abilityModifiers = this.actor.data.data.abilities[toolAbility];
-      let toolProficiency = Math.ceil(item.data.data.proficient * this.actor.data.data.prof)
-    
+      let toolProficiency = Math.ceil(
+        item.data.data.proficient * this.actor.data.data.prof
+      );
+
       return {
         ability: toolAbility,
         bonus: 0,
@@ -152,17 +159,20 @@ class CombatHud {
         total: toolProficiency + abilityModifiers.mod,
         type: "Number",
         proficient: item.data.data.proficient,
-      }
+      };
     });
 
     // Localize skills
-    Object.keys(game.dnd5e.config.skills).forEach(skill => {
+    Object.keys(game.dnd5e.config.skills).forEach((skill) => {
       this.skills[skill].label = game.dnd5e.config.skills[skill];
-      this.skills[skill].proficient = this.skills[skill].value
+      this.skills[skill].proficient = this.skills[skill].value;
+      this.skills[skill].tooltip = game.i18n.localize(
+        `enhancedcombathud.skills.${skill}.tooltip`
+      );
     });
 
     // 
-    Object.keys(game.dnd5e.config.abilities).forEach(ability => {
+    Object.keys(game.dnd5e.config.abilities).forEach((ability) => {
       this.saves[ability].label = game.dnd5e.config.abilities[ability]; 
       this.saves[ability].total = this.saves[ability].save;
     });
@@ -323,7 +333,6 @@ class CombatHud {
       await this.sets.set2.secondary?.update({ "data.equipped": false });
       await this.sets.set3.primary?.update({ "data.equipped": false });
       await this.sets.set3.secondary?.update({ "data.equipped": false });
-      
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
     await this.sets.active.primary?.update({ "data.equipped": true });
@@ -356,7 +365,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     options.template =
       "modules/enhancedcombathud/templates/extendedCombatHud.html";
     options.id = "enhancedcombathud";
-    options.dragDrop = [{dragSelector: null, dropSelector: null}]
+    options.dragDrop = [{ dragSelector: null, dropSelector: null }];
     return options;
   }
 
@@ -381,21 +390,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     super.activateListeners(html);
   }
 
-  async _onDrop(event){
+  async _onDrop(event) {
     event.preventDefault();
-    let set = event.target?.dataset?.set
+    let set = event.target?.dataset?.set;
     let data;
-        try {
-            data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        } catch (err) {
-            //return false;
-        }
-    if(set)
-    {
-      await this.dragDropSet(set,data.data._id,event.target)
-      this.initSets()
-    }else{
-      this.dragDropSetRemove(event.dataTransfer.getData('text'))
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      //return false;
+    }
+    if (set) {
+      await this.dragDropSet(set, data.data._id, event.target);
+      this.initSets();
+    } else {
+      this.dragDropSetRemove(event.dataTransfer.getData("text"));
     }
   }
 
@@ -484,10 +492,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
-      let specialItem
+      let specialItem;
       if (!_this.hudData.findItemByName(itemName))
-          specialItem = this.getSpecialItem(itemName);
-      let confimed = specialItem ? await specialItem.roll() : await this.roller.rollItem(itemName);
+        specialItem = this.getSpecialItem(itemName);
+      let confimed = specialItem
+        ? await specialItem.roll()
+        : await this.roller.rollItem(itemName);
       let item = specialItem || _this.hudData.findItemByName(itemName);
       if (confimed && game.combat?.started) {
         if (actionDataSet) {
@@ -537,6 +547,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         $(".ech-tooltip:not(.is-hover)").remove();
       }, 100);
     });
+    this.element.on("mouseenter", '.ability.is-skill', (event) => {
+      debugger
+      let $element = $(event.currentTarget);
+      let skill = $(event.currentTarget).data("roll");
+
+      const offset = $element.offset();
+
+      $(".ech-tooltip").remove();
+
+      setTimeout(() => {
+        this.drawTooltip(skill, {
+          top: $element[0].offsetTop - $(document).scrollTop() > 70 ? $element[0].offsetTop - $(document).scrollTop() : 70,
+          left: offset.left +$element[0].offsetWidth + 25 - $(document).scrollLeft(),
+        },true);
+      }, 100);
+    });
+    this.element.on("mouseleave", '.ability.is-skill', (event) => {
+      // Allow User to hover over Tooltip
+      setTimeout(() => {
+        $(".ech-tooltip:not(.is-hover)").remove();
+      }, 100);
+    });
+
+
     $("body").on("mouseenter", ".ech-tooltip", (event) => {
       $(event.currentTarget).addClass("is-hover");
     });
@@ -579,71 +613,88 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         this.switchSets($element[0].dataset.value);
       }
     });
-    this.element.on("dragstart", '.set', async (event) => {
-      event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
-      $(".extended-combat-hud").addClass("ech-remove-set")
-    })
-    this.element.on("dragend", '.set', async (event) => {
-      event.originalEvent.dataTransfer.setData('text', event.currentTarget.dataset.set);
-      $(".extended-combat-hud").removeClass("ech-remove-set")
-    })
+this.element.on("dragstart", ".set", async (event) => {
+      event.originalEvent.dataTransfer.setData(
+        "text",
+        event.currentTarget.dataset.set
+      );
+      $(".extended-combat-hud").addClass("ech-remove-set");
+    });
+    this.element.on("dragend", ".set", async (event) => {
+      event.originalEvent.dataTransfer.setData(
+        "text",
+        event.currentTarget.dataset.set
+      );
+      $(".extended-combat-hud").removeClass("ech-remove-set");
+    });
   }
 
-  rigSkills(){
-    $(this.element).on('change', '.ability-menu .ability  .ability-code select', (event) => {
-      let $element = $(event.currentTarget);
-      let abilityScore = $element.val()
-      let $ability = $element.closest('.ability');
-      let whatToRoll = $element.closest('.ability').data('roll')
-      let data = null;
+  rigSkills() {
+    $(this.element).on(
+      "change",
+      ".ability-menu .ability  .ability-code select",
+      (event) => {
+        let $element = $(event.currentTarget);
+        let abilityScore = $element.val();
+        let $ability = $element.closest(".ability");
+        let whatToRoll = $element.closest(".ability").data("roll");
+        let data = null;
 
-      // Update Ability
-      $element.closest('.ability').data('modifier', abilityScore);
+        // Update Ability
+        $element.closest(".ability").data("modifier", abilityScore);
 
+        if ($ability.hasClass("is-save")) {
+          data = this.hudData.saves[whatToRoll];
+        } else if ($ability.hasClass("is-skill")) {
+          data = this.hudData.skills[whatToRoll];
+        } else if ($ability.hasClass("is-tool")) {
+          data = this.hudData.tools.filter(
+            (tool) => tool.label == whatToRoll
+          )[0];
+        } else {
+          return false;
+        }
 
-      if ($ability.hasClass('is-save')) {
-        data = this.hudData.saves[whatToRoll];
-      }else if ($ability.hasClass('is-skill')) {
-        data = this.hudData.skills[whatToRoll];
-      }else if ($ability.hasClass('is-tool')) {
-        data = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0]
-      }else{
-        return false;
+        let newTotal = data.prof + this.hudData.saves[abilityScore].mod;
+        $element
+          .closest(".ability")
+          .find(".ability-modifier")
+          .html(newTotal > 0 ? `+${newTotal}` : newTotal);
       }
-
-      let newTotal = data.prof + this.hudData.saves[abilityScore].mod
-      $element.closest('.ability').find('.ability-modifier').html(newTotal > 0 ? `+${newTotal}` : newTotal);
-    });
-    $(this.element).on('click', 'li.is-save > div > span', (event) => {
+    );
+    $(this.element).on("click", "li.is-save > div > span", (event) => {
       let $element = $(event.currentTarget);
-      let $ability = $element.closest('.ability');
-      let whatToRoll = $ability .data('roll');
+      let $ability = $element.closest(".ability");
+      let whatToRoll = $ability.data("roll");
 
-      if ($element.data('type') == 'save') {
-        this.roller.rollSave(whatToRoll, event)
-      }else if ($element.data('type') == 'check') {
-        this.roller.rollCheck(whatToRoll, event)
+      if ($element.data("type") == "save") {
+        this.roller.rollSave(whatToRoll, event);
+      } else if ($element.data("type") == "check") {
+        this.roller.rollCheck(whatToRoll, event);
       }
     });
-    $(this.element).on('click', '.ability-name', (event) => {
-      let whatToRoll = $(event.currentTarget).closest('.ability').data('roll');
-      let abilityScoreToUse = $(event.currentTarget).closest('.ability').data('modifier');
-      let $ability = $(event.currentTarget).closest('.ability');
-  
-      if ($ability.hasClass('is-save')) {
-        this.roller.rollSave(whatToRoll, event)
-      }else if ($ability.hasClass('is-skill')) {
-        this.roller.rollSkill(whatToRoll, abilityScoreToUse,event);
-      }else if ($ability.hasClass('is-tool')) {
-        let tool = this.hudData.tools.filter(tool => tool.label == whatToRoll)[0];
-        this.roller.rollTool(tool.label,abilityScoreToUse,event);
+    $(this.element).on("click", ".ability-name", (event) => {
+      let whatToRoll = $(event.currentTarget).closest(".ability").data("roll");
+      let abilityScoreToUse = $(event.currentTarget)
+        .closest(".ability")
+        .data("modifier");
+      let $ability = $(event.currentTarget).closest(".ability");
 
-      }else{
+      if ($ability.hasClass("is-save")) {
+        this.roller.rollSave(whatToRoll, event);
+      } else if ($ability.hasClass("is-skill")) {
+        this.roller.rollSkill(whatToRoll, abilityScoreToUse, event);
+      } else if ($ability.hasClass("is-tool")) {
+        let tool = this.hudData.tools.filter(
+          (tool) => tool.label == whatToRoll
+        )[0];
+        this.roller.rollTool(tool.label, abilityScoreToUse, event);
+      } else {
         return false;
       }
 
       //this.roller.rollSkill(skill, abil);
-    })
+    });
   }
 
   rigAccordion() {
@@ -712,7 +763,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let categroyContainers = $(this.element).find("[data-actionbartype]");
     for (let container of categroyContainers) {
       let actiontype = container.dataset.actionbartype;
-      if(actiontype == "actions") continue
+      if (actiontype == "actions") continue;
       let remove = true;
       for (let [key, value] of Object.entries(this.hudData[actiontype])) {
         if (
@@ -844,7 +895,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   getSpecialItem(itemName) {
     if (!ECHItems[itemName]) return false;
-    return new CONFIG.Item.documentClass(ECHItems[itemName],{parent:this.hudData.actor})
+    return new CONFIG.Item.documentClass(ECHItems[itemName], {
+      parent: this.hudData.actor,
+    });
   }
 
   updatePass() {
@@ -901,30 +954,49 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       });
   }
 
-  drawTooltip(itemName, offset) {
+  drawTooltip(itemName, offset, isSkill) {
     const showTooltip = game.settings.get("enhancedcombathud", "showTooltips");
     const showTooltipSpecial = game.settings.get(
       "enhancedcombathud",
       "showTooltipsSpecial"
     );
-    if (!showTooltip) return;
+    const showTooltipSkills = true/*game.settings.get(
+      "enhancedcombathud",
+      "showTooltipSkills"
+    );*/
+    if (!showTooltip || (!showTooltipSkills && isSkill)) return;
     if (!showTooltipSpecial && ECHItems[itemName]) return;
     let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
-    if (!item) {
-      item = {};
-      item.data = ECHItems[itemName];
-    }
-    if (!item || !item.data) return;
-    const title = item.data.name;
-    const description = item.data.data.description.value;
-    const itemType = item.data.type;
+    let title
+    let description
+    let itemType
     let subtitle;
-    let target = item.labels?.target || "-";
-    let range = item.labels?.range || "-";
-    let properties = [];
-    let dt = item.labels?.damageTypes?.split(", ");
-    let damageTypes = dt && dt.length ? dt : [];
+    let target
+    let range
+    let properties = []
+    let dt
+    let damageTypes = []
     let materialComponents = ""
+    if (isSkill) {
+      title = game.dnd5e.config.skills[itemName]
+      description = this.hudData.skills[itemName].tooltip
+
+    } else {
+      if (!item) {
+        item = {};
+        item.data = ECHItems[itemName];
+      }
+      if (!item || !item.data) return;
+      title = item.data.name;
+      description = item.data.data.description.value;
+      itemType = item.data.type;
+      subtitle;
+      target = item.labels?.target || "-";
+      range = item.labels?.range || "-";
+      properties = [];
+      dt = item.labels?.damageTypes?.split(", ");
+      damageTypes = dt && dt.length ? dt : [];
+      materialComponents = "";
     switch (itemType) {
       case "weapon":
         subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType];
@@ -942,7 +1014,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         break;
       case "spell":
         subtitle = `${item.labels.level} ${item.labels.school}`;
-        properties.push(game.dnd5e.config.spellSchools[item.data.data.school]);
+        properties.push(
+          game.dnd5e.config.spellSchools[item.data.data.school]
+        );
         properties.push(item.labels.duration);
         properties.push(item.labels.save);
         for (let comp of item.labels.components) {
@@ -965,6 +1039,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           game.dnd5e.config.itemActionTypes[item.data.data.actionType]
         );
         break;
+      }
     }
 
     const tooltip = ({
@@ -977,9 +1052,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       materialComponents,
       offset,
     }) => {
-      return `<div class="ech-tooltip ${!subtitle ? 'hide-subtitle' : ''}" style="top: ${offset.top}px; left: ${
-        offset.left
-      }px;">
+      return `<div class="ech-tooltip ${
+        !subtitle ? "hide-subtitle" : ""
+      }" style="top: ${offset.top}px; left: ${offset.left}px;">
           <div class="ech-tooltip-header">
             <h2>${title}</h2>
           </div>
@@ -1005,7 +1080,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
               )}</h3>
               ${properties.join("\n")}
             </div>
-            <i style="font-size: 0.8rem;">${materialComponents.length > 0 ? '*-' + materialComponents : ''}</i>
+            <i style="font-size: 0.8rem;">${
+              materialComponents.length > 0 ? "*-" + materialComponents : ""
+            }</i>
           </div>
         </div>`;
     };
@@ -1038,25 +1115,31 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     );
   }
 
-  async dragDropSet(set,itemid,target){
-    let item = this.hudData.actor.data.items.find(i => i.id == itemid)
-    if(!item) return;
-    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary"
-    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps]
-    if(oldSetItem) await oldSetItem.setFlag("enhancedcombathud", set, false)
-    await item.setFlag("enhancedcombathud", set, true)
-    $(target).css({"background-image": `url(${this.hudData.sets[set.substring(0, set.length - 1)][ps].data.img}`})
-    this.initSets()
+  async dragDropSet(set, itemid, target) {
+    let item = this.hudData.actor.data.items.find((i) => i.id == itemid);
+    if (!item) return;
+    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary";
+    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps];
+    if (oldSetItem) await oldSetItem.setFlag("enhancedcombathud", set, false);
+    await item.setFlag("enhancedcombathud", set, true);
+    $(target).css({
+      "background-image": `url(${
+        this.hudData.sets[set.substring(0, set.length - 1)][ps].data.img
+      }`,
+    });
+    this.initSets();
   }
 
-  async dragDropSetRemove(set,target){
-    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary"
-    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps]
-    if(oldSetItem) {
-      await oldSetItem.setFlag("enhancedcombathud", set, false)
-      $(this.element).find(`[data-set="${set}"]`).css({"background-image": ``})
-  }
-  this.initSets()
+  async dragDropSetRemove(set, target) {
+    let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary";
+    let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps];
+    if (oldSetItem) {
+      await oldSetItem.setFlag("enhancedcombathud", set, false);
+      $(this.element)
+        .find(`[data-set="${set}"]`)
+        .css({ "background-image": `` });
+    }
+    this.initSets();
   }
 }
 
@@ -1073,28 +1156,25 @@ class ECHDiceRoller {
     return await game.dnd5e.rollItemMacro(itemName);
   }
 
-  async rollTool(itemName, abil, event){
-    this.actor.items.find(i => i.data.name== itemName).rollToolCheck()
-    Hooks.once("renderDialog", (dialog,html) => {
-      html.find('select[name="ability"]')[0].value = abil
-    } )
+  async rollTool(itemName, abil, event) {
+    this.actor.items.find((i) => i.data.name == itemName).rollToolCheck();
+    Hooks.once("renderDialog", (dialog, html) => {
+      html.find('select[name="ability"]')[0].value = abil;
+    });
     this.hijackDialog(event);
   }
 
   async rollSave(ability, event) {
-    if (this.modules.betterRolls)
-      BetterRolls.rollSave(this.actor, ability);
-      else{
-        this.actor.rollAbilitySave(ability);
-        // Set Dialog Position
-        this.hijackDialog(event);
-      }
-    
+    if (this.modules.betterRolls) BetterRolls.rollSave(this.actor, ability);
+    else {
+      this.actor.rollAbilitySave(ability);
+      // Set Dialog Position
+      this.hijackDialog(event);
+    }
   }
   async rollSkill(skill, ability, event) {
     const skl = this.actor.data.data.skills[skill];
-    if (skl.ability == ability && this.modules.betterRolls)
-      {
+    if (skl.ability == ability && this.modules.betterRolls) {
         BetterRolls.rollSkill(this.actor, skill);
         return;
       }
@@ -1119,7 +1199,7 @@ class ECHDiceRoller {
     return roll;
   }
   hijackDialog(event) {
-    let $element = $(event.currentTarget).closest('.ability');
+    let $element = $(event.currentTarget).closest(".ability");
     const offset = $element.offset();
 
     // Close Previous Highjacked Windows
@@ -1127,21 +1207,26 @@ class ECHDiceRoller {
 
     // Position Windows next to Saves/Skills/Tools Menu
     Hooks.once("renderDialog", (dialog, html) => {
-      offset.top += - $(document).scrollTop() - (dialog.position.height / 2)
-      offset.left += $element[0].getBoundingClientRect().width + 10 - $(document).scrollLeft();
+      offset.top += -$(document).scrollTop() - dialog.position.height / 2;
+      offset.left +=
+        $element[0].getBoundingClientRect().width +
+        10 -
+        $(document).scrollLeft();
 
-      html.css({
-        top: offset.top > 0 ? offset.top : 0,
-        left: offset.left,
-      }).addClass('ech-highjack-window');
+      html
+        .css({
+          top: offset.top > 0 ? offset.top : 0,
+          left: offset.left,
+        })
+        .addClass("ech-highjack-window");
 
       // Update dialog with new position data for dragging.
-      dialog.position.top =  offset.top > 0 ? offset.top : 0;
-      dialog.position.left = offset.left;
+      dialog.position.left = offset.top > 0 ? offset.top : 0;
+      dialog.position.top = offset.left;
 
       // If Dialog allows you to select Modifier, use modifier from ability modifier by default
       if (!html.find('select[name="ability"]'))
-        html.find('select[name="ability"]').val($element.data('modifier'));
+        html.find('select[name="ability"]').val($element.data("modifier"));
     });
   }
 
@@ -1241,8 +1326,13 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
   }
 });
 
+
 Hooks.on("controlToken", (token, controlled) => {
-  if (controlled && canvas.hud.enhancedcombathud?.rendered && canvas.hud.enhancedcombathud.hudData.token.id != token.id) {
+  if (
+    controlled &&
+    canvas.hud.enhancedcombathud?.rendered &&
+    canvas.hud.enhancedcombathud.hudData.token.id != token.id
+  ) {
     canvas.hud.enhancedcombathud.close();
     setTimeout(() => {
       canvas.hud.enhancedcombathud.bind(canvas.tokens.get(token.id));
@@ -1251,7 +1341,8 @@ Hooks.on("controlToken", (token, controlled) => {
 });
 
 Hooks.on("preUpdateToken", (token, updates) => {
-  if (token.actor &&
+  if (
+    token.actor &&
     canvas.hud.enhancedcombathud?.hudData?.actor?.id == token.actor.id &&
     game.combat?.started &&
     ("x" in updates || "y" in updates)
