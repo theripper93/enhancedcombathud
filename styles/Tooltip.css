@@ -1,10 +1,7 @@
 .ech-tooltip {
-    border: 1px solid var(--ech-border-color);
     border-radius: 3px;
     box-shadow: 0px 0px 10px rgb(0 0 0);
-    color: var(--ech-fore-color);
     display:inline-block;
-    font-family: var(--ech-font-family);
     font-size: 16px;
     height: fit-content;
     max-width: 400px;
@@ -23,10 +20,8 @@
 }
 .ech-tooltip .ech-tooltip-header {
   backdrop-filter: blur(6px);
-  background-color: rgb(255 255 255 / 80%);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  color: rgb(65, 65, 70);
   padding: 1rem 0.5rem 2rem;
   position: relative;
   text-align: center;
@@ -38,7 +33,6 @@
   border-width: 0px;
 }
 .ech-tooltip .ech-tooltip-subtitle {
-  background-color: rgb(50, 80, 90);
   border-radius: 3px;
   left: 50%;
   margin-bottom: 0px;
@@ -54,10 +48,8 @@
 
 .ech-tooltip .ech-tooltip-body {
   backdrop-filter: blur(6px);
-  background-color: var(--ech-color-tooltip);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  color: rgb(255, 255, 255);
   padding: 2rem 1rem 1rem;
   text-align: left;
 }
@@ -101,9 +93,7 @@
   text-transform: uppercase;
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
-  background-color: rgb(80 150 195); 
   border-radius: .25rem;
-  color: rgb(255 255 255);
   display: inline-block;
   font-size: 1rem;
   font-weight: 700;
@@ -114,7 +104,4 @@
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge:first-of-type {
-  background-color: rgb(85 190 245); 
 }

@@ -1,5 +1,5 @@
 <div class="extended-combat-hud">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico:400,700" rel="stylesheet">
 	<div class="weapon-sets">
 		<div class="weapon-set active" data-type="switchWeapons" data-value="set1">
 			<div class="set set-primary" draggable="true" data-set="set1p" style="background-image: url({{hudData.sets.set1.primary.data.img}})"></div>
@@ -34,7 +34,7 @@
 			<span>AC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
 		</div>
 		<div class="portrait-stat-block">
-			<span>Spell DC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.spelldc}}"></span>
+			<span>Spell DC</span>&nbsp;<span data-spell-dc="{{hudData.actor.data.data.attributes.spelldc}}"></span>
 		</div>
 		<div class="portrait-stat-block player-details">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
@@ -148,28 +148,28 @@
 			{{/each}}
 		</div>
 		<div class="actions-container has-actions" data-actionbartype="actions" data-title="{{hudData.settings.localize.mainactions}}">
-			<div class="action-element primary-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.setp.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
+			<div class="action-element ech-blur" data-type="trigger" data-set="setp" data-itemname="{{hudData.setp.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
 				<span class="action-element-title">{{hudData.setp.active.primary.data.name}}</span>
 			</div>
 			<div class="action-element-container">
-				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
+				<div class="action-element ech-blur" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
 					<span class="action-element-title">{{hudData.other.specialItemsNames.disengage}}</span>
 				</div>
-				<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dodge}}" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
+				<div class="action-element ech-blur" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.dodge}}" style="background-image: url(modules/enhancedcombathud/icons/armor-upgrade.svg)">
 					<span class="action-element-title">{{hudData.other.specialItemsNames.dodge}}</span>
 				</div>
 			</div>
-			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
+			<div class="action-element ech-blur" data-type="menu" data-actiontype="actions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
 			</div>
-			<div class="action-element" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
+			<div class="action-element ech-blur" data-type="menu" data-actiontype="actions" data-itemtype="special" data-menu="is-powers"  style="background-image: url(modules/enhancedcombathud/icons/mighty-force.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.usepower}}</span>
 			</div>
 			<div class="action-element-container">
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
+			<div class="action-element ech-blur" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.ready}}" style="background-image: url(modules/enhancedcombathud/icons/clockwork.svg)">
 				<span class="action-element-title">{{hudData.other.specialItemsNames.ready}}</span>
 			</div>
-			<div class="action-element" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
+			<div class="action-element ech-blur" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.hide}}" style="background-image: url(modules/enhancedcombathud/icons/cloak-dagger.svg)">
 				<span class="action-element-title">{{hudData.other.specialItemsNames.hide}}</span>
 			</div>
 		</div>

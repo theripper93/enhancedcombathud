@@ -7,7 +7,7 @@
 .actions-container {
   display: flex;
   flex-direction: row;
-  font-family: "Roboto", sans-serif;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 55px;
@@ -19,10 +19,8 @@
 .actions-container:before {
   align-items: center;
   backdrop-filter: blur(6px);
-  background-color: rgb(0 0 0 / 30%);
-  border: 1px solid var(--ech-border-color);
+  border: 1px solid transparent;
   bottom: -55px;
-  color: rgb(150, 150, 150);
   content: attr(data-title);
   display: flex;
   font-size: 1.2rem;
@@ -34,10 +32,8 @@
   width: calc(100% - 1rem);
 }
 .actions-container.has-actions:after {
-  background-color: rgb(180, 210, 225);
   border-radius: 3px;
   bottom: -5px;
-  box-shadow: 0px 0px 10px 0px rgba(200, 230, 245, 0.8);
   content: "";
   height: 10px;
   left: 50%;
@@ -46,17 +42,7 @@
   transition: all 0.3s ease-in-out;
   width: 50px;
 }
-.actions-container.has-actions.actions-used:after {
-  background-color: rgb(120, 130, 145);
-  box-shadow: none;
-}
-
 .action-element {
-  background: var(--ech-color) center no-repeat;
-  background-origin: content-box;
-  background-size: contain;
-  border: 1px solid var(--ech-border-color);
-  backdrop-filter: blur(6px);
   display: flex;
   min-height: 200px;
   min-width: 175px;
@@ -65,13 +51,13 @@
   transition: all 0.3s ease-in-out;
 }
 
-.action-element[data-set=setp],.action-element[data-set=sets]{
+.action-element[data-set=setp],
+.action-element[data-set=sets] {
   background-origin: border-box;
   background-size: cover;
 }
-
 .action-element.has-count:before {
-  border-top: 4rem solid var(--ech-color);
+  border-top: 4rem solid transparent;
   border-right: 4rem solid transparent;
   content: "";
   filter: brightness(150%);
@@ -94,28 +80,9 @@
   width: 2.5rem;
 }
 
-.action-element.bonus-action {
-  background-color: var(--ech-color-bonus-action);
-}
-.action-element.reaction {
-  background-color: var(--ech-color-reaction);
-}
-.action-element.free-action {
-  background-color: var(--ech-color-free-action);
-}
-.action-element.end-turn {
-  background-color: var(--ech-color-end-turn);
-}
-.action-element:hover,
-.action-element:focus,
-.action-element.active {
-  filter: var(--ech-hover-brightness);
-}
-
 .action-element-title {
   align-items: center;
   bottom: 0px;
-  color: var(--ech-fore-color);
   display: flex;
   height: 3rem;
   justify-content: center;
@@ -125,11 +92,12 @@
   width: 100%;
 }
 
-.action-element[data-set=setp] .action-element-title{
+.action-element[data-set=setp] .action-element-title {
   align-items: center;
   backdrop-filter: blur(6px);
   background-color: rgb(0 0 0 / 30%);
-  border-top: 1px solid var(--ech-border-color);
+  border-top: 1px solid transparent;
+  border-top-color: inherit;
   bottom: 0px;
   display: flex;
   justify-content: center;
@@ -153,35 +121,10 @@
   text-transform: lowercase;
 }
 
-/* DO NOT LIKE
-.actions-container {
-  width: calc(175px + 1rem);
-  transition: width 0.3s ease-in-out;
-}
-.actions-container > .action-element,
-.actions-container > .action-element-container {
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease-in-out;
-}
-.actions-container > .action-element.primary-element {
-  transform: scaleX(1) !important;
-}
-
-.actions-container.expand {
-  width: auto;
-}
-.actions-container.expand > .action-element,
-.actions-container.expand > .action-element-container {
-  transform: scaleX(1);
-}
-*/
-
 .features-container {
   bottom: 270px;
   display: flex;
   flex-direction: row;
-  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 700;
   margin-left: 0px;
@@ -224,8 +167,7 @@
 .feature-accordion-title {
     align-items: center;
     backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 30%);
-    border: 1px solid var(--ech-border-color);
+    border: 1px solid transparent;
     display: flex;
     height: fit-content;
     justify-content: center;
@@ -247,8 +189,7 @@
 .feature-spell-slots {
   align-items: center;
   backdrop-filter: blur(6px);
-  background-color: rgb(0 0 0 / 30%);
-  border: 1px solid var(--ech-border-color);
+  border: 1px solid transparent;
   display: flex;
   height: 50px;
   justify-content: center;
@@ -261,9 +202,7 @@
   pointer-events: all;
 }
 .feature-spell-slots .spell-slot {
-    background-color: rgb(180, 210, 225);
     border-radius: 3px;
-    box-shadow: 0px 0px 10px 0px rgb(200 230 245 / 80%);
     content: "";
     height: 25px;
     margin: 0rem 0.5rem;
@@ -299,13 +238,13 @@
 }
 
 .feature-element {
-	background: purple no-repeat center;
+	  background: transparent no-repeat center;
     background-origin: content-box;
     background-size: cover;
-    border: 1px solid var(--ech-border-color);
+    border: 1px solid transparent;
     flex: 0 0 150px;
     height: 150px;
-	overflow: hidden;
+	  overflow: hidden;
     position: relative;
     width: 150px;
     margin-right: 1rem;
@@ -313,19 +252,15 @@
   
   pointer-events: all;
 }
-.feature-element:hover, .feature-element:active, .feature-element:focus, .feature-element.active {
-  filter: var(--ech-hover-brightness);
-}
 
 .features-container.is-spells .feature-element {
   margin-right: 0rem;
 }
 
 .feature-element.has-count:before {
-  border-top: 4rem solid var(--ech-color);
+  border-top: 4rem solid transparent;
   border-right: 4rem solid transparent;
   content: "";
-  filter: brightness(150%);
   height: 0;
   left: 0px;
   position: absolute;
@@ -350,7 +285,7 @@
   align-items: center;
   backdrop-filter: blur(6px);
   background-color: rgb(0 0 0 / 30%);
-  border-top: 1px solid var(--ech-border-color);
+  border-top: 1px solid transparent;
   bottom: 0px;
   display: flex;
   justify-content: center;

@@ -1,0 +1,71 @@
+{
+	"mainAction": {
+	  "base": {
+		"background": "#2f661eb9",
+		"color": "#d1d9bdde"
+	  },
+	  "hover": {
+		"background": "#2f661eb9",
+		"color": "#d1d9bdde"
+	  }
+	},
+	"bonusAction": {
+	  "base": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  },
+	  "hover": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  }
+	},
+	"freeAction": {
+	  "base": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  },
+	  "hover": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  }
+	},
+	"reaction": {
+	  "base": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  },
+	  "hover": {
+		"background": "#249a26c5",
+		"color": "#d1d9bdde"
+	  }
+	},
+	"endTurn": {
+	  "base": {
+		"background": "#2f661eb9",
+		"color": "#d1d9bdde"
+	  },
+	  "hover": {
+		"background": "#2f661eb9",
+		"color": "#d1d9bdde"
+	  }
+	},
+	"tooltip": {
+	  "header": {
+		"background": "",
+		"color": "#d1d9bdde"
+	  },
+	  "subtitle": {
+		"background": "",
+		"color": "#d1d9bdde"
+	  },
+	  "body": {
+		"background": "",
+		"color": "#d1d9bdde"
+	  },
+	  "properties": {
+		"background": "",
+		"color": "#d1d9bdde"
+	  }
+	}
+  }
+  
