@@ -317,16 +317,13 @@ class CombatHud {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
-    if (this.sets.active == this.sets.set1) {
       await this.sets.set1.primary?.update({ "data.equipped": false });
       await this.sets.set1.secondary?.update({ "data.equipped": false });
-    } else if (this.sets.active == this.sets.set2) {
       await this.sets.set2.primary?.update({ "data.equipped": false });
       await this.sets.set2.secondary?.update({ "data.equipped": false });
-    } else if (this.sets.active == this.sets.set3) {
       await this.sets.set3.primary?.update({ "data.equipped": false });
       await this.sets.set3.secondary?.update({ "data.equipped": false });
-    }
+      
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
     await this.sets.active.primary?.update({ "data.equipped": true });
