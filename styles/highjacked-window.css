@@ -6,6 +6,7 @@
 
 .ech-highjack-window {
 	height: auto !important;
+    z-index: 10000 !important;
 }
 
 .ech-highjack-window .window-header {
