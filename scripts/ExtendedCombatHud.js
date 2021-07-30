@@ -548,7 +548,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       }, 100);
     });
     this.element.on("mouseenter", '.ability.is-skill', (event) => {
-      debugger
       let $element = $(event.currentTarget);
       let skill = $(event.currentTarget).data("roll");
 
