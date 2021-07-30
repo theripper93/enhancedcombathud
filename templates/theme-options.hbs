@@ -1,0 +1,62 @@
+<form action="#">
+	<h3 class="flexrow">
+		Argon - Combat HUD: Theme Options
+        <button type="button" name="export" onclick="echThemeOptions.defaultOptions.downloadTheme();">
+            <i class="fas fa-file-export">{{localize 'enhancedcombathud.themeOptions.export'}}</i>
+        </button>
+	</h3>
+	<hr/>
+	<div class="form-group">
+		<label>{{localize 'enhancedcombathud.themeOptions.fontFamilyTitle'}}</label>
+		<div class="form-fields">
+			<input type="text" name="font" value="{{themeOptions.font}}" data-dtype="String">
+		</div>
+		<p class="notes">{{localize 'enhancedcombathud.themeOptions.fontFamilyHint'}}</p>
+    </div>
+	<div class="form-group">
+		<label>{{localize 'enhancedcombathud.themeOptions.themeTitle'}}</label>
+		<div class="form-fields">
+			<select name="theme">
+				<option value="custom" selected="">Custom</option>
+				<option value="helium">Helium</option>
+				<option value="neon">Neon</option>
+				<option value="argon">Argon</option>
+				<option value="krypton">Krypton</option>
+				<option value="xenon">Xenon</option>
+				<option value="radon">Radon</option>
+				<option value="oganesson">Oganesson</option>
+			</select>
+		</div>
+		<p class="hint">{{localize 'enhancedcombathud.themeOptions.themeHint'}}</p>
+    </div>
+	<ul class="echThemeOptionsContainer">
+	{{#each themeOptions.colors}}
+		<li>
+			<h4 class="toggleOptions">{{echLocalize @key}}</h4>
+			<ul>
+			{{#each this}}
+				{{#ifObject this}}
+				<li>
+					{{echLocalize @../key @key}}
+					{{#each this}}
+						<div>
+							<button name="colored" is="colorpicker-button" data-setting="colors.{{@../../key}}.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color><i class="fas fa-eye-dropper"></i> {{echLocalize @key}}</button>
+						</div>
+					{{/each}}
+				{{else}}
+					<div>
+						<button name="colored" is="colorpicker-button" data-setting="colors.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color><i class="fas fa-eye-dropper"></i> {{echLocalize @key}}</button>
+					</div>
+				</li>
+				{{/ifObject}}
+			{{/each}}
+			</ul>
+		</li>
+	{{/each}}
+	</ul>
+	<footer class="sheet-footer flexrow">
+		<button type="submit" name="submit">
+			<i class="fas fa-save"></i> {{localize 'enhancedcombathud.themeOptions.save'}}
+		</button>
+    </footer>
+</form>

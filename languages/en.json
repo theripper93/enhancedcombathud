@@ -101,6 +101,54 @@
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
-    "enhancedcombathud.tooltip.properties.name" : "Properties"
+    "enhancedcombathud.tooltip.properties.name" : "Properties",
+
+
+    "enhancedcombathud.themeOptions.save": "Save Changes",
+    "enhancedcombathud.themeOptions.export": "Export Theme",
+    "enhancedcombathud.themeOptions.autoTextColorTitle" : "Autoset Text Colors Based off Background",
+    "enhancedcombathud.themeOptions.autoTextColorHint" : "This setting adjust the text color based on the background color to a color that should be legiable.",
+
+
+    "enhancedcombathud.themeOptions.mainAction" : "Main Action Colors",
+    "enhancedcombathud.themeOptions.bonusAction" : "Bonus Action Colors",
+    "enhancedcombathud.themeOptions.freeAction" : "Free Action Colors",
+    "enhancedcombathud.themeOptions.reaction" : "Reaction Colors",
+    "enhancedcombathud.themeOptions.endTurn" : "End Turn Colors",
+    "enhancedcombathud.themeOptions.tooltip" : "Tooltip Colors",
+    "enhancedcombathud.themeOptions.abilityMenu" : "Ability Menu Colors",
+    "enhancedcombathud.themeOptions.buttons" : "Button Colors",
+    "enhancedcombathud.themeOptions.movement" : "Movement Box Colors",
+    
+    "enhancedcombathud.themeOptions.background" : "Background Color",
+    "enhancedcombathud.themeOptions.color" : "Text Color",
+    "enhancedcombathud.themeOptions.border" : "Border Color",
+    "enhancedcombathud.themeOptions.boxShadow" : "Box Shadow Color",
+
+    "enhancedcombathud.themeOptions.mainActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.mainActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+    "enhancedcombathud.themeOptions.bonusActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.bonusActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+    "enhancedcombathud.themeOptions.freeActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.freeActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+    "enhancedcombathud.themeOptions.reactionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.reactionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+    "enhancedcombathud.themeOptions.endTurnBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.endTurnHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+    
+    "enhancedcombathud.themeOptions.tooltipHeader" : "Background/Foreground/Border Colors of the Header of Tooltips/Windows",
+    "enhancedcombathud.themeOptions.tooltipSubtitle" : "Background/Foreground/Border Colors of the Subtitle in Tooltips",
+    "enhancedcombathud.themeOptions.tooltipBody" : "Background/Foreground/Border Colors of the Body of Tooltips/Windows",
+
+    "enhancedcombathud.themeOptions.abilityMenuBase" : "Foreground/Box Shadow Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.abilityMenuHover" : "Foreground/Box Shadow Colors when Mouse is over Element",
+
+    "enhancedcombathud.themeOptions.buttonsBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
+    "enhancedcombathud.themeOptions.buttonsHover" : "Background/Foreground/Border Colors when Mouse is over Element",
+
+    "enhancedcombathud.themeOptions.movementUsed" : "Background/Box Shadow of box indicating used movement spaces",
+    "enhancedcombathud.themeOptions.movementBaseMovement" : "Background/Box Shadow of box indicating available movement spaces",
+    "enhancedcombathud.themeOptions.movementDashMovement" : "Background/Box Shadow of box indicating dash movement spaces",
+    "enhancedcombathud.themeOptions.movementDangerMovement" : "Background/Box Shadow of box indicating exceeded movement spaces"
 
 }

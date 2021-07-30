@@ -425,6 +425,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.initSets();
     this.rigAutoScale();
   }
+  get theme() {
+  }
+
   get themes() {
     return {
       custom:{
@@ -502,9 +505,45 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
   setColorSettings() {
-    let theme = this.themes[game.settings.get("enhancedcombathud", "theme")];
-    for(let [key, value] of Object.entries(theme)) {
-      document.documentElement.style.setProperty(key,value);
+    Object.flatten = function(data) {
+      var result = {};
+      function recurse (cur, prop) {
+          if (Object(cur) !== cur) {
+              result[prop] = cur;
+          } else if (Array.isArray(cur)) {
+              for(var i=0, l=cur.length; i<l; i++)
+                  recurse(cur[i], prop + "[" + i + "]");
+              if (l == 0)
+                  result[prop] = [];
+          } else {
+              var isEmpty = true;
+              for (var p in cur) {
+                  isEmpty = false;
+                  recurse(cur[p], prop ? prop+"."+p : p);
+              }
+              if (isEmpty && prop)
+                  result[prop] = {};
+          }
+      }
+      recurse(data, "");
+      return result;
+    }
+    function setThemeColors(colors) {
+      console.log('Updating Theme Colors')
+      Object.entries(Object.flatten(colors)).forEach(([key, value]) => {
+        document.documentElement.style.setProperty(`--ech-${key.replace(/\./g, '-')}`, value);
+      });
+    }
+
+    let theme = game.settings.get("enhancedcombathud", "echThemeData");
+    let themeColors = {};
+
+    if (theme.theme == 'custom') {
+      setThemeColors(theme.colors);
+    }else{
+      fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`).then(response => response.json()).then(colors => {
+        setThemeColors(colors);
+      });
     }
   }
 
@@ -1010,8 +1049,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         );
         break;
     }
-
-    
 
     const tooltip = ({
       title,

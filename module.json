@@ -40,7 +40,8 @@
       "./styles/ActionHUD.css",
       "./styles/PortraitHUD.css",
       "./styles/Tooltip.css",
-      "./styles/highjacked-window.css"
+      "./styles/highjacked-window.css",
+      "./styles/theme.css"
   ],
   "packs": [
     {

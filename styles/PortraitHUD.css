@@ -1,9 +1,9 @@
 /*CHARACTER PORTRAIT CONTAINER*/
 .portrait-hud {
     align-items: flex-end;
-    background: var(--ech-color) center top no-repeat;
+    background: transparent center top no-repeat;
     background-size: var(--ech-portrait-size);
-    border: 1px solid var(--ech-border-color);
+    border: 1px solid transparent;
     backdrop-filter: blur(6px);
     display: flex;
     flex-direction: row;
@@ -18,8 +18,7 @@
 
 .portrait-stat-block {
     align-items: center;
-    border: 1px solid var(--ech-border-color);
-    color: rgb(255, 255, 255);
+    border: 1px solid transparent;
     display: flex;
     flex-direction: row;
     font-size: 1.25rem;
@@ -28,11 +27,9 @@
     margin-bottom: -1px;
     padding: 0.75rem 1rem;
     position: relative;
-    text-shadow: 0 0 10px rgba(0 0 0 / 0.7);
 }
 .portrait-stat-block:not(.player-details):before{
     backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 50%);
     content: '';
     height: 100%;
     left: 0px;
@@ -42,20 +39,19 @@
     z-index: -1;
 }
 .portrait-stat-block [data-hp-value]:after {
-    color: rgb(0 255 170);
     content: attr(data-hp-value);
 }
 .portrait-stat-block [data-hp-max]:after {
     content: attr(data-hp-max);
 }
 .portrait-stat-block [data-ac-value]:after {
-    color: rgb(90, 190, 245);
     content: attr(data-ac-value);
+}
+.portrait-stat-block [data-spell-dc]:after {
+    content: attr(data-spell-dc);
 }
 .portrait-stat-block.player-details {
     align-items: flex-start;
-    background-color: rgba(0 0 0 / 0.1);
-    background: linear-gradient(180deg, rgba(65,75,85,0.9) 0%, rgba(70,80,90,0.8) 50%, rgba(75,85,95,0) 100%);
     border-width: 0px;
     backdrop-filter: none;
     display: flex;
@@ -78,15 +74,6 @@
     width: 100%;
     white-space: nowrap;
 }
-.portrait-stat-block-button {
-    background: rgba(0 0 0 / 50%) no-repeat center;
-    background-size: contain;
-    background-origin: content-box;
-    min-width: 60px;
-    padding: 0.5rem;
-    min-height: 51px;
-    cursor: pointer;
-}
 
 .player-buttons {
     display: flex;
@@ -103,8 +90,6 @@
   background: no-repeat center;
   background-origin: content-box;
   background-size: contain;
-  border: 1px solid var(--ech-border-color);
-  color: rgb(255, 255, 255);
   cursor: pointer;
   display: flex;
   font-size: 1.5rem;
@@ -118,7 +103,6 @@
 }
 .player-button:before {
     backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 50%);
     content: '';
     height: 100%;
     left: 0px;
@@ -129,12 +113,6 @@
 }
 .player-button.ech-close i {
     margin-top: -0.5rem;
-}
-.player-button:hover:before {
-    backdrop-filter: none;
-}
-.player-button:hover {
-    filter: brightness(250%);
 }
 
 .ability-menu {
@@ -150,8 +128,7 @@
 }
 .ability-menu:before {
     backdrop-filter: blur(6px);
-    background-color: var(--ech-color-tooltip);;
-    border: 1px solid var(--ech-border-color);
+    border: 1px solid transparent;
     content: '';
     height: 100%;
     left: 0px;
@@ -172,8 +149,7 @@
     transition: all 0.3s ease-in-out;
 }
 .ability-menu ul > li {
-    border-top: 1px solid var(--ech-border-color);
-    color: var(--ech-fore-color);
+    border-top: 1px solid transparent;
     display: flex;
     padding: 0.5rem 0.75rem;
 }
@@ -237,7 +213,6 @@
     box-shadow: none;
 }
 .ability-menu ul > li .ability-code select * {
-    background: var(--ech-color);
     padding: 0.5rem 0.75rem;
 }
 .ability-menu ul > li .ability-name {
@@ -245,7 +220,6 @@
 }
 .ability-menu ul > li .ability-name:hover {
     cursor: pointer;
-    filter: brightness(150%);
 }
 .ability-menu ul > li.is-save .ability-code,
 .ability-menu ul > li.is-save .ability-passive {
@@ -267,7 +241,6 @@
 }
 .ability-menu ul > li.is-save > div > span:hover {
     cursor: pointer;
-    filter: brightness(150%);
 }
 
 .ech-show-ability-menu .ability-menu ul:first-child {
@@ -277,7 +250,7 @@
     max-height: 100%;
 }
 .ability-menu ul.ability-toggle li {
-    border-top: 1px solid var(--ech-border-color);
+    border-top: 1px solid transparent;
     cursor: pointer;
 }
 .ability-menu ul.ability-toggle li:after {
@@ -313,9 +286,7 @@
 .weapon-set {
     align-items: center;
     backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 50%);
-    border: 1px solid var(--ech-border-color);
-    color: rgb(255, 255, 255);
+    border: 1px solid transparent;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -324,9 +295,8 @@
     pointer-events: all;
 }
 .weapon-set:before {
-    background-color: rgba(0 0 0 / 0.7);
     border-radius: 0%;
-    border: 1px solid var(--ech-border-color);
+    border: 1px solid transparent;
     content: '';
     height: 0px;
     left: 50%;
@@ -343,7 +313,6 @@
     width: 25px;
 }
 .weapon-set.active:after {
-    background-color: var(--ech-border-color);
     border-radius: 50%;
     content: '';
     height: 15px;
@@ -363,7 +332,7 @@
 
 .weapon-set > .set.set-primary:before,
 .weapon-set > .set.set-primary:after {
-    border-left: 2px solid var(--ech-border-color);
+    border-left: 2px solid transparent;
     content: '';
     height: 25px;
     left: 50%;
@@ -389,9 +358,7 @@
 .movement-hud {
     align-items: center;
     backdrop-filter: blur(6px);
-    background-color: rgb(0 0 0 / 30%);
-    border: 1px solid var(--ech-border-color);
-    color: rgb(150, 150, 150);
+    border: 1px solid transparent;
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
@@ -405,9 +372,6 @@
     width: 115px;
 
     pointer-events: all;
-}
-.movement-hud .movement-current {
-    color: rgb(90, 190, 245);
 }
 .movement-hud .movement-current,
 .movement-hud i.fas {
@@ -424,7 +388,6 @@
     width: 100%;
 }
 .movement-spaces .movement-space {
-    background-color: rgba(125, 135, 145, 0.5);
     border-radius: 3px;
     box-shadow: none;
     height: 25px;
@@ -433,16 +396,4 @@
     transition: all 0.3s ease-in-out;
     max-width: 25px;
     width: 100%;
-}
-.movement-spaces .movement-space.base-movement {
-    background-color: rgb(90, 190, 245);
-    box-shadow: 0px 0px 10px 0px rgb(110 210 255 / 80%);
-}
-.movement-spaces .movement-space.dash-movement {
-    background-color: rgb(200, 200, 90);
-    box-shadow: 0px 0px 10px 0px rgb(220 220 110 / 80%);
-}
-.movement-spaces .movement-space.danger-movement {
-    background-color: rgb(200, 95, 90);
-    box-shadow: 0px 0px 10px 0px rgb(220 115 110 / 80%);
 }
