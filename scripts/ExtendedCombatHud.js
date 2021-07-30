@@ -1110,7 +1110,7 @@ this.element.on("dragstart", ".set", async (event) => {
           `<span class="ech-tooltip-badge prop">${prop}</span>`
         );
     }
-
+    $('.ech-tooltip').remove();
     $(".extended-combat-hud").before(
       tooltip({
         title: title,

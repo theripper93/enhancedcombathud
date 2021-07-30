@@ -211,6 +211,20 @@
 	border-color: var(--ech-tooltip-body-border);
 	color: var(--ech-tooltip-body-color);
 }
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link {
+    background-color: var(--ech-buttons-base-background);
+    border: 1px solid var(--ech-buttons-base-border);
+	color: var(--ech-buttons-base-color);
+}
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:hover,
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:active,
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:focus,
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link.active {
+    background-color: var(--ech-buttons-hover-background);
+    border: 1px solid var(--ech-buttons-hover-border);
+	color: var(--ech-buttons-hover-color);
+	text-shadow: none;
+}
 .ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
     background-color: var(--ech-buttons-base-background);
 	border-color: var(--ech-buttons-base-border);

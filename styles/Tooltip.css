@@ -65,6 +65,20 @@
   overflow: auto;
   scroll-behavior: smooth;
 }
+.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link {
+  border-radius: .25rem;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  margin-right: 0.25rem;
+  padding: .35em .65em;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  word-break: break-all;
+}
 .ech-tooltip .ech-tooltip-body .ech-tooltip-details {
   display: flex;
   flex-direction: row;
