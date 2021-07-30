@@ -264,26 +264,6 @@ Hooks.once("init", function () {
     restricted: false
   });
 
-  game.settings.register("enhancedcombathud", "theme", {
-    name: game.i18n.localize("enhancedcombathud.settings.theme.name"),
-    hint: game.i18n.localize("enhancedcombathud.settings.theme.hint"),
-    scope: "client",
-    config: true,
-    choices: {
-      "custom": game.i18n.localize("enhancedcombathud.settings.theme.custom"),
-      "helium": game.i18n.localize("enhancedcombathud.settings.theme.helium"),
-      "neon": game.i18n.localize("enhancedcombathud.settings.theme.neon"),
-      "argon": game.i18n.localize("enhancedcombathud.settings.theme.argon"),
-      "krypton":  game.i18n.localize("enhancedcombathud.settings.theme.krypton"),
-      "xenon": game.i18n.localize("enhancedcombathud.settings.theme.xenon"),
-      "radon": game.i18n.localize("enhancedcombathud.settings.theme.radon"),
-      "oganesson": game.i18n.localize("enhancedcombathud.settings.theme.oganesson"),
-    },
-    type: String,
-    default: "custom",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-
   game.settings.register("enhancedcombathud", "scale", {
     name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
@@ -351,77 +331,36 @@ Hooks.once("init", function () {
     type: Boolean,
     default: true,
   });
+  game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuAbilities", {
+    name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+  game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuSkills", {
+    name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+  game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuTools", {
+    name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuTools.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
 });
 
 //Color Settings
 
 
 Hooks.once("ready", function () {
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "fore-color", {
-    name: game.i18n.localize("enhancedcombathud.settings.fore-color.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.fore-color.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#B4D2DCFF",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color", {
-    name: game.i18n.localize("enhancedcombathud.settings.color.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#414B55E6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-bonus-action", {
-    name: game.i18n.localize("enhancedcombathud.settings.color-bonus-action.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color-bonus-action.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#453B75E6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-free-action", {
-    name: game.i18n.localize("enhancedcombathud.settings.color-free-action.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color-free-action.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#3B5875E6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-reaction", {
-    name: game.i18n.localize("enhancedcombathud.settings.color-reaction.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color-reaction.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#753B3BE6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-end-turn", {
-    name: game.i18n.localize("enhancedcombathud.settings.color-end-turn.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color-end-turn.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#374B3CE6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-
-  new window.Ardittristan.ColorSetting("enhancedcombathud", "color-tooltip", {
-    name: game.i18n.localize("enhancedcombathud.settings.color-tooltip.text"),
-    hint: game.i18n.localize("enhancedcombathud.settings.color-tooltip.hint"),
-    label: game.i18n.localize("enhancedcombathud.settings.color.label"),
-    restricted: true,
-    defaultColor: "#414B55E6",
-    scope: "world",
-    onChange: () => {canvas.hud.enhancedcombathud?.setColorSettings()}
-  });
-
   /*game.settings.set("enhancedcombathud", "echThemeData", {
     theme: 'custom',
     font: 'Roboto',

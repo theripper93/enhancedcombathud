@@ -175,6 +175,9 @@ class CombatHud {
     Object.keys(game.dnd5e.config.abilities).forEach((ability) => {
       this.saves[ability].label = game.dnd5e.config.abilities[ability]; 
       this.saves[ability].total = this.saves[ability].save;
+      this.saves[ability].tooltip = game.i18n.localize(
+        `enhancedcombathud.abilities.${ability}.tooltip`
+      );
     });
 
     console.log(this);
@@ -455,7 +458,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       return result;
     }
     function setThemeColors(colors) {
-      console.log('Updating Theme Colors')
       Object.entries(Object.flatten(colors)).forEach(([key, value]) => {
         document.documentElement.style.setProperty(`--ech-${key.replace(/\./g, '-')}`, value);
       });
@@ -531,14 +533,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let itemName = $(event.currentTarget).data("itemname");
 
       const offset = $element.offset();
+      offset.left += ($element[0].getBoundingClientRect().width / 2);
 
       $(".ech-tooltip").remove();
 
       setTimeout(() => {
-        this.drawTooltip(itemName, {
-          top: offset.top - $(document).scrollTop(),
-          left: offset.left - $(document).scrollLeft(),
-        });
+        this.drawTooltip(itemName, offset);
       }, 100);
     });
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
@@ -547,19 +547,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         $(".ech-tooltip:not(.is-hover)").remove();
       }, 100);
     });
-    this.element.on("mouseenter", '.ability.is-skill', (event) => {
+    this.element.on("mouseenter", '.ability-menu .ability:not(.ability-title)', (event) => {
       let $element = $(event.currentTarget);
-      let skill = $(event.currentTarget).data("roll");
+      let whatToRoll = $(event.currentTarget).data("roll");
+      let type = '';
+      if ($element.hasClass('is-save')) type = 'save'
+      if ($element.hasClass('is-skill')) type = 'skill'
+      if ($element.hasClass('is-tool')) type = 'tool'
 
       const offset = $element.offset();
+      offset.left += $element[0].getBoundingClientRect().width + 10
 
       $(".ech-tooltip").remove();
 
       setTimeout(() => {
-        this.drawTooltip(skill, {
-          top: $element[0].offsetTop - $(document).scrollTop() > 70 ? $element[0].offsetTop - $(document).scrollTop() : 70,
-          left: offset.left +$element[0].offsetWidth + 25 - $(document).scrollLeft(),
-        },true);
+        this.drawTooltip(whatToRoll, offset, type);
       }, 100);
     });
     this.element.on("mouseleave", '.ability.is-skill', (event) => {
@@ -953,7 +955,7 @@ this.element.on("dragstart", ".set", async (event) => {
       });
   }
 
-  drawTooltip(itemName, offset, isSkill) {
+  drawTooltip(itemName, offset, type) {
     const showTooltip = game.settings.get("enhancedcombathud", "showTooltips");
     const showTooltipSpecial = game.settings.get(
       "enhancedcombathud",
@@ -963,7 +965,11 @@ this.element.on("dragstart", ".set", async (event) => {
       "enhancedcombathud",
       "showTooltipSkills"
     );*/
-    if (!showTooltip || (!showTooltipSkills && isSkill)) return;
+    if (!showTooltip || ((
+      (type == 'save' && !game.settings.get("enhancedcombathud","showTooltipsAbilityMenuAbilities")) 
+      || (type == 'skill' && !game.settings.get("enhancedcombathud","showTooltipsAbilityMenuSkills")) 
+      || (type == 'tool' && !game.settings.get("enhancedcombathud","showTooltipsAbilityMenuTools"))
+    ))) return;
     if (!showTooltipSpecial && ECHItems[itemName]) return;
     let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
     let title
@@ -976,10 +982,12 @@ this.element.on("dragstart", ".set", async (event) => {
     let dt
     let damageTypes = []
     let materialComponents = ""
-    if (isSkill) {
+    if (type == 'skill') {
       title = game.dnd5e.config.skills[itemName]
       description = this.hudData.skills[itemName].tooltip
-
+    } else if(type == 'save') {
+      title = game.dnd5e.config.abilities[itemName]
+      description = this.hudData.saves[itemName].tooltip
     } else {
       if (!item) {
         item = {};
@@ -1048,12 +1056,15 @@ this.element.on("dragstart", ".set", async (event) => {
       target,
       range,
       properties,
-      materialComponents,
-      offset,
+      materialComponents
     }) => {
-      return `<div class="ech-tooltip ${
-        !subtitle ? "hide-subtitle" : ""
-      }" style="top: ${offset.top}px; left: ${offset.left}px;">
+      target = target || '-';
+      range = range || '-';
+      return `<div class="ech-tooltip 
+        ${!subtitle ? "hide-subtitle" : ""} 
+        ${target == '-' && range == '-' ? "hideTargetRange" : ''}
+        ${properties.length == 0 ? "hideProperties" : ''}
+        ">
           <div class="ech-tooltip-header">
             <h2>${title}</h2>
           </div>
@@ -1099,7 +1110,7 @@ this.element.on("dragstart", ".set", async (event) => {
           `<span class="ech-tooltip-badge prop">${prop}</span>`
         );
     }
-
+    $('.ech-tooltip').remove();
     $(".extended-combat-hud").before(
       tooltip({
         title: title,
@@ -1108,10 +1119,30 @@ this.element.on("dragstart", ".set", async (event) => {
         target: target,
         range: range,
         properties: listOfProperties,
-        materialComponents: materialComponents,
-        offset: offset,
+        materialComponents: materialComponents
       })
     );
+    $(".extended-combat-hud").off('wheel');
+    $(".extended-combat-hud").on('wheel', function(event) {
+      let $tooltipDesc = $('.ech-tooltip').last().find('.ech-tooltip-description');
+      let scrollPosition = $tooltipDesc[0].scrollTop
+      $tooltipDesc[0].scrollTop = scrollPosition + event.originalEvent.deltaY;
+    });
+
+    if (type == 'save' || type == 'skill' || type == 'tool') {
+      offset.top = offset.top - ($('.ech-tooltip').last().height() / 2);
+    }else{
+      offset.top = (offset.top - $('.ech-tooltip').last().height()) - 10;
+      offset.left = offset.left - ($('.ech-tooltip').last().width() / 2);
+      if (offset.left + $('.ech-tooltip').last().width() > $(window).width()) {
+        offset.left -= ((offset.left + $('.ech-tooltip').last().width()) - $(window).width());
+      }
+    }
+
+    $('.ech-tooltip').last().css({
+      top: `${offset.top < 0 ? 0 : offset.top}px`,
+      left: `${offset.left}px`
+    });
   }
 
   async dragDropSet(set, itemid, target) {
