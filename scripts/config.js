@@ -256,9 +256,9 @@ Hooks.once("init", function () {
 
   // Define a settings submenu which handles advanced configuration needs
   game.settings.registerMenu("enhancedcombathud", "echThemeOptions", {
-    name: "My Settings Submenu",
-    label: "The label which appears on the Settings submenu button",
-    hint: "A description of what will occur in the submenu dialog.",
+    name: game.i18n.localize("enhancedcombathud.settings.thememenu.name"),
+    label: game.i18n.localize("enhancedcombathud.settings.thememenu.label"),
+    hint: game.i18n.localize("enhancedcombathud.settings.thememenu.hint"),
     icon: "fas fa-bars",
     type: echThemeOptions,
     restricted: false

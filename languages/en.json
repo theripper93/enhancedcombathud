@@ -124,10 +124,20 @@
     "enhancedcombathud.settings.showTooltips.hint" : "Show tooltips on hover",
     "enhancedcombathud.settings.showTooltipsSpecial.name" : "Show Tooltips for Special Actions",
     "enhancedcombathud.settings.showTooltipsSpecial.hint" : "Show tooltips on hover for special actions (dodge,disengage,shove...)",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "Show Tooltips for Abilities",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "Show tooltips on hover for abilities in the ability menu",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "Show Tooltips for Skills",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "Show tooltips on hover for skills in the ability menu",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "Show Tooltips for Tools",
+    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Show tooltips on hover for tools in the ability menu",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
     "enhancedcombathud.tooltip.properties.name" : "Properties",
+
+    "enhancedcombathud.settings.thememenu.name": "Theme Customization",
+    "enhancedcombathud.settings.thememenu.hint": "Configure, choose and cusomize Argon themes",
+    "enhancedcombathud.settings.thememenu.label": "Configure Themes",
 
 
     "enhancedcombathud.themeOptions.save": "Save Changes",
