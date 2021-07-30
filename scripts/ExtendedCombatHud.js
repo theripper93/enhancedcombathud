@@ -1202,7 +1202,7 @@ class ECHDiceRoller {
     const offset = $element.offset();
 
     // Close Previous Highjacked Windows
-    $('.ech-highjack-window .close').trigger('click');
+    $(".ech-highjack-window .close").trigger("click");
 
     // Position Windows next to Saves/Skills/Tools Menu
     Hooks.once("renderDialog", (dialog, html) => {
@@ -1324,7 +1324,6 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
     }
   }
 });
-
 
 Hooks.on("controlToken", (token, controlled) => {
   if (
