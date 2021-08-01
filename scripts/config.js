@@ -671,3 +671,8 @@ $('body').on('click', '#echThemeOptions li h4.toggleOptions', (event) => {
   $(event.currentTarget).closest('ul').find('li.show').removeClass('show');
   $(event.currentTarget).closest('li').toggleClass('show', !isOpened);
 });
+
+Hooks.on("canvasReady", function () {
+  canvas.hud.enhancedcombathud?.close();
+  $(".extended-combat-hud").remove()
+})
