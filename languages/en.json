@@ -130,6 +130,8 @@
     "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "Show tooltips on hover for skills in the ability menu",
     "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "Show Tooltips for Tools",
     "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Show tooltips on hover for tools in the ability menu",
+    "enhancedcombathud.settings.fadeOutInactive.name" : "Fade Out",
+    "enhancedcombathud.settings.fadeOutInactive.hint" : "Fade out the HUD after not mouse overing it for 5 seconds",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
