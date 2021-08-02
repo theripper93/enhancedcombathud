@@ -18,7 +18,53 @@ class echThemeOptions extends FormApplication {
       resizable: true,
       width: 660,
       height: $(window).height(),
-      downloadTheme: () => {
+      createTheme: () => {
+        new Dialog({
+          title: 'Export Argon - Combat HUD Theme',
+          content: `<form id="echExportTheme">
+            <div class="form-group">
+              <label>${game.i18n.localize('enhancedcombathud.themeOptions.exportThemeName')}</label>
+              <input type="text" name="echExportThemeName"/>
+            </div>
+          </form>`,
+          buttons: {
+            export: {
+              label: 'Save',
+              callback: (event) => { 
+                console.log(event) 
+                console.log(echThemeOptions.defaultOptions.getThemeColors());
+                const themeName = $(event).find('input[name="echExportThemeName"]').val();
+                const theme = new File(
+                    [new Blob(
+                      [JSON.stringify(echThemeOptions.defaultOptions.getThemeColors())],
+                      { type: 'application/json' }
+                    )], 
+                    `${themeName}.json`
+                  );
+                FilePicker.upload('data', './modules/enhancedcombathud/scripts/themes/', theme).then(response => {
+                  echThemeOptions.defaultOptions.buildDropdown(themeName);
+                });
+              }
+            },
+            cancel: {
+              label: 'Cancel',
+              callback: (event) => { return true; }
+            } 
+          },
+          default: 'export',
+          render: html => {
+            let $dialog = $(html);
+            $dialog.find('button[data-button="export"]').prop('disabled', true);
+            $dialog.find('input[name="echExportThemeName"]').on('keyup', (event) => {
+              let $input = $dialog.find('input[name="echExportThemeName"]');
+              $input.val($input.val().replace(/[^a-z0-9]/gi, '-').replace(/-{2,}/g, '-').toLowerCase());
+              $dialog.find('button[data-button="export"]').prop('disabled', $input.val().length <= 1);
+            });
+            $dialog.find('input[name="echExportThemeName"]').focus();
+          }
+        }).render(true);
+      },
+      getThemeColors: () => {
         function setDeepObj(obj, path, val) {
           var props = path.split('.');
           for (var i = 0, n = props.length - 1; i < n; ++i) {
@@ -36,14 +82,27 @@ class echThemeOptions extends FormApplication {
         });
 
         // Export Theme
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(theme.colors));
-        var copyTextarea = document.createElement('textarea');
-        copyTextarea.value = JSON.stringify(theme.colors);
-        document.body.appendChild(copyTextarea);
-        copyTextarea.select();
-        document.execCommand('copy');
-        copyTextarea.remove();
-        ui.notifications.info("Argon - Combat HUD Theme has been copied to your clipboard. Paste it into a text file to save.");
+        return theme.colors;
+      },
+      buildDropdown: (selectedTheme) => {
+        if (typeof selectedTheme == 'undefined') game.settings.get("enhancedcombathud", "echThemeData").theme;
+
+        $('#echThemeOptions').find('select[name="theme"] option').remove();
+
+        FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
+          let files = response.files;
+          if (files.length > 0) {
+            return files;
+          }
+          throw TypeError(`No theme files found in enhancedcombathud/scripts/themes`);
+        }).then(files => {
+          $('#echThemeOptions').find('select[name="theme"]').append(`<option value="custom">Custom</option>`);
+          files.forEach(file => {
+            let filename = file.split('/')[file.split('/').length - 1].replace(/\.json/gi, '')
+            $('#echThemeOptions').find('select[name="theme"]').append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
+          })
+          $('#echThemeOptions').find('select[name="theme"]').val(selectedTheme);
+        }).catch(error => console.log(error));
       }
     }
   }
@@ -72,8 +131,10 @@ class echThemeOptions extends FormApplication {
         return 'black';
       }
     } 
+
+    echThemeOptions.defaultOptions.buildDropdown(game.settings.get("enhancedcombathud", "echThemeData").theme);
     
-    FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
+    /*FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
       let files = response.files;
       if (files.length > 0) {
         return files;
@@ -85,7 +146,7 @@ class echThemeOptions extends FormApplication {
         $(html).find('select[name="theme"]').append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
       })
       $(html).find('select[name="theme"]').val(game.settings.get("enhancedcombathud", "echThemeData").theme);
-    }).catch(error => console.log(error));
+    }).catch(error => console.log(error));*/
 
 
     // Handle Theme Selection

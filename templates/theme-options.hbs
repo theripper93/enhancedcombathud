@@ -1,12 +1,12 @@
 <form action="#">
 	<h3 class="flexrow">
 		Argon - Combat HUD: Theme Options
-        <button type="button" name="export" onclick="echThemeOptions.defaultOptions.downloadTheme();">
+        <button type="button" name="export" onclick="echThemeOptions.defaultOptions.createTheme();">
             <i class="fas fa-file-export">{{localize 'enhancedcombathud.themeOptions.export'}}</i>
         </button>
 	</h3>
 	<hr/>
-	<div class="form-group">
+	<div class="form-group" style="display: none;">
 		<label>{{localize 'enhancedcombathud.themeOptions.fontFamilyTitle'}}</label>
 		<div class="form-fields">
 			<input type="text" name="font" value="{{themeOptions.font}}" data-dtype="String">

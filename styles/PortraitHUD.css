@@ -272,9 +272,9 @@
 .ech-show-ability-menu .ability-menu ul.ability-toggle li:after {
     transform: rotate(0deg);
 }
-.ability-menu ul:last-child > li:hover {
+/*.ability-menu ul:last-child > li:hover {
     filter:brightness(150%);
-}
+}*/
 
 .weapon-sets {
     display: flex;
