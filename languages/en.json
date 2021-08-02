@@ -144,6 +144,13 @@
     "enhancedcombathud.themeOptions.export": "Export Theme",
     "enhancedcombathud.themeOptions.autoTextColorTitle" : "Autoset Text Colors Based off Background",
     "enhancedcombathud.themeOptions.autoTextColorHint" : "This setting adjust the text color based on the background color to a color that should be legiable.",
+    "enhancedcombathud.themeOptions.exportThemeName": "Export Theme Name:",
+    "enhancedcombathud.themeOptions.exportTheme.save": "Save",
+    "enhancedcombathud.themeOptions.exportTheme.cancel": "Cancel",
+
+    "enhancedcombathud.themeOptions.themeTitle": "Choose a Theme",
+    "enhancedcombathud.themeOptions.themeHint": "Selecting a theme will apply a predefined color pallet to Argon.",
+    
 
 
     "enhancedcombathud.themeOptions.mainAction" : "Main Action Colors",
