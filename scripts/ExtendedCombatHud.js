@@ -768,6 +768,9 @@ this.element.on("dragstart", ".set", async (event) => {
       let actiontype = container.dataset.actionbartype;
       if (actiontype == "actions") continue;
       let remove = true;
+      if (actiontype == "bonus" && this.hudData.sets.active.secondary) remove = false;
+      if (actiontype == "reactions" && this.hudData.sets.active.primary) remove = false;
+      
       for (let [key, value] of Object.entries(this.hudData[actiontype])) {
         if (
           !(
@@ -781,7 +784,8 @@ this.element.on("dragstart", ".set", async (event) => {
           remove = false;
         }
       }
-      if (remove) $(container).remove();
+      if (remove) $(container).hide();
+      else $(container).show();
     }
   }
 
@@ -791,6 +795,7 @@ this.element.on("dragstart", ".set", async (event) => {
     let secondary = $(this.element).find('div[data-set="sets"]');
     this.updateSetElement(primary, this.hudData.sets.active.primary);
     this.updateSetElement(secondary, this.hudData.sets.active.secondary);
+    this.clearEmpty()
   }
   updateSetElement(element, item) {
     if (!item) {
