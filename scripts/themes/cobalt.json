@@ -1,0 +1,104 @@
+{
+  "mainAction": {
+    "base": {
+      "background": "#336b87cc",
+      "color": "#e9f3f7ff",
+      "border": "#336b87cc"
+    },
+    "hover": {
+      "background": "#669ebacc",
+      "color": "#e9f3f7ff",
+      "border": "#336b87cc"
+    }
+  },
+  "bonusAction": {
+    "base": {
+      "background": "#41338780",
+      "color": "#e6e3f5ff",
+      "border": "#41338780"
+    },
+    "hover": {
+      "background": "#7466ba80",
+      "color": "#e6e3f5ff",
+      "border": "#41338780"
+    }
+  },
+  "freeAction": {
+    "base": {
+      "background": "#90afc5cc",
+      "color": "#f1f5f8ff",
+      "border": "#90afc5cc"
+    },
+    "hover": {
+      "background": "#aac9dfcc",
+      "color": "#f1f5f8ff",
+      "border": "#90afc5cc"
+    }
+  },
+  "reaction": {
+    "base": {
+      "background": "#33874fcc",
+      "color": "#e7f6ecff",
+      "border": "#33874fcc"
+    },
+    "hover": {
+      "background": "#66ba82cc",
+      "color": "#e7f6ecff",
+      "border": "#33874fcc"
+    }
+  },
+  "endTurn": {
+    "base": {
+      "background": "#763626cc",
+      "color": "#f9ede9ff",
+      "border": "#763626cc"
+    },
+    "hover": {
+      "background": "#905040cc",
+      "color": "#f9ede9ff",
+      "border": "#763626cc"
+    }
+  },
+  "tooltip": {
+    "header": {
+      "background": "#ffffffCC",
+      "color": "#414146",
+      "border": "#4188ac80"
+    },
+    "subtitle": {
+      "background": "#793387ff",
+      "color": "#ffffff",
+      "border": "#793387ff"
+    },
+    "body": {
+      "background": "#4188ac80",
+      "color": "#ffffff",
+      "border": "#4188ac80"
+    }
+  },
+  "abilityMenu": {
+    "background": "#2a3132cc",
+    "color": "#ffffffff",
+    "border": "#2a3132cc",
+    "base": { "color": "#ffffffff", "boxShadow": "#ffffff00" },
+    "hover": { "color": "#ffffffff", "boxShadow": "#ffffffe6" }
+  },
+  "buttons": {
+    "base": {
+      "background": "#418733ff",
+      "color": "#ffffff",
+      "border": "#418733ff"
+    },
+    "hover": {
+      "background": "#74ba66ff",
+      "color": "#ffffffff",
+      "border": "#74ba66ff"
+    }
+  },
+  "movement": {
+    "used": { "background": "#7d879180", "boxShadow": "#00000000" },
+    "baseMovement": { "background": "#5abef5FF", "boxShadow": "#6ed2ffCC" },
+    "dashMovement": { "background": "#c8c85aFF", "boxShadow": "#dcdc6eCC" },
+    "dangerMovement": { "background": "#c85f5aFF", "boxShadow": "#dc736eCC" }
+  }
+}

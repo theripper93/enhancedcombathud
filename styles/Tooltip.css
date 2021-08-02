@@ -6,8 +6,11 @@
     height: fit-content;
     max-width: 400px;
     min-width: 400px;
+    opacity: 0;
     position:absolute;
     text-align:left;
+    transition: opacity 0.3s ease-in-out;
+    transition-property: backdrop-filter, opacity;
 
     left: 50%;
     top: 50%;
@@ -17,6 +20,9 @@
     z-index: 10000;
 
     pointer-events: all;
+}
+.ech-tooltip.ech-show-tooltip {
+  opacity: 1;
 }
 .ech-tooltip .ech-tooltip-header {
   backdrop-filter: blur(6px);

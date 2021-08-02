@@ -28,6 +28,9 @@
 	border: 1px solid var(--ech-mainAction-base-border);
 	color: var(--ech-mainAction-base-color);
 }
+.action-element[data-set=setp], .action-element[data-set=sets] {
+	color: rgb(150, 150, 150);
+}
 .action-element.bonus-action {
 	background-color: var(--ech-bonusAction-base-background);
 	border-color: var(--ech-bonusAction-base-border);
@@ -93,6 +96,7 @@
 	/* ADD THEME OPTIONS */
     background-color: rgb(0 0 0 / 30%);
     border-color: var(--ech-mainAction-base-border);
+	color: rgb(150, 150, 150);
 }
 .feature-spell-slots {
 	/* ADD THEME OPTIONS */
@@ -113,6 +117,7 @@
 .feature-element {
 	/* ADD THEME OPTIONS */
 	border-color: var(--ech-mainAction-base-border);
+	color: rgb(150, 150, 150);
 }
 .feature-element:hover, 
 .feature-element:active, 

@@ -65,28 +65,31 @@
   --ech-font-family: 'Roboto', sans-serif;
 }
 
-@keyframes extendedCombatHUDLoadAnimation {
-  from {
-    bottom: -100%;
-    opacity: 0;
-  }
-  to {
-    bottom: 15px;
-    opacity: 1;
-  }
+@keyframes echFadeOut {
 }
 
 .extended-combat-hud {
-  animation: extendedCombatHUDLoadAnimation 0.3s ease-in 1;
   backface-visibility: hidden;
   bottom: 15px;
   display: flex;
   flex-direction: row;
   left: 15px;
+  opacity: 1;
   position: absolute;
   transform-origin: bottom left;
   /* USED TO ALLOW USERS TO CLICK THROUGH AND AROUND ECH*/
   pointer-events: none;
+}
+.extended-combat-hud.fade-out-inactive-true {
+  opacity: 0.1;
+  transition-property: opacity;
+  transition-duration: 1s;
+  transition-delay: 5s;
+}
+.ech-tooltip:hover + .extended-combat-hud,
+.extended-combat-hud:hover {
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .extended-combat-hud *,

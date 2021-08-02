@@ -1,70 +1,104 @@
 {
   "mainAction": {
     "base": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#c56914b3",
+      "color": "#fdefefff",
+      "border": "#ac5000cc"
     },
     "hover": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#f89c47b3",
+      "color": "#fdefefff",
+      "border": "#c56914b3"
     }
   },
   "bonusAction": {
     "base": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#c214c580",
+      "color": "#fdd5ffff",
+      "border": "#c214c580"
     },
     "hover": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#f547f8b3",
+      "color": "#fdd5ffff",
+      "border": "#c214c580"
     }
   },
   "freeAction": {
     "base": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#18c51480",
+      "color": "#d7ffd7ff",
+      "border": "#18c51480"
     },
     "hover": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#4bf84780",
+      "color": "#d7ffd7ff",
+      "border": "#18c51480"
     }
   },
   "reaction": {
     "base": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#1470c580",
+      "color": "#c6ccffff",
+      "border": "#1470c580"
     },
     "hover": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#47a3f880",
+      "color": "#c6ccffff",
+      "border": "#1470c580"
     }
   },
   "endTurn": {
     "base": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#c5141880",
+      "color": "#ffe3e3ff",
+      "border": "#c5141880"
     },
     "hover": {
-      "background": "#3e3e3e7d",
-      "color": "#d0d0d0ff"
+      "background": "#f8474b80",
+      "color": "#ffe3e3ff",
+      "border": "#c5141880"
     }
   },
   "tooltip": {
     "header": {
-      "background": "",
-      "color": "#d0d0d0ff"
+      "background": "#ffffffCC",
+      "color": "#414146ff",
+      "border": "#757f89FF"
     },
     "subtitle": {
-      "background": "",
-      "color": "#d0d0d0ff"
+      "background": "#c5c214ff",
+      "color": "#5f5c00ff",
+      "border": "#c5c214ff"
     },
     "body": {
-      "background": "",
-      "color": "#d0d0d0ff"
-    },
-    "properties": {
-      "background": "",
-      "color": "#d0d0d0ff"
+      "background": "#f89c47b3",
+      "color": "#ffffffff",
+      "border": "#f89c47b3"
     }
+  },
+  "abilityMenu": {
+    "background": "#e98223cc",
+    "color": "#5f0300ff",
+    "border": "#e98223cc",
+    "base": { "color": "#ffffffff", "boxShadow": "#5f030000" },
+    "hover": { "color": "#ffffffff", "boxShadow": "#5f0300cc" }
+  },
+  "buttons": {
+    "base": {
+      "background": "#14c569ff",
+      "color": "#000000ff",
+      "border": "#14c569ff"
+    },
+    "hover": {
+      "background": "#2edf83ff",
+      "color": "#000000ff",
+      "border": "#2edf83ff"
+    }
+  },
+  "movement": {
+    "used": { "background": "#7d879180", "boxShadow": "#00000000" },
+    "baseMovement": { "background": "#5abef5FF", "boxShadow": "#6ed2ffCC" },
+    "dashMovement": { "background": "#c8c85aFF", "boxShadow": "#dcdc6eCC" },
+    "dangerMovement": { "background": "#c85f5aFF", "boxShadow": "#dc736eCC" }
   }
 }

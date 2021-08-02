@@ -3,6 +3,7 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
+      fadeOutInactive: game.settings.get("enhancedcombathud", 'fadeOutInactive'),
       spellMode: game.settings.get("enhancedcombathud", "preparedSpells"),
       localize: {
         mainactions: game.i18n.localize(
@@ -564,7 +565,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         this.drawTooltip(whatToRoll, offset, type);
       }, 100);
     });
-    this.element.on("mouseleave", '.ability.is-skill', (event) => {
+    this.element.on("mouseleave", '.ability', (event) => {
       // Allow User to hover over Tooltip
       setTimeout(() => {
         $(".ech-tooltip:not(.is-hover)").remove();
@@ -674,7 +675,8 @@ this.element.on("dragstart", ".set", async (event) => {
         this.roller.rollCheck(whatToRoll, event);
       }
     });
-    $(this.element).on("click", ".ability-name", (event) => {
+
+    $(this.element).on("click", "li .ability-name", (event) => {
       let whatToRoll = $(event.currentTarget).closest(".ability").data("roll");
       let abilityScoreToUse = $(event.currentTarget)
         .closest(".ability")
@@ -1142,7 +1144,7 @@ this.element.on("dragstart", ".set", async (event) => {
     $('.ech-tooltip').last().css({
       top: `${offset.top < 0 ? 0 : offset.top}px`,
       left: `${offset.left}px`
-    });
+    }).addClass('ech-show-tooltip');
   }
 
   async dragDropSet(set, itemid, target) {
@@ -1251,8 +1253,8 @@ class ECHDiceRoller {
         .addClass("ech-highjack-window");
 
       // Update dialog with new position data for dragging.
-      dialog.position.left = offset.top > 0 ? offset.top : 0;
-      dialog.position.top = offset.left;
+      dialog.position.left = offset.left;
+      dialog.position.top = offset.top > 0 ? offset.top : 0 ;
 
       // If Dialog allows you to select Modifier, use modifier from ability modifier by default
       if (!html.find('select[name="ability"]'))
@@ -1260,7 +1262,9 @@ class ECHDiceRoller {
     });
   }
 
-  async rollCheck(ability) {
+  async rollCheck(ability, event) {
+    // Set Dialog Position
+    this.hijackDialog(event);
     if (this.modules.betterRolls)
       return await BetterRolls.rollCheck(this.actor, ability);
     return await this.actor.rollAbilityTest(ability);
