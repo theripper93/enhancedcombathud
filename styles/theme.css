@@ -308,6 +308,9 @@
     background-color: var(--ech-abilityMenu-background);
     border-color: var(--ech-abilityMenu-border);
 }
+.ability-menu ul:last-child > li:hover,
+.ability-menu ul:last-child > li:active,
+.ability-menu ul:last-child > li:focus,
 .ability-menu ul > li .ability-name:hover,
 .ability-menu ul > li .ability-name:active,
 .ability-menu ul > li .ability-name:focus,
