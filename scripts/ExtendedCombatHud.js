@@ -216,7 +216,7 @@ class CombatHud {
         this.settings.spellMode &&
         prepared === true &&
         itemData.data.preparation?.prepared === false &&
-        itemData.data.preparation?.prepared == "prepared"
+        itemData.data.preparation?.mode == "prepared"
       )
         return false;
       if (
