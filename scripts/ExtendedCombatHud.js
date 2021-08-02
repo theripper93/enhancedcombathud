@@ -1132,6 +1132,7 @@ this.element.on("dragstart", ".set", async (event) => {
     $(".extended-combat-hud").off('wheel');
     $(".extended-combat-hud").on('wheel', function(event) {
       let $tooltipDesc = $('.ech-tooltip').last().find('.ech-tooltip-description');
+      if(!$tooltipDesc[0]) return
       let scrollPosition = $tooltipDesc[0].scrollTop
       $tooltipDesc[0].scrollTop = scrollPosition + event.originalEvent.deltaY;
     });
