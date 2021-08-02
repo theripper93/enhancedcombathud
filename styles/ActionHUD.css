@@ -248,9 +248,13 @@
     position: relative;
     width: 150px;
     margin-right: 1rem;
-    cursor: pointer;
+    transition: all 0.3s ease-in-out;
   
-  pointer-events: all;
+    pointer-events: all;
+    cursor: pointer;
+}
+.feature-element:hover {
+  filter: brightness(150%);
 }
 
 .features-container.is-spells .feature-element {

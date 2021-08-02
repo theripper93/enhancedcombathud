@@ -73,6 +73,21 @@ class echThemeOptions extends FormApplication {
       }
     } 
     
+    FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
+      console.log(response);
+      let files = response.files;
+      if (files.length > 0) {
+        return files;
+      }
+      throw TypeError(`No theme files found in enhancedcombathud/scripts/themes`);
+    }).then(files => {
+      files.forEach(file => {
+        let filename = file.split('/')[file.split('/').length - 1].replace(/\.json/gi, '')
+        $(html).find('select[name="theme"]').append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
+      })
+      $(html).find('select[name="theme"]').trigger('change');
+    }).catch(error => console.log(error));
+
     $(html).find('select[name="theme"]').val(game.settings.get("enhancedcombathud", "echThemeData").theme);
 
     // Handle Theme Selection
@@ -92,7 +107,7 @@ class echThemeOptions extends FormApplication {
           }
         })
       }
-
+      
       if (selectedTheme != 'custom') {
         fetch(`./modules/enhancedcombathud/scripts/themes/${selectedTheme}.json`).then(response => response.json()).then(colors => {
           updateColors(colors);
@@ -100,7 +115,7 @@ class echThemeOptions extends FormApplication {
       }else{
         updateColors(game.settings.get("enhancedcombathud", "echThemeData").colors);
       }
-    }).trigger('change');
+    })
 
     // Update Custom Themes
 
@@ -135,121 +150,111 @@ Hooks.once("init", function () {
       theme: 'custom',
       font: 'Roboto',
       colors: {
-        mainAction: {
-          base: {
-            background: '#414B55E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+        "mainAction": {
+          "base": {
+            "background": "#414B55E6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           },
-          hover: {
-            background: '#414B55E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+          "hover": {
+            "background": "#747e88e6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           }
         },
-        bonusAction: {
-          base: {
-            background: '#453B75E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+        "bonusAction": {
+          "base": {
+            "background": "#453B75E6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           },
-          hover: {
-            background: '#453B75E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+          "hover": {
+            "background": "#9288c2e6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           }
         },
-        freeAction: {
-          base: {
-            background: '#3B5875E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+        "freeAction": {
+          "base": {
+            "background": "#3B5875E6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           },
-          hover: {
-            background: '#3B5875E6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+          "hover": {
+            "background": "#88a5c2e6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           }
         },
-        reaction: {
-          base: {
-            background: '#753B3BE6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+        "reaction": {
+          "base": {
+            "background": "#753B3BE6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           },
-          hover: {
-            background: '#753B3BE6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+          "hover": {
+            "background": "#c28888e6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           }
         },
-        endTurn: {
-          base: {
-            background: '#374B3CE6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+        "endTurn": {
+          "base": {
+            "background": "#374B3CE6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           },
-          hover: {
-            background: '#374B3CE6',
-            color: '#B4D2DCFF',
-            border: '#757f89FF'
+          "hover": {
+            "background": "#849889e6",
+            "color": "#B4D2DCFF",
+            "border": "#757f89FF"
           }
         },
-        tooltip: {
-          header: {
-            background: '#ffffffCC',
-            color: '#414146',
-            border: '#757f89FF'
+        "tooltip": {
+          "header": {
+            "background": "#ffffffCC",
+            "color": "#414146",
+            "border": "#757f89FF"
           },
-          subtitle: {
-            background: '#32505a',
-            color: '#ffffff',
-            border: '#757f89FF'
+          "subtitle": {
+            "background": "#32505a",
+            "color": "#ffffff",
+            "border": "#757f89FF"
           },
-          body: {
-            background: '#5a7896B3',
-            color: '#ffffff',
-            border: '#757f89FF'
+          "body": {
+            "background": "#5a7896B3",
+            "color": "#ffffff",
+            "border": "#757f89FF"
           }
         },
-        abilityMenu: {
-          background: '#414B55E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "abilityMenu": {
+          "background": "#414B55E6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF",
+          "base": { "color": "#B4D2DCFF", "boxShadow": "#757f89CC" },
+          "hover": { "color": "#B4D2DCFF", "boxShadow": "#757f89CC" }
         },
-        buttons: {
-          base: {
-            background: '#5096c3',
-            color: '#ffffff',
-            border: '#5096c3'
+        "buttons": {
+          "base": {
+            "background": "#5096c3",
+            "color": "#ffffff",
+            "border": "#5096c3"
           },
-          hover: {
-            background: '#55bef5',
-            color: '#B4D2DCFF',
-            border: '#55bef5'
+          "hover": {
+            "background": "#55bef5",
+            "color": "#ffffffff",
+            "border": "#55bef5"
           }
         },
-        movement: {
-          used: {
-            background: '#7d879180',
-            boxShadow: '#00000000'
-          },
-          baseMovement: {
-            background: '#5abef5FF',
-            boxShadow: '#6ed2ffCC'
-          },
-          dashMovement: {
-            background: '#c8c85aFF',
-            boxShadow: '#dcdc6eCC'
-          },
-          dangerMovement: {
-            background: '#c85f5aFF',
-            boxShadow: '#dc736eCC'
-          }
+        "movement": {
+          "used": { "background": "#7d879180", "boxShadow": "#00000000" },
+          "baseMovement": { "background": "#5abef5FF", "boxShadow": "#6ed2ffCC" },
+          "dashMovement": { "background": "#c8c85aFF", "boxShadow": "#dcdc6eCC" },
+          "dangerMovement": { "background": "#c85f5aFF", "boxShadow": "#dc736eCC" }
         }
-      }
+      }    
     },
-    scope: "world",
+    scope: "client",
     config: false, // Doesn't show up in config
   })
 
@@ -355,6 +360,15 @@ Hooks.once("init", function () {
     type: Boolean,
     default: true,
   });
+
+  game.settings.register("enhancedcombathud", "fadeOutInactive", {
+    name: game.i18n.localize("enhancedcombathud.settings.fadeOutInactive.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.fadeOutInactive.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
 });
 
 //Color Settings
@@ -365,127 +379,109 @@ Hooks.once("ready", function () {
     theme: 'custom',
     font: 'Roboto',
     colors: {
-      mainAction: {
-        base: {
-          background: '#414B55E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+      "mainAction": {
+        "base": {
+          "background": "#414B55E6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         },
-        hover: {
-          background: '#414B55E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "hover": {
+          "background": "#747e88e6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         }
       },
-      bonusAction: {
-        base: {
-          background: '#453B75E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+      "bonusAction": {
+        "base": {
+          "background": "#453B75E6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         },
-        hover: {
-          background: '#453B75E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "hover": {
+          "background": "#9288c2e6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         }
       },
-      freeAction: {
-        base: {
-          background: '#3B5875E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+      "freeAction": {
+        "base": {
+          "background": "#3B5875E6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         },
-        hover: {
-          background: '#3B5875E6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "hover": {
+          "background": "#88a5c2e6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         }
       },
-      reaction: {
-        base: {
-          background: '#753B3BE6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+      "reaction": {
+        "base": {
+          "background": "#753B3BE6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         },
-        hover: {
-          background: '#753B3BE6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "hover": {
+          "background": "#c28888e6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         }
       },
-      endTurn: {
-        base: {
-          background: '#374B3CE6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+      "endTurn": {
+        "base": {
+          "background": "#374B3CE6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         },
-        hover: {
-          background: '#374B3CE6',
-          color: '#B4D2DCFF',
-          border: '#757f89FF'
+        "hover": {
+          "background": "#849889e6",
+          "color": "#B4D2DCFF",
+          "border": "#757f89FF"
         }
       },
-      tooltip: {
-        header: {
-          background: '#ffffffCC',
-          color: '#414146',
-          border: '#757f89FF'
+      "tooltip": {
+        "header": {
+          "background": "#ffffffCC",
+          "color": "#414146",
+          "border": "#757f89FF"
         },
-        subtitle: {
-          background: '#32505a',
-          color: '#ffffff',
-          border: '#757f89FF'
+        "subtitle": {
+          "background": "#32505a",
+          "color": "#ffffff",
+          "border": "#757f89FF"
         },
-        body: {
-          background: '#5a7896B3',
-          color: '#ffffff',
-          border: '#757f89FF'
+        "body": {
+          "background": "#5a7896B3",
+          "color": "#ffffff",
+          "border": "#757f89FF"
         }
       },
-      abilityMenu: {
-        background: '#414B55E6',
-        color: '#B4D2DCFF',
-        border: '#757f89FF',
-        base: {
-          color: '#B4D2DCFF',
-          boxShadow: '#757f89CC'
+      "abilityMenu": {
+        "background": "#414B55E6",
+        "color": "#B4D2DCFF",
+        "border": "#757f89FF",
+        "base": { "color": "#B4D2DCFF", "boxShadow": "#757f89CC" },
+        "hover": { "color": "#B4D2DCFF", "boxShadow": "#757f89CC" }
+      },
+      "buttons": {
+        "base": {
+          "background": "#5096c3",
+          "color": "#ffffff",
+          "border": "#5096c3"
         },
-        hover: {
-          color: '#B4D2DCFF',
-          boxShadow: '#757f89CC'
+        "hover": {
+          "background": "#55bef5",
+          "color": "#ffffffff",
+          "border": "#55bef5"
         }
       },
-      buttons: {
-        base: {
-          background: '#5096c3',
-          color: '#ffffff',
-          border: '#5096c3'
-        },
-        hover: {
-          background: '#55bef5',
-          color: '#B4D2DCFF',
-          border: '#55bef5'
-        }
-      },
-      movement: {
-        used: {
-          background: '#7d879180',
-          boxShadow: '#00000000'
-        },
-        baseMovement: {
-          background: '#5abef5FF',
-          boxShadow: '#6ed2ffCC'
-        },
-        dashMovement: {
-          background: '#c8c85aFF',
-          boxShadow: '#dcdc6eCC'
-        },
-        dangerMovement: {
-          background: '#c85f5aFF',
-          boxShadow: '#dc736eCC'
-        }
+      "movement": {
+        "used": { "background": "#7d879180", "boxShadow": "#00000000" },
+        "baseMovement": { "background": "#5abef5FF", "boxShadow": "#6ed2ffCC" },
+        "dashMovement": { "background": "#c8c85aFF", "boxShadow": "#dcdc6eCC" },
+        "dangerMovement": { "background": "#c85f5aFF", "boxShadow": "#dc736eCC" }
       }
-    }
+    }    
   })*/
 });
 
