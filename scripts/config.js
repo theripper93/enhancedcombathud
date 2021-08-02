@@ -74,7 +74,6 @@ class echThemeOptions extends FormApplication {
     } 
     
     FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
-      console.log(response);
       let files = response.files;
       if (files.length > 0) {
         return files;
@@ -85,10 +84,9 @@ class echThemeOptions extends FormApplication {
         let filename = file.split('/')[file.split('/').length - 1].replace(/\.json/gi, '')
         $(html).find('select[name="theme"]').append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
       })
-      $(html).find('select[name="theme"]').trigger('change');
+      $(html).find('select[name="theme"]').val(game.settings.get("enhancedcombathud", "echThemeData").theme);
     }).catch(error => console.log(error));
 
-    $(html).find('select[name="theme"]').val(game.settings.get("enhancedcombathud", "echThemeData").theme);
 
     // Handle Theme Selection
     $(html).find('select[name="theme"]').on('change', (event) => {
@@ -107,7 +105,7 @@ class echThemeOptions extends FormApplication {
           }
         })
       }
-      
+
       if (selectedTheme != 'custom') {
         fetch(`./modules/enhancedcombathud/scripts/themes/${selectedTheme}.json`).then(response => response.json()).then(colors => {
           updateColors(colors);
