@@ -1224,7 +1224,7 @@ class ECHDiceRoller {
       const actorToRoll =
         canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ??
         game.actors.get(actorId);
-        const itemToRoll = actorToRoll?.items.find(i => i.name === itemName);
+        const itemToRoll = actorToRoll?.items.find(i => i.data.name === itemName);
       if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
         return itemToRoll.executeMacro();
       }
