@@ -590,13 +590,16 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
   controls
     .find((x) => x.name == "token")
     .tools.push({
-      active: false,
+      active: canvas.hud?.enhancedcombathud?._state == 2,
       icon: "ech-swords",
       name: "echtoggle",
-      title: "Toggle",
-      onClick: (toggle) => {
+      title: game.i18n.localize('enhancedcombathud.controls.toggle.title'),
+      onClick: function (toggle)  {
         if (toggle) {
-          canvas.hud.enhancedcombathud.bind(_token);
+          if(_token && canvas.tokens.get(_token.id))canvas.hud.enhancedcombathud.bind(_token);
+          else {
+            this.active = false
+            ui.notifications.warn(game.i18n.localize('enhancedcombathud.controls.toggle.warning'));}
         } else {
           canvas.hud.enhancedcombathud.close();
         }

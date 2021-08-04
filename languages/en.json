@@ -83,6 +83,9 @@
     "enhancedcombathud.hud.spells.8": "8th Level",
     "enhancedcombathud.hud.spells.9": "9th Level",
 
+    "enhancedcombathud.controls.toggle.title": "Toggle Argon Combat HUD",
+    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: No token selected. Please select a token to enable the HUD",
+
     "enhancedcombathud.settings.color.label" : "Color",
     "enhancedcombathud.settings.fore-color.text" : "Text Color",
     "enhancedcombathud.settings.fore-color.hint" : "Text color",

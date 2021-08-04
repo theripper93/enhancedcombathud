@@ -910,7 +910,7 @@ this.element.on("dragstart", ".set", async (event) => {
 
   updatePass() {
     let element = $(this.element).find("div[data-passcont]");
-    if (this.hudData.token.id == game.combat?.current?.tokenId) {
+    if (this.hudData?.token?.id == game.combat?.current?.tokenId) {
       element.css({ display: "flex" });
     } else {
       element.css({ display: "none" });
