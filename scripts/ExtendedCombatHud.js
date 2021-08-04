@@ -1220,7 +1220,6 @@ class ECHDiceRoller {
     if (this.modules.betterRolls) {
       //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
       const actorId = this.actor.id;
-      const itemName = itemName;
       const actorToRoll =
         canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ??
         game.actors.get(actorId);
