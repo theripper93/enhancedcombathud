@@ -92,6 +92,7 @@
   width: 100%;
 }
 
+.action-element[data-set=sets] .action-element-title,
 .action-element[data-set=setp] .action-element-title {
   align-items: center;
   backdrop-filter: blur(6px);
