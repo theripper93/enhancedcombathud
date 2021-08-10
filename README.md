@@ -38,7 +38,7 @@ And many more option including, themes, color customization and more
 # FAQs
 
 Q: Can you add compatibility for X system?
-A: No, Argon is hardcoded for dnd5e. If you want you can make a fork for a specific system. You have to include the licence section and credit the original authors (theripper93, Mouse0270) and include links to our patreon page\website (if provided)
+A: No, Argon is hardcoded for dnd5e. If you want you can make a fork for a specific system. You have to include the licence section and credit the original authors (theripper93, Mouse0270) and include links to our patreon page\website (if provided). While you are free to fork this project it must remain free and you cannot make revenue out of it.
 
 Q: Why is this kind of item not in the HUD?
 A: We had to make a choice on what to include, anything that's not on those categories is not icluded (a 1 minute cast time spell for example, or a consumable that is used as bonus action). Those items will not be addedd. You can use Sets for any item.
