@@ -3,9 +3,15 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
-      fadeOutInactive: game.settings.get("enhancedcombathud", "fadeOutInactive"),
+      fadeOutInactive: game.settings.get(
+        "enhancedcombathud",
+        "fadeOutInactive"
+      ),
       spellMode: game.settings.get("enhancedcombathud", "preparedSpells"),
-      playerDetailsBottom: game.settings.get("enhancedcombathud", "playerDetailsBottom"),
+      playerDetailsBottom: game.settings.get(
+        "enhancedcombathud",
+        "playerDetailsBottom"
+      ),
       localize: {
         mainactions: game.i18n.localize(
           "enhancedcombathud.hud.mainactions.name"
@@ -336,16 +342,24 @@ class CombatHud {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
-    if(this.sets.set1.primary?.data.data.equipped) await this.sets.set1.primary?.update({ "data.equipped": false });
-    if(this.sets.set1.secondary?.data.data.equipped) await this.sets.set1.secondary?.update({ "data.equipped": false });
-    if(this.sets.set2.primary?.data.data.equipped) await this.sets.set2.primary?.update({ "data.equipped": false });
-    if(this.sets.set2.secondary?.data.data.equipped) await this.sets.set2.secondary?.update({ "data.equipped": false });
-    if(this.sets.set3.primary?.data.data.equipped) await this.sets.set3.primary?.update({ "data.equipped": false });
-    if(this.sets.set3.secondary?.data.data.equipped) await this.sets.set3.secondary?.update({ "data.equipped": false });
+    if (this.sets.set1.primary?.data.data.equipped)
+      await this.sets.set1.primary?.update({ "data.equipped": false });
+    if (this.sets.set1.secondary?.data.data.equipped)
+      await this.sets.set1.secondary?.update({ "data.equipped": false });
+    if (this.sets.set2.primary?.data.data.equipped)
+      await this.sets.set2.primary?.update({ "data.equipped": false });
+    if (this.sets.set2.secondary?.data.data.equipped)
+      await this.sets.set2.secondary?.update({ "data.equipped": false });
+    if (this.sets.set3.primary?.data.data.equipped)
+      await this.sets.set3.primary?.update({ "data.equipped": false });
+    if (this.sets.set3.secondary?.data.data.equipped)
+      await this.sets.set3.secondary?.update({ "data.equipped": false });
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-    if(!this.sets.active.primary?.data.data.equipped) await this.sets.active.primary?.update({ "data.equipped": true });
-    if(!this.sets.active.secondary?.data.data.equipped) await this.sets.active.secondary?.update({ "data.equipped": true });
+    if (!this.sets.active.primary?.data.data.equipped)
+      await this.sets.active.primary?.update({ "data.equipped": true });
+    if (!this.sets.active.secondary?.data.data.equipped)
+      await this.sets.active.secondary?.update({ "data.equipped": true });
   }
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
@@ -1488,7 +1502,11 @@ Hooks.on("preUpdateToken", (token, updates) => {
 });
 
 Hooks.on("updateCombat", (combat, updates) => {
-  if (canvas.hud.enhancedcombathud?.hudData && "round" in updates) {
+  if (
+    canvas.hud.enhancedcombathud?.hudData &&
+    combat?.combatant?._token.id ==
+      canvas.hud.enhancedcombathud?.hudData?.token?.id
+  ) {
     canvas.hud.enhancedcombathud.newRound();
   }
   canvas.hud.enhancedcombathud?.updatePass();
