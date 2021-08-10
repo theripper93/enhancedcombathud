@@ -56,6 +56,10 @@
   background-origin: border-box;
   background-size: cover;
 }
+.action-element[data-set=setp]:hover,
+.action-element[data-set=sets]:hover {
+  filter: brightness(150%);
+}
 .action-element.has-count:before {
   border-top: 4rem solid transparent;
   border-right: 4rem solid transparent;
