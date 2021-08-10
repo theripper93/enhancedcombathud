@@ -938,7 +938,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   static generateSpells(obj) {
-    obj
+    obj = obj
       .replace("０", "0")
       .replace("１", "1")
       .replace("２", "2")
