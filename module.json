@@ -2,6 +2,7 @@
   "name": "enhancedcombathud",
   "title": "Argon - Combat HUD",
   "description": "It's Magic",
+  "systems": ["dnd5e"],
   "version": "0.1",
   "author": "theripper93, Mouse0270",
   "authors": [

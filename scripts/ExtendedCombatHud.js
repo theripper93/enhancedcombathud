@@ -1414,6 +1414,21 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
   }
 });
 
+Hooks.on("updateItem", (item, updates) => {
+  let actor = item.parent;
+  if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
+    return;
+  let ad = actor.data.data.attributes;
+    if (updates?.data?.equipped !== undefined) {
+      canvas.hud.enhancedcombathud.updatePortrait(
+        ad.hp.value,
+        ad.hp.max,
+        ad.ac.value
+      );
+      return;
+    }
+});
+
 Hooks.on("controlToken", (token, controlled) => {
   if (
     controlled &&

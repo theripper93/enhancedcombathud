@@ -335,8 +335,8 @@ Hooks.once("init", function () {
     config: true,
     range: {
       min: 0.1,
-      max: 2,
-      step: 0.1,
+      max: 1,
+      step: 0.01,
     },
     type: Number,
     default: 1,
