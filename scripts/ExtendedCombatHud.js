@@ -187,22 +187,26 @@ class CombatHud {
     console.log(this);
   }
   getClassesAsString() {
-    let classes = this.actor.data.data.classes;
-    if (!classes) return "";
-    if (Object.keys(classes).length === 0)
-      return this.actor.labels.creatureType;
-    let string = "";
-    for (let [key, value] of Object.entries(classes)) {
-      string += "lvl " + value.levels + " ";
-      string += key[0].toUpperCase() + key.substring(1);
-      string += value.subclass
-        ? " (" +
-          value.subclass[0].toUpperCase() +
-          value.subclass.substring(1) +
-          ") "
-        : "";
+    try {
+      let classes = this.actor.data.data.classes;
+      if (!classes) return "";
+      if (Object.keys(classes).length === 0)
+        return this.actor.labels.creatureType;
+      let string = "";
+      for (let [key, value] of Object.entries(classes)) {
+        string += "lvl " + value.levels + " ";
+        string += key[0].toUpperCase() + key.substring(1);
+        string += value.subclass
+          ? " (" +
+            value.subclass[0].toUpperCase() +
+            value.subclass.substring(1) +
+            ") "
+          : "";
+      }
+      return string;
+    } catch {
+      return "";
     }
-    return string;
   }
   getItems(filters) {
     const actionType = filters.actionType;
@@ -934,6 +938,17 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   static generateSpells(obj) {
+    obj
+      .replace("０", "0")
+      .replace("１", "1")
+      .replace("２", "2")
+      .replace("３", "3")
+      .replace("４", "4")
+      .replace("５", "5")
+      .replace("６", "6")
+      .replace("７", "7")
+      .replace("８", "8")
+      .replace("９", "9");
     let _this = canvas.hud.enhancedcombathud.hudData;
     let convertSpellSlot;
     if (obj == _this.settings.localize.spells.pact) {
@@ -1223,7 +1238,9 @@ class ECHDiceRoller {
       const actorToRoll =
         canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ??
         game.actors.get(actorId);
-        const itemToRoll = actorToRoll?.items.find(i => i.data.name === itemName);
+      const itemToRoll = actorToRoll?.items.find(
+        (i) => i.data.name === itemName
+      );
       if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
         return itemToRoll.executeMacro();
       }
@@ -1419,14 +1436,14 @@ Hooks.on("updateItem", (item, updates) => {
   if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
     return;
   let ad = actor.data.data.attributes;
-    if (updates?.data?.equipped !== undefined) {
-      canvas.hud.enhancedcombathud.updatePortrait(
-        ad.hp.value,
-        ad.hp.max,
-        ad.ac.value
-      );
-      return;
-    }
+  if (updates?.data?.equipped !== undefined) {
+    canvas.hud.enhancedcombathud.updatePortrait(
+      ad.hp.value,
+      ad.hp.max,
+      ad.ac.value
+    );
+    return;
+  }
 });
 
 Hooks.on("controlToken", (token, controlled) => {
