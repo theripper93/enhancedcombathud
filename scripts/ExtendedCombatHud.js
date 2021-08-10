@@ -3,11 +3,9 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
-      fadeOutInactive: game.settings.get(
-        "enhancedcombathud",
-        "fadeOutInactive"
-      ),
+      fadeOutInactive: game.settings.get("enhancedcombathud", "fadeOutInactive"),
       spellMode: game.settings.get("enhancedcombathud", "preparedSpells"),
+      playerDetailsBottom: game.settings.get("enhancedcombathud", "playerDetailsBottom"),
       localize: {
         mainactions: game.i18n.localize(
           "enhancedcombathud.hud.mainactions.name"
