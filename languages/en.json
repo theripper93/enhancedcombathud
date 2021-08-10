@@ -121,6 +121,8 @@
     "enhancedcombathud.settings.leftPos.hint" : "Distance from the left border in pixels",
     "enhancedcombathud.settings.botPos.name" : "Bottom Position",
     "enhancedcombathud.settings.botPos.hint" : "Distance from the bottom border in pixels",
+    "enhancedcombathud.settings.playerDetailsBottom.name" : "Player Details on Bottom",
+    "enhancedcombathud.settings.playerDetailsBottom.hint" : "Positions players name and class information at bottom for portrait",
     "enhancedcombathud.settings.preparedSpells.name" : "Prepared Spells Only",
     "enhancedcombathud.settings.preparedSpells.hint" : "Show only prepared spells",
     "enhancedcombathud.settings.showTooltips.name" : "Show Tooltips",

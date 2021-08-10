@@ -36,7 +36,7 @@
 		<div class="portrait-stat-block">
 			<span>Spell DC</span>&nbsp;<span data-spell-dc="{{hudData.actor.data.data.attributes.spelldc}}"></span>
 		</div>
-		<div class="portrait-stat-block player-details">
+		<div class="portrait-stat-block player-details{{#if hudData.settings.playerDetailsBottom}} player-details-bottom{{/if}}">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
 				<span class="player-detail">
 					{{hudData.other.classes}}

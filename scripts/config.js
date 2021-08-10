@@ -369,6 +369,15 @@ Hooks.once("init", function () {
     default: 15,
   });
 
+  game.settings.register("enhancedcombathud", "playerDetailsBottom", {
+    name: game.i18n.localize("enhancedcombathud.settings.playerDetailsBottom.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.playerDetailsBottom.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("enhancedcombathud", "preparedSpells", {
     name: game.i18n.localize("enhancedcombathud.settings.preparedSpells.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.preparedSpells.hint"),

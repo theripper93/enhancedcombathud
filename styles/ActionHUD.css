@@ -100,10 +100,12 @@
   border-top: 1px solid transparent;
   border-top-color: inherit;
   bottom: 0px;
+  color: rgb(200 200 200);
   display: flex;
   justify-content: center;
   padding: 1rem 0.5rem;
   position: absolute;
+  text-shadow: 0 0 10px rgba(0 0 0 / 90%);
   width: 100%;
 }
 
@@ -292,9 +294,11 @@
   background-color: rgb(0 0 0 / 30%);
   border-top: 1px solid transparent;
   bottom: 0px;
+  color: rgb(200 200 200);
   display: flex;
   justify-content: center;
   padding: 1rem 0.5rem;
   position: absolute;
+  text-shadow: 0 0 10px rgba(0 0 0 / 90%);
   width: 100%;
 }
