@@ -56,7 +56,7 @@ class CombatHud {
       attack: this.getItems({
         actionType: ["action"],
         itemType: ["weapon"],
-        equipped: true,
+        equipped: false,
       }),
       spells: this.getItems({
         actionType: ["action"],
@@ -73,7 +73,7 @@ class CombatHud {
       attack: this.getItems({
         actionType: ["bonus"],
         itemType: ["weapon"],
-        equipped: true,
+        equipped: false,
       }),
       spells: this.getItems({
         actionType: ["bonus"],
