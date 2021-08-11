@@ -1111,6 +1111,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           break;
       }
     }
+    description = TextEditor.enrichHTML(description);
 
     const tooltip = ({
       title,
