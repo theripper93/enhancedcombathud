@@ -368,6 +368,15 @@ Hooks.once("init", function () {
     type: Number,
     default: 15,
   });
+  
+  game.settings.register("enhancedcombathud", "hideMacroPlayers", {
+    name: game.i18n.localize("enhancedcombathud.settings.hideMacroPlayers.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.hideMacroPlayers.hint"),
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
 
   game.settings.register("enhancedcombathud", "playerDetailsBottom", {
     name: game.i18n.localize("enhancedcombathud.settings.playerDetailsBottom.name"),
@@ -437,6 +446,32 @@ Hooks.once("init", function () {
     type: Boolean,
     default: false,
   });
+
+  game.settings.register("enhancedcombathud", "fadeoutDelay", {
+    name: game.i18n.localize("enhancedcombathud.settings.fadeoutDelay.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.fadeoutDelay.hint"),
+    scope: "client",
+    config: true,
+    type: Number,
+    default: 4,
+  });
+
+  game.settings.register("enhancedcombathud", "fadeoutOpacity", {
+    name: game.i18n.localize("enhancedcombathud.settings.fadeoutOpacity.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.fadeoutOpacity.hint"),
+    scope: "client",
+    config: true,
+    type: Number,
+    range: {
+      min: 0,
+      max: 1,
+      step: 0.05,
+    },
+    default: 0.1,
+  });
+
+  
+  
 });
 
 //Color Settings

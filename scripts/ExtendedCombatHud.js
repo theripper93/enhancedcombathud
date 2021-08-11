@@ -448,6 +448,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigHtml() {
+    this.loadCSSSettings();
     this.clearEmpty();
     this.setColorSettings();
     this.updatePass();
@@ -458,6 +459,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.initSets();
     this.rigAutoScale();
   }
+
+  loadCSSSettings() {
+    document.documentElement.style.setProperty("--ech-fadeout-deleay", game.settings.get("enhancedcombathud", "fadeoutDelay")+"s");
+    document.documentElement.style.setProperty("--ech-fadeout-opacity", game.settings.get("enhancedcombathud", "fadeoutOpacity"));
+  }
+
   setColorSettings() {
     Object.flatten = function (data) {
       var result = {};
@@ -952,8 +959,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   toggleMacroPlayers(togg) {
-    $("#players").css("display", togg ? "block" : "none");
-    $("#hotbar").css("display", togg ? "flex" : "none");
+    if(togg || !game.settings.get("enhancedcombathud","hideMacroPlayers")){
+      $("#players").show(500);
+      $("#hotbar").show(500);
+    }else{
+      $("#players").hide(500);
+      $("#hotbar").hide(500);
+    }
+
   }
 
   static generateSpells(obj) {

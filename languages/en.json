@@ -137,6 +137,12 @@
     "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Show tooltips on hover for tools in the ability menu",
     "enhancedcombathud.settings.fadeOutInactive.name" : "Fade Out",
     "enhancedcombathud.settings.fadeOutInactive.hint" : "Fade out the HUD after not mouse overing it for 5 seconds",
+    "enhancedcombathud.settings.fadeoutDelay.name" : "Fadeout Delay",
+    "enhancedcombathud.settings.fadeoutDelay.hint" : "Delay before fading out the HUD in seconds",
+    "enhancedcombathud.settings.fadeoutOpacity.name" : "Fadeout Opacity",
+    "enhancedcombathud.settings.fadeoutOpacity.hint" : "Opacity of the HUD when faded out",
+    "enhancedcombathud.settings.hideMacroPlayers.name" : "Hide Macro Bar and Player list",
+    "enhancedcombathud.settings.hideMacroPlayers.hint" : "Hide Macro Bar and Player list while the HUD is opened",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",

@@ -63,6 +63,8 @@
 	/* SETTINGS */
   --ech-portrait-size: cover;
   --ech-font-family: 'Roboto', sans-serif;
+  --ech-fadeout-deleay: 5s;
+  --ech-fadeout-opacity: 0.1;
 }
 
 @keyframes echFadeOut {
@@ -81,10 +83,10 @@
   pointer-events: none;
 }
 .extended-combat-hud.fade-out-inactive-true {
-  opacity: 0.1;
+  opacity: var(--ech-fadeout-opacity);
   transition-property: opacity;
   transition-duration: 1s;
-  transition-delay: 5s;
+  transition-delay: var(--ech-fadeout-deleay);
 }
 .ech-tooltip:hover + .extended-combat-hud,
 .extended-combat-hud:hover {
