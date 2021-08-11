@@ -932,7 +932,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     maxhpel[0].dataset.hpMax = hp.max+hp.tempmax;
     acelel[0].dataset.acValue = ac;
     hpelel.css({color: hp.temp ? "#6698f3" : "rgb(0 255 170)"});
-    maxhpel.css({color: hp.tempmax ? "#ffb000" : "rgb(255, 255, 255)"});
+    maxhpel.css({color: hp.tempmax ? hp.tempmax > 0 ? "rgb(222 91 255)" : "#ffb000" : "rgb(255, 255, 255)"});
   }
 
   getSpecialItem(itemName) {
