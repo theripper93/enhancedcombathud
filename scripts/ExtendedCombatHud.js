@@ -63,10 +63,10 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["action"], itemType: ["feat"] }),
+      special: this.getItems({ actionType: ["action","legendary"], itemType: ["feat"] }),
       consumables: this.getItems({
         actionType: ["action"],
-        itemType: ["consumable"],
+        itemType: ["consumable","weapon","equipment","loot"],
       }),
     };
     this.bonus = {
@@ -80,7 +80,7 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["bonus"], itemType: ["feat"] }),
+      special: this.getItems({ actionType: ["bonus"], itemType: ["feat","equipment","consumable"] }),
       consumables: this.getItems({
         actionType: ["bonus"],
         itemType: ["consumable"],
@@ -116,8 +116,13 @@ class CombatHud {
       currHp: this.actor.data.data.attributes.hp.value,
       movement: {
         max: Math.round(
-          this.actor.data.data.attributes.movement.walk /
-            canvas.dimensions.distance
+          Math.max(
+            this.actor.data.data.attributes.movement.burrow,
+            this.actor.data.data.attributes.movement.climb,
+            this.actor.data.data.attributes.movement.fly,
+            this.actor.data.data.attributes.movement.swim,
+            this.actor.data.data.attributes.movement.walk
+          ) / canvas.dimensions.distance
         ),
         current: 0,
         moved: 0,
@@ -205,7 +210,7 @@ class CombatHud {
             value.subclass[0].toUpperCase() +
             value.subclass.substring(1) +
             ") "
-          : "";
+          : " ";
       }
       return string;
     } catch {
@@ -919,13 +924,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     $element.html(newHtml);
   }
 
-  updatePortrait(hp, maxhp, ac) {
+  updatePortrait(hp,ac) {
     let hpelel = $(this.element).find("span[data-hp-value]");
     let maxhpel = $(this.element).find("span[data-hp-max]");
     let acelel = $(this.element).find("span[data-ac-value]");
-    hpelel[0].dataset.hpValue = hp;
-    maxhpel[0].dataset.hpMax = maxhp;
+    hpelel[0].dataset.hpValue = hp.value+hp.temp;
+    maxhpel[0].dataset.hpMax = hp.max+hp.tempmax;
     acelel[0].dataset.acValue = ac;
+    hpelel.css({color: hp.temp ? "#6698f3" : "rgb(0 255 170)"});
+    maxhpel.css({color: hp.tempmax ? "#ffb000" : "rgb(255, 255, 255)"});
   }
 
   getSpecialItem(itemName) {
@@ -1413,14 +1420,12 @@ Hooks.once("init", () => {
 Hooks.on("updateActor", (actor, updates) => {
   if (
     actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id &&
-    (updates?.data?.attributes?.ac?.value ||
-      updates?.data?.attributes?.hp?.value ||
-      updates?.data?.attributes?.hp?.max)
+    (updates?.data?.attributes?.ac ||
+      updates?.data?.attributes?.hp)
   ) {
     let ad = actor.data.data.attributes;
     canvas.hud.enhancedcombathud.updatePortrait(
-      ad.hp.value,
-      ad.hp.max,
+      ad.hp,
       ad.ac.value
     );
   }
@@ -1434,8 +1439,7 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
   for (let change of activeEffect.data.changes) {
     if (change.key == "data.attributes.ac.value") {
       canvas.hud.enhancedcombathud.updatePortrait(
-        ad.hp.value,
-        ad.hp.max,
+        ad.hp,
         ad.ac.value
       );
       return;
@@ -1450,8 +1454,7 @@ Hooks.on("updateItem", (item, updates) => {
   let ad = actor.data.data.attributes;
   if (updates?.data?.equipped !== undefined) {
     canvas.hud.enhancedcombathud.updatePortrait(
-      ad.hp.value,
-      ad.hp.max,
+      ad.hp,
       ad.ac.value
     );
     return;

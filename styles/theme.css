@@ -258,10 +258,10 @@
 	/* ADD THEME OPTIONS */
     background-color: rgb(0 0 0 / 50%);
 }
-.portrait-stat-block [data-hp-value]:after {
-	/* ADD THEME OPTIONS */
+/*.portrait-stat-block [data-hp-value]:after {
+	 ADD THEME OPTIONS 
     color: rgb(0 255 170);
-}
+}*/
 .portrait-stat-block [data-ac-value]:after {
 	/* ADD THEME OPTIONS */
     color: rgb(90, 190, 245);
