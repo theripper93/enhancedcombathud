@@ -1,5 +1,6 @@
 class CombatHud {
   constructor(token) {
+    this.fixFoundry = false;
     this.token = token;
     this.actor = token.actor;
     this.settings = {
@@ -444,6 +445,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   setPosition() {
     if (!this.object) return;
+    // Fix foundry (or us) calling this function twice 
+    if (this.hudData.fixFoundry) return
+    this.hudData.fixFoundry = true;
+
     this.rigHtml();
     const position = {
       "z-index": 100,
@@ -451,11 +456,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       bottom: game.settings.get("enhancedcombathud", "botPos") + "px",
     };
     this.element.css(position);
+    this.toggleMinimize($('body').hasClass('minimize-ech-hud'));
     this.toggleMacroPlayers(false);
   }
 
-  toggleMinimize() {
-    $('.extended-combat-hud').toggleClass('minimize-hud');
+  toggleMinimize(forceState) {
+    $('body').toggleClass('minimize-ech-hud', forceState ?? !$('body').hasClass('minimize-ech-hud'));
+    $('.extended-combat-hud').toggleClass('minimize-hud',  $('body').hasClass('minimize-ech-hud'));
+    
 
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
@@ -482,6 +490,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.rigAccordion();
     this.initSets();
     this.rigAutoScale();
+
+    setTimeout(() => { this.element.addClass('loaded'); }, 500)
   }
 
   loadCSSSettings() {

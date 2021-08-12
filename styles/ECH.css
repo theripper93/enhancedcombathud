@@ -82,6 +82,9 @@
   /* USED TO ALLOW USERS TO CLICK THROUGH AND AROUND ECH*/
   pointer-events: none;
 }
+.extended-combat-hud.loaded {
+  transition: all 0.3s ease-in-out;
+}
 .extended-combat-hud.fade-out-inactive-true {
   opacity: var(--ech-fadeout-opacity);
   transition-property: opacity;
