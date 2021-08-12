@@ -117,7 +117,7 @@
 .feature-element {
 	/* ADD THEME OPTIONS */
 	border-color: var(--ech-mainAction-base-border);
-	color: rgb(150, 150, 150);
+	color: var(--ech-mainAction-base-color);
 }
 .feature-element:hover, 
 .feature-element:active, 
