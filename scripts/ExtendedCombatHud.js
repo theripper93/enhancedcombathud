@@ -1132,11 +1132,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         case "consumable":
           subtitle =
             game.dnd5e.config.consumableTypes[item.data.data.consumableType] +
-            " " +
-            item.data.data.chatFlavor;
-          properties.push(
-            game.dnd5e.config.itemActionTypes[item.data.data.actionType]
-          );
+            //" " + item.data.data.chatFlavor;
+            properties.push(
+              game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+            );
           break;
         case "feat":
           subtitle = item.data.data.requirements;
@@ -1543,4 +1542,21 @@ Hooks.on("updateCombat", (combat, updates) => {
 
 Hooks.on("deleteCombat", (combat, updates) => {
   canvas.hud.enhancedcombathud?.newRound();
+});
+
+Hooks.on("deleteToken", (token, updates) => {
+  if (
+    canvas.hud.enhancedcombathud?.rendered &&
+    canvas.hud.enhancedcombathud.hudData.token.id === token.id
+  ) {
+    canvas.hud.enhancedcombathud.close();
+  }
+});
+
+Hooks.on("preUpdateCombat", (combat, updates) => {
+  if (game.settings.get("enhancedcombathud", "openCombatStart") && canvas.tokens.controlled[0] && !canvas.hud.enhancedcombathud?.rendered && combat.previous?.round === null  && combat.previous?.turn === null) {
+    canvas.hud.enhancedcombathud.bind(
+      canvas.tokens.get(canvas.tokens.controlled[0].id)
+    );
+  }
 });
