@@ -145,6 +145,8 @@
     "enhancedcombathud.settings.hideMacroPlayers.hint" : "Hide Macro Bar and Player list while the HUD is opened",
     "enhancedcombathud.settings.openCombatStart.name" : "Open on Combat Start",
     "enhancedcombathud.settings.openCombatStart.hint" : "Open the HUD when a combat is started",
+    "enhancedcombathud.settings.tooltipScale.name" : "Tooltip Scale",
+    "enhancedcombathud.settings.tooltipScale.hint" : "Scale of the tooltips",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",

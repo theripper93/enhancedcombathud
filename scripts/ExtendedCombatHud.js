@@ -4,6 +4,7 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
+      tooltipScale: game.settings.get("enhancedcombathud", "tooltipScale"),
       fadeOutInactive: game.settings.get(
         "enhancedcombathud",
         "fadeOutInactive"
@@ -589,7 +590,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        let uses = item.data.data.quantity || item.data.data.uses.value;
+        if(item.data.data.consume?.type){
+          switch(item.data.data.consume.type){
+            case "ammo":
+              let ammoItem = isAmmo
+                ? this.hudData.actor.items.find(
+                    (i) => i.id == item.data.data.consume?.target
+                  )
+                : null;
+              let ammoCount = confimed
+                ? ammoItem?.data?.data?.quantity - item.data.data.consume?.amount
+                : ammoItem?.data?.data?.quantity;
+              event.currentTarget.dataset.itemCount = ammoCount;
+              break;
+            case "attribute":
+              let value = Object.byString(this.hudData.actor.data.data,item.data.data.consume.target)
+              let resCount = value
+              event.currentTarget.dataset.itemCount = resCount;
+          }
+        }
+        else{
+          let uses = item.data.data.quantity || item.data.data.uses.value;
+          event.currentTarget.dataset.itemCount = uses;
+        }
+        /*let uses = item.data.data.quantity || item.data.data.uses.value;
         let isAmmo = item.data.data.consume?.type == "ammo";
         let ammoItem = isAmmo
           ? this.hudData.actor.items.find(
@@ -599,7 +623,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         let ammoCount = confimed
           ? ammoItem?.data?.data?.quantity - item.data.data.consume?.amount
           : ammoItem?.data?.data?.quantity;
-        event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses;
+        event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses;*/
       }
       this.updateSpellSlots();
     });
@@ -1076,10 +1100,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       "enhancedcombathud",
       "showTooltipsSpecial"
     );
-    const showTooltipSkills = true; /*game.settings.get(
-      "enhancedcombathud",
-      "showTooltipSkills"
-    );*/
     if (
       !showTooltip ||
       (type == "save" &&
@@ -1190,7 +1210,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         ${!subtitle ? "hide-subtitle" : ""} 
         ${target == "-" && range == "-" ? "hideTargetRange" : ""}
         ${properties.length == 0 ? "hideProperties" : ""}
-        ">
+        " style="transform: scale(${this.hudData.settings.tooltipScale});">
           <div class="ech-tooltip-header">
             <h2>${title}</h2>
           </div>
@@ -1259,6 +1279,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
 
     if (type == "save" || type == "skill" || type == "tool") {
+      $(".ech-tooltip").last().addClass("ability-tooltip")
       offset.top = offset.top - $(".ech-tooltip").last().height() / 2;
     } else {
       offset.top = offset.top - $(".ech-tooltip").last().height() - 10;

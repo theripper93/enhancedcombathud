@@ -11,7 +11,7 @@
     text-align:left;
     transition: opacity 0.3s ease-in-out;
     transition-property: backdrop-filter, opacity;
-
+    transform-origin: bottom center;
     left: 50%;
     top: 50%;
 
@@ -21,6 +21,11 @@
 
     pointer-events: all;
 }
+
+.ech-tooltip.ability-tooltip{
+  transform-origin: left center;
+}
+
 .ech-tooltip.ech-show-tooltip {
   opacity: 1;
 }
