@@ -63,10 +63,13 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["action","legendary"], itemType: ["feat"] }),
+      special: this.getItems({
+        actionType: ["action", "legendary"],
+        itemType: ["feat"],
+      }),
       consumables: this.getItems({
         actionType: ["action"],
-        itemType: ["consumable","weapon","equipment","loot"],
+        itemType: ["consumable", "weapon", "equipment", "loot"],
       }),
     };
     this.bonus = {
@@ -80,7 +83,10 @@ class CombatHud {
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({ actionType: ["bonus"], itemType: ["feat","equipment","consumable"] }),
+      special: this.getItems({
+        actionType: ["bonus"],
+        itemType: ["feat", "equipment", "consumable"],
+      }),
       consumables: this.getItems({
         actionType: ["bonus"],
         itemType: ["consumable"],
@@ -461,8 +467,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   loadCSSSettings() {
-    document.documentElement.style.setProperty("--ech-fadeout-deleay", game.settings.get("enhancedcombathud", "fadeoutDelay")+"s");
-    document.documentElement.style.setProperty("--ech-fadeout-opacity", game.settings.get("enhancedcombathud", "fadeoutOpacity"));
+    document.documentElement.style.setProperty(
+      "--ech-fadeout-deleay",
+      game.settings.get("enhancedcombathud", "fadeoutDelay") + "s"
+    );
+    document.documentElement.style.setProperty(
+      "--ech-fadeout-opacity",
+      game.settings.get("enhancedcombathud", "fadeoutOpacity")
+    );
   }
 
   setColorSettings() {
@@ -833,7 +845,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let primary = $(this.element).find('div[data-set="setp"]');
     let secondary = $(this.element).find('div[data-set="sets"]');
     this.updateSetElement(primary, this.hudData.sets.active.primary);
-    this.updateSetElement(secondary, this.hudData.sets.active.secondary);
+    this.updateSetElement(
+      secondary,
+      this.hudData.sets.active.secondary?.data.data.activation.type
+        ? this.hudData.sets.active.secondary
+        : undefined
+    );
     this.clearEmpty();
   }
   updateSetElement(element, item) {
@@ -931,15 +948,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     $element.html(newHtml);
   }
 
-  updatePortrait(hp,ac) {
+  updatePortrait(hp, ac) {
     let hpelel = $(this.element).find("span[data-hp-value]");
     let maxhpel = $(this.element).find("span[data-hp-max]");
     let acelel = $(this.element).find("span[data-ac-value]");
-    hpelel[0].dataset.hpValue = hp.value+hp.temp;
-    maxhpel[0].dataset.hpMax = hp.max+hp.tempmax;
+    hpelel[0].dataset.hpValue = hp.value + hp.temp;
+    maxhpel[0].dataset.hpMax = hp.max + hp.tempmax;
     acelel[0].dataset.acValue = ac;
-    hpelel.css({color: hp.temp ? "#6698f3" : "rgb(0 255 170)"});
-    maxhpel.css({color: hp.tempmax ? hp.tempmax > 0 ? "rgb(222 91 255)" : "#ffb000" : "rgb(255, 255, 255)"});
+    hpelel.css({ color: hp.temp ? "#6698f3" : "rgb(0 255 170)" });
+    maxhpel.css({
+      color: hp.tempmax
+        ? hp.tempmax > 0
+          ? "rgb(222 91 255)"
+          : "#ffb000"
+        : "rgb(255, 255, 255)",
+    });
   }
 
   getSpecialItem(itemName) {
@@ -959,14 +982,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   toggleMacroPlayers(togg) {
-    if(togg || !game.settings.get("enhancedcombathud","hideMacroPlayers")){
+    if (togg || !game.settings.get("enhancedcombathud", "hideMacroPlayers")) {
       $("#players").show(500);
       $("#hotbar").show(500);
-    }else{
+    } else {
       $("#players").hide(500);
       $("#hotbar").hide(500);
     }
-
   }
 
   static generateSpells(obj) {
@@ -1434,14 +1456,10 @@ Hooks.once("init", () => {
 Hooks.on("updateActor", (actor, updates) => {
   if (
     actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id &&
-    (updates?.data?.attributes?.ac ||
-      updates?.data?.attributes?.hp)
+    (updates?.data?.attributes?.ac || updates?.data?.attributes?.hp)
   ) {
     let ad = actor.data.data.attributes;
-    canvas.hud.enhancedcombathud.updatePortrait(
-      ad.hp,
-      ad.ac.value
-    );
+    canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
   }
 });
 
@@ -1452,10 +1470,7 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
   let ad = actor.data.data.attributes;
   for (let change of activeEffect.data.changes) {
     if (change.key == "data.attributes.ac.value") {
-      canvas.hud.enhancedcombathud.updatePortrait(
-        ad.hp,
-        ad.ac.value
-      );
+      canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
       return;
     }
   }
@@ -1467,10 +1482,7 @@ Hooks.on("updateItem", (item, updates) => {
     return;
   let ad = actor.data.data.attributes;
   if (updates?.data?.equipped !== undefined) {
-    canvas.hud.enhancedcombathud.updatePortrait(
-      ad.hp,
-      ad.ac.value
-    );
+    canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
     return;
   }
 });
