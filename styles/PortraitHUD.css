@@ -123,6 +123,10 @@
 .player-button.ech-close i {
     margin-top: -0.5rem;
 }
+.minimize-hud .player-button.ech-close i {
+    transform: rotate(180deg);
+    margin-top: 0.5rem;  
+}
 
 .ability-menu {
     bottom: 374px;

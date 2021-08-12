@@ -13,6 +13,7 @@ class CombatHud {
         "playerDetailsBottom"
       ),
       localize: {
+        InitiativeRoll: game.i18n.localize('COMBAT.InitiativeRoll'),
         mainactions: game.i18n.localize(
           "enhancedcombathud.hud.mainactions.name"
         ),
@@ -451,6 +452,23 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     };
     this.element.css(position);
     this.toggleMacroPlayers(false);
+  }
+
+  toggleMinimize() {
+    $('.extended-combat-hud').toggleClass('minimize-hud');
+
+    let echHUDWidth = $(".extended-combat-hud").outerWidth();
+    let windowWidth = $(window).width() - 340;
+    let scale = game.settings.get("enhancedcombathud", "noAutoscale")
+      ? game.settings.get("enhancedcombathud", "scale")
+      : (1 / (echHUDWidth / windowWidth)) *
+        game.settings.get("enhancedcombathud", "scale");
+
+    const position = {
+      bottom: $('.extended-combat-hud').hasClass('minimize-hud') ? `0px` : `${game.settings.get("enhancedcombathud", "botPos")}px`,
+      transform: $('.extended-combat-hud').hasClass('minimize-hud') ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)` : `scale(${scale > 1 ? 1 : scale})`
+    }
+    $('.extended-combat-hud').css(position);
   }
 
   rigHtml() {
