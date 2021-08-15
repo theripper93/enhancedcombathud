@@ -32,7 +32,12 @@
         "lang": "it",
         "name": "Italiano",
         "path": "languages/it.json"
-    }
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "languages/ja.json"
+  }
   ],
   "scripts": [
       "./scripts/main.js",
