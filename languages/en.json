@@ -147,6 +147,8 @@
     "enhancedcombathud.settings.openCombatStart.hint" : "Open the HUD when a combat is started",
     "enhancedcombathud.settings.tooltipScale.name" : "Tooltip Scale",
     "enhancedcombathud.settings.tooltipScale.hint" : "Scale of the tooltips",
+    "enhancedcombathud.settings.switchEquip.name" : "Auto Equip",
+    "enhancedcombathud.settings.switchEquip.hint" : "Automatically equip/unequip items when switching sets",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
