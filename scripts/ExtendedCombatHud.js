@@ -362,7 +362,10 @@ class CombatHud {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
-    if (!this.settings.switchEquip) return;
+    if (!this.settings.switchEquip) {
+      await this.actor.setFlag("enhancedcombathud", "activeSet", active);
+      return;
+    }
     if (this.sets.set1.primary?.data.data.equipped)
       await this.sets.set1.primary?.update({ "data.equipped": false });
     if (this.sets.set1.secondary?.data.data.equipped)
