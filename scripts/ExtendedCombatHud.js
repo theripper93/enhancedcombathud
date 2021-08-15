@@ -16,7 +16,11 @@ class CombatHud {
         "playerDetailsBottom"
       ),
       localize: {
-        InitiativeRoll: game.i18n.localize("COMBAT.InitiativeRoll"),
+
+        AC: game.i18n.localize('DND5E.AC'),
+        SpellDC: game.i18n.localize('DND5E.SpellDC'),
+        InitiativeRoll: game.i18n.localize('COMBAT.InitiativeRoll'),
+
         mainactions: game.i18n.localize(
           "enhancedcombathud.hud.mainactions.name"
         ),

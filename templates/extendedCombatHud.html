@@ -31,10 +31,10 @@
 			&nbsp;HP
 		</div>
 		<div class="portrait-stat-block">
-			<span>AC</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
+			<span>{{hudData.settings.localize.AC}}</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
 		</div>
 		<div class="portrait-stat-block">
-			<span>Spell DC</span>&nbsp;<span data-spell-dc="{{hudData.actor.data.data.attributes.spelldc}}"></span>
+			<span>{{hudData.settings.localize.SpellDC}}</span>&nbsp;<span data-spell-dc="{{hudData.actor.data.data.attributes.spelldc}}"></span>
 		</div>
 		<div class="portrait-stat-block player-details{{#if hudData.settings.playerDetailsBottom}} player-details-bottom{{/if}}">
 			<span class="player-name">{{hudData.actor.data.name}}</span>
