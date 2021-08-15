@@ -77,7 +77,7 @@ class CombatHud {
       }),
       consumables: this.getItems({
         actionType: ["action"],
-        itemType: ["consumable", "weapon", "equipment", "loot"],
+        itemType: ["consumable", "equipment", "loot"],
       }),
     };
     this.bonus = {
@@ -611,16 +611,15 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         if (item.data.data.consume?.type) {
           switch (item.data.data.consume.type) {
             case "ammo":
-              let ammoItem = isAmmo
-                ? this.hudData.actor.items.find(
+              let ammoItem = this.hudData.actor.items.find(
                     (i) => i.id == item.data.data.consume?.target
-                  )
-                : null;
+                  );
               let ammoCount = confimed
                 ? ammoItem?.data?.data?.quantity -
                   item.data.data.consume?.amount
                 : ammoItem?.data?.data?.quantity;
-              event.currentTarget.dataset.itemCount = ammoCount;
+                $(".extended-combat-hud").find(`[data-set] .action-element-title:contains(${itemName})`).closest('div').each((index, element) => element.dataset.itemCount = ammoCount)
+                event.currentTarget.dataset.itemCount = ammoCount;
               break;
             case "attribute":
               let value = Object.byString(
