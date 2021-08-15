@@ -4,6 +4,7 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
+      switchEquip: game.settings.get("enhancedcombathud", "switchEquip"),
       tooltipScale: game.settings.get("enhancedcombathud", "tooltipScale"),
       fadeOutInactive: game.settings.get(
         "enhancedcombathud",
@@ -15,7 +16,7 @@ class CombatHud {
         "playerDetailsBottom"
       ),
       localize: {
-        InitiativeRoll: game.i18n.localize('COMBAT.InitiativeRoll'),
+        InitiativeRoll: game.i18n.localize("COMBAT.InitiativeRoll"),
         mainactions: game.i18n.localize(
           "enhancedcombathud.hud.mainactions.name"
         ),
@@ -241,7 +242,8 @@ class CombatHud {
         this.settings.spellMode &&
         prepared === true &&
         itemData.data.preparation?.prepared === false &&
-        itemData.data.preparation?.mode == "prepared"
+        itemData.data.preparation?.mode == "prepared" &&
+        itemData.data.level !== 0
       )
         return false;
       if (
@@ -356,6 +358,7 @@ class CombatHud {
     canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
+    if (!this.settings.switchEquip) return;
     if (this.sets.set1.primary?.data.data.equipped)
       await this.sets.set1.primary?.update({ "data.equipped": false });
     if (this.sets.set1.secondary?.data.data.equipped)
@@ -446,8 +449,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   setPosition() {
     if (!this.object) return;
-    // Fix foundry (or us) calling this function twice 
-    if (this.hudData.fixFoundry) return
+    // Fix foundry (or us) calling this function twice
+    if (this.hudData.fixFoundry) return;
     this.hudData.fixFoundry = true;
 
     this.rigHtml();
@@ -457,14 +460,19 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       bottom: game.settings.get("enhancedcombathud", "botPos") + "px",
     };
     this.element.css(position);
-    this.toggleMinimize($('body').hasClass('minimize-ech-hud'));
+    this.toggleMinimize($("body").hasClass("minimize-ech-hud"));
     this.toggleMacroPlayers(false);
   }
 
   toggleMinimize(forceState) {
-    $('body').toggleClass('minimize-ech-hud', forceState ?? !$('body').hasClass('minimize-ech-hud'));
-    $('.extended-combat-hud').toggleClass('minimize-hud',  $('body').hasClass('minimize-ech-hud'));
-    
+    $("body").toggleClass(
+      "minimize-ech-hud",
+      forceState ?? !$("body").hasClass("minimize-ech-hud")
+    );
+    $(".extended-combat-hud").toggleClass(
+      "minimize-hud",
+      $("body").hasClass("minimize-ech-hud")
+    );
 
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
@@ -474,10 +482,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         game.settings.get("enhancedcombathud", "scale");
 
     const position = {
-      bottom: $('.extended-combat-hud').hasClass('minimize-hud') ? `0px` : `${game.settings.get("enhancedcombathud", "botPos")}px`,
-      transform: $('.extended-combat-hud').hasClass('minimize-hud') ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)` : `scale(${scale > 1 ? 1 : scale})`
-    }
-    $('.extended-combat-hud').css(position);
+      bottom: $(".extended-combat-hud").hasClass("minimize-hud")
+        ? `0px`
+        : `${game.settings.get("enhancedcombathud", "botPos")}px`,
+      transform: $(".extended-combat-hud").hasClass("minimize-hud")
+        ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)`
+        : `scale(${scale > 1 ? 1 : scale})`,
+    };
+    $(".extended-combat-hud").css(position);
   }
 
   rigHtml() {
@@ -492,7 +504,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.initSets();
     this.rigAutoScale();
 
-    setTimeout(() => { this.element.addClass('loaded'); }, 500)
+    setTimeout(() => {
+      this.element.addClass("loaded");
+    }, 500);
   }
 
   loadCSSSettings() {
@@ -590,8 +604,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item) {
         $(event.currentTarget).remove();
       } else {
-        if(item.data.data.consume?.type){
-          switch(item.data.data.consume.type){
+        if (item.data.data.consume?.type) {
+          switch (item.data.data.consume.type) {
             case "ammo":
               let ammoItem = isAmmo
                 ? this.hudData.actor.items.find(
@@ -599,17 +613,20 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
                   )
                 : null;
               let ammoCount = confimed
-                ? ammoItem?.data?.data?.quantity - item.data.data.consume?.amount
+                ? ammoItem?.data?.data?.quantity -
+                  item.data.data.consume?.amount
                 : ammoItem?.data?.data?.quantity;
               event.currentTarget.dataset.itemCount = ammoCount;
               break;
             case "attribute":
-              let value = Object.byString(this.hudData.actor.data.data,item.data.data.consume.target)
-              let resCount = value
+              let value = Object.byString(
+                this.hudData.actor.data.data,
+                item.data.data.consume.target
+              );
+              let resCount = value;
               event.currentTarget.dataset.itemCount = resCount;
           }
-        }
-        else{
+        } else {
           let uses = item.data.data.quantity || item.data.data.uses.value;
           event.currentTarget.dataset.itemCount = uses;
         }
@@ -1279,7 +1296,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
 
     if (type == "save" || type == "skill" || type == "tool") {
-      $(".ech-tooltip").last().addClass("ability-tooltip")
+      $(".ech-tooltip").last().addClass("ability-tooltip");
       offset.top = offset.top - $(".ech-tooltip").last().height() / 2;
     } else {
       offset.top = offset.top - $(".ech-tooltip").last().height() - 10;
@@ -1373,7 +1390,7 @@ class ECHDiceRoller {
   async rollSave(ability, event) {
     if (this.modules.betterRolls) BetterRolls.rollSave(this.actor, ability);
     else {
-      this.actor.rollAbilitySave(ability);
+      this.actor.rollAbilitySave(ability, { event: event });
       // Set Dialog Position
       this.hijackDialog(event);
     }
@@ -1393,7 +1410,7 @@ class ECHDiceRoller {
         ECHDiceRoller.dnd5eRollSkill,
         "OVERRIDE"
       );
-    let roll = this.actor.rollSkill(skill, { data: data });
+    let roll = this.actor.rollSkill(skill, { data: data, event: event });
     libWrapper.unregister(
       "enhancedcombathud",
       "game.dnd5e.entities.Actor5e.prototype.rollSkill",
@@ -1603,7 +1620,13 @@ Hooks.on("deleteToken", (token, updates) => {
 });
 
 Hooks.on("preUpdateCombat", (combat, updates) => {
-  if (game.settings.get("enhancedcombathud", "openCombatStart") && canvas.tokens.controlled[0] && !canvas.hud.enhancedcombathud?.rendered && combat.previous?.round === null  && combat.previous?.turn === null) {
+  if (
+    game.settings.get("enhancedcombathud", "openCombatStart") &&
+    canvas.tokens.controlled[0] &&
+    !canvas.hud.enhancedcombathud?.rendered &&
+    combat.previous?.round === null &&
+    combat.previous?.turn === null
+  ) {
     canvas.hud.enhancedcombathud.bind(
       canvas.tokens.get(canvas.tokens.controlled[0].id)
     );
