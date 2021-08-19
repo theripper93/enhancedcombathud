@@ -495,6 +495,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       transform: $(".extended-combat-hud").hasClass("minimize-hud")
         ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)`
         : `scale(${scale > 1 ? 1 : scale})`,
+      width: `calc(100vw * ${scale < 1 ? (1 + scale) : 1})`
     };
     $(".extended-combat-hud").css(position);
   }
