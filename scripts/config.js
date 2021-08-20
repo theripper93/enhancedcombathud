@@ -772,7 +772,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
       name: "echtoggle",
       title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
       onClick: function (toggle) {
-        if(_token.document.actor.type == "vehicle") return
+        if(_token.document.actor.data.type == "vehicle") return
         if (toggle) {
           if (_token && canvas.tokens.get(_token.id))
             canvas.hud.enhancedcombathud.bind(_token);
