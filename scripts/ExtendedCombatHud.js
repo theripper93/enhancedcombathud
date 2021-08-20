@@ -1559,6 +1559,7 @@ Hooks.on("updateItem", (item, updates) => {
 });
 
 Hooks.on("controlToken", (token, controlled) => {
+  if(token.document.actor.actor.type == "vehicle") return
   if (
     controlled &&
     canvas.hud.enhancedcombathud?.rendered &&
