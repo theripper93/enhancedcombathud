@@ -197,6 +197,17 @@ class CombatHud {
         `enhancedcombathud.skills.${skill}.tooltip`
       );
     });
+    
+    let sortableSkills = [];
+    for (let skill in this.skills) {
+      sortableSkills.push([skill, this.skills[skill]]);
+    }
+    sortableSkills.sort((a, b) => a[1].label < b[1].label ? -1 : 1);
+    let tempSkills = {};
+    sortableSkills.forEach(function(item){
+      tempSkills[item[0]]=item[1];
+    })
+    this.skills = tempSkills;
 
     //
     Object.keys(game.dnd5e.config.abilities).forEach((ability) => {
