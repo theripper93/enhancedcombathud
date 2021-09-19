@@ -53,11 +53,11 @@
         "name": "Português (Brasil)",
         "path": "languages/pt-br.json"
     },
-		{
-			"lang": "ru",
-			"name": "Русский",
-			"path": "languages/ru.json"
-		}
+    {
+        "lang": "ru",
+        "name": "Русский",
+        "path": "languages/ru.json"
+    }
   ],
   "scripts": [
       "./scripts/main.js",
