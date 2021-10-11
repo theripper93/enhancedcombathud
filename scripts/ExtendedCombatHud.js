@@ -3,6 +3,10 @@ class CombatHud {
     this.fixFoundry = false;
     this.token = token;
     this.actor = token.actor;
+    console.log(this);
+  }
+
+  async init(){
     this.settings = {
       isMagicItems: game.modules.get("magicitems").active,
       switchEquip: game.settings.get("enhancedcombathud", "switchEquip"),
@@ -62,67 +66,67 @@ class CombatHud {
       },
     };
     this.actions = {
-      attack: this.getItems({
+      attack: await this.getItems({
         actionType: ["action"],
         itemType: ["weapon"],
         equipped: false,
       }),
-      spells: this.getItems({
+      spells: await this.getItems({
         actionType: ["action"],
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({
+      special: await this.getItems({
         actionType: ["action", "legendary"],
         itemType: ["feat"],
       }),
-      consumables: this.getItems({
+      consumables: await this.getItems({
         actionType: ["action"],
         itemType: ["consumable", "equipment", "loot"],
       }),
     };
     this.bonus = {
-      attack: this.getItems({
+      attack: await this.getItems({
         actionType: ["bonus"],
         itemType: ["weapon"],
         equipped: false,
       }),
-      spells: this.getItems({
+      spells: await this.getItems({
         actionType: ["bonus"],
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({
+      special: await this.getItems({
         actionType: ["bonus"],
         itemType: ["feat", "equipment", "consumable"],
       }),
-      consumables: this.getItems({
+      consumables: await this.getItems({
         actionType: ["bonus"],
         itemType: ["consumable"],
       }),
     };
     this.reactions = {
-      attack: this.getItems({
+      attack: await this.getItems({
         actionType: ["reaction"],
         itemType: ["weapon"],
         equipped: true,
       }),
-      spells: this.getItems({
+      spells: await this.getItems({
         actionType: ["reaction"],
         itemType: ["spell"],
         prepared: true,
       }),
-      special: this.getItems({
+      special: await this.getItems({
         actionType: ["reaction"],
         itemType: ["feat"],
       }),
-      consumables: this.getItems({
+      consumables: await this.getItems({
         actionType: ["reaction"],
         itemType: ["consumable"],
       }),
     };
     this.free = {
-      special: this.getItems({ actionType: ["special"], itemType: ["feat"] }),
+      special: await this.getItems({ actionType: ["special"], itemType: ["feat"] }),
     };
     this.other = {
       portrait: this.actor.data.img,
@@ -218,9 +222,9 @@ class CombatHud {
         `enhancedcombathud.abilities.${ability}.tooltip`
       );
     });
-
-    console.log(this);
+    return this;
   }
+
   getClassesAsString() {
     try {
       let classes = this.actor.data.data.classes;
@@ -244,34 +248,38 @@ class CombatHud {
     }
   }
 
-  static getMagicItemItem(magicItem){
+  static async getMagicItemItem(magicItem){
     if(!game.modules.get("magicitems").active) return null;
-    return game.items.get(magicItem.id)
+    debugger;
+    let mi = game.items.get(magicItem.id) ?? await game.packs.get(magicItem.pack).getDocument(magicItem.id)
+    return mi 
   }
 
-  static getMagicItemByName(actor, name){
+  static async getMagicItemByName(actor, name){
     if(!game.modules.get("magicitems").active) return null;
     for(let i of MagicItems.actor(actor.id).items.filter(item => item.visible && item.active)){
       let mItem = i.spells.find(spell => spell.name == name);
-      if(mItem) return CombatHud.getMagicItemItem(mItem);
+      if(mItem) return await CombatHud.getMagicItemItem(mItem);
     }
     return null;
   }
 
-  getItems(filters) {
+  async getItems(filters) {
     const actionType = filters.actionType;
     const itemType = filters.itemType;
     const equipped = filters.equipped;
     const prepared = filters.prepared;
     let magicitems = [];
     if(this.settings.isMagicItems){
-      MagicItems.actor(this.actor.id).items.filter(item => item.visible && item.active).forEach(item => item.spells.forEach(spell => {
-        const item = CombatHud.getMagicItemItem(spell);
-       if(item){
-         item.isMagicItem=true;
-        magicitems.push(item)
-       }
-      }));
+      for(let mi of MagicItems.actor(this.actor.id).items.filter(item => item.visible && item.active)){
+        for(let spell of mi.spells){
+          const item = await CombatHud.getMagicItemItem(spell);
+          if(item){
+            item.isMagicItem=true;
+           magicitems.push(item)
+          }
+        }
+      }
     }
     let items = Array.from(this.actor.data.items).concat(magicitems);
 
@@ -458,9 +466,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     return true;
   }
 
-  getData() {
+  async getData() {
     const data = super.getData();
-    data.hudData = new CombatHud(this.object);
+    data.hudData = await new CombatHud(this.object).init();
     this.hudData = data.hudData;
     this.roller = new ECHDiceRoller(this.hudData.actor);
     return data;
@@ -1155,7 +1163,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       });
   }
 
-  drawTooltip(itemName, offset, type) {
+  async drawTooltip(itemName, offset, type) {
     const showTooltip = game.settings.get("enhancedcombathud", "showTooltips");
     const showTooltipSpecial = game.settings.get(
       "enhancedcombathud",
@@ -1178,7 +1186,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     )
       return;
     if (!showTooltipSpecial && ECHItems[itemName]) return;
-    let item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    let item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     let title;
     let description;
     let itemType;
@@ -1428,9 +1436,8 @@ class ECHDiceRoller {
   }
 
   async rollMagicItem(itemName){
-    const mi = CombatHud.getMagicItemByName(this.actor, itemName)
-    const parent = this.getMagicItemParent(mi.name)
-    MagicItems.actor(this.actor.id).rollByName(parent, itemName);
+    const parent = this.getMagicItemParent(itemName)
+    await MagicItems.actor(this.actor.id).rollByName(parent, itemName);
   }
 
   getMagicItemParent(itemName){
