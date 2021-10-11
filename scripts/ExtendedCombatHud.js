@@ -250,7 +250,6 @@ class CombatHud {
 
   static async getMagicItemItem(magicItem){
     if(!game.modules.get("magicitems").active) return null;
-    debugger;
     let mi = game.items.get(magicItem.id) ?? await game.packs.get(magicItem.pack).getDocument(magicItem.id)
     return mi 
   }
