@@ -245,12 +245,12 @@ class CombatHud {
   }
 
   static getMagicItemItem(magicItem){
-    if(!this.settings.isMagicItems) return null;
+    if(!game.modules.get("magicitems").active) return null;
     return game.items.get(magicItem.id)
   }
 
   static getMagicItemByName(actor, name){
-    if(!this.settings.isMagicItems) return null;
+    if(!game.modules.get("magicitems").active) return null;
     for(let i of MagicItems.actor(actor.id).items.filter(item => item.visible && item.active)){
       let mItem = i.spells.find(spell => spell.name == name);
       if(mItem) return CombatHud.getMagicItemItem(mItem);
@@ -1178,7 +1178,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     )
       return;
     if (!showTooltipSpecial && ECHItems[itemName]) return;
-    let item = this.hudData.actor.items.find((i) => i.data.name == itemName);
+    let item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     let title;
     let description;
     let itemType;
