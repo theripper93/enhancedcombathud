@@ -7,6 +7,8 @@ Read FAQs at the bottom of the page
 
 ## HUD
 
+To open the hud, click the crossed swords icon in the token controls (top left buttons) or click the same button in the token hud (right click on a token)
+
 ![image](https://user-images.githubusercontent.com/1346839/127322007-c4e6a5e4-41ae-4820-9662-ae7e9e4a36af.png)
 
 ## Spells
