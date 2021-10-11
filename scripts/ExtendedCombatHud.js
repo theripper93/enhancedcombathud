@@ -4,6 +4,7 @@ class CombatHud {
     this.token = token;
     this.actor = token.actor;
     this.settings = {
+      isMagicItems: game.modules.get("magicitems").active,
       switchEquip: game.settings.get("enhancedcombathud", "switchEquip"),
       tooltipScale: game.settings.get("enhancedcombathud", "tooltipScale"),
       fadeOutInactive: game.settings.get(
@@ -242,13 +243,37 @@ class CombatHud {
       return "";
     }
   }
+
+  static getMagicItemItem(magicItem){
+    if(!this.settings.isMagicItems) return null;
+    return game.items.get(magicItem.id)
+  }
+
+  static getMagicItemByName(actor, name){
+    if(!this.settings.isMagicItems) return null;
+    for(let i of MagicItems.actor(actor.id).items.filter(item => item.visible && item.active)){
+      let mItem = i.spells.find(spell => spell.name == name);
+      if(mItem) return CombatHud.getMagicItemItem(mItem);
+    }
+    return null;
+  }
+
   getItems(filters) {
     const actionType = filters.actionType;
     const itemType = filters.itemType;
     const equipped = filters.equipped;
     const prepared = filters.prepared;
-
-    let items = this.actor.data.items;
+    let magicitems = [];
+    if(this.settings.isMagicItems){
+      MagicItems.actor(this.actor.id).items.filter(item => item.visible && item.active).forEach(item => item.spells.forEach(spell => {
+        const item = CombatHud.getMagicItemItem(spell);
+       if(item){
+         item.isMagicItem=true;
+        magicitems.push(item)
+       }
+      }));
+    }
+    let items = Array.from(this.actor.data.items).concat(magicitems);
 
     let filteredItems = items.filter((i) => {
       let itemData = i.data;
@@ -260,7 +285,9 @@ class CombatHud {
         itemData.data.preparation?.mode == "prepared" &&
         itemData.data.level !== 0
       )
-        return false;
+        {
+        if(!i.isMagicItem)  return false;
+        }
       if (
         actionType &&
         actionType.includes(itemData.data.activation?.type) &&
@@ -619,8 +646,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           );
         }
       }
-
-      if (!item) {
+      if (!item && !CombatHud.getMagicItemByName(this.actor ,itemName)){
         $(event.currentTarget).remove();
       } else {
         if (item.data.data.consume?.type) {
@@ -1378,7 +1404,7 @@ class ECHDiceRoller {
         game.actors.get(actorId);
       const itemToRoll = actorToRoll?.items.find(
         (i) => i.data.name === itemName
-      );
+      ) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
       if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
         return itemToRoll.executeMacro();
       }
@@ -1394,7 +1420,26 @@ class ECHDiceRoller {
 
       return itemToRoll.roll({ vanilla: false });
     }
-    return await game.dnd5e.rollItemMacro(itemName);
+    const itemToRoll = this.actor.items.getName(itemName)
+    if(!itemToRoll){
+      return await this.rollMagicItem(itemName);
+    }
+    return await itemToRoll.roll();
+  }
+
+  async rollMagicItem(itemName){
+    const mi = CombatHud.getMagicItemByName(this.actor, itemName)
+    const parent = this.getMagicItemParent(mi.name)
+    MagicItems.actor(this.actor.id).rollByName(parent, itemName);
+  }
+
+  getMagicItemParent(itemName){
+    const actor = this.actor;
+    for(let i of MagicItems.actor(actor.id).items.filter(item => item.visible && item.active)){
+      let mItem = i.spells.find(spell => spell.name == itemName);
+      if(mItem) return i.name;
+    }
+    return null;
   }
 
   async rollTool(itemName, abil, event) {
