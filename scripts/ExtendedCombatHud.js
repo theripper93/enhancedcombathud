@@ -8,7 +8,7 @@ class CombatHud {
 
   async init(){
     this.settings = {
-      isMagicItems: game.modules.get("magicitems").active,
+      isMagicItems: game.modules.get("magicitems")?.active,
       switchEquip: game.settings.get("enhancedcombathud", "switchEquip"),
       tooltipScale: game.settings.get("enhancedcombathud", "tooltipScale"),
       fadeOutInactive: game.settings.get(
@@ -249,13 +249,13 @@ class CombatHud {
   }
 
   static async getMagicItemItem(magicItem){
-    if(!game.modules.get("magicitems").active) return null;
-    let mi = game.items.get(magicItem.id) ?? await game.packs.get(magicItem.pack).getDocument(magicItem.id)
+    if(!game.modules.get("magicitems")?.active) return null;
+    let mi = game.items.get(magicItem.id) ?? await game.packs.get(magicItem.pack)?.getDocument(magicItem.id)
     return mi 
   }
 
   static async getMagicItemByName(actor, name){
-    if(!game.modules.get("magicitems").active) return null;
+    if(!game.modules.get("magicitems")?.active) return null;
     for(let i of MagicItems.actor(actor.id).items.filter(item => item.visible && item.active)){
       let mItem = i.spells.find(spell => spell.name == name);
       if(mItem) return await CombatHud.getMagicItemItem(mItem);
