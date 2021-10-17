@@ -1413,7 +1413,7 @@ class ECHDiceRoller {
         (i) => i.data.name === itemName
       ) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
       if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
-        return itemToRoll.executeMacro();
+        itemToRoll.executeMacro();
       }
 
       if (!itemToRoll) {
@@ -1425,7 +1425,7 @@ class ECHDiceRoller {
         );
       }
 
-      return itemToRoll.roll({ vanilla: false });
+      return await itemToRoll.roll({ vanilla: false });
     }
     const itemToRoll = this.actor.items.getName(itemName)
     if(!itemToRoll){
