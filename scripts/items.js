@@ -506,7 +506,7 @@ Hooks.once("ready",()=>{
         "value": null,
         "width": null,
         "units": "",
-        "type": ""
+        "type": "self"
       },
       "range": {
         "value": null,
