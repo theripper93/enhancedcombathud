@@ -8,8 +8,6 @@ Read FAQs at the bottom of the page
 
 ## Common issues:
 
-Minimizing the HUD changes the scale: Unfortunatelly it's a problem caused by many css nested transforms - enable "don't autoscale" in the module settings to fix the issue
-
 Argon was made for Chrome - if you experience weird UI issues consider switching browser.
 
 ## HUD
