@@ -462,6 +462,15 @@ Hooks.once("init", function () {
     default: false,
   });
 
+  game.settings.register("enhancedcombathud", "noAA", {
+    name: game.i18n.localize("enhancedcombathud.settings.noAA.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.noAA.hint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("enhancedcombathud", "openCombatStart", {
     name: game.i18n.localize("enhancedcombathud.settings.openCombatStart.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.openCombatStart.hint"),

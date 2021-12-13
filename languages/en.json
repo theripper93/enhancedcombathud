@@ -151,6 +151,8 @@
     "enhancedcombathud.settings.switchEquip.hint" : "Automatically equip/unequip items when switching sets",
     "enhancedcombathud.settings.showWeaponsItems.name" : "Show Weapons in 'Use Item' Section",
     "enhancedcombathud.settings.showWeaponsItems.hint" : "Show weapons in the 'Use Item' section. Usefull if your weapon slots are not enough",
+    "enhancedcombathud.settings.noAA.name" : "Don't Apply Active Effects",
+    "enhancedcombathud.settings.noAA.hint" : "Don't apply active effects when using special actions. (requires refresh)",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",

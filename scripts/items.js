@@ -571,4 +571,9 @@ Hooks.once("ready",()=>{
       }
     }
   }
+  if(game.settings.get("enhancedcombathud", "noAA")){
+    for(let key of Object.keys(ECHItems)) {
+      delete ECHItems[key].effects
+    }
+  }
 })
