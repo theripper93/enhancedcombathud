@@ -82,7 +82,7 @@ class CombatHud {
       }),
       consumables: await this.getItems({
         actionType: ["action"],
-        itemType: ["consumable", "equipment", "loot"],
+        itemType: game.settings.get("enhancedcombathud", "showWeaponsItems") ? ["consumable", "equipment", "loot", "weapon"] : ["consumable", "equipment", "loot"],
       }),
     };
     this.bonus = {

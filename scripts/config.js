@@ -480,6 +480,15 @@ Hooks.once("init", function () {
     default: false,
   });
 
+  game.settings.register("enhancedcombathud", "showWeaponsItems", {
+    name: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.hint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("enhancedcombathud", "switchEquip", {
     name: game.i18n.localize("enhancedcombathud.settings.switchEquip.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.switchEquip.hint"),
