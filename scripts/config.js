@@ -409,14 +409,14 @@ Hooks.once("init", function () {
     default: 1,
   });
 
-  game.settings.register("enhancedcombathud", "noAutoscale", {
+  /*game.settings.register("enhancedcombathud", "noAutoscale", {
     name: game.i18n.localize("enhancedcombathud.settings.noAutoscale.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.noAutoscale.hint"),
     scope: "client",
     config: true,
     type: Boolean,
     default: false,
-  });
+  });*/
 
   game.settings.register("enhancedcombathud", "leftPos", {
     name: game.i18n.localize("enhancedcombathud.settings.leftPos.name"),

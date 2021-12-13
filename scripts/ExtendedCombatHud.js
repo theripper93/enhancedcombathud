@@ -525,10 +525,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       "minimize-hud",
       $("body").hasClass("minimize-ech-hud")
     );
-
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
-    let scale = game.settings.get("enhancedcombathud", "noAutoscale")
+    let scale = true//game.settings.get("enhancedcombathud", "noAutoscale")
       ? game.settings.get("enhancedcombathud", "scale")
       : (1 / (echHUDWidth / windowWidth)) *
         game.settings.get("enhancedcombathud", "scale");
@@ -540,7 +539,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       transform: $(".extended-combat-hud").hasClass("minimize-hud")
         ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)`
         : `scale(${scale > 1 ? 1 : scale})`,
-      width: `calc(100vw * ${scale < 1 ? (1 + ((parseFloat(1 - scale).toFixed(2) * 1))) : 1})`
+      width: `calc(100vw * ${scale < 1 ? (1 + ((parseFloat(1 - scale) * 1))) : 1})`
     };
     $(".extended-combat-hud").css(position);
   }
@@ -620,7 +619,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   rigAutoScale() {
     let echHUDWidth = $(".extended-combat-hud").outerWidth();
     let windowWidth = $(window).width() - 340;
-    let scale = game.settings.get("enhancedcombathud", "noAutoscale")
+    let scale = true //game.settings.get("enhancedcombathud", "noAutoscale")
       ? game.settings.get("enhancedcombathud", "scale")
       : (1 / (echHUDWidth / windowWidth)) *
         game.settings.get("enhancedcombathud", "scale");
@@ -711,7 +710,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
       // Allow User to hover over Tooltip
       setTimeout(() => {
-        $(".ech-tooltip:not(.is-hover)").remove();
+        //$(".ech-tooltip:not(.is-hover)").remove();
+        $(".ech-tooltip").remove();
       }, 100);
     });
     this.element.on(
@@ -1240,6 +1240,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           );
           properties.push(item.labels.duration);
           properties.push(item.labels.save);
+          if(item.labels.components.includes("C")) properties.push("Concentration");
           for (let comp of item.labels.components) {
             properties.push(game.dnd5e.config.spellComponents[comp]);
           }
