@@ -1240,7 +1240,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           );
           properties.push(item.labels.duration);
           properties.push(item.labels.save);
-          if(item.labels.components.includes("C")) properties.push("Concentration");
+          if(item.labels.components.includes("C")) properties.push(game.i18n.localize("DND5E.Concentration"));
           for (let comp of item.labels.components) {
             properties.push(game.dnd5e.config.spellComponents[comp]);
           }
