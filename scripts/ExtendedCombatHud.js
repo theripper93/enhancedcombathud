@@ -1102,6 +1102,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   toggleMacroPlayers(togg) {
+    if(!game.settings.get("enhancedcombathud", "hideMacroPlayers")) return;
     if (togg || !game.settings.get("enhancedcombathud", "hideMacroPlayers")) {
       $("#players")[0].style.visibility = "visible";
       $("#hotbar").show(500);

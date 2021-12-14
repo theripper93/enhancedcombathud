@@ -447,6 +447,12 @@ Hooks.once("init", function () {
     config: true,
     type: Boolean,
     default: true,
+    onChange: (sett) => {
+      if(!sett){
+        $("#players")[0].style.visibility = "visible";
+        $("#hotbar").show(500);
+      }
+    },
   });
 
   game.settings.register("enhancedcombathud", "playerDetailsBottom", {
