@@ -1007,12 +1007,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   resetActionsUses() {
+    if(!this.hudData) return;
     this.hudData.hasAction = true;
     this.hudData.hasBonus = true;
     this.hudData.hasReaction = true;
   }
 
   newRound() {
+    if(!this.hudData) return;
     this.resetActionsUses();
     this.hudData.other.movement.current = this.hudData.other.movement.max;
     this.hudData.other.movement.moved = 0;
