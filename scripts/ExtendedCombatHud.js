@@ -697,7 +697,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.on("mouseenter", '[data-type="trigger"]', (event) => {
       let $element = $(event.currentTarget);
       let itemName = $(event.currentTarget).data("itemname");
-
       const offset = $element.offset();
       offset.left += $element[0].getBoundingClientRect().width / 2;
 
@@ -724,7 +723,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         if ($element.hasClass("is-save")) type = "save";
         if ($element.hasClass("is-skill")) type = "skill";
         if ($element.hasClass("is-tool")) type = "tool";
-
         const offset = $element.offset();
         offset.left += $element[0].getBoundingClientRect().width + 10;
 
@@ -1349,7 +1347,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let scrollPosition = $tooltipDesc[0].scrollTop;
       $tooltipDesc[0].scrollTop = scrollPosition + event.originalEvent.deltaY;
     });
-
     if (type == "save" || type == "skill" || type == "tool") {
       $(".ech-tooltip").last().addClass("ability-tooltip");
       offset.top = offset.top - $(".ech-tooltip").last().height() / 2;
@@ -1365,7 +1362,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     $(".ech-tooltip")
       .last()
       .css({
-        top: `${offset.top < 0 ? 0 : offset.top}px`,
+        top: `${offset.top}px`,
         left: `${offset.left}px`,
       })
       .addClass("ech-show-tooltip");
