@@ -1528,7 +1528,7 @@ class ECHDiceRoller {
     this.hijackDialog(event);
     if (this.modules.betterRolls)
       return await BetterRolls.rollCheck(this.actor, ability);
-    return await this.actor.rollAbilityTest(ability);
+    return await this.actor.rollAbilityTest(ability, { event: event });
   }
 
   static dnd5eRollSkill(skillId, options = {}) {
