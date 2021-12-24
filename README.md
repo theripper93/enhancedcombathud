@@ -10,6 +10,8 @@ Read FAQs at the bottom of the page
 
 Argon was made for Chrome - if you experience weird UI issues consider switching browser.
 
+Portraits not showing: If your image path has parenthesis "(" or ")" the image will fail to load, this might be true for other special characters as well
+
 ## HUD
 
 To open the hud, click the crossed swords icon in the token controls (top left buttons) or click the same button in the token hud (right click on a token)
