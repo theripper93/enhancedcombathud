@@ -83,8 +83,8 @@
         "module": "enhancedcombathud"
     }
   ],
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "9.2",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
   "url": "https://github.com/theripper93/enhancedcombathud",
   "manifest": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.json",
   "download": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.zip",
