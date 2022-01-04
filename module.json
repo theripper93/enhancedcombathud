@@ -57,6 +57,11 @@
         "lang": "ru",
         "name": "Русский",
         "path": "languages/ru.json"
+    },
+    {
+        "lang": "ko",
+        "name": "한국어",
+        "path": "languages/ko.json"
     }
   ],
   "scripts": [
