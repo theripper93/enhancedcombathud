@@ -734,7 +734,7 @@ Hooks.once("ready", function () {
     }    
   })*/
 });
-
+/*
 Hooks.on("renderItemSheet", (itemsheet, html) => {
   let actionType = itemsheet.object.data.data.activation.type;
   let itemType = itemsheet.object.data.type;
@@ -786,7 +786,7 @@ Hooks.on("renderItemSheet", (itemsheet, html) => {
 
   html.find('div[class="form-group stacked"]').first().before(confightml);
 });
-
+*/
 Hooks.on("getSceneControlButtons", (controls, b, c) => {
   controls
     .find((x) => x.name == "token")
