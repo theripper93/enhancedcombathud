@@ -798,7 +798,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
       onClick: function (toggle) {
         if(_token.document.actor.data.type == "vehicle") return
         if (toggle) {
-          if (_token && canvas.tokens.get(_token.id))
+          if (_token && canvas.tokens.get(_token.id) && _token.actor)
             canvas.hud.enhancedcombathud.bind(_token);
           else {
             this.active = false;

@@ -404,7 +404,7 @@ class CombatHud {
     return sets;
   }
   _render() {
-    canvas.hud.enhancedcombathud.bind(this.token);
+    if(this.token.actor)canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
     if (!this.settings.switchEquip) {
@@ -1631,7 +1631,9 @@ Hooks.on("controlToken", (token, controlled) => {
   ) {
     canvas.hud.enhancedcombathud.close();
     setTimeout(() => {
-      canvas.hud.enhancedcombathud.bind(canvas.tokens.get(token.id));
+      const ctoken = canvas.tokens.get(token.id)
+      if(!ctoken?.actor) return
+      canvas.hud.enhancedcombathud.bind(ctoken);
     }, 250);
   }
 });
@@ -1698,8 +1700,10 @@ Hooks.on("preUpdateCombat", (combat, updates) => {
     combat.previous?.round === null &&
     combat.previous?.turn === null
   ) {
+    const token = canvas.tokens.get(canvas.tokens.controlled[0]?.id);
+    if(!token?.actor) return
     canvas.hud.enhancedcombathud.bind(
-      canvas.tokens.get(canvas.tokens.controlled[0].id)
+      canvas.tokens.get(token)
     );
   }
 });
