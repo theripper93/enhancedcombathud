@@ -1702,8 +1702,6 @@ Hooks.on("preUpdateCombat", (combat, updates) => {
   ) {
     const token = canvas.tokens.get(canvas.tokens.controlled[0]?.id);
     if(!token?.actor) return
-    canvas.hud.enhancedcombathud.bind(
-      canvas.tokens.get(token)
-    );
+    canvas.hud.enhancedcombathud.bind(token);
   }
 });
