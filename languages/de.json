@@ -149,7 +149,11 @@
     "enhancedcombathud.settings.tooltipScale.hint" : "Skalierung der Tooltips",
     "enhancedcombathud.settings.switchEquip.name" : "Automatisches Ausrüsten",
     "enhancedcombathud.settings.switchEquip.hint" : "Automatisches ausrüsten/ablegen von Gegenständen beim Wechsel von Sets",
-
+    "enhancedcombathud.settings.showWeaponsItems.name" : "Zeige Waffen im 'Gegenstand verwenden' Bereich",
+    "enhancedcombathud.settings.showWeaponsItems.hint" : "Zeigt die Waffen im 'Gegenstand verwenden' Bereich an. Nützlich wenn die Waffenplätze nicht ausreichen.",
+    "enhancedcombathud.settings.noAA.name" : "Aktive Effekte nicht anwenden",
+    "enhancedcombathud.settings.noAA.hint" : "Beim Einsatz einer Spezialaktion den aktiven Effekt nicht anwenden. (erfordert Aktualisierung)",
+    
     "enhancedcombathud.tooltip.target.name" : "Ziel",
     "enhancedcombathud.tooltip.range.name" : "Reichweite",
     "enhancedcombathud.tooltip.properties.name" : "Eigenschaften",
