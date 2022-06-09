@@ -705,9 +705,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       setTimeout(() => {
         this.drawTooltip(itemName, offset);
       }, 100);
+
+      this.showRangeFinder(itemName);
     });
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
       // Allow User to hover over Tooltip
+      if(game.Levels3DPreview)game.Levels3DPreview.rangeFinders.forEach(rf => {rf.destroy();})
       setTimeout(() => {
         //$(".ech-tooltip:not(.is-hover)").remove();
         $(".ech-tooltip").remove();
@@ -1366,6 +1369,18 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         left: `${offset.left}px`,
       })
       .addClass("ech-show-tooltip");
+  }
+
+  async showRangeFinder(itemName){
+    const item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    if(!item.data.data.range.value) return;
+    const range = Math.max(item.data.data.range.value, item.data.data.range.long ?? 0);
+    const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
+    game.Levels3DPreview.rangeFinders.forEach(rf => {
+          rf.destroy();
+    })
+    canvas.tokens.placeables.filter(t => t.visible && game.Levels3DPreview.helpers.ruler3d.measureMinTokenDistance(game.Levels3DPreview.tokens[this.object.id],game.Levels3DPreview.tokens[t.id]) <= range).forEach(t => {new RangeFinder(t, {sources: [this.object]})})
+    
   }
 
   async dragDropSet(set, itemid, target) {
