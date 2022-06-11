@@ -1395,7 +1395,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           sources: [this.object],
           text: `-${Math.abs(distDiff.toFixed(2))}${canvas.scene.data.gridUnits}`,
           style: {
-            color: 'rgb(190 61 61)',
+            color: 'rgb(210 119 119);',
           }
         })
       }
