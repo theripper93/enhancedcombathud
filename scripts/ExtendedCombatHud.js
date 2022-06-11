@@ -1372,15 +1372,56 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   async showRangeFinder(itemName){
+    if(!game.Levels3DPreview?._active) return;
+    const sett = game.settings.get("enhancedcombathud", "rangefinder")
+    const showRangeFinder = sett != "none";
+    if(!showRangeFinder) return;
+    const showPercentage = sett == "full";
     const item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
-    if(!item.data.data.range.value) return;
-    const range = Math.max(item.data.data.range.value, item.data.data.range.long ?? 0);
+    const range = Math.max(item.data.data?.range?.value, item.data.data?.range?.long ?? 0) ?? Infinity;
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
     })
-    canvas.tokens.placeables.filter(t => t.visible && game.Levels3DPreview.helpers.ruler3d.measureMinTokenDistance(game.Levels3DPreview.tokens[this.object.id],game.Levels3DPreview.tokens[t.id]) <= range).forEach(t => {new RangeFinder(t, {sources: [this.object]})})
+    canvas.tokens.placeables.filter(t => t.visible).forEach(t => {
+      const dist = game.Levels3DPreview.helpers.ruler3d.measureMinTokenDistance(game.Levels3DPreview.tokens[this.object.id],game.Levels3DPreview.tokens[t.id])
+      const distDiff = range - dist;
+      if(distDiff >= 0){
+        const percent = this.rangeFinederGetPercent(item,t);
+        const text = showPercentage && percent ? `${parseFloat(Math.clamped(percent, 0,100).toFixed(2))}%` : null;
+        new RangeFinder(t, {sources: [this.object], text: text})
+      }else{
+        new RangeFinder(t, {
+          sources: [this.object],
+          text: `-${Math.abs(distDiff.toFixed(2))}${canvas.scene.data.gridUnits}`,
+          style: {
+            color: 'rgb(190 61 61)',
+          }
+        })
+      }
+      
+    })
     
+  }
+
+  rangeFinederGetPercent(item, token){
+    if(!item || !token.actor) return false;
+    const actor = token.actor
+    const itemData = {
+      toHit: item.abilityMod ? item.data.data.prof.flat + item.parent.data.data.abilities[item.abilityMod].mod : null,
+      saveDC: item.parent.data.data.attributes.spelldc,
+    };
+    const targetData = {
+        ac : actor.data.data.attributes.ac.value,
+        save: item.data.data.save.ability ? actor.data.data.abilities[item.data.data.save.ability].save : null
+    }
+    if(item.hasAttack){
+      const chanceToHit = (21-targetData.ac+itemData.toHit)/20
+      return Math.clamped(chanceToHit*100, 5, 95)
+    }else if(item.hasSave){
+      const chanceToSave = 1-(21-itemData.saveDC+targetData.save)/20
+      return chanceToSave * 100
+    }
   }
 
   async dragDropSet(set, itemid, target) {

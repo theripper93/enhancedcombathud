@@ -154,6 +154,12 @@
     "enhancedcombathud.settings.noAA.name" : "Don't Apply Active Effects",
     "enhancedcombathud.settings.noAA.hint" : "Don't apply active effects when using special actions. (requires refresh)",
 
+    "enhancedcombathud.settings.rangefinder.name": "3D Canvas - Range Finder",
+    "enhancedcombathud.settings.rangefinder.hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. 'Distance Only' will show the distance to the target - the distance will be Red if the target is out of range. 'Game Mode' will show the chance to hit the target (both attacks and saves).",
+    "enhancedcombathud.settings.rangefinder.choices.none": "Disabled",
+    "enhancedcombathud.settings.rangefinder.choices.rangeOnly": "Distance Only",
+    "enhancedcombathud.settings.rangefinder.choices.full": "Game Mode",
+
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
     "enhancedcombathud.tooltip.properties.name" : "Properties",

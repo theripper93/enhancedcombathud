@@ -395,6 +395,20 @@ Hooks.once("init", function () {
     restricted: false,
   });
 
+  game.settings.register("enhancedcombathud", "rangefinder", {
+    name: game.i18n.localize("enhancedcombathud.settings.rangefinder.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.rangefinder.hint"),
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+        "none": game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.none"),
+        "rangeOnly": game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.rangeOnly"),
+        "full": game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.full"),
+      },
+    default: "rangeOnly",
+});
+
   game.settings.register("enhancedcombathud", "scale", {
     name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
