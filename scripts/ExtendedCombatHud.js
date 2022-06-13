@@ -7,6 +7,7 @@ class CombatHud {
   }
 
   async init(){
+    this._itemCount = this.actor.items.size
     this.settings = {
       isMagicItems: game.modules.get("magicitems")?.active,
       switchEquip: game.settings.get("enhancedcombathud", "switchEquip"),
@@ -471,6 +472,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.hudData = data.hudData;
     this.roller = new ECHDiceRoller(this.hudData.actor);
     return data;
+  }
+
+  checkReRender(item){
+    try{
+      if(item.parent.id == this.hudData.actor.id && this.hudData._itemCount != item.parent.items.size)this.render(true)
+    }catch{}
   }
 
   close() {
@@ -1761,3 +1768,7 @@ Hooks.on("preUpdateCombat", (combat, updates) => {
     canvas.hud.enhancedcombathud.bind(token);
   }
 });
+
+Hooks.on("updateItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
+Hooks.on("deleteItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
+Hooks.on("createItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
