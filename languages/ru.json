@@ -9,11 +9,11 @@
 
 
     "enhancedcombathud.hud.mainactions.name": "Основное действие",
-    "enhancedcombathud.hud.castspell.name":"Сотворение заклинания",
-    "enhancedcombathud.hud.usepower.name":"Использование особенности",
-    "enhancedcombathud.hud.useitem.name":"Использование предмета",
-    "enhancedcombathud.hud.bonusaction.name":"Бонус",
-    "enhancedcombathud.hud.reaction.name":"Ответное действие",
+    "enhancedcombathud.hud.castspell.name":"Заклинание",
+    "enhancedcombathud.hud.usepower.name":"Исп. особенности",
+    "enhancedcombathud.hud.useitem.name":"Исп. предмета",
+    "enhancedcombathud.hud.bonusaction.name":"Бонусное",
+    "enhancedcombathud.hud.reaction.name":"Ответное",
     "enhancedcombathud.hud.specialaction.name":"Свободное",
     "enhancedcombathud.hud.pass.name":"Пропуск",
     "enhancedcombathud.hud.endturn.name":"Конец хода",
