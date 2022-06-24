@@ -1379,23 +1379,30 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   async showRangeFinder(itemName){
-    if(!game.Levels3DPreview?._active) return;
+    if(!game.Levels3DPreview?._active || !itemName) return;
     const sett = game.settings.get("enhancedcombathud", "rangefinder")
     const showRangeFinder = sett != "none";
     if(!showRangeFinder) return;
+    const isMidi = game.modules.get("midi-qol")?.active
     const showPercentage = sett == "full";
     const item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    if(!item) return;
     const range = Math.max(item.data.data?.range?.value, item.data.data?.range?.long ?? 0) ?? Infinity;
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
     })
-    canvas.tokens.placeables.filter(t => t.visible).forEach(t => {
+    const visTokens = canvas.tokens.placeables.filter(t => t.visible)
+    for(let t of visTokens){
       const dist = game.Levels3DPreview.helpers.ruler3d.measureMinTokenDistance(game.Levels3DPreview.tokens[this.object.id],game.Levels3DPreview.tokens[t.id])
       const distDiff = range - dist;
       if(distDiff >= 0){
-        const percent = this.rangeFinederGetPercent(item,t);
+        const rollData = await this.rangeFinederGetPercent(item,t, isMidi);
+        const percent = rollData.chance;
         const text = showPercentage && percent ? `${parseFloat(Math.clamped(percent, 0,100).toFixed(2))}%` : null;
+        if(rollData.adv || rollData.dis){
+          text+= `(${rollData.adv ? "ADV" : ""}${rollData.dis ? "DIS" : ""})`
+        }
         new RangeFinder(t, {sources: [this.object], text: text})
       }else{
         new RangeFinder(t, {
@@ -1406,12 +1413,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           }
         })
       }
-      
-    })
+    }
     
   }
 
-  rangeFinederGetPercent(item, token){
+  async rangeFinederGetPercent(item, token, isMidi){
     if(!item || !token.actor) return false;
     const actor = token.actor
     const itemData = {
@@ -1423,11 +1429,24 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         save: item.data.data.save.ability ? actor.data.data.abilities[item.data.data.save.ability].save : null
     }
     if(item.hasAttack){
-      const chanceToHit = (21-targetData.ac+itemData.toHit)/20
-      return Math.clamped(chanceToHit*100, 5, 95)
+      let midiBonus = null;
+      let wf = null;
+      if(isMidi){
+        wf = new MidiQOL.DummyWorkflow(item.parent, item, ChatMessage.getSpeaker(this.object), [], {});
+        await wf.simulateAttack(token);
+        midiBonus = wf.expectedAttackRoll - 10.5 + (wf.advantage ? 1 : wf.disadvantage ? -1 : 0)*3.325;
+      }
+      const chanceToHit = (21-targetData.ac+(midiBonus ?? itemData.toHit))/20
+      return {
+        chance: Math.clamped(chanceToHit*100, 5, 95),
+        adv: wf?.advantage,
+        dis: wf?.disadvantage
+      }
     }else if(item.hasSave){
       const chanceToSave = 1-(21-itemData.saveDC+targetData.save)/20
-      return chanceToSave * 100
+      return {
+        chance: chanceToSave * 100,
+      }
     }
   }
 
