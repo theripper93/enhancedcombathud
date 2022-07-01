@@ -9,9 +9,9 @@
 
 
     "enhancedcombathud.hud.mainactions.name": "Основное действие",
-    "enhancedcombathud.hud.castspell.name":"Заклинание",
-    "enhancedcombathud.hud.usepower.name":"Исп. особенности",
-    "enhancedcombathud.hud.useitem.name":"Исп. предмета",
+    "enhancedcombathud.hud.castspell.name":"Заклинания",
+    "enhancedcombathud.hud.usepower.name":"Особенности",
+    "enhancedcombathud.hud.useitem.name":"Предметы",
     "enhancedcombathud.hud.bonusaction.name":"Бонусное",
     "enhancedcombathud.hud.reaction.name":"Ответное",
     "enhancedcombathud.hud.specialaction.name":"Свободное",
@@ -71,7 +71,7 @@
 
     "enhancedcombathud.hud.spells.cantrip": "Фокус",
     "enhancedcombathud.hud.spells.pact": "Магия договора",
-    "enhancedcombathud.hud.spells.will": "Неограниченно",
+    "enhancedcombathud.hud.spells.will": "Неограниченные",
     "enhancedcombathud.hud.spells.innate": "Врождённые",
     "enhancedcombathud.hud.spells.1": "1-й круг",
     "enhancedcombathud.hud.spells.2": "2-й круг",
