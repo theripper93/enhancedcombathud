@@ -27,15 +27,15 @@
 	<div class="portrait-hud">
 		<div class="portrait-hud-image" style="background-image: url('{{hudData.actor.data.img}}');"></div>
 		<div class="portrait-stat-block">
-			<span data-hp-value="{{hudData.actor.data.data.attributes.hp.value}}"></span>
-			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.data.data.attributes.hp.max}}"></span>
+			<span data-hp-value="{{hudData.actor.system.attributes.hp.value}}"></span>
+			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.system.attributes.hp.max}}"></span>
 			&nbsp;HP
 		</div>
 		<div class="portrait-stat-block">
-			<span>{{hudData.settings.localize.AC}}</span>&nbsp;<span data-ac-value="{{hudData.actor.data.data.attributes.ac.value}}"></span>
+			<span>{{hudData.settings.localize.AC}}</span>&nbsp;<span data-ac-value="{{hudData.actor.system.attributes.ac.value}}"></span>
 		</div>
 		<div class="portrait-stat-block">
-			<span>{{hudData.settings.localize.SpellDC}}</span>&nbsp;<span data-spell-dc="{{hudData.actor.data.data.attributes.spelldc}}"></span>
+			<span>{{hudData.settings.localize.SpellDC}}</span>&nbsp;<span data-spell-dc="{{hudData.actor.system.attributes.spelldc}}"></span>
 		</div>
 		<div class="portrait-stat-block player-details{{#if hudData.settings.playerDetailsBottom}} player-details-bottom{{/if}}">
 			<span class="player-name">{{hudData.actor.data.name}}</span>

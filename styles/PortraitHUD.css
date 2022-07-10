@@ -247,7 +247,7 @@
 .ability-menu ul > li.is-save .ability-passive {
     display: none;
 }
-.ability-menu ul > li.is-save .ability-name {
+.ability-menu .ability-name {
     padding-left: 1rem;
 }
 .ability-menu ul > li.is-save .ability-modifier {

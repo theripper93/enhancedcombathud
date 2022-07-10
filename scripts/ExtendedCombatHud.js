@@ -132,22 +132,22 @@ class CombatHud {
     this.other = {
       portrait: this.actor.data.img,
       name: this.actor.data.name,
-      maxHp: this.actor.data.data.attributes.hp.max,
-      currHp: this.actor.data.data.attributes.hp.value,
+      maxHp: this.actor.system.attributes.hp.max,
+      currHp: this.actor.system.attributes.hp.value,
       movement: {
         max: Math.round(
           Math.max(
-            this.actor.data.data.attributes.movement.burrow,
-            this.actor.data.data.attributes.movement.climb,
-            this.actor.data.data.attributes.movement.fly,
-            this.actor.data.data.attributes.movement.swim,
-            this.actor.data.data.attributes.movement.walk
+            this.actor.system.attributes.movement.burrow,
+            this.actor.system.attributes.movement.climb,
+            this.actor.system.attributes.movement.fly,
+            this.actor.system.attributes.movement.swim,
+            this.actor.system.attributes.movement.walk
           ) / canvas.dimensions.distance
         ),
         current: 0,
         moved: 0,
       },
-      ac: this.actor.data.data.attributes.ac.value,
+      ac: this.actor.system.attributes.ac.value,
       classes: this.getClassesAsString(),
       specialItemsNames: {
         disengage: game.i18n.localize("enhancedcombathud.items.disengage.name"),
@@ -168,20 +168,19 @@ class CombatHud {
       bonus: true,
       reaction: true,
     };
-    this.skills = this.actor.data.data.skills;
-    this.saves = this.actor.data.data.abilities;
+    this.skills = this.actor.system.skills;
+    this.saves = this.actor.system.abilities;
     this.tools = this.actor.data.items
       .filter((i) => i.data.type == "tool")
       .map((item, index) => {
         let toolAbility =
-          typeof item.data.data.ability == "string"
-            ? item.data.data.ability
-            : item.data.data.ability[0] || "str";
-        let abilityModifiers = this.actor.data.data.abilities[toolAbility];
+          typeof item.system.ability == "string"
+            ? item.system.ability
+            : item.system.ability[0] || "str";
+        let abilityModifiers = this.actor.system.abilities[toolAbility];
         let toolProficiency = Math.ceil(
-          item.data.data.proficient * this.actor.data.data.prof
+          item.system.proficient * this.actor.system.attributes.prof
         );
-
         return {
           ability: toolAbility,
           bonus: 0,
@@ -191,7 +190,7 @@ class CombatHud {
           prof: toolProficiency,
           total: toolProficiency + abilityModifiers.mod,
           type: "Number",
-          proficient: item.data.data.proficient,
+          proficient: item.system.proficient,
         };
       });
 
@@ -228,7 +227,7 @@ class CombatHud {
 
   getClassesAsString() {
     try {
-      let classes = this.actor.data.data.classes;
+      let classes = this.actor.system.classes;
       if (!classes) return "";
       if (Object.keys(classes).length === 0)
         return this.actor.labels.creatureType;
@@ -322,7 +321,7 @@ class CombatHud {
     if (prepared) {
       for (let item of filteredItems) {
         let key = item.labels.level;
-        switch (item.data.data.preparation.mode) {
+        switch (item.system.preparation.mode) {
           case "innate":
             key = this.settings.localize.spells["innate"];
             break;
@@ -412,23 +411,23 @@ class CombatHud {
       await this.actor.setFlag("enhancedcombathud", "activeSet", active);
       return;
     }
-    if (this.sets.set1.primary?.data.data.equipped)
+    if (this.sets.set1.primary?.system.equipped)
       await this.sets.set1.primary?.update({ "data.equipped": false });
-    if (this.sets.set1.secondary?.data.data.equipped)
+    if (this.sets.set1.secondary?.system.equipped)
       await this.sets.set1.secondary?.update({ "data.equipped": false });
-    if (this.sets.set2.primary?.data.data.equipped)
+    if (this.sets.set2.primary?.system.equipped)
       await this.sets.set2.primary?.update({ "data.equipped": false });
-    if (this.sets.set2.secondary?.data.data.equipped)
+    if (this.sets.set2.secondary?.system.equipped)
       await this.sets.set2.secondary?.update({ "data.equipped": false });
-    if (this.sets.set3.primary?.data.data.equipped)
+    if (this.sets.set3.primary?.system.equipped)
       await this.sets.set3.primary?.update({ "data.equipped": false });
-    if (this.sets.set3.secondary?.data.data.equipped)
+    if (this.sets.set3.secondary?.system.equipped)
       await this.sets.set3.secondary?.update({ "data.equipped": false });
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-    if (!this.sets.active.primary?.data.data.equipped)
+    if (!this.sets.active.primary?.system.equipped)
       await this.sets.active.primary?.update({ "data.equipped": true });
-    if (!this.sets.active.secondary?.data.data.equipped)
+    if (!this.sets.active.secondary?.system.equipped)
       await this.sets.active.secondary?.update({ "data.equipped": true });
   }
   set hasAction(value) {
@@ -447,7 +446,7 @@ class CombatHud {
       .toggleClass("actions-used", !value);
   }
   get spellSlots() {
-    return this.actor.data.data.spells;
+    return this.actor.system.spells;
   }
   get movementColor() {}
 }
@@ -499,7 +498,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       //return false;
     }
     if (set) {
-      await this.dragDropSet(set, data.data._id, event.target);
+      const item = await fromUuid(data.uuid)
+      await this.dragDropSet(set, item.id, event.target);
       this.initSets();
     } else {
       this.dragDropSetRemove(event.dataTransfer.getData("text"));
@@ -662,40 +662,40 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!item && !CombatHud.getMagicItemByName(this.actor ,itemName)){
         $(event.currentTarget).remove();
       } else {
-        if (item.data.data.consume?.type) {
-          switch (item.data.data.consume.type) {
+        if (item.system.consume?.type) {
+          switch (item.system.consume.type) {
             case "ammo":
               let ammoItem = this.hudData.actor.items.find(
-                    (i) => i.id == item.data.data.consume?.target
+                    (i) => i.id == item.system.consume?.target
                   );
               let ammoCount = confimed
                 ? ammoItem?.data?.data?.quantity -
-                  item.data.data.consume?.amount
+                  item.system.consume?.amount
                 : ammoItem?.data?.data?.quantity;
                 $(".extended-combat-hud").find(`[data-set] .action-element-title:contains(${itemName})`).closest('div').each((index, element) => element.dataset.itemCount = ammoCount)
                 event.currentTarget.dataset.itemCount = ammoCount;
               break;
             case "attribute":
               let value = Object.byString(
-                this.hudData.actor.data.data,
-                item.data.data.consume.target
+                this.hudData.actor.system,
+                item.system.consume.target
               );
               let resCount = value;
               event.currentTarget.dataset.itemCount = resCount;
           }
         } else {
-          let uses = item.data.data.quantity || item.data.data.uses.value;
+          let uses = item.system.quantity || item.system.uses.value;
           event.currentTarget.dataset.itemCount = uses;
         }
-        /*let uses = item.data.data.quantity || item.data.data.uses.value;
-        let isAmmo = item.data.data.consume?.type == "ammo";
+        /*let uses = item.system.quantity || item.system.uses.value;
+        let isAmmo = item.system.consume?.type == "ammo";
         let ammoItem = isAmmo
           ? this.hudData.actor.items.find(
-              (i) => i.id == item.data.data.consume?.target
+              (i) => i.id == item.system.consume?.target
             )
           : null;
         let ammoCount = confimed
-          ? ammoItem?.data?.data?.quantity - item.data.data.consume?.amount
+          ? ammoItem?.data?.data?.quantity - item.system.consume?.amount
           : ammoItem?.data?.data?.quantity;
         event.currentTarget.dataset.itemCount = isAmmo ? ammoCount : uses;*/
       }
@@ -809,38 +809,6 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   rigSkills() {
-    $(this.element).on(
-      "change",
-      ".ability-menu .ability  .ability-code select",
-      (event) => {
-        let $element = $(event.currentTarget);
-        let abilityScore = $element.val();
-        let $ability = $element.closest(".ability");
-        let whatToRoll = $element.closest(".ability").data("roll");
-        let data = null;
-
-        // Update Ability
-        $element.closest(".ability").data("modifier", abilityScore);
-
-        if ($ability.hasClass("is-save")) {
-          data = this.hudData.saves[whatToRoll];
-        } else if ($ability.hasClass("is-skill")) {
-          data = this.hudData.skills[whatToRoll];
-        } else if ($ability.hasClass("is-tool")) {
-          data = this.hudData.tools.filter(
-            (tool) => tool.label == whatToRoll
-          )[0];
-        } else {
-          return false;
-        }
-
-        let newTotal = data.prof + this.hudData.saves[abilityScore].mod;
-        $element
-          .closest(".ability")
-          .find(".ability-modifier")
-          .html(newTotal > 0 ? `+${newTotal}` : newTotal);
-      }
-    );
     $(this.element).on("click", "li.is-save > div > span", (event) => {
       let $element = $(event.currentTarget);
       let $ability = $element.closest(".ability");
@@ -975,7 +943,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.updateSetElement(primary, this.hudData.sets.active.primary);
     this.updateSetElement(
       secondary,
-      this.hudData.sets.active.secondary?.data.data.activation.type
+      this.hudData.sets.active.secondary?.system.activation.type
         ? this.hudData.sets.active.secondary
         : undefined
     );
@@ -986,10 +954,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       element.css({ display: "none" });
       return;
     }
-    let isAmmo = item.data.data.consume?.type == "ammo";
+    let isAmmo = item.system.consume?.type == "ammo";
     let ammoItem = isAmmo
       ? this.hudData.actor.items.find(
-          (i) => i.id == item.data.data.consume?.target
+          (i) => i.id == item.system.consume?.target
         )
       : null;
     element.toggleClass("has-count", isAmmo);
@@ -1220,7 +1188,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       }
       if (!item || !item.data) return;
       title = item.data.name;
-      description = item.data.data.description.value;
+      description = item.system.description.value;
       itemType = item.data.type;
       subtitle;
       target = item.labels?.target || "-";
@@ -1231,11 +1199,11 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       materialComponents = "";
       switch (itemType) {
         case "weapon":
-          subtitle = game.dnd5e.config.weaponTypes[item.data.data.weaponType];
+          subtitle = game.dnd5e.config.weaponTypes[item.system.weaponType];
           properties.push(
-            game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+            game.dnd5e.config.itemActionTypes[item.system.actionType]
           );
-          for (let [key, value] of Object.entries(item.data.data.properties)) {
+          for (let [key, value] of Object.entries(item.system.properties)) {
             let prop =
               value && game.dnd5e.config.weaponProperties[key]
                 ? game.dnd5e.config.weaponProperties[key]
@@ -1247,7 +1215,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         case "spell":
           subtitle = `${item.labels.level} ${item.labels.school}`;
           properties.push(
-            game.dnd5e.config.spellSchools[item.data.data.school]
+            game.dnd5e.config.spellSchools[item.system.school]
           );
           properties.push(item.labels.duration);
           properties.push(item.labels.save);
@@ -1259,21 +1227,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           break;
         case "consumable":
           subtitle =
-            game.dnd5e.config.consumableTypes[item.data.data.consumableType] +
-            //" " + item.data.data.chatFlavor;
+            game.dnd5e.config.consumableTypes[item.system.consumableType] +
+            //" " + item.system.chatFlavor;
             properties.push(
-              game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+              game.dnd5e.config.itemActionTypes[item.system.actionType]
             );
           break;
         case "feat":
-          subtitle = item.data.data.requirements;
+          subtitle = item.system.requirements;
           properties.push(
-            game.dnd5e.config.itemActionTypes[item.data.data.actionType]
+            game.dnd5e.config.itemActionTypes[item.system.actionType]
           );
           break;
       }
     }
-    description = TextEditor.enrichHTML(description);
+    description = await TextEditor.enrichHTML(description);
 
     const tooltip = ({
       title,
@@ -1387,7 +1355,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const showPercentage = sett == "full";
     const item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     if(!item) return;
-    const range = Math.max(item.data.data?.range?.value, item.data.data?.range?.long ?? 0) ?? Infinity;
+    const range = Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity;
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
@@ -1421,12 +1389,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     if(!item || !token.actor) return false;
     const actor = token.actor
     const itemData = {
-      toHit: item.abilityMod ? item.data.data.prof.flat + item.parent.data.data.abilities[item.abilityMod].mod : null,
-      saveDC: item.parent.data.data.attributes.spelldc,
+      toHit: item.abilityMod ? item.system.prof.flat + item.parent.system.abilities[item.abilityMod].mod : null,
+      saveDC: item.parent.system.attributes.spelldc,
     };
     const targetData = {
-        ac : actor.data.data.attributes.ac.value,
-        save: item.data.data.save.ability ? actor.data.data.abilities[item.data.data.save.ability].save : null
+        ac : actor.system.attributes.ac.value,
+        save: item.system.save.ability ? actor.system.abilities[item.system.save.ability].save : null
     }
     if(item.hasAttack){
       let midiBonus = null;
@@ -1547,27 +1515,12 @@ class ECHDiceRoller {
       this.hijackDialog(event);
     }
   }
-  async rollSkill(skill, ability, event) {
-    const skl = this.actor.data.data.skills[skill];
-    if (skl.ability == ability && this.modules.betterRolls) {
+  async rollSkill(skill, ab, event) {
+    if (this.modules.betterRolls) {
       BetterRolls.rollSkill(this.actor, skill);
       return;
     }
-    const abl = this.actor.data.data.abilities[ability];
-    const data = { mod: abl.mod + skl.prof };
-    if (skl.ability != ability)
-      libWrapper.register(
-        "enhancedcombathud",
-        "game.dnd5e.entities.Actor5e.prototype.rollSkill",
-        ECHDiceRoller.dnd5eRollSkill,
-        "OVERRIDE"
-      );
-    let roll = this.actor.rollSkill(skill, { data: data, event: event });
-    libWrapper.unregister(
-      "enhancedcombathud",
-      "game.dnd5e.entities.Actor5e.prototype.rollSkill",
-      false
-    );
+    let roll = this.actor.rollSkill(skill, { event: event });
 
     // Set Dialog Position
     this.hijackDialog(event);
@@ -1614,8 +1567,8 @@ class ECHDiceRoller {
   }
 
   static dnd5eRollSkill(skillId, options = {}) {
-    const skl = this.data.data.skills[skillId];
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    const skl = this.system.skills[skillId];
+    const bonuses = getProperty(this.system, "bonuses.abilities") || {};
 
     // Compose roll parts and data
     const parts = ["@mod"];
@@ -1675,7 +1628,7 @@ Hooks.on("updateActor", (actor, updates) => {
     actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id &&
     (updates?.data?.attributes?.ac || updates?.data?.attributes?.hp)
   ) {
-    let ad = actor.data.data.attributes;
+    let ad = actor.system.attributes;
     canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
   }
 });
@@ -1684,7 +1637,7 @@ Hooks.on("updateActiveEffect", (activeEffect, updates) => {
   let actor = activeEffect.parent;
   if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
     return;
-  let ad = actor.data.data.attributes;
+  let ad = actor.system.attributes;
   for (let change of activeEffect.data.changes) {
     if (change.key == "data.attributes.ac.value") {
       canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
@@ -1697,7 +1650,7 @@ Hooks.on("updateItem", (item, updates) => {
   let actor = item.parent;
   if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
     return;
-  let ad = actor.data.data.attributes;
+  let ad = actor.system.attributes;
   if (updates?.data?.equipped !== undefined) {
     canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
     return;

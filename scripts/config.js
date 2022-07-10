@@ -750,7 +750,7 @@ Hooks.once("ready", function () {
 });
 /*
 Hooks.on("renderItemSheet", (itemsheet, html) => {
-  let actionType = itemsheet.object.data.data.activation.type;
+  let actionType = itemsheet.object.system.activation.type;
   let itemType = itemsheet.object.data.type;
   let echFlags = itemsheet.object.data.flags.enhancedcombathud;
 
@@ -878,7 +878,7 @@ Handlebars.registerHelper("hasUses", function (data) {
         break;
       case "attribute":
         let value = Object.byString(
-          canvas.hud.enhancedcombathud.hudData.actor.data.data,
+          canvas.hud.enhancedcombathud.hudData.actor.system,
           data.data.consume.target
         );
         let resCount = value;
@@ -941,31 +941,19 @@ Handlebars.registerHelper("generateAbilities", function (str) {
     1: "proficient",
     2: "expertise",
   };
-  let $dropdown = $("<select></select>");
-
-  for (let [key, value] of Object.entries(game.dnd5e.config.abilities)) {
-    $dropdown.append(
-      `<option value="${key}">${value.substring(0, 3)}</option>`
-    );
-  }
 
   if (Object.entries(data).length > 0) {
     html += `<li class="ability ability-title">${localize[str]}</li>`;
   }
 
   for (let [key, value] of Object.entries(data)) {
-    $dropdown.find(`[selected]`).removeAttr("selected");
-    $dropdown.find(`[value="${value.ability}"]`).attr("selected", true);
-
     html += `<li class="ability is-${str.substring(
       0,
       str.length - 1
     )} proficiency-is-${prof[value.proficient]}" data-roll="${
       str == "tools" ? value.label : key
     }" data-modifier="${value.ability}" >
-        <span class="ability-code">${$dropdown.prop(
-          "outerHTML"
-        )}</span> <span class="ability-name">${
+</span> <span class="ability-name">${
       value.label
     }</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${
       value.ability
