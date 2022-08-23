@@ -411,18 +411,24 @@ class CombatHud {
       await this.actor.setFlag("enhancedcombathud", "activeSet", active);
       return;
     }
-    if (this.sets.set1.primary?.system.equipped)
-      await this.sets.set1.primary?.update({ "data.equipped": false });
-    if (this.sets.set1.secondary?.system.equipped)
-      await this.sets.set1.secondary?.update({ "data.equipped": false });
-    if (this.sets.set2.primary?.system.equipped)
-      await this.sets.set2.primary?.update({ "data.equipped": false });
-    if (this.sets.set2.secondary?.system.equipped)
-      await this.sets.set2.secondary?.update({ "data.equipped": false });
-    if (this.sets.set3.primary?.system.equipped)
-      await this.sets.set3.primary?.update({ "data.equipped": false });
-    if (this.sets.set3.secondary?.system.equipped)
-      await this.sets.set3.secondary?.update({ "data.equipped": false });
+    if (active !== 'set1') {
+      if (this.sets.set1.primary?.system.equipped)
+        await this.sets.set1.primary?.update({ "data.equipped": false });
+      if (this.sets.set1.secondary?.system.equipped)
+        await this.sets.set1.secondary?.update({ "data.equipped": false });
+    }
+    if (active !== 'set2') {
+      if (this.sets.set2.primary?.system.equipped)
+        await this.sets.set2.primary?.update({ "data.equipped": false });
+      if (this.sets.set2.secondary?.system.equipped)
+        await this.sets.set2.secondary?.update({ "data.equipped": false });
+    }
+    if (active !== 'set3') {
+      if (this.sets.set3.primary?.system.equipped)
+        await this.sets.set3.primary?.update({ "data.equipped": false });
+      if (this.sets.set3.secondary?.system.equipped)
+        await this.sets.set3.secondary?.update({ "data.equipped": false });
+    }
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
     if (!this.sets.active.primary?.system.equipped)
