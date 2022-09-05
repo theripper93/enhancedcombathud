@@ -5,7 +5,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.disengage.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/journey.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.disengage.desc"),
         "chat": "",
@@ -104,7 +104,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.hide.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/cloak-dagger.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.hide.desc"),
         "chat": "",
@@ -208,7 +208,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.shove.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/shield-bash.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.shove.desc"),
         "chat": "",
@@ -283,7 +283,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.dash.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/walking-boot.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.dash.desc"),
         "chat": "",
@@ -380,7 +380,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.dodge.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/armor-upgrade.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.dodge.desc"),
         "chat": "",
@@ -445,7 +445,7 @@ Hooks.once("ready",()=>{
         "disabled": false,
         "duration": {
           "startTime": null,
-          "turns": 1
+          "rounds": 1
         },
         "icon": "modules/enhancedcombathud/icons/armor-upgrade.svg",
         "label": "Dodge",
@@ -478,7 +478,7 @@ Hooks.once("ready",()=>{
     "name": game.i18n.localize("enhancedcombathud.items.ready.name"),
     "type": "feat",
     "img": "modules/enhancedcombathud/icons/clockwork.svg",
-    "data": {
+    "system": {
       "description": {
         "value": game.i18n.localize("enhancedcombathud.items.ready.desc"),
         "chat": "",

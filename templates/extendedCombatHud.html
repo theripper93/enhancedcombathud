@@ -2,16 +2,16 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 	<div class="weapon-sets">
 		<div class="weapon-set active" data-type="switchWeapons" data-value="set1">
-			<div class="set set-primary" draggable="true" data-set="set1p" style="background-image: url({{hudData.sets.set1.primary.data.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set1s" style="background-image: url({{hudData.sets.set1.secondary.data.img}})"></div>
+			<div class="set set-primary" draggable="true" data-set="set1p" style="background-image: url({{hudData.sets.set1.primary.img}})"></div>
+			<div class="set set-secondary" draggable="true" data-set="set1s" style="background-image: url({{hudData.sets.set1.secondary.img}})"></div>
 		</div>
 		<div class="weapon-set" data-type="switchWeapons" data-value="set2">
-			<div class="set set-primary" draggable="true" data-set="set2p" style="background-image: url({{hudData.sets.set2.primary.data.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set2s" style="background-image: url({{hudData.sets.set2.secondary.data.img}})"></div>
+			<div class="set set-primary" draggable="true" data-set="set2p" style="background-image: url({{hudData.sets.set2.primary.img}})"></div>
+			<div class="set set-secondary" draggable="true" data-set="set2s" style="background-image: url({{hudData.sets.set2.secondary.img}})"></div>
 		</div>
 		<div class="weapon-set" data-type="switchWeapons" data-value="set3">
-			<div class="set set-primary" draggable="true" data-set="set3p" style="background-image: url({{hudData.sets.set3.primary.data.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set3s" style="background-image: url({{hudData.sets.set3.secondary.data.img}})"></div>
+			<div class="set set-primary" draggable="true" data-set="set3p" style="background-image: url({{hudData.sets.set3.primary.img}})"></div>
+			<div class="set set-secondary" draggable="true" data-set="set3s" style="background-image: url({{hudData.sets.set3.secondary.img}})"></div>
 		</div>
 	</div>
 	<div class="ability-menu">
@@ -25,7 +25,7 @@
 		</ul>
 	</div>
 	<div class="portrait-hud">
-		<div class="portrait-hud-image" style="background-image: url('{{hudData.actor.data.img}}');"></div>
+		<div class="portrait-hud-image" style="background-image: url('{{hudData.actorimg}}');"></div>
 		<div class="portrait-stat-block">
 			<span data-hp-value="{{hudData.actor.system.attributes.hp.value}}"></span>
 			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.system.attributes.hp.max}}"></span>
@@ -38,7 +38,7 @@
 			<span>{{hudData.settings.localize.SpellDC}}</span>&nbsp;<span data-spell-dc="{{hudData.actor.system.attributes.spelldc}}"></span>
 		</div>
 		<div class="portrait-stat-block player-details{{#if hudData.settings.playerDetailsBottom}} player-details-bottom{{/if}}">
-			<span class="player-name">{{hudData.actor.data.name}}</span>
+			<span class="player-name">{{hudData.actor.name}}</span>
 				<span class="player-detail">
 					{{hudData.other.classes}}
 				</span>
@@ -68,8 +68,8 @@
 				<span class="feature-accordion-title">{{@key}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-						<span class="feature-element-title">{{data.name}}</span>
+					<div {{{hasUses this}}} data-type="trigger"{{{hasUses this}}} data-itemname="{{name}}" style="background-image: url({{img}})">
+						<span class="feature-element-title">{{name}}</span>
 					</div>
 				{{/each}}
 					<div class="feature-spell-slots" data-type="{{@key}}">
@@ -85,8 +85,8 @@
 				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-						<span class="feature-element-title">{{data.name}}</span>
+					<div {{{hasUses this}}} data-type="trigger"{{{hasUses this}}} data-itemname="{{name}}" style="background-image: url({{img}})">
+						<span class="feature-element-title">{{name}}</span>
 					</div>
 				{{/each}}
 				<div class="feature-spell-slots" data-type="{{@key}}">
@@ -102,8 +102,8 @@
 				<span class="feature-accordion-title">{{this.[0].labels.level}}</span>
 				<div class="features-accordion-content">
 				{{#each this}}
-					<div {{{hasUses data}}} data-type="trigger"{{{hasUses data}}} data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-						<span class="feature-element-title">{{data.name}}</span>
+					<div {{{hasUses this}}} data-type="trigger"{{{hasUses this}}} data-itemname="{{name}}" style="background-image: url({{img}})">
+						<span class="feature-element-title">{{name}}</span>
 					</div>
 				{{/each}}
 				<div class="feature-spell-slots" data-type="{{@key}}">
@@ -115,42 +115,42 @@
 		</div>
 		<div class="features-container is-consumables" data-iscontainer="true" data-containeractiontype="actions">
 			{{#each hudData.actions.consumables}}
-			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-			<span class="feature-element-title">{{data.name}}</span>
+			<div {{{hasUses this}}} data-type="trigger" data-itemname="{{name}}" style="background-image: url({{img}})">
+			<span class="feature-element-title">{{name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="actions">
 			{{#each hudData.actions.special}}
-			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-			<span class="feature-element-title">{{data.name}}</span>
+			<div {{{hasUses this}}} data-type="trigger" data-itemname="{{name}}" style="background-image: url({{img}})">
+			<span class="feature-element-title">{{name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="bonus">
 			{{#each hudData.bonus.special}}
-			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-			<span class="feature-element-title">{{data.name}}</span>
+			<div {{{hasUses this}}} data-type="trigger" data-itemname="{{name}}" style="background-image: url({{img}})">
+			<span class="feature-element-title">{{name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="reactions">
 			{{#each hudData.reactions.special}}
-			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-			<span class="feature-element-title">{{data.name}}</span>
+			<div {{{hasUses this}}} data-type="trigger" data-itemname="{{name}}" style="background-image: url({{img}})">
+			<span class="feature-element-title">{{name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="features-container is-powers" data-iscontainer="true" data-containeractiontype="free">
 			{{#each hudData.free.special}}
-			<div {{{hasUses data}}} data-type="trigger" data-itemname="{{data.name}}" style="background-image: url({{data.img}})">
-			<span class="feature-element-title">{{data.name}}</span>
+			<div {{{hasUses this}}} data-type="trigger" data-itemname="{{name}}" style="background-image: url({{img}})">
+			<span class="feature-element-title">{{name}}</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="actions-container has-actions" data-actionbartype="actions" data-title="{{hudData.settings.localize.mainactions}}">
-			<div class="action-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
-				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
+			<div class="action-element" data-type="trigger" data-set="setp" data-itemname="{{hudData.sets.active.primaryname}}" style="background-image: url({{hudData.sets.active.primaryimg}})">
+				<span class="action-element-title">{{hudData.sets.active.primary.name}}</span>
 			</div>
 			<div class="action-element-container">
 				<div class="action-element ech-blur" data-type="trigger" data-itemname="{{hudData.other.specialItemsNames.disengage}}" style="background-image: url(modules/enhancedcombathud/icons/journey.svg)">
@@ -189,8 +189,8 @@
 		
 		
 		<div class="actions-container  has-actions" data-actionbartype="bonus" data-title="{{hudData.settings.localize.bonusaction}}">
-			<div class="action-element primary-element" data-type="trigger" data-atype="bonus" data-set="sets" data-itemname="{{hudData.sets.active.secondary.data.name}}" style="background-image: url({{hudData.sets.active.secondary.data.img}})">
-				<span class="action-element-title">{{hudData.sets.active.secondary.data.name}}</span>
+			<div class="action-element primary-element" data-type="trigger" data-atype="bonus" data-set="sets" data-itemname="{{hudData.sets.active.secondary.name}}" style="background-image: url({{hudData.sets.active.secondary.img}})">
+				<span class="action-element-title">{{hudData.sets.active.secondary.name}}</span>
 			</div>
 			<div class="action-element bonus-action" data-type="menu" data-actiontype="bonus" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>
@@ -205,8 +205,8 @@
 			</div>
 		</div>
 		<div class="actions-container has-actions" data-actionbartype="reactions" data-title="{{hudData.settings.localize.reaction}}">
-			<div class="action-element primary-element" data-type="trigger"  data-atype="reaction" data-set="setp" data-itemname="{{hudData.sets.active.primary.data.name}}" style="background-image: url({{hudData.sets.active.primary.data.img}})">
-				<span class="action-element-title">{{hudData.sets.active.primary.data.name}}</span>
+			<div class="action-element primary-element" data-type="trigger"  data-atype="reaction" data-set="setp" data-itemname="{{hudData.sets.active.primaryname}}" style="background-image: url({{hudData.sets.active.primaryimg}})">
+				<span class="action-element-title">{{hudData.sets.active.primaryname}}</span>
 			</div>
 			<div class="action-element reaction" data-type="menu" data-actiontype="reactions" data-itemtype="spells" data-menu="is-spells" style="background-image: url(modules/enhancedcombathud/icons/spell-book.svg)">
 				<span class="action-element-title">{{hudData.settings.localize.castspell}}</span>

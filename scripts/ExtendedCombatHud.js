@@ -50,19 +50,19 @@ class CombatHud {
         skills: game.i18n.localize("enhancedcombathud.hud.skills.name"),
         tools: game.i18n.localize("enhancedcombathud.hud.tools.name"),
         spells: {
-          0: game.dnd5e.config.spellLevels["0"],
-          pact: game.dnd5e.config.spellPreparationModes.pact,
-          will: game.dnd5e.config.spellPreparationModes.atwill,
+          0: CONFIG.DND5E.spellLevels["0"],
+          pact: CONFIG.DND5E.spellPreparationModes.pact,
+          will: CONFIG.DND5E.spellPreparationModes.atwill,
           innate: game.i18n.localize("enhancedcombathud.hud.spells.innate"),
-          1: game.dnd5e.config.spellLevels["1"],
-          2: game.dnd5e.config.spellLevels["2"],
-          3: game.dnd5e.config.spellLevels["3"],
-          4: game.dnd5e.config.spellLevels["4"],
-          5: game.dnd5e.config.spellLevels["5"],
-          6: game.dnd5e.config.spellLevels["6"],
-          7: game.dnd5e.config.spellLevels["7"],
-          8: game.dnd5e.config.spellLevels["8"],
-          9: game.dnd5e.config.spellLevels["9"],
+          1: CONFIG.DND5E.spellLevels["1"],
+          2: CONFIG.DND5E.spellLevels["2"],
+          3: CONFIG.DND5E.spellLevels["3"],
+          4: CONFIG.DND5E.spellLevels["4"],
+          5: CONFIG.DND5E.spellLevels["5"],
+          6: CONFIG.DND5E.spellLevels["6"],
+          7: CONFIG.DND5E.spellLevels["7"],
+          8: CONFIG.DND5E.spellLevels["8"],
+          9: CONFIG.DND5E.spellLevels["9"],
         },
       },
     };
@@ -130,8 +130,8 @@ class CombatHud {
       special: await this.getItems({ actionType: ["special"], itemType: ["feat"] }),
     };
     this.other = {
-      portrait: this.actor.data.img,
-      name: this.actor.data.name,
+      portrait: this.actor.img,
+      name: this.actor.name,
       maxHp: this.actor.system.attributes.hp.max,
       currHp: this.actor.system.attributes.hp.value,
       movement: {
@@ -170,8 +170,8 @@ class CombatHud {
     };
     this.skills = this.actor.system.skills;
     this.saves = this.actor.system.abilities;
-    this.tools = this.actor.data.items
-      .filter((i) => i.data.type == "tool")
+    this.tools = this.actor.items
+      .filter((i) => i.type == "tool")
       .map((item, index) => {
         let toolAbility =
           typeof item.system.ability == "string"
@@ -184,7 +184,7 @@ class CombatHud {
         return {
           ability: toolAbility,
           bonus: 0,
-          label: item.data.name,
+          label: item.name,
           mod: abilityModifiers.mod,
           passive: 8 + toolProficiency + abilityModifiers.mod,
           prof: toolProficiency,
@@ -195,8 +195,8 @@ class CombatHud {
       });
 
     // Localize skills
-    Object.keys(game.dnd5e.config.skills).forEach((skill) => {
-      this.skills[skill].label = game.dnd5e.config.skills[skill];
+    Object.keys(CONFIG.DND5E.skills).forEach((skill) => {
+      this.skills[skill].label = CONFIG.DND5E.skills[skill];
       this.skills[skill].proficient = this.skills[skill].value;
       this.skills[skill].tooltip = game.i18n.localize(
         `enhancedcombathud.skills.${skill}.tooltip`
@@ -207,7 +207,7 @@ class CombatHud {
     for (let skill in this.skills) {
       sortableSkills.push([skill, this.skills[skill]]);
     }
-    sortableSkills.sort((a, b) => a[1].label < b[1].label ? -1 : 1);
+    sortableSkills.sort((a, b) => a[1].label.label < b[1].label.label ? -1 : 1);
     let tempSkills = {};
     sortableSkills.forEach(function(item){
       tempSkills[item[0]]=item[1];
@@ -215,8 +215,8 @@ class CombatHud {
     this.skills = tempSkills;
 
     //
-    Object.keys(game.dnd5e.config.abilities).forEach((ability) => {
-      this.saves[ability].label = game.dnd5e.config.abilities[ability];
+    Object.keys(CONFIG.DND5E.abilities).forEach((ability) => {
+      this.saves[ability].label = CONFIG.DND5E.abilities[ability];
       this.saves[ability].total = this.saves[ability].save;
       this.saves[ability].tooltip = game.i18n.localize(
         `enhancedcombathud.abilities.${ability}.tooltip`
@@ -280,30 +280,31 @@ class CombatHud {
         }
       }
     }
-    let items = Array.from(this.actor.data.items).concat(magicitems);
+    let items = Array.from(this.actor.items).concat(magicitems);
 
     let filteredItems = items.filter((i) => {
-      let itemData = i.data;
-      if (equipped === true && !itemData.data.equipped) return false;
+      let itemData = i.system;
+      if (equipped === true && !itemData.equipped) return false;
       if (
         this.settings.spellMode &&
         prepared === true &&
-        itemData.data.preparation?.prepared === false &&
-        itemData.data.preparation?.mode == "prepared" &&
-        itemData.data.level !== 0
+        itemData.preparation?.prepared === false &&
+        itemData.preparation?.mode == "prepared" &&
+        itemData.level !== 0
       )
         {
         if(!i.isMagicItem)  return false;
         }
       if (
         actionType &&
-        actionType.includes(itemData.data.activation?.type) &&
+        actionType.includes(itemData.activation?.type) &&
         itemType &&
-        itemType.includes(itemData.type)
+        itemType.includes(i.type)
       )
         return true;
       return false;
     });
+
     let spells = {};
     spells[this.settings.localize.spells["0"]] = [];
     spells[this.settings.localize.spells["innate"]] = [];
@@ -351,12 +352,12 @@ class CombatHud {
     }
   }
   findItemByName(itemName) {
-    let items = this.actor.data.items;
-    let item = items.find((i) => i.data.name == itemName);
+    let items = this.actor.items;
+    let item = items.find((i) => i.name == itemName);
     return item;
   }
   get sets() {
-    let items = this.actor.data.items;
+    let items = this.actor.items;
     let sets;
     sets = {
       set1: {
@@ -389,16 +390,16 @@ class CombatHud {
       };
     }
     for (let item of items) {
-      if (item.data.flags.enhancedcombathud?.set1p) sets.set1.primary = item;
-      if (item.data.flags.enhancedcombathud?.set2p) sets.set2.primary = item;
-      if (item.data.flags.enhancedcombathud?.set3p) sets.set3.primary = item;
-      if (item.data.flags.enhancedcombathud?.set1s) sets.set1.secondary = item;
-      if (item.data.flags.enhancedcombathud?.set2s) sets.set2.secondary = item;
-      if (item.data.flags.enhancedcombathud?.set3s) sets.set3.secondary = item;
+      if (item.flags.enhancedcombathud?.set1p) sets.set1.primary = item;
+      if (item.flags.enhancedcombathud?.set2p) sets.set2.primary = item;
+      if (item.flags.enhancedcombathud?.set3p) sets.set3.primary = item;
+      if (item.flags.enhancedcombathud?.set1s) sets.set1.secondary = item;
+      if (item.flags.enhancedcombathud?.set2s) sets.set2.secondary = item;
+      if (item.flags.enhancedcombathud?.set3s) sets.set3.secondary = item;
     }
 
-    sets.active = this.actor.data.flags.enhancedcombathud?.activeSet
-      ? sets[`${this.actor.data.flags.enhancedcombathud?.activeSet}`]
+    sets.active = this.actor.flags.enhancedcombathud?.activeSet
+      ? sets[`${this.actor.flags.enhancedcombathud?.activeSet}`]
       : sets.set1;
 
     return sets;
@@ -412,23 +413,23 @@ class CombatHud {
       return;
     }
     if (this.sets.set1.primary?.system.equipped)
-      await this.sets.set1.primary?.update({ "data.equipped": false });
+      await this.sets.set1.primary?.update({ equipped: false });
     if (this.sets.set1.secondary?.system.equipped)
-      await this.sets.set1.secondary?.update({ "data.equipped": false });
+      await this.sets.set1.secondary?.update({ equipped: false });
     if (this.sets.set2.primary?.system.equipped)
-      await this.sets.set2.primary?.update({ "data.equipped": false });
+      await this.sets.set2.primary?.update({ equipped: false });
     if (this.sets.set2.secondary?.system.equipped)
-      await this.sets.set2.secondary?.update({ "data.equipped": false });
+      await this.sets.set2.secondary?.update({ equipped: false });
     if (this.sets.set3.primary?.system.equipped)
-      await this.sets.set3.primary?.update({ "data.equipped": false });
+      await this.sets.set3.primary?.update({ equipped: false });
     if (this.sets.set3.secondary?.system.equipped)
-      await this.sets.set3.secondary?.update({ "data.equipped": false });
+      await this.sets.set3.secondary?.update({ equipped: false });
     //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
     if (!this.sets.active.primary?.system.equipped)
-      await this.sets.active.primary?.update({ "data.equipped": true });
+      await this.sets.active.primary?.update({ equipped: true });
     if (!this.sets.active.secondary?.system.equipped)
-      await this.sets.active.secondary?.update({ "data.equipped": true });
+      await this.sets.active.secondary?.update({ equipped: true });
   }
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
@@ -647,7 +648,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if (!_this.hudData.findItemByName(itemName))
         specialItem = this.getSpecialItem(itemName);
       let confimed = specialItem
-        ? await specialItem.roll()
+        ? await specialItem.use()
         : await this.roller.rollItem(itemName);
       let item = specialItem || _this.hudData.findItemByName(itemName);
       if (confimed && game.combat?.started) {
@@ -655,7 +656,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           this.updateActionEconomy(actionDataSet);
         } else {
           this.updateActionEconomy(
-            item.data?.data?.activation?.type ?? item.data.activation.type
+            item.system.activation?.type ?? item.activation.type
           );
         }
       }
@@ -669,9 +670,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
                     (i) => i.id == item.system.consume?.target
                   );
               let ammoCount = confimed
-                ? ammoItem?.data?.data?.quantity -
+                ? ammoItem.system?.quantity -
                   item.system.consume?.amount
-                : ammoItem?.data?.data?.quantity;
+                : ammoItem?.system?.quantity;
                 $(".extended-combat-hud").find(`[data-set] .action-element-title:contains(${itemName})`).closest('div').each((index, element) => element.dataset.itemCount = ammoCount)
                 event.currentTarget.dataset.itemCount = ammoCount;
               break;
@@ -962,19 +963,19 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       : null;
     element.toggleClass("has-count", isAmmo);
     if (element[0])
-      element[0].dataset.itemCount = ammoItem?.data?.data?.quantity;
+      element[0].dataset.itemCount = ammoItem?.system.quantity;
     if (element[1])
-      element[1].dataset.itemCount = ammoItem?.data?.data?.quantity;
+      element[1].dataset.itemCount = ammoItem?.system.quantity;
     element
       .data("itemname", item.name)
       .prop("data-itemname", item.name)
-      .css({ "background-image": `url(${item.data.img})`, display: "flex" })
+      .css({ "background-image": `url(${item.img})`, display: "flex" })
       .find(".action-element-title")
       .text(item.name);
   }
   initSets() {
     let set =
-      this.hudData.actor.data.flags.enhancedcombathud?.activeSet || "set1";
+      this.hudData.actor.flags.enhancedcombathud?.activeSet || "set1";
     this.switchSets(set);
     $(this.element)
       .find('div[data-type="switchWeapons"]')
@@ -1164,7 +1165,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     )
       return;
     if (!showTooltipSpecial && ECHItems[itemName]) return;
-    let item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    let item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     let title;
     let description;
     let itemType;
@@ -1176,20 +1177,19 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let damageTypes = [];
     let materialComponents = "";
     if (type == "skill") {
-      title = game.dnd5e.config.skills[itemName];
+      title = CONFIG.DND5E.skills[itemName];
       description = this.hudData.skills[itemName].tooltip;
     } else if (type == "save") {
-      title = game.dnd5e.config.abilities[itemName];
+      title = CONFIG.DND5E.abilities[itemName];
       description = this.hudData.saves[itemName].tooltip;
     } else {
       if (!item) {
-        item = {};
-        item.data = ECHItems[itemName];
+        item = ECHItems[itemName];
       }
-      if (!item || !item.data) return;
-      title = item.data.name;
+      if (!item || !item.system) return;
+      title = item.name;
       description = item.system.description.value;
-      itemType = item.data.type;
+      itemType = item.type;
       subtitle;
       target = item.labels?.target || "-";
       range = item.labels?.range || "-";
@@ -1199,14 +1199,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       materialComponents = "";
       switch (itemType) {
         case "weapon":
-          subtitle = game.dnd5e.config.weaponTypes[item.system.weaponType];
+          subtitle = CONFIG.DND5E.weaponTypes[item.system.weaponType];
           properties.push(
-            game.dnd5e.config.itemActionTypes[item.system.actionType]
+            CONFIG.DND5E.itemActionTypes[item.system.actionType]
           );
           for (let [key, value] of Object.entries(item.system.properties)) {
             let prop =
-              value && game.dnd5e.config.weaponProperties[key]
-                ? game.dnd5e.config.weaponProperties[key]
+              value && CONFIG.DND5E.weaponProperties[key]
+                ? CONFIG.DND5E.weaponProperties[key]
                 : undefined;
             if (prop) properties.push(prop);
           }
@@ -1215,7 +1215,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         case "spell":
           subtitle = `${item.labels.level} ${item.labels.school}`;
           properties.push(
-            game.dnd5e.config.spellSchools[item.system.school]
+            CONFIG.DND5E.spellSchools[item.system.school]
           );
           properties.push(item.labels.duration);
           properties.push(item.labels.save);
@@ -1227,21 +1227,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           break;
         case "consumable":
           subtitle =
-            game.dnd5e.config.consumableTypes[item.system.consumableType] +
+            CONFIG.DND5E.consumableTypes[item.system.consumableType] +
             //" " + item.system.chatFlavor;
             properties.push(
-              game.dnd5e.config.itemActionTypes[item.system.actionType]
+              CONFIG.DND5E.itemActionTypes[item.system.actionType]
             );
           break;
         case "feat":
           subtitle = item.system.requirements;
           properties.push(
-            game.dnd5e.config.itemActionTypes[item.system.actionType]
+            CONFIG.DND5E.itemActionTypes[item.system.actionType]
           );
           break;
       }
     }
-    description = await TextEditor.enrichHTML(description);
+    description = await TextEditor.enrichHTML(description, {async: true});
 
     const tooltip = ({
       title,
@@ -1307,7 +1307,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     $(".ech-tooltip").remove();
     $(".extended-combat-hud").before(
       tooltip({
-        title: title,
+        title: title.label,
         subtitle: subtitle,
         description: description,
         target: target,
@@ -1353,7 +1353,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     if(!showRangeFinder) return;
     const isMidi = game.modules.get("midi-qol")?.active
     const showPercentage = sett == "full";
-    const item = this.hudData.actor.items.find((i) => i.data.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     if(!item) return;
     const range = Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity;
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
@@ -1375,7 +1375,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       }else{
         new RangeFinder(t, {
           sources: [this.object],
-          text: `-${Math.abs(distDiff.toFixed(2))}${canvas.scene.data.gridUnits}`,
+          text: `-${Math.abs(distDiff.toFixed(2))}${canvas.scene.grid.units}`,
           style: {
             color: 'rgb(210 119 119);',
           }
@@ -1419,7 +1419,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   async dragDropSet(set, itemid, target) {
-    let item = this.hudData.actor.data.items.find((i) => i.id == itemid);
+    let item = this.hudData.actor.items.find((i) => i.id == itemid);
     if (!item) return;
     let ps = set.substring(4, set.length) == "p" ? "primary" : "secondary";
     let oldSetItem = this.hudData.sets[set.substring(0, set.length - 1)][ps];
@@ -1427,7 +1427,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     await item.setFlag("enhancedcombathud", set, true);
     $(target).css({
       "background-image": `url(${
-        this.hudData.sets[set.substring(0, set.length - 1)][ps].data.img
+        this.hudData.sets[set.substring(0, set.length - 1)][ps].img
       }`,
     });
     this.initSets();
@@ -1461,7 +1461,7 @@ class ECHDiceRoller {
         canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ??
         game.actors.get(actorId);
       const itemToRoll = actorToRoll?.items.find(
-        (i) => i.data.name === itemName
+        (i) => i.name === itemName
       ) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
       if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
         itemToRoll.executeMacro();
@@ -1476,13 +1476,13 @@ class ECHDiceRoller {
         );
       }
 
-      return await itemToRoll.roll({ vanilla: false });
+      return await itemToRoll.use({ vanilla: false });
     }
     const itemToRoll = this.actor.items.getName(itemName)
     if(!itemToRoll){
       return await this.rollMagicItem(itemName);
     }
-    return await itemToRoll.roll();
+    return await itemToRoll.use();
   }
 
   async rollMagicItem(itemName){
@@ -1500,7 +1500,7 @@ class ECHDiceRoller {
   }
 
   async rollTool(itemName, abil, event) {
-    this.actor.items.find((i) => i.data.name == itemName).rollToolCheck();
+    this.actor.items.find((i) => i.name == itemName).rollToolCheck();
     Hooks.once("renderDialog", (dialog, html) => {
       html.find('select[name="ability"]')[0].value = abil;
     });
@@ -1625,24 +1625,10 @@ Hooks.once("init", () => {
 
 Hooks.on("updateActor", (actor, updates) => {
   if (
-    actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id &&
-    (updates?.data?.attributes?.ac || updates?.data?.attributes?.hp)
+    actor.id == canvas.hud.enhancedcombathud?.hudData?.actor?.id
   ) {
     let ad = actor.system.attributes;
     canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
-  }
-});
-
-Hooks.on("updateActiveEffect", (activeEffect, updates) => {
-  let actor = activeEffect.parent;
-  if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
-    return;
-  let ad = actor.system.attributes;
-  for (let change of activeEffect.data.changes) {
-    if (change.key == "data.attributes.ac.value") {
-      canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
-      return;
-    }
   }
 });
 
@@ -1651,14 +1637,11 @@ Hooks.on("updateItem", (item, updates) => {
   if (!actor || actor?.id != canvas.hud.enhancedcombathud?.hudData?.actor?.id)
     return;
   let ad = actor.system.attributes;
-  if (updates?.data?.equipped !== undefined) {
     canvas.hud.enhancedcombathud.updatePortrait(ad.hp, ad.ac.value);
-    return;
-  }
 });
 
 Hooks.on("controlToken", (token, controlled) => {
-  if(token?.document?.actor?.data?.type == "vehicle") return
+  if(token?.document?.actor?.type == "vehicle") return
   if (
     controlled &&
     canvas.hud.enhancedcombathud?.rendered &&

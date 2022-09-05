@@ -810,7 +810,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
       name: "echtoggle",
       title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
       onClick: function (toggle) {
-        if(_token.document.actor.data.type == "vehicle") return
+        if(_token.document.actor.type == "vehicle") return
         if (toggle) {
           if (_token && canvas.tokens.get(_token.id) && _token.actor)
             canvas.hud.enhancedcombathud.bind(_token);
@@ -866,27 +866,27 @@ Handlebars.registerHelper("spellSlots", function (obj) {
   return CombatHudCanvasElement.generateSpells(obj);
 });
 
-Handlebars.registerHelper("hasUses", function (data) {
+Handlebars.registerHelper("hasUses", function (item) {
   let itemCount = 0;
-  if (data.data.consume?.type) {
-    switch (data.data.consume.type) {
+  if (item.system.consume?.type) {
+    switch (item.system.consume.type) {
       case "ammo":
         let ammoItem = canvas.hud.enhancedcombathud.hudData.actor.items.find(
-          (i) => i.id == data.data.consume?.target
+          (i) => i.id == item.system.consume?.target
         );
-        itemCount = ammoItem?.data?.data?.quantity;
+        itemCount = ammoItem?.system?.quantity;
         break;
       case "attribute":
         let value = Object.byString(
           canvas.hud.enhancedcombathud.hudData.actor.system,
-          data.data.consume.target
+          item.system.consume.target
         );
         let resCount = value;
         itemCount = resCount;
         break;
     }
   } else {
-    let uses = data.data.quantity || data.data.uses.value;
+    let uses = item.system.quantity || item.system.uses.value;
     itemCount = uses;
   }
   if (itemCount)
@@ -951,10 +951,10 @@ Handlebars.registerHelper("generateAbilities", function (str) {
       0,
       str.length - 1
     )} proficiency-is-${prof[value.proficient]}" data-roll="${
-      str == "tools" ? value.label : key
+      str == "tools" ? value.label.label : key
     }" data-modifier="${value.ability}" >
 </span> <span class="ability-name">${
-      value.label
+      value.label.label
     }</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${
       value.ability
     }" data-skill="${key}">${
