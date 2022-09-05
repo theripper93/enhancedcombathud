@@ -951,10 +951,10 @@ Handlebars.registerHelper("generateAbilities", function (str) {
       0,
       str.length - 1
     )} proficiency-is-${prof[value.proficient]}" data-roll="${
-      str == "tools" ? value.label.label : key
+      str == "tools" ? value.label : key
     }" data-modifier="${value.ability}" >
 </span> <span class="ability-name">${
-      value.label.label
+      value.label.label ?? value.label
     }</span> <span style="margin-left: auto;"><span class="ability-modifier" data-ability="${
       value.ability
     }" data-skill="${key}">${

@@ -1307,7 +1307,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     $(".ech-tooltip").remove();
     $(".extended-combat-hud").before(
       tooltip({
-        title: title.label,
+        title: title.label ?? title,
         subtitle: subtitle,
         description: description,
         target: target,
