@@ -408,29 +408,19 @@ class CombatHud {
     if(this.token.actor)canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
-    if (!this.settings.switchEquip) {
-      await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-      return;
-    }
-    if (this.sets.set1.primary?.system.equipped)
-      await this.sets.set1.primary?.update({ equipped: false });
-    if (this.sets.set1.secondary?.system.equipped)
-      await this.sets.set1.secondary?.update({ equipped: false });
-    if (this.sets.set2.primary?.system.equipped)
-      await this.sets.set2.primary?.update({ equipped: false });
-    if (this.sets.set2.secondary?.system.equipped)
-      await this.sets.set2.secondary?.update({ equipped: false });
-    if (this.sets.set3.primary?.system.equipped)
-      await this.sets.set3.primary?.update({ equipped: false });
-    if (this.sets.set3.secondary?.system.equipped)
-      await this.sets.set3.secondary?.update({ equipped: false });
-    //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-    if (!this.sets.active.primary?.system.equipped)
-      await this.sets.active.primary?.update({ equipped: true });
-    if (!this.sets.active.secondary?.system.equipped)
-      await this.sets.active.secondary?.update({ equipped: true });
+    if (!this.settings.switchEquip) return;
+
+    
+    const updates = [];
+    for(let [k,v] of Object.entries(this.sets)){
+      if(v.primary) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
+      if(v.secondary) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
+    }
+
+    await this.actor.updateEmbeddedDocuments("Item", updates);
   }
+  
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
       .find('.actions-container.has-actions[data-actionbartype="actions"]')
