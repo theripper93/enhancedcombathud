@@ -1061,11 +1061,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   updateDS(){
     const actor = this.object.actor;
-    if(!actor) return;
+    const $element = $(this.element).find(".death-saves");
+    if(!actor || !actor.system.attributes.death) {
+      $element.hide();
+      return;
+    }
     const isDead = actor.system.attributes.hp.value <= 0;
     const failed = actor.system.attributes.death.failure;
     const success = actor.system.attributes.death.success;
-    const $element = $(this.element).find(".death-saves");
     if(!isDead) {
       $element.hide();
       return;
