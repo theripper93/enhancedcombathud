@@ -548,6 +548,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.setColorSettings();
     this.updatePass();
     this.updateMovement();
+    this.updateDS();
     this.rigButtons();
     this.rigSkills();
     this.rigAccordion();
@@ -631,6 +632,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let _this = this;
     this.element.unbind("click");
     this.element.unbind("mouseenter");
+    this.element.on("click", ".death-save-btn", (event) => {
+      this.object.actor?.rollDeathSave()
+    });
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
@@ -1052,6 +1056,23 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           : "#ffb000"
         : "rgb(255, 255, 255)",
     });
+    this.updateDS();
+  }
+
+  updateDS(){
+    const actor = this.object.actor;
+    if(!actor) return;
+    const isDead = actor.system.attributes.hp.value <= 0;
+    const failed = actor.system.attributes.death.failure;
+    const success = actor.system.attributes.death.success;
+    const $element = $(this.element).find(".death-saves");
+    if(!isDead) {
+      $element.hide();
+      return;
+    }
+    $element.show();
+    $element.find(".death-save-success").find("span").text(success);
+    $element.find(".death-save-fail").find("span").text(failed);
   }
 
   getSpecialItem(itemName) {

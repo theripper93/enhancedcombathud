@@ -25,6 +25,21 @@
 		</ul>
 	</div>
 	<div class="portrait-hud">
+		<div class="death-saves">
+			<div class="death-save-success">
+			<div class="death-save-result-container">
+				<span>1</span>
+				<i class="fas fa-check"></i>
+			</div>
+			</div>
+			<div class="death-save-btn"><i class="fas fa-skull"></i></div>
+			<div class="death-save-fail">
+				<div class="death-save-result-container">
+					<span>1</span>
+					<i class="fas fa-times"></i>
+				</div>
+			</div>
+		</div>
 		<div class="portrait-hud-image" style="background-image: url('{{hudData.actor.img}}');"></div>
 		<div class="portrait-stat-block">
 			<span data-hp-value="{{hudData.actor.system.attributes.hp.value}}"></span>

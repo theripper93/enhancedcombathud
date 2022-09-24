@@ -420,7 +420,7 @@ Hooks.once("init", function () {
       step: 0.01,
     },
     type: Number,
-    default: 1,
+    default: 0.5,
   });
 
   /*game.settings.register("enhancedcombathud", "noAutoscale", {

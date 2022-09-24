@@ -16,6 +16,36 @@
     pointer-events: all;
 }
 
+.portrait-hud .death-saves{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    position: absolute;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.693);
+    background-color: #ff000059;
+}
+
+.portrait-hud .death-saves div{
+    display: flex;
+    justify-content: center;
+}
+
+.portrait-hud .death-save-result-container{
+    font-size: 3rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portrait-hud .death-save-btn{
+    font-size: 10rem;
+}
+
+.portrait-hud .death-save-btn:hover{
+    color: white;
+}
+
 .portrait-hud-image{
     position: absolute;
     width: 100%;
