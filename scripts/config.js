@@ -969,7 +969,7 @@ Handlebars.registerHelper("generateAbilities", function (str) {
 $("body").on("click", ".ability-menu .ability-toggle", (event) => {
   $("body").toggleClass("ech-show-ability-menu");
   let element = document.querySelector(".extended-combat-hud");
-  let ratio = element.style.transform.replace(/[^0-9.]+/g, "");
+  let ratio = element.style.transform.split(" ")[0].replace(/[^0-9.]+/g, "");
   let scaleHeight =
     ($(window).height() - $(".portrait-hud").outerHeight() * ratio) / ratio -
     70;
