@@ -408,29 +408,19 @@ class CombatHud {
     if(this.token.actor)canvas.hud.enhancedcombathud.bind(this.token);
   }
   async switchSets(active) {
-    if (!this.settings.switchEquip) {
-      await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-      return;
-    }
-    if (this.sets.set1.primary?.system.equipped)
-      await this.sets.set1.primary?.update({ equipped: false });
-    if (this.sets.set1.secondary?.system.equipped)
-      await this.sets.set1.secondary?.update({ equipped: false });
-    if (this.sets.set2.primary?.system.equipped)
-      await this.sets.set2.primary?.update({ equipped: false });
-    if (this.sets.set2.secondary?.system.equipped)
-      await this.sets.set2.secondary?.update({ equipped: false });
-    if (this.sets.set3.primary?.system.equipped)
-      await this.sets.set3.primary?.update({ equipped: false });
-    if (this.sets.set3.secondary?.system.equipped)
-      await this.sets.set3.secondary?.update({ equipped: false });
-    //this.sets.active = this.sets[active];
     await this.actor.setFlag("enhancedcombathud", "activeSet", active);
-    if (!this.sets.active.primary?.system.equipped)
-      await this.sets.active.primary?.update({ equipped: true });
-    if (!this.sets.active.secondary?.system.equipped)
-      await this.sets.active.secondary?.update({ equipped: true });
+    if (!this.settings.switchEquip) return;
+
+    
+    const updates = [];
+    for(let [k,v] of Object.entries(this.sets)){
+      if(v.primary) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
+      if(v.secondary) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
+    }
+
+    await this.actor.updateEmbeddedDocuments("Item", updates);
   }
+  
   set hasAction(value) {
     $(canvas.hud.enhancedcombathud.element)
       .find('.actions-container.has-actions[data-actionbartype="actions"]')
@@ -558,6 +548,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.setColorSettings();
     this.updatePass();
     this.updateMovement();
+    this.updateDS();
     this.rigButtons();
     this.rigSkills();
     this.rigAccordion();
@@ -641,6 +632,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     let _this = this;
     this.element.unbind("click");
     this.element.unbind("mouseenter");
+    this.element.on("click", ".death-save-btn", (event) => {
+      this.object.actor?.rollDeathSave()
+    });
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
       let actionDataSet = event.currentTarget.dataset.atype;
@@ -1062,6 +1056,26 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
           : "#ffb000"
         : "rgb(255, 255, 255)",
     });
+    this.updateDS();
+  }
+
+  updateDS(){
+    const actor = this.object.actor;
+    const $element = $(this.element).find(".death-saves");
+    if(!actor || !actor.system.attributes.death) {
+      $element.hide();
+      return;
+    }
+    const isDead = actor.system.attributes.hp.value <= 0;
+    const failed = actor.system.attributes.death.failure;
+    const success = actor.system.attributes.death.success;
+    if(!isDead) {
+      $element.hide();
+      return;
+    }
+    $element.show();
+    $element.find(".death-save-success").find("span").text(success);
+    $element.find(".death-save-fail").find("span").text(failed);
   }
 
   getSpecialItem(itemName) {

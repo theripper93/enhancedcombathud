@@ -420,7 +420,7 @@ Hooks.once("init", function () {
       step: 0.01,
     },
     type: Number,
-    default: 1,
+    default: 0.5,
   });
 
   /*game.settings.register("enhancedcombathud", "noAutoscale", {
@@ -969,7 +969,7 @@ Handlebars.registerHelper("generateAbilities", function (str) {
 $("body").on("click", ".ability-menu .ability-toggle", (event) => {
   $("body").toggleClass("ech-show-ability-menu");
   let element = document.querySelector(".extended-combat-hud");
-  let ratio = element.style.transform.replace(/[^0-9.]+/g, "");
+  let ratio = element.style.transform.split(" ")[0].replace(/[^0-9.]+/g, "");
   let scaleHeight =
     ($(window).height() - $(".portrait-hud").outerHeight() * ratio) / ratio -
     70;
