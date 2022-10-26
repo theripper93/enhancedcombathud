@@ -108,21 +108,21 @@ class CombatHud {
     };
     this.reactions = {
       attack: await this.getItems({
-        actionType: ["reaction"],
+        actionType: ["reaction", "reactiondamage", "reactionmanual"],
         itemType: ["weapon"],
         equipped: true,
       }),
       spells: await this.getItems({
-        actionType: ["reaction"],
+        actionType: ["reaction", "reactiondamage", "reactionmanual"],
         itemType: ["spell"],
         prepared: true,
       }),
       special: await this.getItems({
-        actionType: ["reaction"],
+        actionType: ["reaction", "reactiondamage", "reactionmanual"],
         itemType: ["feat"],
       }),
       consumables: await this.getItems({
-        actionType: ["reaction"],
+        actionType: ["reaction", "reactiondamage", "reactionmanual"],
         itemType: ["consumable"],
       }),
     };
