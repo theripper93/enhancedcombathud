@@ -633,7 +633,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     this.element.unbind("click");
     this.element.unbind("mouseenter");
     this.element.on("click", ".death-save-btn", (event) => {
-      this.object.actor?.rollDeathSave()
+      this.object.actor?.rollDeathSave({})
     });
     this.element.on("click", '[data-type="trigger"]', async (event) => {
       let itemName = $(event.currentTarget).data("itemname");
