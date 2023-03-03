@@ -1469,33 +1469,30 @@ class ECHDiceRoller {
   constructor(actor) {
     this.actor = actor;
     this.modules = {
-      betterRolls: game.modules.get("betterrolls5e")?.active,
+        betterRolls: game.modules.get("betterrolls5e")?.active,
+        MidiQOL: game.modules.get("midi-qol")?.active,
     };
   }
   async rollItem(itemName) {
-    if (this.modules.betterRolls) {
-      //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
-      const actorId = this.actor.id;
-      const actorToRoll =
-        canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ??
-        game.actors.get(actorId);
-      const itemToRoll = actorToRoll?.items.find(
-        (i) => i.name === itemName
-      ) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
-      if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
-        itemToRoll.executeMacro();
-      }
+    if (!this.modules.MidiQOL) {
+        //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
+        const actorId = this.actor.id;
+        const actorToRoll = canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ?? game.actors.get(actorId);
+        const itemToRoll = actorToRoll?.items.find((i) => i.name === itemName) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
+        if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
+            itemToRoll.executeMacro();
+        }
 
-      if (!itemToRoll) {
-        return ui.notifications.warn(
-          game.i18n.format("DND5E.ActionWarningNoItem", {
-            item: itemId,
-            name: actorToRoll?.name ?? "[Not Found]",
-          })
-        );
-      }
+        if (!itemToRoll) {
+            return ui.notifications.warn(
+                game.i18n.format("DND5E.ActionWarningNoItem", {
+                    item: itemId,
+                    name: actorToRoll?.name ?? "[Not Found]",
+                }),
+            );
+        }
 
-      return await itemToRoll.use({ vanilla: false });
+        return await itemToRoll.use({ vanilla: false });
     }
     const itemToRoll = this.actor.items.getName(itemName)
     if(!itemToRoll){
