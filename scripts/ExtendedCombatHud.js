@@ -641,9 +641,14 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       let specialItem;
       if (!_this.hudData.findItemByName(itemName))
         specialItem = this.getSpecialItem(itemName);
-      let confimed = specialItem
-        ? await specialItem.use()
-        : await this.roller.rollItem(itemName);
+      const useCE = specialItem && game.modules.get("dfreds-convenient-effects")?.active && game.dfreds.effectInterface.findEffectByName(itemName);
+      let confimed;
+      if (useCE) {
+        confimed = true;
+        await game.dfreds.effectInterface.toggleEffect(itemName, { overlay: false, uuids : [this.object.actor.uuid] });
+      } else {
+        confimed = specialItem ? await specialItem.use() : await this.roller.rollItem(itemName);
+      }
       let item = specialItem || _this.hudData.findItemByName(itemName);
       if (confimed && game.combat?.started) {
         if (actionDataSet) {
