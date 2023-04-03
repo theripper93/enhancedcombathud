@@ -717,7 +717,10 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     });
     this.element.on("mouseleave", '[data-type="trigger"]', (event) => {
       // Allow User to hover over Tooltip
-      if(game.Levels3DPreview)game.Levels3DPreview.rangeFinders.forEach(rf => {rf.destroy();})
+      if (game.Levels3DPreview) {
+        this.clearRanges();
+        game.Levels3DPreview.rangeFinders.forEach(rf => {rf.destroy();})
+      }
       setTimeout(() => {
         //$(".ech-tooltip:not(.is-hover)").remove();
         $(".ech-tooltip").remove();
@@ -1365,6 +1368,17 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       .addClass("ech-show-tooltip");
   }
 
+  clearRanges() {
+    if (this.normalRange) {
+      this.normalRange.remove();
+      this.normalRange = null;
+    }
+    if (this.longRange) {
+      this.longRange.remove();
+      this.longRange = null;
+    }
+  }
+
   async showRangeFinder(itemName){
     if(!game.Levels3DPreview?._active || !itemName) return;
     const sett = game.settings.get("enhancedcombathud", "rangefinder")
@@ -1373,8 +1387,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const isMidi = game.modules.get("midi-qol")?.active
     const showPercentage = sett == "full";
     const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
-    if(!item) return;
+    if (!item) return;
     const range = Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity;
+    const normal = item.system?.range?.value ?? null;
+    const long = item.system?.range?.long ?? null;
+    this.clearRanges();
+    if (normal) this.normalRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, normal)
+    if (long) this.longRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, long, "#ff0000");
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
@@ -1386,9 +1405,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       if(distDiff >= 0){
         const rollData = await this.rangeFinederGetPercent(item,t, isMidi);
         const percent = rollData.chance;
-        const text = showPercentage && percent ? `${parseFloat(Math.clamped(percent, 0,100).toFixed(2))}%` : null;
+        let text = showPercentage && percent ? `${parseFloat(Math.clamped(percent, 0,100).toFixed(2))}%` : "";
         if(rollData.adv || rollData.dis){
-          text+= `(${rollData.adv ? "ADV" : ""}${rollData.dis ? "DIS" : ""})`
+          //text+= `(${rollData.adv ? "ADV" : ""}${rollData.dis ? "DIS" : ""})`
         }
         new RangeFinder(t, {sources: [this.object], text: text})
       }else{
@@ -1435,6 +1454,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         chance: chanceToSave * 100,
       }
     }
+    return {};
   }
 
   async dragDropSet(set, itemid, target) {
