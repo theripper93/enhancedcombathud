@@ -1368,7 +1368,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       .addClass("ech-show-tooltip");
   }
 
-  clearRanges() {
+  clearRanges(force = false) {
+    if(this.isTargetPicker && !force) return;
     if (this.normalRange) {
       this.normalRange.remove();
       this.normalRange = null;
@@ -1377,6 +1378,21 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
       this.longRange.remove();
       this.longRange = null;
     }
+  }
+
+  static getRangeForItem(item) { 
+    return {
+      range: Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity,
+      normal: item.system?.range?.value ?? null,
+      long: item.system?.range?.long ?? null,
+    }
+  }
+
+  showRangeRings(normal, long) {
+    if(!game.Levels3DPreview?._active) return;
+    this.clearRanges();
+    if (normal) this.normalRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, normal);
+    if (long) this.longRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, long, "#ff0000");
   }
 
   async showRangeFinder(itemName){
@@ -1388,12 +1404,8 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const showPercentage = sett == "full";
     const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
     if (!item) return;
-    const range = Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity;
-    const normal = item.system?.range?.value ?? null;
-    const long = item.system?.range?.long ?? null;
-    this.clearRanges();
-    if (normal) this.normalRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, normal)
-    if (long) this.longRange = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, long, "#ff0000");
+    const { range, normal, long } = CombatHudCanvasElement.getRangeForItem(item);
+    this.showRangeRings(normal, long);
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
@@ -1494,6 +1506,7 @@ class ECHDiceRoller {
     };
   }
   async rollItem(itemName) {
+    let finalItemToRoll = null;
     if (!this.modules.MidiQOL) {
         //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
         const actorId = this.actor.id;
@@ -1511,14 +1524,24 @@ class ECHDiceRoller {
                 }),
             );
         }
-
+        finalItemToRoll = itemToRoll;
         return await itemToRoll.use({ vanilla: false });
     }
-    const itemToRoll = this.actor.items.getName(itemName)
-    if(!itemToRoll){
-      return await this.rollMagicItem(itemName);
+    if (!finalItemToRoll) { 
+      finalItemToRoll = this.actor.items.getName(itemName);
     }
-    return await itemToRoll.use();
+    if (!finalItemToRoll) {
+        return await this.rollMagicItem(itemName);
+    }
+    const useTargetPicker = game.settings.get("enhancedcombathud", "rangepicker")
+    if (useTargetPicker) {      
+      const targetPicker = new ECHTargetPicker(finalItemToRoll, this.object);
+      canvas.hud.enhancedcombathud.isTargetPicker = true;
+      const res = await targetPicker.promise;
+      canvas.hud.enhancedcombathud.isTargetPicker = false;
+      if(!res) return;
+    }
+    return await finalItemToRoll.use();
   }
 
   async rollMagicItem(itemName){
@@ -1649,6 +1672,105 @@ class ECHDiceRoller {
       options
     );
     return game.dnd5e.dice.d20Roll(rollData);
+  }
+}
+
+class ECHTargetPicker{
+  constructor (item, token) {
+    this.ranges = CombatHudCanvasElement.getRangeForItem(item);
+    this.item = item;
+    this.token = token;
+    this.resolve = null;
+    this.reject = null;
+    this._targetCount = game.user.targets.size;
+    this._maxTargets = ECHTargetPicker.getTargetCount(item);
+    this.promise = new Promise((resolve, reject) => {
+      this.resolve = resolve;
+      this.reject = reject;
+    });
+    this.targetHook = Hooks.on("targetToken", (user, token, targeted) => { 
+      this.targetCount = game.user.targets.size;
+      if(this.targetCount >= this.maxTargets) {
+        this.end(true);
+      }
+    });
+
+    this.movelistener = (event) => {
+        this.update(event);
+    };
+    this.clicklistener = (event) => { 
+      if(event.which === 3) {
+        this.end(false);
+      }
+    };
+    this.keyuplistener = (event) => { 
+      //check for + and - keys
+      if (event.key === "+" || event.key === "=") {
+        this.maxTargets++;
+      }
+      if (event.key === "-" || event.key === "_") {
+        if (this.maxTargets > 1) this.maxTargets--;
+      }
+    };
+    document.addEventListener("mousemove", this.movelistener);
+    document.addEventListener("mouseup", this.clicklistener);
+    document.addEventListener("keyup", this.keyuplistener);
+    this.init();
+  }
+
+  static getTargetCount(item) {
+    const validTargets = ["creature", "ally", "enemy"];
+    if (validTargets.includes(item.system.target.type)) {
+        return item.system.target.value;
+    }
+    return null;
+  }
+
+  set targetCount(count) { 
+    this._targetCount = count;
+    this.update();
+  }
+
+  get targetCount() {
+    return this._targetCount;
+  }
+
+  set maxTargets(count) {
+    this._maxTargets = count;
+    this.update();
+  }
+
+  get maxTargets() {
+    return this._maxTargets;
+  }
+
+  init() { 
+    const element = document.createElement("div");
+    element.classList.add("ech-target-picker");
+    document.body.appendChild(element);
+    this.element = element;
+    if (!this.maxTargets || this.targetCount == this.maxTargets) return this.end(true);
+    canvas.hud.enhancedcombathud.showRangeRings(this.ranges.normal, this.ranges.long);
+  }
+
+  update(event) {
+    if (event) {
+      const clientX = event.clientX;
+      const clientY = event.clientY;
+      this.element.style.left = clientX + 20 + "px";
+      this.element.style.top = clientY + "px";
+    }
+    this.element.innerText = `${this.targetCount}/${this.maxTargets} Targets`;
+  }
+
+  end(res) {
+    this.resolve(res);
+    canvas.hud.enhancedcombathud.clearRanges(true);
+    this.element.remove();
+    Hooks.off("targetToken", this.targetHook);
+    document.removeEventListener("mousemove", this.movelistener);
+    document.removeEventListener("mouseup", this.clicklistener);
+    document.removeEventListener("keyup", this.keyuplistener);
   }
 }
 

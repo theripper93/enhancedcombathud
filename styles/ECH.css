@@ -286,3 +286,11 @@
   margin: 0 0 0 calc(13px + 1rem);
   order: 3;
 }
+
+.ech-target-picker{
+  color: white;
+  position: absolute;
+  font-size: large;
+  text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black;
+  z-index: 9999;
+}

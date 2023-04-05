@@ -160,6 +160,9 @@
     "enhancedcombathud.settings.rangefinder.choices.rangeOnly": "Distance Only",
     "enhancedcombathud.settings.rangefinder.choices.full": "Game Mode",
 
+    "enhancedcombathud.settings.rangepicker.name": "Target Picker",
+    "enhancedcombathud.settings.rangepicker.hint": "When using an item or action that requires a target, this will show a target count that follows the mouse cursor until the correct amount of target is selected, use the +/- keys to manually adjust the required targets if needed.",
+
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",
     "enhancedcombathud.tooltip.properties.name" : "Properties",
