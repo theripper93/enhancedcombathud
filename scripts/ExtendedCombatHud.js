@@ -1399,13 +1399,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     if(!game.Levels3DPreview?._active || !itemName) return;
     const sett = game.settings.get("enhancedcombathud", "rangefinder")
     const showRangeFinder = sett != "none";
+    const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
+    const { range, normal, long } = CombatHudCanvasElement.getRangeForItem(item);
+    this.showRangeRings(normal, long);
+    if (!item) return;
     if(!showRangeFinder) return;
     const isMidi = game.modules.get("midi-qol")?.active
     const showPercentage = sett == "full";
-    const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
-    if (!item) return;
-    const { range, normal, long } = CombatHudCanvasElement.getRangeForItem(item);
-    this.showRangeRings(normal, long);
     const RangeFinder = game.Levels3DPreview.CONFIG.entityClass.RangeFinder; 
     game.Levels3DPreview.rangeFinders.forEach(rf => {
           rf.destroy();
