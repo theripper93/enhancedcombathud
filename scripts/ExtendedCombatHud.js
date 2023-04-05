@@ -1525,7 +1525,6 @@ class ECHDiceRoller {
             );
         }
         finalItemToRoll = itemToRoll;
-        return await itemToRoll.use({ vanilla: false });
     }
     if (!finalItemToRoll) { 
       finalItemToRoll = this.actor.items.getName(itemName);
