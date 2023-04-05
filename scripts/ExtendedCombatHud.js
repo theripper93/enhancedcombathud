@@ -1380,12 +1380,13 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     }
   }
 
-  static getRangeForItem(item) { 
+  static getRangeForItem(item) {
+    const touchRange = item.system.range.units == "touch" ? canvas?.scene?.grid?.distance : null;
     return {
-      range: Math.max(item.system?.range?.value, item.system?.range?.long ?? 0) ?? Infinity,
-      normal: item.system?.range?.value ?? null,
-      long: item.system?.range?.long ?? null,
-    }
+        range: Math.max(item.system?.range?.value ?? touchRange, item.system?.range?.long ?? 0) ?? Infinity,
+        normal: item.system?.range?.value ?? touchRange,
+        long: item.system?.range?.long ?? null,
+    };
   }
 
   showRangeRings(normal, long) {
