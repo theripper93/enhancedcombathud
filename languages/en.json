@@ -162,6 +162,8 @@
 
     "enhancedcombathud.settings.rangepicker.name": "Target Picker",
     "enhancedcombathud.settings.rangepicker.hint": "When using an item or action that requires a target, this will show a target count that follows the mouse cursor until the correct amount of target is selected, use the +/- keys to manually adjust the required targets if needed.",
+    "enhancedcombathud.settings.rangepickerclear.name": "Target Picker - Clear Targets",
+    "enhancedcombathud.settings.rangepickerclear.hint": "When using an item or action that requires a target, clear all targets before entering Target Picker mode.",
 
     "enhancedcombathud.tooltip.target.name" : "Target",
     "enhancedcombathud.tooltip.range.name" : "Range",

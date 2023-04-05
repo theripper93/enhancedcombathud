@@ -1401,9 +1401,9 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     const sett = game.settings.get("enhancedcombathud", "rangefinder")
     const showRangeFinder = sett != "none";
     const item = this.hudData.actor.items.find((i) => i.name == itemName) ?? await CombatHud.getMagicItemByName(this.hudData.actor, itemName);
-    const { range, normal, long } = CombatHudCanvasElement.getRangeForItem(item);
-    this.showRangeRings(normal, long);
     if (!item) return;
+    const { range, normal, long } = CombatHudCanvasElement.getRangeForItem(item);
+    if (!canvas.hud.enhancedcombathud.isTargetPicker) this.showRangeRings(normal, long);
     if(!showRangeFinder) return;
     const isMidi = game.modules.get("midi-qol")?.active
     const showPercentage = sett == "full";
@@ -1534,7 +1534,9 @@ class ECHDiceRoller {
         return await this.rollMagicItem(itemName);
     }
     const useTargetPicker = game.settings.get("enhancedcombathud", "rangepicker")
-    if (useTargetPicker) {      
+    if (useTargetPicker) {  
+      const release = game.settings.get("enhancedcombathud", "rangepickerclear");
+      if(release) (canvas.tokens.placeables[0] ?? _token)?.setTarget(false);
       const targetPicker = new ECHTargetPicker(finalItemToRoll, this.object);
       canvas.hud.enhancedcombathud.isTargetPicker = true;
       const res = await targetPicker.promise;
@@ -1689,10 +1691,7 @@ class ECHTargetPicker{
       this.reject = reject;
     });
     this.targetHook = Hooks.on("targetToken", (user, token, targeted) => { 
-      this.targetCount = game.user.targets.size;
-      if(this.targetCount >= this.maxTargets) {
-        this.end(true);
-      }
+      this.checkComplete();
     });
 
     this.movelistener = (event) => {
@@ -1716,6 +1715,13 @@ class ECHTargetPicker{
     document.addEventListener("mouseup", this.clicklistener);
     document.addEventListener("keyup", this.keyuplistener);
     this.init();
+  }
+
+  checkComplete() { 
+      this.targetCount = game.user.targets.size;
+      if (this.targetCount >= this.maxTargets) {
+          this.end(true);
+      }
   }
 
   static getTargetCount(item) {
@@ -1744,6 +1750,7 @@ class ECHTargetPicker{
   set maxTargets(count) {
     this._maxTargets = count;
     this.update();
+    this.checkComplete();
   }
 
   get maxTargets() {
@@ -1891,3 +1898,20 @@ Hooks.on("preUpdateCombat", (combat, updates) => {
 Hooks.on("updateItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
 Hooks.on("deleteItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
 Hooks.on("createItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
+
+Hooks.on("init", () => { 
+  if (!game.modules.get("lib-wrapper")?.active) return;
+
+    libWrapper.register(
+        "enhancedcombathud",
+        "CONFIG.Token.objectClass.prototype._onClickLeft",
+        function (wrapped, ...args) {
+            if (canvas?.hud?.enhancedcombathud?.isTargetPicker) {
+                this.setTarget(!this.isTargeted, { releaseOthers: false });
+            } else {
+                return wrapped(...args);
+            }
+        },
+        "MIXED",
+    );
+})

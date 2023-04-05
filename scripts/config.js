@@ -418,6 +418,15 @@ Hooks.once("init", function () {
       default: true,
   });
 
+    game.settings.register("enhancedcombathud", "rangepickerclear", {
+        name: game.i18n.localize("enhancedcombathud.settings.rangepickerclear.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.rangepickerclear.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
+
   game.settings.register("enhancedcombathud", "scale", {
     name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
     hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
