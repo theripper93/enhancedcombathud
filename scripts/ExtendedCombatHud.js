@@ -1719,8 +1719,14 @@ class ECHTargetPicker{
 
   static getTargetCount(item) {
     const validTargets = ["creature", "ally", "enemy"];
-    if (validTargets.includes(item.system.target.type)) {
+    const actionType = item.system.actionType;
+    const targetType = item.system.target.type;
+    if (validTargets.includes(targetType)) {
         return item.system.target.value;
+    } else {
+        if (actionType === "mwak" || actionType === "rwak") {
+            return 1;
+        }
     }
     return null;
   }
