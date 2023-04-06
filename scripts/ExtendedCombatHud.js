@@ -1541,6 +1541,7 @@ class ECHDiceRoller {
       canvas.hud.enhancedcombathud.isTargetPicker = true;
       const res = await targetPicker.promise;
       canvas.hud.enhancedcombathud.isTargetPicker = false;
+      if (release) (canvas.tokens.placeables[0] ?? _token)?.setTarget(false);
       if(!res) return;
     }
     return await finalItemToRoll.use();
