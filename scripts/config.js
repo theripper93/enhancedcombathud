@@ -824,7 +824,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
     .find((x) => x.name == "token")
     .tools.push({
       active: canvas.hud?.enhancedcombathud?._state == 2,
-      icon: "ech-swords",
+      icon: "ech-swords fa-duotone fa-swords",
       name: "echtoggle",
       title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
       onClick: function (toggle) {
@@ -849,7 +849,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
 });
 Hooks.on("renderTokenHUD", (app, html, data) => {
   let $tokenHUDButton = $(
-    `<div class="control-icon echtoggle"><i class="ech-swords"></i></div>`
+    `<div class="control-icon echtoggle"><i class="ech-swords fa-duotone fa-swords"></i></div>`
   );
   $tokenHUDButton.toggleClass(
     "active",

@@ -103,7 +103,7 @@
   box-sizing: border-box;
 }
 
-.ech-swords {
+/*.ech-swords {
     width: 100%;
     height: 100%;
     display: block;
@@ -112,7 +112,7 @@
     filter: brightness(0.7);
     padding: 5px;
     background-origin: content-box;
-}
+}*/
 
 .ech-remove-set .portrait-hud:after {
   -moz-osx-font-smoothing: grayscale;

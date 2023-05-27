@@ -647,7 +647,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
         confimed = true;
         await game.dfreds.effectInterface.toggleEffect(itemName, { overlay: false, uuids : [this.object.actor.uuid] });
       } else {
-        confimed = specialItem ? await specialItem.use() : await this.roller.rollItem(itemName);
+        confimed = specialItem ? await specialItem.use() : await this.roller.rollItem(itemName, event);
       }
       let item = specialItem || _this.hudData.findItemByName(itemName);
       if (confimed && game.combat?.started) {
@@ -1506,7 +1506,7 @@ class ECHDiceRoller {
         MidiQOL: game.modules.get("midi-qol")?.active,
     };
   }
-  async rollItem(itemName) {
+  async rollItem(itemName, event) {
     let finalItemToRoll = null;
     if (!this.modules.MidiQOL) {
         //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
