@@ -456,12 +456,29 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
     return true;
   }
 
+  bind(object) {
+    const actor = object.document.actor;
+    if (!actor) return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
+    const type = actor.type;
+    if(type !== "npc" && type !== "character") return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
+    if (this._crashed) {
+      this._crashed = false;
+      this._state = this.constructor.RENDER_STATES.ERROR;
+    }
+    return super.bind(object);
+  }
+
   async getData() {
-    const data = super.getData();
-    data.hudData = await new CombatHud(this.object).init();
-    this.hudData = data.hudData;
-    this.roller = new ECHDiceRoller(this.hudData.actor);
-    return data;
+    try {      
+      const data = super.getData();
+      data.hudData = await new CombatHud(this.object).init();
+      this.hudData = data.hudData;
+      this.roller = new ECHDiceRoller(this.hudData.actor);
+      return data;
+    } catch (err) {
+      this._crashed = true;
+      return {};
+    }
   }
 
   checkReRender(item){

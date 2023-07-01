@@ -226,6 +226,8 @@
     "enhancedcombathud.themeOptions.movementUsed" : "Background/Box Shadow of box indicating used movement spaces",
     "enhancedcombathud.themeOptions.movementBaseMovement" : "Background/Box Shadow of box indicating available movement spaces",
     "enhancedcombathud.themeOptions.movementDashMovement" : "Background/Box Shadow of box indicating dash movement spaces",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "Background/Box Shadow of box indicating exceeded movement spaces"
+    "enhancedcombathud.themeOptions.movementDangerMovement" : "Background/Box Shadow of box indicating exceeded movement spaces",
+
+    "enhancedcombathud.err.invalid": "Argon: Invalid Actor data or Actor Type not supported"
 
 }
