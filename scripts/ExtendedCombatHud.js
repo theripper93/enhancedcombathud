@@ -1703,6 +1703,10 @@ class ECHTargetPicker{
     this.reject = null;
     this._targetCount = game.user.targets.size;
     this._maxTargets = ECHTargetPicker.getTargetCount(item);
+
+    const targetTool = document.querySelector('.control-tool[data-tool="target"]')
+    targetTool?.click();
+
     this.promise = new Promise((resolve, reject) => {
       this.resolve = resolve;
       this.reject = reject;
@@ -1794,6 +1798,7 @@ class ECHTargetPicker{
   }
 
   end(res) {
+    document.querySelector(".control-tool").click();
     this.resolve(res);
     canvas.hud.enhancedcombathud.clearRanges(true);
     this.element.remove();
@@ -1801,6 +1806,7 @@ class ECHTargetPicker{
     document.removeEventListener("mousemove", this.movelistener);
     document.removeEventListener("mouseup", this.clicklistener);
     document.removeEventListener("keyup", this.keyuplistener);
+    document.querySelector('.control-tool[data-tool="select"]')?.click();
   }
 }
 
@@ -1915,20 +1921,3 @@ Hooks.on("preUpdateCombat", (combat, updates) => {
 Hooks.on("updateItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
 Hooks.on("deleteItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
 Hooks.on("createItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
-
-Hooks.on("init", () => { 
-  if (!game.modules.get("lib-wrapper")?.active) return;
-
-    libWrapper.register(
-        "enhancedcombathud",
-        "CONFIG.Token.objectClass.prototype._onClickLeft",
-        function (wrapped, ...args) {
-            if (canvas?.hud?.enhancedcombathud?.isTargetPicker) {
-                this.setTarget(!this.isTargeted, { releaseOthers: false });
-            } else {
-                return wrapped(...args);
-            }
-        },
-        "MIXED",
-    );
-})
