@@ -1904,17 +1904,15 @@ Hooks.on("deleteToken", (token, updates) => {
   }
 });
 
-Hooks.on("preUpdateCombat", (combat, updates) => {
+Hooks.on("combatStart", (combat, updates) => {
+  const activeToken = canvas.tokens.controlled[0] ?? canvas.tokens.ownedTokens[0];
   if (
     game.settings.get("enhancedcombathud", "openCombatStart") &&
-    canvas.tokens.controlled[0] &&
-    !canvas.hud.enhancedcombathud?.rendered &&
-    combat.previous?.round === null &&
-    combat.previous?.turn === null
+    activeToken &&
+    !canvas.hud.enhancedcombathud?.rendered
   ) {
-    const token = canvas.tokens.get(canvas.tokens.controlled[0]?.id);
-    if(!token?.actor) return
-    canvas.hud.enhancedcombathud.bind(token);
+    if(!activeToken?.actor) return
+    canvas.hud.enhancedcombathud.bind(activeToken);
   }
 });
 
