@@ -1911,10 +1911,22 @@ Hooks.on("combatStart", (combat, updates) => {
     activeToken &&
     !canvas.hud.enhancedcombathud?.rendered
   ) {
-    if(!activeToken?.actor) return
+    if (!activeToken?.actor) return
+    activeToken.control({releaseOthers: true});
+    $(`.control-tool[data-tool="echtoggle"]`).click();
     canvas.hud.enhancedcombathud.bind(activeToken);
   }
 });
+
+Hooks.on("deleteCombat", (combat) => {
+    if (
+    combat.scene == canvas.scene &&
+      game.settings.get("enhancedcombathud", "openCombatStart") &&
+    canvas.hud.enhancedcombathud?.rendered
+    ) {
+      $(`.control-tool[data-tool="echtoggle"]`).click();
+    }
+})
 
 Hooks.on("updateItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
 Hooks.on("deleteItem", (item) =>{canvas.hud.enhancedcombathud?.checkReRender(item)})
