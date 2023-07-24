@@ -173,10 +173,7 @@ class CombatHud {
     this.tools = this.actor.items
       .filter((i) => i.type == "tool")
       .map((item, index) => {
-        let toolAbility =
-          typeof item.system.ability == "string"
-            ? item.system.ability
-            : item.system.ability[0] || "str";
+        let toolAbility = item.abilityMod || "str";
         let abilityModifiers = this.actor.system.abilities[toolAbility];
         let toolProficiency = Math.ceil(
           item.system.proficient * this.actor.system.attributes.prof
