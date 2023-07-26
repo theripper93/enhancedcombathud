@@ -1,4 +1,7 @@
 :root {
+  --ech-portrait-base-background: #414B55E6;
+  --ech-portrait-base-border: #757f89FF;
+  --ech-portrait-base-color: #B4D2DCFF;
   --ech-mainAction-base-background: #414B55E6;
   --ech-mainAction-base-color: #B4D2DCFF;
   --ech-mainAction-base-border: #757f89FF;
@@ -65,6 +68,7 @@
   --ech-font-family: 'Roboto', sans-serif;
   --ech-fadeout-deleay: 5s;
   --ech-fadeout-opacity: 0.1;
+  --ech-blur-amount: blur(6px);
 }
 
 @keyframes echFadeOut {
@@ -294,3 +298,4 @@
   text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black;
   z-index: 9999;
 }
+

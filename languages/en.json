@@ -187,6 +187,7 @@
     
 
 
+    "enhancedcombathud.themeOptions.portrait": "Portrait Colors",
     "enhancedcombathud.themeOptions.mainAction" : "Main Action Colors",
     "enhancedcombathud.themeOptions.bonusAction" : "Bonus Action Colors",
     "enhancedcombathud.themeOptions.freeAction" : "Free Action Colors",
@@ -202,6 +203,7 @@
     "enhancedcombathud.themeOptions.border" : "Border Color",
     "enhancedcombathud.themeOptions.boxShadow" : "Box Shadow Color",
 
+    "enhancedcombathud.themeOptions.portraitBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
     "enhancedcombathud.themeOptions.mainActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
     "enhancedcombathud.themeOptions.mainActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
     "enhancedcombathud.themeOptions.bonusActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
