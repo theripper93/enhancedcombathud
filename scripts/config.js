@@ -8,6 +8,122 @@ Hooks.on("pickerDone", (element, color) => {
   }
 });
 
+let defaultTheme = {
+  theme: "custom",
+  font: "Roboto",
+  colors: {
+    portrait: {
+      base: {
+        background: "#414B55E6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    mainAction: {
+      base: {
+        background: "#414B55E6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+      hover: {
+        background: "#747e88e6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    bonusAction: {
+      base: {
+        background: "#453B75E6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+      hover: {
+        background: "#9288c2e6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    freeAction: {
+      base: {
+        background: "#3B5875E6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+      hover: {
+        background: "#88a5c2e6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    reaction: {
+      base: {
+        background: "#753B3BE6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+      hover: {
+        background: "#c28888e6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    endTurn: {
+      base: {
+        background: "#374B3CE6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+      hover: {
+        background: "#849889e6",
+        color: "#B4D2DCFF",
+        border: "#757f89FF",
+      },
+    },
+    tooltip: {
+      header: {
+        background: "#ffffffCC",
+        color: "#414146",
+        border: "#757f89FF",
+      },
+      subtitle: {
+        background: "#32505a",
+        color: "#ffffff",
+        border: "#757f89FF",
+      },
+      body: {
+        background: "#5a7896B3",
+        color: "#ffffff",
+        border: "#757f89FF",
+      },
+    },
+    abilityMenu: {
+      background: "#414B55E6",
+      color: "#B4D2DCFF",
+      border: "#757f89FF",
+      base: { color: "#B4D2DCFF", boxShadow: "#757f89CC" },
+      hover: { color: "#B4D2DCFF", boxShadow: "#757f89CC" },
+    },
+    buttons: {
+      base: {
+        background: "#5096c3",
+        color: "#ffffff",
+        border: "#5096c3",
+      },
+      hover: {
+        background: "#55bef5",
+        color: "#ffffffff",
+        border: "#55bef5",
+      },
+    },
+    movement: {
+      used: { background: "#7d879180", boxShadow: "#00000000" },
+      baseMovement: { background: "#5abef5FF", boxShadow: "#6ed2ffCC" },
+      dashMovement: { background: "#c8c85aFF", boxShadow: "#dcdc6eCC" },
+      dangerMovement: { background: "#c85f5aFF", boxShadow: "#dc736eCC" },
+    },
+  },
+};
+
 class echThemeOptions extends FormApplication {
   static get defaultOptions() {
     return {
@@ -157,8 +273,14 @@ class echThemeOptions extends FormApplication {
     };
   }
   getData() {
+    // We need to use the stored settings, but do a check from the default settings
+    // In case a new color was added since the last update
+    // We build a new object with the default settings, and then overwrite the values with the stored settings
+    let themeOptions = game.settings.get("enhancedcombathud", "echThemeData");
+    themeOptions = mergeObject(defaultTheme, themeOptions);
+
     return {
-      themeOptions: game.settings.get("enhancedcombathud", "echThemeData"),
+      themeOptions: themeOptions,
     };
   }
   activateListeners(html) {
@@ -273,114 +395,7 @@ Hooks.once("init", function () {
   game.settings.register("enhancedcombathud", "echThemeData", {
     name: "Data used for Theming",
     type: Object,
-    default: {
-      theme: "custom",
-      font: "Roboto",
-      colors: {
-        mainAction: {
-          base: {
-            background: "#414B55E6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-          hover: {
-            background: "#747e88e6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-        },
-        bonusAction: {
-          base: {
-            background: "#453B75E6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-          hover: {
-            background: "#9288c2e6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-        },
-        freeAction: {
-          base: {
-            background: "#3B5875E6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-          hover: {
-            background: "#88a5c2e6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-        },
-        reaction: {
-          base: {
-            background: "#753B3BE6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-          hover: {
-            background: "#c28888e6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-        },
-        endTurn: {
-          base: {
-            background: "#374B3CE6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-          hover: {
-            background: "#849889e6",
-            color: "#B4D2DCFF",
-            border: "#757f89FF",
-          },
-        },
-        tooltip: {
-          header: {
-            background: "#ffffffCC",
-            color: "#414146",
-            border: "#757f89FF",
-          },
-          subtitle: {
-            background: "#32505a",
-            color: "#ffffff",
-            border: "#757f89FF",
-          },
-          body: {
-            background: "#5a7896B3",
-            color: "#ffffff",
-            border: "#757f89FF",
-          },
-        },
-        abilityMenu: {
-          background: "#414B55E6",
-          color: "#B4D2DCFF",
-          border: "#757f89FF",
-          base: { color: "#B4D2DCFF", boxShadow: "#757f89CC" },
-          hover: { color: "#B4D2DCFF", boxShadow: "#757f89CC" },
-        },
-        buttons: {
-          base: {
-            background: "#5096c3",
-            color: "#ffffff",
-            border: "#5096c3",
-          },
-          hover: {
-            background: "#55bef5",
-            color: "#ffffffff",
-            border: "#55bef5",
-          },
-        },
-        movement: {
-          used: { background: "#7d879180", boxShadow: "#00000000" },
-          baseMovement: { background: "#5abef5FF", boxShadow: "#6ed2ffCC" },
-          dashMovement: { background: "#c8c85aFF", boxShadow: "#dcdc6eCC" },
-          dangerMovement: { background: "#c85f5aFF", boxShadow: "#dc736eCC" },
-        },
-      },
-    },
+    default: defaultTheme,
     scope: "client",
     config: false, // Doesn't show up in config
   });
