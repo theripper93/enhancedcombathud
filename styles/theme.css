@@ -7,7 +7,7 @@
 /* ========== ActionHud.css - Action Containers ========== */
 .actions-container:before {
 	/* ADD THEME OPTIONS */
-  background-color: rgb(0 0 0 / 30%);
+  background-color: var(--ech-mainAction-background-color);
   border: 1px solid var(--ech-mainAction-base-border);
   color: rgb(200 200 200);
 }
@@ -244,9 +244,9 @@
 /* ========== Portrait.css ========== */
 .portrait-hud {
 	/* ADD THEME OPTIONS */
-	background-color: var(--ech-mainAction-base-background);
-	border-color: var(--ech-mainAction-base-border);
-	color: var(--ech-bonusAction-base-color);
+	background-color: var(--ech-portrait-base-background);
+	border-color: var(--ech-portrait-base-border);
+	color: var(--ech-portrait-base-color);
 }
 .portrait-stat-block {
 	/* ADD THEME OPTIONS */
@@ -354,7 +354,7 @@
 /* ========== Portrait.css - Movement HUD ========== */
 .movement-hud {
 	/* ADD THEME OPTIONS */
-    background-color: rgb(0 0 0 / 30%);
+	background-color: var(--ech-mainAction-background-color);
 	border-color: var(--ech-mainAction-base-border);
     color: rgb(200 200 200);
 }
@@ -378,3 +378,4 @@
     background-color: var(--ech-movement-dangerMovement-background);
 	box-shadow: 0px 0px 10px 0px var(--ech-movement-dangerMovement-boxShadow);
 }
+

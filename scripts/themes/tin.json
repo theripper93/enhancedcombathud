@@ -1,4 +1,11 @@
 {
+  "portrait": {
+    "base": {
+      "background": "#1f2125e6",
+      "color": "#ffffffff",
+      "border": "#757f89FF"
+    }
+  },
   "mainAction": {
     "base": {
       "background": "#1f2125e6",
@@ -100,5 +107,8 @@
     "baseMovement": { "background": "#5abef5FF", "boxShadow": "#6ed2ffCC" },
     "dashMovement": { "background": "#c8c85aFF", "boxShadow": "#dcdc6eCC" },
     "dangerMovement": { "background": "#c85f5aFF", "boxShadow": "#dc736eCC" }
+  },
+  "blur": {
+    "amount": "blur(6px)"
   }
 }
