@@ -454,7 +454,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   bind(object) {
-    const actor = object.document.actor;
+    const actor = object.actor;
     if (!actor) return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
     const type = actor.type;
     if(type !== "npc" && type !== "character") return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
@@ -1525,7 +1525,7 @@ class ECHDiceRoller {
     if (!this.modules.MidiQOL) {
         //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
         const actorId = this.actor.id;
-        const actorToRoll = canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ?? game.actors.get(actorId);
+        const actorToRoll = this.actor ?? canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ?? game.actors.get(actorId);
         const itemToRoll = actorToRoll?.items.find((i) => i.name === itemName) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
         if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
             itemToRoll.executeMacro();
