@@ -410,11 +410,11 @@ class CombatHud {
 
     
     const updates = [];
-    for(let [k,v] of Object.entries(this.sets)){
-      if(v.primary) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
-      if(v.secondary) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
+    for (let [k, v] of Object.entries(this.sets)) {
+      if(k == "active") continue;
+      if(v.primary && v.primary.system.equipped !== (v.primary == this.sets.active.primary)) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
+      if(v.secondary && v.secondary.system.equipped !== (v.secondary == this.sets.active.secondary)) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
     }
-
     await this.actor.updateEmbeddedDocuments("Item", updates);
   }
   
@@ -440,6 +440,13 @@ class CombatHud {
 }
 
 class CombatHudCanvasElement extends BasePlaceableHUD {
+
+  constructor (...args) {
+    super(...args);
+    //this.debouncedRerender = debounce(this.debouncedRerender.bind(this), 350);
+  }
+
+
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.template =
@@ -480,8 +487,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   checkReRender(item){
     try{
-      if(item.parent.id == this.hudData.actor.id && this.hudData._itemCount != item.parent.items.size)this.render(true)
+      if(item.parent.id == this.hudData.actor.id && this.hudData._itemCount != item.parent.items.size)this.debouncedRerender();
     }catch{}
+  }
+
+  debouncedRerender() {
+    this.render(true);
   }
 
   close() {
