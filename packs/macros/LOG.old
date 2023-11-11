@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-2023/08/10-13:48:06.672 5d10 Recovering log #401
-2023/08/10-13:48:06.676 5d10 Delete type=0 #401
-2023/08/10-13:48:06.676 5d10 Delete type=3 #400
-2023/08/10-13:48:15.577 650 Level-0 table #405: started
-2023/08/10-13:48:15.578 650 Level-0 table #405: 0 bytes OK
-2023/08/10-13:48:15.579 650 Delete type=0 #403
-2023/08/10-13:48:15.579 650 Manual compaction at level-0 from '!macros!EzzHK20OhYCQF2T3' @ 72057594037927935 : 1 .. '!macros!EzzHK20OhYCQF2T3' @ 0 : 0; will stop at (end)
-2023/08/10-13:48:15.579 650 Manual compaction at level-1 from '!macros!EzzHK20OhYCQF2T3' @ 72057594037927935 : 1 .. '!macros!EzzHK20OhYCQF2T3' @ 0 : 0; will stop at (end)
-=======
-2023/10/28-10:35:48.438 2dd0 Recovering log #442
-2023/10/28-10:35:48.438 2dd0 Delete type=0 #442
-2023/10/28-10:35:48.438 2dd0 Delete type=3 #440
-2023/10/28-10:49:35.413 521c Level-0 table #447: started
-2023/10/28-10:49:35.413 521c Level-0 table #447: 0 bytes OK
-2023/10/28-10:49:35.414 521c Delete type=0 #445
-2023/10/28-10:49:35.415 521c Manual compaction at level-0 from '!macros!EzzHK20OhYCQF2T3' @ 72057594037927935 : 1 .. '!macros!EzzHK20OhYCQF2T3' @ 0 : 0; will stop at (end)
->>>>>>> dc88e1953b012301bc8a63b6d9f4633efa82934d
+2023/11/11-13:14:00.929 73e4 Log #407: 0 ops saved to Table #450 OK
+2023/11/11-13:14:00.929 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/000407.log: OK
+2023/11/11-13:14:00.929 73e4 Log #449: 0 ops saved to Table #451 OK
+2023/11/11-13:14:00.930 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/000449.log: OK
+2023/11/11-13:14:00.930 73e4 Table #405: 1 entries OK
+2023/11/11-13:14:00.932 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/MANIFEST-000406: OK
+2023/11/11-13:14:00.932 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/MANIFEST-000448: OK
+2023/11/11-13:14:00.934 73e4 **** Repaired leveldb D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros; recovered 1 files; 590 bytes. Some data may have been lost. ****
