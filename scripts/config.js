@@ -456,14 +456,14 @@ Hooks.once("init", function () {
     default: 0.5,
   });
 
-  /*game.settings.register("enhancedcombathud", "noAutoscale", {
-    name: game.i18n.localize("enhancedcombathud.settings.noAutoscale.name"),
-    hint: game.i18n.localize("enhancedcombathud.settings.noAutoscale.hint"),
+  game.settings.register("enhancedcombathud", "alwaysOn", {
+    name: game.i18n.localize("enhancedcombathud.settings.alwaysOn.name"),
+    hint: game.i18n.localize("enhancedcombathud.settings.alwaysOn.hint"),
     scope: "client",
     config: true,
     type: Boolean,
     default: false,
-  });*/
+  });
 
   game.settings.register("enhancedcombathud", "leftPos", {
     name: game.i18n.localize("enhancedcombathud.settings.leftPos.name"),

@@ -117,6 +117,8 @@
     "enhancedcombathud.settings.scale.hint" : "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale",
     "enhancedcombathud.settings.noAutoscale.name" : "Don't Autoscale",
     "enhancedcombathud.settings.noAutoscale.hint" : "Don't scale the HUD to fit the screen, use the flat value in the Scale setting instead",
+    "enhancedcombathud.settings.alwaysOn.name": "Always On",
+    "enhancedcombathud.settings.alwaysOn.hint": "Automatically show the hud whenever you select a token",   
     "enhancedcombathud.settings.leftPos.name" : "Left Position",
     "enhancedcombathud.settings.leftPos.hint" : "Distance from the left border in pixels",
     "enhancedcombathud.settings.botPos.name" : "Bottom Position",

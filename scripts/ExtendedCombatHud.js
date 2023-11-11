@@ -1832,11 +1832,12 @@ Hooks.on("updateItem", (item, updates) => {
 });
 
 Hooks.on("controlToken", (token, controlled) => {
-  if(token?.document?.actor?.type == "vehicle") return
+  if (token?.document?.actor?.type == "vehicle") return
+  const alwaysOn = game.settings.get("enhancedcombathud", "alwaysOn")
   if (
     controlled &&
-    canvas.hud.enhancedcombathud?.rendered &&
-    canvas.hud.enhancedcombathud.hudData.token.id != token.id
+    (canvas.hud.enhancedcombathud?.rendered || alwaysOn) &&
+    canvas.hud.enhancedcombathud.hudData?.token?.id != token.id
   ) {
     canvas.hud.enhancedcombathud.close();
     setTimeout(() => {
