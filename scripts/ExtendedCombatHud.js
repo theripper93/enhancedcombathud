@@ -410,11 +410,11 @@ class CombatHud {
 
     
     const updates = [];
-    for(let [k,v] of Object.entries(this.sets)){
-      if(v.primary) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
-      if(v.secondary) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
+    for (let [k, v] of Object.entries(this.sets)) {
+      if(k == "active") continue;
+      if(v.primary && v.primary.system.equipped !== (v.primary == this.sets.active.primary)) updates.push({_id: v.primary.id, "system.equipped": v.primary == this.sets.active.primary});
+      if(v.secondary && v.secondary.system.equipped !== (v.secondary == this.sets.active.secondary)) updates.push({_id: v.secondary.id, "system.equipped": v.secondary == this.sets.active.secondary});
     }
-
     await this.actor.updateEmbeddedDocuments("Item", updates);
   }
   
@@ -440,6 +440,13 @@ class CombatHud {
 }
 
 class CombatHudCanvasElement extends BasePlaceableHUD {
+
+  constructor (...args) {
+    super(...args);
+    //this.debouncedRerender = debounce(this.debouncedRerender.bind(this), 350);
+  }
+
+
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.template =
@@ -454,7 +461,7 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
   }
 
   bind(object) {
-    const actor = object.document.actor;
+    const actor = object.actor;
     if (!actor) return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
     const type = actor.type;
     if(type !== "npc" && type !== "character") return ui.notifications.error(game.i18n.localize("enhancedcombathud.err.invalid"));
@@ -480,8 +487,12 @@ class CombatHudCanvasElement extends BasePlaceableHUD {
 
   checkReRender(item){
     try{
-      if(item.parent.id == this.hudData.actor.id && this.hudData._itemCount != item.parent.items.size)this.render(true)
+      if(item.parent.id == this.hudData.actor.id && this.hudData._itemCount != item.parent.items.size)this.debouncedRerender();
     }catch{}
+  }
+
+  debouncedRerender() {
+    this.render(true);
   }
 
   close() {
@@ -1525,7 +1536,7 @@ class ECHDiceRoller {
     if (!this.modules.MidiQOL) {
         //return await BetterRolls.quickRollByName(this.actor.data.name, itemName);
         const actorId = this.actor.id;
-        const actorToRoll = canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ?? game.actors.get(actorId);
+        const actorToRoll = this.actor ?? canvas.tokens.placeables.find((t) => t.actor?.id === actorId)?.actor ?? game.actors.get(actorId);
         const itemToRoll = actorToRoll?.items.find((i) => i.name === itemName) ?? CombatHud.getMagicItemByName(actorToRoll, itemName);
         if (game.modules.get("itemacro")?.active && itemToRoll.hasMacro()) {
             itemToRoll.executeMacro();
