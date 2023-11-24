@@ -1,14 +1,16 @@
-import { DrawerButton } from "./components/drawer/drawerButton";
-import { DrawerPanel } from "./components/drawer/drawerPanel";
-import { AccordionPanel } from "./components/main/buttonPanel/accordionPanel";
-import { AccordionPanelCategory } from "./components/main/buttonPanel/accordionPanelCategory";
-import { ButtonPanel } from "./components/main/buttonPanel/buttonPanel";
-import { ActionButton } from "./components/main/buttons/ActionButton";
-import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton";
-import { ItemButton } from "./components/main/buttons/itemButton";
-import { SplitButton } from "./components/main/buttons/splitButton";
-import {ActionPanel} from "./components/main/actionPanel";
-import { PortraitPanel } from "./components/portrait/portraitPanel";
+import { DrawerButton } from "./components/drawer/drawerButton.js";
+import { DrawerPanel } from "./components/drawer/drawerPanel.js";
+import { AccordionPanel } from "./components/main/buttonPanel/accordionPanel.js";
+import { AccordionPanelCategory } from "./components/main/buttonPanel/accordionPanelCategory.js";
+import { ButtonPanel } from "./components/main/buttonPanel/buttonPanel.js";
+import { ActionButton } from "./components/main/buttons/ActionButton.js";
+import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton.js";
+import { ItemButton } from "./components/main/buttons/itemButton.js";
+import { SplitButton } from "./components/main/buttons/splitButton.js";
+import {ActionPanel} from "./components/main/actionPanel.js";
+import {PortraitPanel} from "./components/portrait/portraitPanel.js";
+import {ArgonTooltip} from "./tooltip.js";
+import { ArgonComponent } from "./components/component.js";
 
 
 export class CoreHUD extends Application{
@@ -18,6 +20,11 @@ export class CoreHUD extends Application{
 
   static get ARGON() {
     return {
+      CORE: {
+        CoreHUD: CoreHUD,
+        ArgonTooltip: ArgonTooltip,
+        ArgonComponent: ArgonComponent,
+      },
       MAIN: {
         BUTTONS: {
           ActionButton: ActionButton,
