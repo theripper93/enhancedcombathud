@@ -1,8 +1,7 @@
-2023/11/11-13:14:00.929 73e4 Log #407: 0 ops saved to Table #450 OK
-2023/11/11-13:14:00.929 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/000407.log: OK
-2023/11/11-13:14:00.929 73e4 Log #449: 0 ops saved to Table #451 OK
-2023/11/11-13:14:00.930 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/000449.log: OK
-2023/11/11-13:14:00.930 73e4 Table #405: 1 entries OK
-2023/11/11-13:14:00.932 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/MANIFEST-000406: OK
-2023/11/11-13:14:00.932 73e4 Archiving D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros/MANIFEST-000448: OK
-2023/11/11-13:14:00.934 73e4 **** Repaired leveldb D:\FoundryVTT\Data\modules\enhancedcombathud\packs\macros; recovered 1 files; 590 bytes. Some data may have been lost. ****
+2023/11/23-11:33:07.849 2f58 Recovering log #498
+2023/11/23-11:33:07.853 2f58 Delete type=0 #498
+2023/11/23-11:33:07.853 2f58 Delete type=3 #497
+2023/11/23-11:43:56.229 257c Level-0 table #502: started
+2023/11/23-11:43:56.229 257c Level-0 table #502: 0 bytes OK
+2023/11/23-11:43:56.231 257c Delete type=0 #500
+2023/11/23-11:43:56.231 257c Manual compaction at level-0 from '!macros!EzzHK20OhYCQF2T3' @ 72057594037927935 : 1 .. '!macros!EzzHK20OhYCQF2T3' @ 0 : 0; will stop at (end)
