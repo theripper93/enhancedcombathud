@@ -67,10 +67,12 @@
     }
   ],
   "scripts": [
-    "scripts/main.js",
     "scripts/config.js",
     "scripts/ExtendedCombatHud.js",
     "scripts/items.js"
+  ],
+  "esmodules": [
+    "scripts/main.js"
   ],
   "styles": [
     "styles/ECH.css",
