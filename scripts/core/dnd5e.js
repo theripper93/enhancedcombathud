@@ -1,6 +1,6 @@
 export function register() {
   Hooks.on("argonInit", (CoreHUD) => {
-    if(!game.system.id === "dnd5e") return;
+    if(game.system.id !== "dnd5e") return;
     const ARGON = CoreHUD.ARGON;
   
     const actionTypes = {
