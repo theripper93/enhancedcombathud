@@ -151,11 +151,6 @@
   transform: translateY(0px);
 }
 
-.features-container:not(.is-spells){
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 .features-accordion {
   align-items: flex-start;
     display: flex;
