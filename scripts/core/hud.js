@@ -34,6 +34,7 @@ const mainSystemComponents = {
 export class CoreHUD extends Application{
   constructor () {
     super();
+    this._itemButtons = [];
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
@@ -65,16 +66,26 @@ export class CoreHUD extends Application{
     return totalActionBarWidth;
   }
 
+  get itemButtons() {
+    return this._itemButtons;
+  }
+
   async _updateActionContainers() {
     this.components.main.forEach(component => component.updateVisibility());
   }
 
-  _onUpdateItem(item, data, options, userId) {
+  _onUpdateItem(item) {
     if (item.parent !== this._actor) return;
-    for (const component of this.components.main) {
-      component.updateItem(item);
+    for (const itemButton of this.itemButtons) {
+      if (itemButton.item === item) itemButton.render();
     }
+  }
 
+  updateItemButtons(items) {
+    if(!Array.isArray(items)) items = [items];
+    for (const itemButton of this.itemButtons) {
+      if (items.includes(itemButton.item)) itemButton.render();
+    }
   }
 
   async _renderInner(data) {
@@ -113,6 +124,7 @@ export class CoreHUD extends Application{
   }
 
   bind(target) {
+    this._itemButtons = [];
     if (target instanceof Token || target instanceof TokenDocument) {
       this._actor = target.actor;
       this._token = target instanceof Token ? target : target.object;

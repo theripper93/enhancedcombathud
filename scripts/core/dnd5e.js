@@ -39,7 +39,6 @@ export function register() {
       }
   
       async _getButtons() {
-        //buttons.push(new DND5eEquipmentButton({slot: 1}));
         
         const spellItems = this.actor.items.filter(item => item.type === "spell" && actionTypes.action.includes(item.system.activation?.type));
         const featItems = this.actor.items.filter(item => item.type === "feat" && actionTypes.action.includes(item.system.activation?.type));
@@ -131,6 +130,33 @@ export function register() {
     class DND5eItemButton extends ARGON.MAIN.BUTTONS.ItemButton {
       constructor(...args) {
         super(...args);
+      }
+
+      async _onLeftClick(event) {
+        this.item.use({event}, {event});
+      }
+
+      async render(...args) {
+        await super.render(...args);
+        if (this.item?.system.consumableType === "ammo") {
+          const weapons = this.actor.items.filter(item => item.system.consume?.target === this.item.id);
+          ui.ARGON.updateItemButtons(weapons);
+        }
+      }
+
+      get quantity() {
+        const showQuantityItemTypes = ["consumable"];
+        const consumeType = this.item.system.consume?.type;
+        if (consumeType === "ammo") {
+          const ammoItem = this.actor.items.get(this.item.system.consume.target);
+          if (!ammoItem) return null;
+          return ammoItem.system.quantity;
+        } else if (consumeType === "attribute") {
+          return getProperty(this.actor.system, this.item.system.consume.target);
+        } else if (showQuantityItemTypes.includes(this.item.type)){
+          return this.item.system.uses?.value ?? this.item.system.quantity;
+        }
+        return null;
       }
     }
   
