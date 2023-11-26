@@ -1,5 +1,5 @@
 {
-  "title": "Argon - Combat HUD",
+  "title": "Argon - Combat HUD (CORE)",
   "description": "It's Magic",
   "version": "0.1",
   "authors": [
@@ -105,13 +105,7 @@
         "compatibility": {}
       }
     ],
-    "systems": [
-      {
-        "id": "dnd5e",
-        "type": "system",
-        "compatibility": {}
-      }
-    ]
+    "systems": []
   },
   "compatibility": {
     "minimum": "11",

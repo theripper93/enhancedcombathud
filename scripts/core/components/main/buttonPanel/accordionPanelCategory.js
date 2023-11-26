@@ -44,6 +44,8 @@ export class AccordionPanelCategory extends ArgonComponent{
     }
   }
 
+  setVisibility(){}
+
   updateItem(item) {
     if (!this._buttons) return;
     for (const button of this._buttons) {

@@ -15,6 +15,8 @@ export class ButtonPanel extends ArgonComponent{
     return this.element.classList.contains("show");
   }
 
+  setVisibility(){}
+
   toggle(toggle) {
     if (toggle === undefined) toggle = !this.visible;
     if(toggle) ui.ARGON.collapseAllPanels();

@@ -21,6 +21,10 @@ export class ActionButton extends ArgonComponent{
     return null;
   }
 
+  get colorScheme() {
+    return 0;
+  }
+
   async getData() {
     return {
       label: this.label,

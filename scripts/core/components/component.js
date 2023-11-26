@@ -27,6 +27,28 @@ export class ArgonComponent{
     return "div";
   }
 
+  get colorScheme() {
+    return null;
+  }
+
+  get visible() {
+    return true;
+  }
+
+  setColorScheme() {
+    if(this.colorScheme === null) return;
+    switch (this.colorScheme) {
+      case 1: this.element.classList.add("bonus-action"); break;
+      case 2: this.element.classList.add("free-action"); break;
+      case 3: this.element.classList.add("reaction"); break;
+      case 4: this.element.classList.add("end-turn"); break;
+    }
+  }
+
+  setVisibility() {
+    this.element.classList.toggle("hidden", !this.visible);
+  }
+
   async getData(){
     return {};
   }
@@ -43,6 +65,8 @@ export class ArgonComponent{
     const tempElement = document.createElement("div");
     tempElement.innerHTML = rendered;
     this.element.innerHTML = tempElement.firstElementChild.innerHTML;
+    this.setColorScheme();
+    this.setVisibility();
   }
   
   async activateListeners(html) { }

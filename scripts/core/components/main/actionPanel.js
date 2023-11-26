@@ -13,6 +13,10 @@ export class ActionPanel extends ArgonComponent{
     return "Action Panel";
   }
 
+  get buttons() {
+    return this._buttons;
+  }
+
   updateVisibility() {
     if (!this._buttons) return;
     let count = this._buttons.length;

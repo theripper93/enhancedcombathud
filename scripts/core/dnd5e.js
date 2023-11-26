@@ -20,8 +20,6 @@ export function register() {
         super(...args);
       }
     }
-
-    class DND5eWeaponSets extends ARGON.WeaponSets { }
   
     class DND5eDrawerPanel extends ARGON.DRAWER.DrawerPanel {
       constructor(...args) {
@@ -203,6 +201,11 @@ export function register() {
               uses: {max: Infinity, value: Infinity},
             },
             {
+              label: Object.values(spellLevels)[0],
+              buttons: this.items.filter(item => item.system.level == 0).map(item => new DND5eItemButton({item})),
+              uses: {max: Infinity, value: Infinity},
+            },
+            {
               label: "DND5E.PactMagic",
               buttons: this.items.filter(item => item.system.preparation.mode === "pact").map(item => new DND5eItemButton({item})),
               uses: this.actor.system.spells.pact,
@@ -210,12 +213,11 @@ export function register() {
           ];
           for (const [level, label] of Object.entries(spellLevels)) {
             const levelSpells = this.items.filter(item => item.system.level == level);
-            if (!levelSpells.length) continue;
-            const slots = level == 0 ? {max: Infinity, value: Infinity} : this.actor.system.spells[`spell${level}`]
+            if (!levelSpells.length || level == 0) continue;
             spells.push({
               label,
               buttons: levelSpells.map(item => new DND5eItemButton({item})),
-              uses: slots,
+              uses: this.actor.system.spells[`spell${level}`],
             });
           }
           return new ARGON.MAIN.BUTTON_PANELS.ACCORDION.AccordionPanel({accordionPanelCategories: spells.filter(spell=>spell.buttons.length).map(({label, buttons, uses}) => new ARGON.MAIN.BUTTON_PANELS.ACCORDION.AccordionPanelCategory({label, buttons, uses}))});
@@ -260,6 +262,7 @@ export function register() {
       DND5eBonusActionPanel,
       DND5eReactionActionPanel,
       DND5eFreeActionPanel,
+      ARGON.PREFAB.PassTurnPanel,
     ]);
   
   

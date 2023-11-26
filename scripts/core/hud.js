@@ -14,6 +14,8 @@ import {WeaponSets} from "./components/main/weaponSets.js";
 import { MovementHud } from "./components/main/movementHud.js";
 import {ArgonTooltip} from "./tooltip.js";
 
+import { PassTurnPanel } from "./prefab/passTurnPanel.js";
+
 export const MODULE_ID = "enhancedcombathud";
 export const TEMPLATE_PATH = `modules/${MODULE_ID}/templates/`;
 export const PARTIALS_PATH = `modules/${MODULE_ID}/templates/partials/`;
@@ -34,10 +36,12 @@ const mainSystemComponents = {
 export class CoreHUD extends Application{
   constructor () {
     super();
+    this.performModuleCheck();
     this._itemButtons = [];
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
+    Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
   }
 
   static get defaultOptions() {
@@ -55,7 +59,7 @@ export class CoreHUD extends Application{
   }
 
   get buttonPanelContainer(){
-    return this.element[0].querySelector(".action-hud");
+    return this._buttonPanelContainer;
   }
 
   get actionBarWidth() {
@@ -72,6 +76,10 @@ export class CoreHUD extends Application{
 
   async _updateActionContainers() {
     this.components.main.forEach(component => component.updateVisibility());
+  }
+
+  _onUpdateCombat(combat) {
+    this.components.combat.forEach(component => component.updateVisibility());
   }
 
   _onUpdateItem(item) {
@@ -106,6 +114,7 @@ export class CoreHUD extends Application{
 
     const actionHudElement = document.createElement("div");
     actionHudElement.classList.add("action-hud");
+    this._buttonPanelContainer = actionHudElement;
     html.appendChild(actionHudElement);
 
     for (const component of this.components.main) {
@@ -120,6 +129,7 @@ export class CoreHUD extends Application{
 
     await Promise.all(promises);
     this._updateActionContainers();
+    this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
     return element;
   }
 
@@ -144,6 +154,13 @@ export class CoreHUD extends Application{
     this.element[0].querySelectorAll(".features-container.show").forEach(element => {
       element.classList.remove("show");
     });
+  }
+
+  performModuleCheck() {
+    const systemModule = game.modules.get(`enhancedcombathud-${game.system.id}`);
+    if (systemModule?.active) return;
+    const systemModuleElement = `<a href="https://foundryvtt.com/packages/enhancedcombathud-${game.system.id}" target="_blank">Argon - Combat HUD (${game.system.id.toUpperCase()})</a>`;
+    ui.notifications.error(localize("enhancedcombathud.err.moduleNotActive").replace("%m", systemModuleElement), {permanent: true});
   }
 
   static definePortraitPanel(panel) {
@@ -198,6 +215,9 @@ export class CoreHUD extends Application{
       },
       WeaponSets,
       MovementHud,
+      PREFAB: {
+        PassTurnPanel,
+      }
     }
   }
 }

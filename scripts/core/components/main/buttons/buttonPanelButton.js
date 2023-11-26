@@ -23,14 +23,6 @@ export class ButtonPanelButton extends ArgonComponent{
     return ui.ARGON.buttonPanelContainer;
   }
 
-  setColorScheme() {
-    switch (this.colorScheme) {
-      case 1: this.element.classList.add("bonus-action"); break;
-      case 2: this.element.classList.add("free-action"); break;
-      case 3: this.element.classList.add("reaction"); break;
-    }
-  }
-
   updateItem(item) {
     if (!this.panel) return;
     this.panel.updateItem(item);
@@ -57,7 +49,6 @@ export class ButtonPanelButton extends ArgonComponent{
   async _renderInner() {
     await super._renderInner();
     this.element.style.backgroundImage = `url(${this.icon})`;
-    this.setColorScheme();
     this.panel = await this._getPanel();
     this.buttonPanelContainer.appendChild(this.panel.element);
     await this.panel.render();

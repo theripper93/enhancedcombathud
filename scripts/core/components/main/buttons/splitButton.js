@@ -11,6 +11,10 @@ export class SplitButton extends ArgonComponent{
     return ["action-element-container"];
   }
 
+  get colorScheme() {
+    return 0;
+  }
+
   async _renderInner() {
     await super._renderInner();
     this.element.appendChild(this.button1.element);
