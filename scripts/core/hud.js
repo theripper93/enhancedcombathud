@@ -42,6 +42,7 @@ export class CoreHUD extends Application{
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
     Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
+    CoreHUD.setColorSettings();
   }
 
   static get defaultOptions() {
@@ -218,6 +219,50 @@ export class CoreHUD extends Application{
       PREFAB: {
         PassTurnPanel,
       }
+    }
+  }
+
+  static setColorSettings() {
+    Object.flatten = function (data) {
+      var result = {};
+      function recurse(cur, prop) {
+        if (Object(cur) !== cur) {
+          result[prop] = cur;
+        } else if (Array.isArray(cur)) {
+          for (var i = 0, l = cur.length; i < l; i++)
+            recurse(cur[i], prop + "[" + i + "]");
+          if (l == 0) result[prop] = [];
+        } else {
+          var isEmpty = true;
+          for (var p in cur) {
+            isEmpty = false;
+            recurse(cur[p], prop ? prop + "." + p : p);
+          }
+          if (isEmpty && prop) result[prop] = {};
+        }
+      }
+      recurse(data, "");
+      return result;
+    };
+    function setThemeColors(colors) {
+      Object.entries(Object.flatten(colors)).forEach(([key, value]) => {
+        document.documentElement.style.setProperty(
+          `--ech-${key.replace(/\./g, "-")}`,
+          value
+        );
+      });
+    }
+
+    let theme = game.settings.get("enhancedcombathud", "echThemeData");
+
+    if (theme.theme == "custom") {
+      setThemeColors(theme.colors);
+    } else {
+      fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`)
+        .then((response) => response.json())
+        .then((colors) => {
+          setThemeColors(colors);
+        });
     }
   }
 }
