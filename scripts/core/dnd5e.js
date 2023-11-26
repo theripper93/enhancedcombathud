@@ -17,9 +17,84 @@ export function register() {
     }
   
     class DND5ePortraitPanel extends ARGON.PORTRAIT.PortraitPanel {
-      constructor(...args) {
-        super(...args);
-      }
+        constructor(...args) {
+            super(...args);
+        }
+
+        get description() {
+            const { type, system } = this.actor;
+            const actor = this.actor;
+            const isNPC = type === "npc";
+            const isPC = type === "character";
+            if (isNPC) {
+                const creatureType = game.i18n.localize(CONFIG.DND5E.creatureTypes[actor.system.details.type.value] ?? actor.system.details.type.custom);
+                const cr = system.details.cr >= 1 || system.details.cr <= 0 ? system.details.cr : `1/${1 / system.details.cr}`;
+                return `CR ${cr} ${creatureType}`;
+            } else if (isPC) {
+                const classes = Object.values(actor.classes)
+                    .map((c) => c.name)
+                    .join(" / ");
+                return `Level ${system.details.level} ${classes} (${system.details.race})`;
+            } else {
+                return "";
+            }
+		}
+
+		get isDead() {
+			return this.isDying && this.actor.type !== "character";
+		}
+
+		get isDying() {
+			return this.actor.system.attributes.hp.value <= 0;
+		}
+
+		get successes() {
+			return this.actor.system.attributes?.death?.success ?? 0;
+		}
+
+		get failures() {
+			return this.actor.system.attributes?.death?.failure ?? 0;
+		}
+
+		async _onDeathSave(event) {
+			this.actor.rollDeathSave({})
+		}
+		
+		async getStatBlocks() {
+			const HPText = game.i18n.localize("DND5E.HitPoints").split(" ").map(word => word.charAt(0).toUpperCase()).join("");
+			const ACText = game.i18n.localize("DND5E.ArmorClass").split(" ").map(word => word.charAt(0).toUpperCase()).join("");
+			const SpellDC = game.i18n.localize("DND5E.SaveDC").replace("{ability}", "").replace("{dc}", "").trim();
+			return [
+				[
+					{
+						text: `${this.actor.system.attributes.hp.value + (this.actor.system.attributes.hp.temp ?? 0)} / ${this.actor.system.attributes.hp.max}`,
+					},
+					{
+						text: HPText,
+					}
+				],
+				[
+				
+					{
+						text: ACText,
+					},
+					{
+						text: this.actor.system.attributes.ac.value,
+						color: "var(--ech-movement-baseMovement-background)"
+					}
+				],
+				[
+				
+					{
+						text: SpellDC,
+					},
+					{
+						text: this.actor.system.attributes.spelldc,
+						color: "var(--ech-movement-baseMovement-background)"
+					}
+				],
+			];
+		}
     }
   
     class DND5eDrawerPanel extends ARGON.DRAWER.DrawerPanel {

@@ -27,9 +27,17 @@
     background-color: #ff000059;
 }
 
+.portrait-hud .death-saves.hidden{
+    display: none;
+}
+
 .portrait-hud .death-saves div{
     display: flex;
     justify-content: center;
+}
+
+.portrait-hud .death-saves div.hidden{
+    display: none;
 }
 
 .portrait-hud .death-save-result-container{
@@ -66,6 +74,7 @@
     margin-bottom: -1px;
     padding: 0.75rem;
     position: relative;
+    gap: 0.5ch;
 }
 .portrait-stat-block:not(.player-details):before{
     backdrop-filter: blur(6px);
@@ -77,18 +86,7 @@
     width: 100%;
     z-index: -1;
 }
-.portrait-stat-block [data-hp-value]:after {
-    content: attr(data-hp-value);
-}
-.portrait-stat-block [data-hp-max]:after {
-    content: attr(data-hp-max);
-}
-.portrait-stat-block [data-ac-value]:after {
-    content: attr(data-ac-value);
-}
-.portrait-stat-block [data-spell-dc]:after {
-    content: attr(data-spell-dc);
-}
+
 .portrait-stat-block.player-details {
     align-items: flex-start;
     border-width: 0px;

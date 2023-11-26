@@ -2,34 +2,23 @@
 		<div class="death-saves">
 			<div class="death-save-success">
 			<div class="death-save-result-container">
-				<span>1</span>
+				<span>{{successes}}</span>
 				<i class="fas fa-check"></i>
 			</div>
 			</div>
-			<div class="death-save-btn"><i class="fas fa-skull"></i></div>
+			<div class="death-save-btn"><i class="{{deathIcon}}"></i></div>
 			<div class="death-save-fail">
 				<div class="death-save-result-container">
-					<span>1</span>
+					<span>{{failures}}</span>
 					<i class="fas fa-times"></i>
 				</div>
 			</div>
 		</div>
-		<div class="portrait-hud-image" style="background-image: url('{{hudData.actor.img}}');"></div>
-		<div class="portrait-stat-block">
-			<span data-hp-value="{{hudData.actor.system.attributes.hp.value}}"></span>
-			&nbsp;/&nbsp;<span data-hp-max="{{hudData.actor.system.attributes.hp.max}}"></span>
-			&nbsp;HP
-		</div>
-		<div class="portrait-stat-block">
-			<span>{{hudData.settings.localize.AC}}</span>&nbsp;<span data-ac-value="{{hudData.actor.system.attributes.ac.value}}"></span>
-		</div>
-		<div class="portrait-stat-block">
-			<span>{{hudData.settings.localize.SpellDC}}</span>&nbsp;<span data-spell-dc="{{hudData.actor.system.attributes.spelldc}}"></span>
-		</div>
-		<div class="portrait-stat-block player-details{{#if hudData.settings.playerDetailsBottom}} player-details-bottom{{/if}}">
-			<span class="player-name">{{hudData.actor.name}}</span>
+		<div class="portrait-hud-image" style="background-image: url('{{image}}');"></div>
+		<div class="portrait-stat-block player-details{{#if playerDetailsBottom}} player-details-bottom{{/if}}">
+			<span class="player-name">{{name}}</span>
 				<span class="player-detail">
-					{{hudData.other.classes}}
+					{{description}}
 				</span>
 		</div>
 		<div class="player-buttons">

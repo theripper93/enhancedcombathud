@@ -42,6 +42,7 @@ export class CoreHUD extends Application{
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
     Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
+    Hooks.on("updateActor", this._onUpdateActor.bind(this));
     CoreHUD.setColorSettings();
   }
 
@@ -95,6 +96,11 @@ export class CoreHUD extends Application{
     for (const itemButton of this.itemButtons) {
       if (items.includes(itemButton.item)) itemButton.render();
     }
+  }
+
+  _onUpdateActor(actor) {
+    if (actor !== this._actor) return;
+    this.components.portrait.render();
   }
 
   async _renderInner(data) {
