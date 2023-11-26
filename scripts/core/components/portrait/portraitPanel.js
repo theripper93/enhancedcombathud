@@ -54,6 +54,12 @@ export class PortraitPanel extends ArgonComponent {
   async activateListeners(html) {
     super.activateListeners(html);
     html.querySelector(".death-save-btn").addEventListener("click", this._onDeathSave.bind(this));
+    const toggleMinimizeButton = this._buttons.find(button => button.id === "toggle-minimize");
+    if(toggleMinimizeButton) {
+      toggleMinimizeButton.element.addEventListener("click", (e) => {
+        toggleMinimizeButton.element.classList.toggle("fa-flip-vertical")
+      });
+    }
   }
 
   async _onDeathSave(event) {
@@ -62,6 +68,29 @@ export class PortraitPanel extends ArgonComponent {
 
   async getStatBlocks() {
     return [];
+  }
+
+  async _getButtons() {
+    return [
+      {
+        id: "roll-initiative",
+        icon: "fas fa-dice-d20",
+        label: "Roll Initiative",
+        onClick: (e) => this.actor.rollInitiative({ rerollInitiative: true, createCombatants: true })
+      },
+      {
+        id: "open-sheet",
+        icon: "fas fa-suitcase",
+        label: "Open Character Sheet",
+        onClick: (e) => this.actor.sheet.render(true)
+      },
+      {
+        id: "toggle-minimize",
+        icon: "fas fa-caret-down",
+        label: "Minimize",
+        onClick: (e) => ui.ARGON.toggleMinimize()
+      }
+    ];
   }
   
   async _renderInner(data) {
@@ -77,6 +106,17 @@ export class PortraitPanel extends ArgonComponent {
         sb.appendChild(span);
       }
       this.element.appendChild(sb);
+    }
+    this._buttons = await this._getButtons();
+    const buttonsContainer = this.element.querySelector(".player-buttons");
+    for(const button of this._buttons) {
+      const btn = document.createElement("div");
+      btn.classList.add("player-button");
+      btn.innerHTML = `<i class="${button.icon}"></i>`;
+      btn.dataset.tooltip = button.label;
+      btn.onclick = button.onClick;
+      button.element = btn;
+      buttonsContainer.appendChild(btn);
     }
     const deathContainer = this.element.querySelector(".death-saves");
     if (!this.isDead && !this.isDying) {

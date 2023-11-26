@@ -163,6 +163,70 @@ export class CoreHUD extends Application{
     });
   }
 
+  toggleMinimizeJQ(forceState) {
+    $("body").toggleClass(
+      "minimize-ech-hud",
+      forceState ?? !$("body").hasClass("minimize-ech-hud")
+    );
+    $(".extended-combat-hud").toggleClass(
+      "minimize-hud",
+      $("body").hasClass("minimize-ech-hud")
+    );
+    let echHUDWidth = $(".extended-combat-hud").outerWidth();
+    let windowWidth = $(window).width() - 340;
+    let scale = true//game.settings.get("enhancedcombathud", "noAutoscale")
+      ? game.settings.get("enhancedcombathud", "scale")
+      : (1 / (echHUDWidth / windowWidth)) *
+        game.settings.get("enhancedcombathud", "scale");
+
+    const position = {
+      bottom: $(".extended-combat-hud").hasClass("minimize-hud")
+        ? `0px`
+        : `${game.settings.get("enhancedcombathud", "botPos")}px`,
+      transform: $(".extended-combat-hud").hasClass("minimize-hud")
+        ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)`
+        : `scale(${scale > 1 ? 1 : scale})`,
+      width: `calc(100vw * ${scale < 1 ? (1 + ((parseFloat(1 - scale) * 1))) : 1})`
+    };
+    $(".extended-combat-hud").css(position);
+  }
+
+  toggleMinimize(forceState) {
+    const body = document.body;
+    const html = this.element[0];
+  
+    const isMinimizeEchHud = body.classList.contains("minimize-ech-hud");
+
+    const newState = forceState ?? !isMinimizeEchHud;
+  
+    body.classList.toggle("minimize-ech-hud", newState);
+    html.classList.toggle("minimize-hud", newState);
+
+    this.setPosition();
+  }
+
+  setPosition() {
+    const html = this.element[0];
+  
+    const isMinimizeHud = html.classList.contains("minimize-hud");
+  
+    const echHUDWidth = html.offsetWidth;
+    const windowWidth = window.innerWidth - 340;
+    const scale = true // game.settings.get("enhancedcombathud", "noAutoscale")
+      ? game.settings.get("enhancedcombathud", "scale")
+      : (1 / (echHUDWidth / windowWidth)) * game.settings.get("enhancedcombathud", "scale");
+  
+    const position = {
+      bottom: isMinimizeHud ? "0px" : `${game.settings.get("enhancedcombathud", "botPos")}px`,
+      transform: isMinimizeHud ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)` : `scale(${scale > 1 ? 1 : scale})`,
+      width: `calc(100vw * ${scale < 1 ? 1 + parseFloat(1 - scale) * 1 : 1})`,
+    };
+  
+    for (let prop in position) {
+      html.style[prop] = position[prop];
+    }
+  }
+
   performModuleCheck() {
     const systemModule = game.modules.get(`enhancedcombathud-${game.system.id}`);
     if (systemModule?.active) return;
