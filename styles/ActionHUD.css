@@ -152,7 +152,6 @@
   align-items: flex-start;
     display: flex;
     flex-wrap: wrap-reverse;
-    width: 0px;
 	overflow: hidden;
     padding-left: 53px;
     position: relative;
@@ -161,11 +160,13 @@
 	transition: all 0.3s ease-in-out;
 }
 .features-accordion:not(.show) {
-	width: 0px !important;
+	width: 0px;
 }
 .features-accordion-content {
 	display: flex;
     flex-wrap: inherit;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease-in-out;
@@ -178,7 +179,7 @@
     backdrop-filter: blur(6px);
     border: 1px solid transparent;
     display: flex;
-    height: fit-content;
+    height: 3rem;/*fit-content;*/
     justify-content: center;
     margin-right: -75px;
     padding: 1rem 0.5rem;
@@ -188,7 +189,7 @@
     position: absolute;
     bottom: 75px;
     left: -22px;
-  
+    text-align: center;
     pointer-events: all;
 }
 /* SPELL SLOT USAGE */

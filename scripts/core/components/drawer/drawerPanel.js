@@ -8,7 +8,7 @@ export class DrawerPanel extends ArgonComponent{
   }
   
   get classes(){
-    return ["drawer-panel"];
+    return ["ability-menu"];
   }
 
   get elementType(){

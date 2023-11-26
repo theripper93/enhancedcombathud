@@ -31,9 +31,18 @@ export class ArgonComponent{
     return {};
   }
 
+  async render() {
+    await this._renderInner();
+    await this.activateListeners(this.element);
+    return this.element;
+  }
+
   async _renderInner() {
-    this.element.innerHTML = (await renderTemplate(this.template, await this.getData())).innerHTML;
-    this.activateListeners(this.element);
+    const data = await this.getData();
+    const rendered = await renderTemplate(this.template, data);
+    const tempElement = document.createElement("div");
+    tempElement.innerHTML = rendered;
+    this.element.innerHTML = tempElement.firstElementChild.innerHTML;
   }
   
   async activateListeners(html) { }

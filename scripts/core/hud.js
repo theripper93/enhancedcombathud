@@ -39,8 +39,6 @@ export class CoreHUD extends Application{
   }
 
   static get defaultOptions() {
-    const options = super.defaultOptions;
-
     return {
       ...super.defaultOptions,
       id: "enhancedcombathud",
@@ -52,6 +50,10 @@ export class CoreHUD extends Application{
 
   _canDragDrop(selector) {
     return true;
+  }
+
+  get buttonPanelContainer(){
+    return this.element[0].querySelector(".action-hud");
   }
 
   async _renderInner(data) {
@@ -75,13 +77,13 @@ export class CoreHUD extends Application{
     html.appendChild(actionHudElement);
 
     for (const component of this.components.main) {
-      actionHudElement.appendChild(component.element);
+      const buttonCount = await component._getButtons();
+      if(buttonCount.length) actionHudElement.appendChild(component.element);
     }
     
     const promises = []
-
     Object.values(this.components).forEach(component => {
-      Array.isArray(component) ? component.forEach(c => promises.push(c._renderInner())) : promises.push(component._renderInner());
+      Array.isArray(component) ? component.forEach(c => promises.push(c.render())) : promises.push(component.render());
     });
 
     await Promise.all(promises);
@@ -102,6 +104,12 @@ export class CoreHUD extends Application{
     }
     if(!this._actor) console.error("Argon: No actor found");
     this.render(true);
+  }
+
+  collapseAllPanels() {
+    this.element[0].querySelectorAll(".features-container.show").forEach(element => {
+      element.classList.remove("show");
+    });
   }
 
   static definePortraitPanel(panel) {
