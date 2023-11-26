@@ -21,6 +21,13 @@ export class ButtonPanel extends ArgonComponent{
     this.element.classList.toggle("show", toggle);
   }
 
+  updateItem(item) {
+    if (!this._buttons) return;
+    for (const button of this._buttons) {
+      if (button.item === item) button.render();
+    }
+  }
+
   async _renderInner() {
     await super._renderInner();
     this._buttons.forEach(button => {

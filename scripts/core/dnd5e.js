@@ -20,6 +20,8 @@ export function register() {
         super(...args);
       }
     }
+
+    class DND5eWeaponSets extends ARGON.WeaponSets { }
   
     class DND5eDrawerPanel extends ARGON.DRAWER.DrawerPanel {
       constructor(...args) {
@@ -37,14 +39,24 @@ export function register() {
       }
   
       async _getButtons() {
-        const buttons = [];
         //buttons.push(new DND5eEquipmentButton({slot: 1}));
-        for (const [type, types] of Object.entries(itemTypes)) {
-          const items = this.actor.items.filter(item => types.includes(item.type) && actionTypes.action.includes(item.system.activation?.type));
-          if (!items.length) continue;
-          buttons.push(new DND5eButtonPanelButton({type, items, color: 0}));
-        }
-        return buttons;
+        
+        const spellItems = this.actor.items.filter(item => item.type === "spell" && actionTypes.action.includes(item.system.activation?.type));
+        const featItems = this.actor.items.filter(item => item.type === "feat" && actionTypes.action.includes(item.system.activation?.type));
+        const consumableItems = this.actor.items.filter(item => item.type === "consumable" && actionTypes.action.includes(item.system.activation?.type));
+        
+        const specialActions = Object.values(ECHItems);
+
+        const buttons = [
+          new DND5eItemButton({item: null, isWeaponSet: true, isPrimary: true}),
+          new ARGON.MAIN.BUTTONS.SplitButton(new DND5eSpecialActionButton(specialActions[0]), new DND5eSpecialActionButton(specialActions[1])),
+          new DND5eButtonPanelButton({type: "spell", items: spellItems, color: 0}),
+          new DND5eButtonPanelButton({type: "feat", items: featItems, color: 0}),
+          new ARGON.MAIN.BUTTONS.SplitButton(new DND5eSpecialActionButton(specialActions[2]), new DND5eSpecialActionButton(specialActions[3])),
+          new ARGON.MAIN.BUTTONS.SplitButton(new DND5eSpecialActionButton(specialActions[4]), new DND5eSpecialActionButton(specialActions[5])),
+          new DND5eButtonPanelButton({type: "consumable", items: consumableItems, color: 0}),
+        ];
+        return buttons.filter(button => button.items == undefined || button.items.length);
       }
     }
   
@@ -58,7 +70,9 @@ export function register() {
       }
   
       async _getButtons() {
-        const buttons = [];
+        const buttons = [
+          new DND5eItemButton({item: null, isWeaponSet: true, isPrimary: false}),
+        ];
         //buttons.push(new DND5eEquipmentButton({slot: 2}));
         for (const [type, types] of Object.entries(itemTypes)) {
           const items = this.actor.items.filter(item => types.includes(item.type) && actionTypes.bonus.includes(item.system.activation?.type));
@@ -79,7 +93,9 @@ export function register() {
       }
   
       async _getButtons() {
-        const buttons = [];
+        const buttons = [
+          new DND5eItemButton({item: null, isWeaponSet: true, isPrimary: true}),
+        ];
         //buttons.push(new DND5eEquipmentButton({slot: 1}));
         for (const [type, types] of Object.entries(itemTypes)) {
           const items = this.actor.items.filter(item => types.includes(item.type) && actionTypes.reaction.includes(item.system.activation?.type));
@@ -101,6 +117,7 @@ export function register() {
   
       async _getButtons() {
         const buttons = [];
+
         for (const [type, types] of Object.entries(itemTypes)) {
           const items = this.actor.items.filter(item => types.includes(item.type) && actionTypes.free.includes(item.system.activation?.type));
           if (!items.length) continue;
@@ -181,14 +198,21 @@ export function register() {
         }
       }
     }
-  
-    class DND5eEquipmentButton extends ARGON.MAIN.BUTTONS.EquipmentButton {
-      constructor(...args) {
-        super(...args);
+
+    class DND5eSpecialActionButton extends ARGON.MAIN.BUTTONS.ActionButton {
+      constructor (specialItem) {
+        super();
+        this.item = new Item(specialItem);
+      }
+
+      get label() {
+        return this.item.name;
+      }
+
+      get icon() {
+        return this.item.img;
       }
     }
-
-    class DND5eSpellAccordion extends ARGON.MAIN.BUTTON_PANELS.ACCORDION.AccordionPanel { }
   
   
   

@@ -357,6 +357,7 @@
     transform: translate(-50%, -50%);
     transition: all 0.1s ease-in-out;
     width: 0px;
+    pointer-events: none;
 }
 .weapon-set:hover:before,
 .weapon-set.active:before {
@@ -373,6 +374,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 15px;
+    pointer-events: none;
 }
 .weapon-set > .set {
     background: no-repeat center;

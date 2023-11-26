@@ -1,14 +1,10 @@
 	<div>
-		<div class="weapon-set active" data-type="switchWeapons" data-value="set1">
-			<div class="set set-primary" draggable="true" data-set="set1p" style="background-image: url({{hudData.sets.set1.primary.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set1s" style="background-image: url({{hudData.sets.set1.secondary.img}})"></div>
+		{{#each sets}}
+
+		<div class="weapon-set" data-type="switchWeapons" data-set="{{@key}}">
+			<div class="set set-primary" draggable="true" data-set="{{@key}}" data-slot="primary" style="background-image: url({{primary.img}})"></div>
+			<div class="set set-secondary" draggable="true" data-set="{{@key}}" data-slot="secondary" style="background-image: url({{secondary.img}})"></div>
 		</div>
-		<div class="weapon-set" data-type="switchWeapons" data-value="set2">
-			<div class="set set-primary" draggable="true" data-set="set2p" style="background-image: url({{hudData.sets.set2.primary.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set2s" style="background-image: url({{hudData.sets.set2.secondary.img}})"></div>
-		</div>
-		<div class="weapon-set" data-type="switchWeapons" data-value="set3">
-			<div class="set set-primary" draggable="true" data-set="set3p" style="background-image: url({{hudData.sets.set3.primary.img}})"></div>
-			<div class="set set-secondary" draggable="true" data-set="set3s" style="background-image: url({{hudData.sets.set3.secondary.img}})"></div>
-		</div>
+
+		{{/each}}
 	</div>

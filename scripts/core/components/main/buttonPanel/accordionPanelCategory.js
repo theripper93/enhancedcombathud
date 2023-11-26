@@ -34,9 +34,20 @@ export class AccordionPanelCategory extends ArgonComponent{
     return this._buttons;
   }
 
+  get totalWidth() {
+    return this._realWidth + this.element.querySelector(".feature-accordion-title").offsetHeight;
+  }
+
   async getData() {
     return {
       label: this.label,
+    }
+  }
+
+  updateItem(item) {
+    if (!this._buttons) return;
+    for (const button of this._buttons) {
+      if (button.item === item) button.render();
     }
   }
 

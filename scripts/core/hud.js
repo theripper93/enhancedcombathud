@@ -8,7 +8,6 @@ import { ActionButton } from "./components/main/buttons/actionButton.js";
 import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton.js";
 import { ItemButton } from "./components/main/buttons/itemButton.js";
 import {SplitButton} from "./components/main/buttons/splitButton.js";
-import { EquipmentButton } from "./components/main/buttons/equipmentButton.js";
 import {ActionPanel} from "./components/main/actionPanel.js";
 import {PortraitPanel} from "./components/portrait/portraitPanel.js";
 import {WeaponSets} from "./components/main/weaponSets.js";
@@ -36,6 +35,8 @@ export class CoreHUD extends Application{
   constructor () {
     super();
     Hooks.callAll(`argonInit`, CoreHUD);
+    Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
+    Hooks.on("updateItem", this._onUpdateItem.bind(this));
   }
 
   static get defaultOptions() {
@@ -54,6 +55,26 @@ export class CoreHUD extends Application{
 
   get buttonPanelContainer(){
     return this.element[0].querySelector(".action-hud");
+  }
+
+  get actionBarWidth() {
+    let totalActionBarWidth = 0;
+    this.element[0].querySelectorAll(".actions-container").forEach(element => {
+      totalActionBarWidth += element.offsetWidth;
+    });
+    return totalActionBarWidth;
+  }
+
+  async _updateActionContainers() {
+    this.components.main.forEach(component => component.updateVisibility());
+  }
+
+  _onUpdateItem(item, data, options, userId) {
+    if (item.parent !== this._actor) return;
+    for (const component of this.components.main) {
+      component.updateItem(item);
+    }
+
   }
 
   async _renderInner(data) {
@@ -87,6 +108,7 @@ export class CoreHUD extends Application{
     });
 
     await Promise.all(promises);
+    this._updateActionContainers();
     return element;
   }
 
@@ -145,7 +167,6 @@ export class CoreHUD extends Application{
           ButtonPanelButton,
           ItemButton,
           SplitButton,
-          EquipmentButton,
         },
         ActionPanel,
         BUTTON_PANELS: {

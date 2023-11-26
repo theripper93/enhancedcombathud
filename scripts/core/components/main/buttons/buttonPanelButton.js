@@ -31,6 +31,11 @@ export class ButtonPanelButton extends ArgonComponent{
     }
   }
 
+  updateItem(item) {
+    if (!this.panel) return;
+    this.panel.updateItem(item);
+  }
+
   async getData() {
     return {
       label: this.label,
