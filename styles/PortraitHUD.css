@@ -200,16 +200,18 @@
 }
 .ability-menu ul > li {
     border-top: 1px solid transparent;
-    display: flex;
     padding: 0.5rem 0.75rem;
+    display: grid;
 }
 .ability-menu ul > li:first-child {
     border-top-width: 0px;
 }
 .ability-menu ul > li.ability-title {
+    display: grid;
     font-weight: 900;
     padding-left: 1.3rem;
     text-transform: uppercase;
+    padding: 0.5rem 0.75rem;
 }
 .ability-menu ul > li.ability-title > div {
     margin-left: auto;

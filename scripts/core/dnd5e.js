@@ -197,6 +197,50 @@ export function register() {
             constructor(...args) {
                 super(...args);
             }
+
+            get categories() {
+                const abilities = this.actor.system.abilities;
+
+                const abilitiesButtons = Object.keys(abilities).map((ability) => {
+                    const abilityData = abilities[ability];
+                    return new ARGON.DRAWER.DrawerButton([
+                        {
+                            label: CONFIG.DND5E.abilities[ability].label,
+                            onClick: () => console.log("Ability Clicked" + ability),
+                        },
+                        {
+                            label: abilityData.mod,
+                            onClick: () => console.log("Ability Mod Clicked" + ability),
+                        },
+                        {
+                            label: abilityData.save,
+                            onClick: () => console.log("Ability Save Clicked" + ability), 
+                        }
+                    ]);
+                });
+
+
+
+                return [
+                    {
+                        gridCols: "5fr 2fr 2fr",
+                        captions: ["Abilities", "Check", "Save"],
+                        buttons: abilitiesButtons,
+                    },
+                    {
+                        gridCols: "7fr 2fr",
+                        captions: ["Skills", ""]
+                    },
+                    {
+                        gridCols: "7fr 2fr",
+                        captions: ["Tools", ""]
+                    }
+                ];
+            }
+
+            get title() {
+                return `${game.i18n.localize("enhancedcombathud.hud.saves.name")} / ${game.i18n.localize("enhancedcombathud.hud.skills.name")} / ${game.i18n.localize("enhancedcombathud.hud.tools.name")}`;
+            }
         }
 
         class DND5eActionActionPanel extends ARGON.MAIN.ActionPanel {

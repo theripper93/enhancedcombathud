@@ -1,7 +1,10 @@
-	<div>
-		<ul>
-		</ul>
-		<ul class="ability-toggle">
-			<li class="ability ability-title">{{hudData.settings.localize.saves}} / {{hudData.settings.localize.skills}} / {{hudData.settings.localize.tools}}</li>
-		</ul>
-	</div>
+<div>
+	<ul>
+		{{#each categories as |category|}}
+		<li data-index="{{@index}}" style="grid-template-columns: {{category.gridCols}};" class="ability ability-title">{{#each captions as |caption|}}<span>{{{localize caption}}}</span>{{/each}}</li>
+		{{/each}}
+	</ul>
+	<ul class="ability-toggle">
+		<li class="ability ability-title">{{{localize title}}}</li>
+	</ul>
+</div>
