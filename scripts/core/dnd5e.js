@@ -335,10 +335,55 @@ export function register() {
             get movementMax() {
                 return this.actor.system.attributes.movement.walk / canvas.scene.dimensions.distance;
             }
+      }
+      
+      class DND5eWeaponSets extends ARGON.WeaponSets {
+
+        async getDefaultSets() {
+          const sets = await super.getDefaultSets();
+          if (this.actor.type !== "npc") return sets;
+          const actions = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "action");
+          const bonus = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "bonus");
+          return {
+            1: {
+              primary: actions[0]?.uuid ?? null,
+              secondary: bonus[0]?.uuid ?? null,
+            },
+            2: {
+              primary: actions[1]?.uuid ?? null,
+              secondary: bonus[1]?.uuid ?? null,
+            },
+            3: {
+              primary: actions[2]?.uuid ?? null,
+              secondary: bonus[2]?.uuid ?? null,
+            },
+          }
         }
+
+        get a() {
+          if (this.actor.type == "npc") {
+            sets = {
+              set1: {
+                primary: this.actions.attack[0],
+                secondary: this.bonus.attack[0],
+              },
+              set2: {
+                primary: this.actions.attack[1],
+                secondary: this.bonus.attack[1],
+              },
+              set3: {
+                primary: this.actions.attack[2],
+                secondary: this.bonus.attack[2],
+              },
+            };
+          }
+        }
+      }
+
         CoreHUD.definePortraitPanel(DND5ePortraitPanel);
         CoreHUD.defineDrawerPanel(DND5eDrawerPanel);
         CoreHUD.defineMainPanels([DND5eActionActionPanel, DND5eBonusActionPanel, DND5eReactionActionPanel, DND5eFreeActionPanel, ARGON.PREFAB.PassTurnPanel]);
-        CoreHUD.defineMovementHud(DND5eMovementHud);
+      CoreHUD.defineMovementHud(DND5eMovementHud);
+      CoreHUD.defineWeaponSets(DND5eWeaponSets);
     });
 }
