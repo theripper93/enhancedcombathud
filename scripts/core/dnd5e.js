@@ -131,6 +131,10 @@ export function register() {
                 return "DND5E.Action";
             }
 
+            get hasAction() {
+                return true;
+            }
+
             async _getButtons() {
                 const spellItems = this.actor.items.filter((item) => item.type === "spell" && actionTypes.action.includes(item.system.activation?.type));
                 const featItems = this.actor.items.filter((item) => item.type === "feat" && actionTypes.action.includes(item.system.activation?.type));
@@ -150,6 +154,10 @@ export function register() {
 
             get label() {
                 return "DND5E.BonusAction";
+            }
+
+            get hasAction() {
+                return true;
             }
 
             async _getButtons() {
@@ -173,6 +181,10 @@ export function register() {
                 return "DND5E.Reaction";
             }
 
+            get hasAction() {
+                return true;
+            }
+
             async _getButtons() {
                 const buttons = [new DND5eItemButton({ item: null, isWeaponSet: true, isPrimary: true })];
                 //buttons.push(new DND5eEquipmentButton({slot: 1}));
@@ -194,6 +206,10 @@ export function register() {
                 return "DND5E.Special";
             }
 
+            get hasAction() {
+                return true;
+            }
+
             async _getButtons() {
                 const buttons = [];
 
@@ -212,7 +228,28 @@ export function register() {
             }
 
             async _onLeftClick(event) {
-                this.item.use({ event }, { event });
+                const used = await this.item.use({event}, {event});
+                if (used) {
+                    DND5eItemButton.consumeActionEconomy(this.item);
+                }
+            }
+
+            static consumeActionEconomy(item) {
+                const activationType = item.system.activation?.type;
+                let actionType = null;
+                for(const [type, types] of Object.entries(actionTypes)) {
+                    if(types.includes(activationType)) actionType = type;
+                }
+                if (!actionType) return;
+                if (actionType === "action") {
+                    ui.ARGON.components.main[0].isActionUsed = true;
+                } else if (actionType === "bonus") {
+                    ui.ARGON.components.main[1].isActionUsed = true;
+                } else if (actionType === "reaction") {
+                    ui.ARGON.components.main[2].isActionUsed = true;
+                } else if (actionType === "free") {
+                    ui.ARGON.components.main[3].isActionUsed = true;
+                }
             }
 
             async render(...args) {
@@ -332,7 +369,9 @@ export function register() {
         class DND5eSpecialActionButton extends ARGON.MAIN.BUTTONS.ActionButton {
             constructor(specialItem) {
                 super();
-                this.item = new Item(specialItem);
+                this.item = new CONFIG.Item.documentClass(specialItem, {
+                    parent: this.actor,
+                });
             }
 
             get label() {
@@ -341,6 +380,20 @@ export function register() {
 
             get icon() {
                 return this.item.img;
+            }
+
+            async _onLeftClick(event) {
+                const useCE = game.modules.get("dfreds-convenient-effects")?.active && game.dfreds.effectInterface.findEffectByName(this.label);
+                let success = false;
+                if (useCE) {
+                    success = true;
+                  await game.dfreds.effectInterface.toggleEffect(this.label, { overlay: false, uuids : [this.actor.uuid] });
+                } else {
+                    success = await this.item.use({ event }, { event });
+                }
+                if(success) {
+                    DND5eItemButton.consumeActionEconomy(this.item);
+                }
             }
         }
 

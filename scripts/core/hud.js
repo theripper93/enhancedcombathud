@@ -86,13 +86,17 @@ export class CoreHUD extends Application{
 
   _onCombatStart(combat) {
     this.components.movement?._onNewRound(combat);
+    this.components.main.forEach(component => component._onNewRound(combat));
     const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
     if (openCombatStart) this.bind(canvas.tokens.controlled[0] ?? _token);
   }
 
   _onUpdateCombat(combat, updates) {
     this.components.combat.forEach(component => component.updateVisibility());
-    if("round" in updates) this.components.movement?._onNewRound(combat);
+    if ("round" in updates) {
+      this.components.main.forEach(component => component._onNewRound(combat));
+      this.components.movement?._onNewRound(combat);
+    }
   }
 
   _onDeleteCombat(combat) {

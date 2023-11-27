@@ -5,6 +5,12 @@ import {SplitButton} from "./buttons/splitButton.js";
 
 export class ActionPanel extends ArgonComponent{
 
+  constructor (...args) {
+    super(...args);
+    this._buttons = [];
+    this._isActionUsed = false;
+  }
+
   get classes() {
     return ["actions-container"]
   }
@@ -17,6 +23,24 @@ export class ActionPanel extends ArgonComponent{
     return this._buttons;
   }
 
+  get hasAction() {
+    return false;
+  }
+
+  get isActionUsed() {
+    if(!game.combat?.started) return false;
+    return this._isActionUsed;
+  }
+
+  set isActionUsed(value) {
+    this._isActionUsed = value;
+    this.updateActionUse();
+  }
+
+  _onNewRound(combat) {
+    this.isActionUsed = false;
+  }
+
   updateVisibility() {
     if (!this._buttons) return;
     let count = this._buttons.length;
@@ -24,6 +48,11 @@ export class ActionPanel extends ArgonComponent{
       if (button.visible === false) count--;
     }
     this.element.classList.toggle("hidden", count === 0);
+  }
+
+  updateActionUse() {
+    this.element.classList.toggle("has-actions", this.hasAction);
+    this.element.classList.toggle("actions-used", this.isActionUsed);
   }
 
   updateItem(item) {
@@ -52,5 +81,7 @@ export class ActionPanel extends ArgonComponent{
       this.element.appendChild(button.element);
       button.render();
     }
+    this.updateActionUse();
+    this.updateVisibility();
   }
 }
