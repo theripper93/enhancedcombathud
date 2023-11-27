@@ -43,8 +43,8 @@ export class DrawerPanel extends ArgonComponent {
             const index = categories.indexOf(category);
             const container = this.element.querySelector(`.ability-title[data-index="${index}"]`);
             if (!container) continue;
-            const buttons = category.buttons;
-            if (!buttons) continue;
+            if (!category.buttons) continue;
+            const buttons = [...category.buttons].reverse();
             for (const button of buttons) {
                 container.after(button.element);
                 button.setGrid(category.gridCols);
