@@ -701,6 +701,7 @@ Hooks.on("getSceneControlButtons", (controls, b, c) => {
     });
 });
 Hooks.on("renderTokenHUD", (app, html, data) => {
+  return
   let $tokenHUDButton = $(
     `<div class="control-icon echtoggle"><i class="ech-swords fa-duotone fa-swords"></i></div>`
   );

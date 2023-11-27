@@ -6,5 +6,5 @@ CoreHUD.setControlHooks();
 Hooks.on("ready", () => {
   register();
   ui.ARGON = new CoreHUD();
-  ui.ARGON.bind(canvas.tokens.placeables[0]);
+  //ui.ARGON.bind(canvas.tokens.placeables[0]);
 });

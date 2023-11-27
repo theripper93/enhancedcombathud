@@ -39,6 +39,7 @@ export class CoreHUD extends Application{
     this.performModuleCheck();
     this._itemButtons = [];
     this._tooltip = null;
+    this._target = null;
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
@@ -203,8 +204,11 @@ export class CoreHUD extends Application{
 
   updateSceneControlButton() {
     const btn = document.querySelector(`.control-tool[data-tool="echtoggle"]`);
-    if(!btn) return;
-    document.querySelector(`.control-tool[data-tool="echtoggle"]`).classList.toggle("active", !!this._target);
+    if (!btn) return;
+    try {      
+      document.querySelector(`.control-tool[data-tool="echtoggle"]`).classList.toggle("active", !!this._target);
+      ui.controls.controls.find(c=>c.name == "token").tools.find(t=> t.name== "echtoggle").active = !!this._target;
+    } catch (e) {}
   }
 
   toggleUiElements(toggle) {
@@ -240,6 +244,8 @@ export class CoreHUD extends Application{
 
   setPosition() {
     const html = this.element[0];
+
+    html.style.transition = "none";
   
     const isMinimizeHud = html.classList.contains("minimize-hud");
   
@@ -258,6 +264,8 @@ export class CoreHUD extends Application{
     for (let prop in position) {
       html.style[prop] = position[prop];
     }
+
+    html.style.transition = null;
   }
 
   performModuleCheck() {
@@ -338,7 +346,8 @@ export class CoreHUD extends Application{
       html.querySelector(".col.left").prepend(button);
       button.onclick = (event) => {
         const target = canvas.tokens.controlled[0] ?? _token;
-        ui.ARGON.bind(toggle ? target : null)
+        ui.ARGON.bind(!ui.ARGON._target ? target : null)
+        button.classList.toggle("active");
       };
     });
   }
