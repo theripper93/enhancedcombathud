@@ -60,7 +60,7 @@ export class ItemButton extends ArgonComponent{
   }
 
   get useRangeFinder() {
-    return game.Levels3DPreview._active && game.settings.get("enhancedcombathud", "rangefinder");
+    return game.Levels3DPreview?._active && game.settings.get("enhancedcombathud", "rangefinder");
   }
 
   get visible() {
