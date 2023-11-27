@@ -91,10 +91,14 @@ export class AccordionPanelCategory extends ArgonComponent{
     const promises = this._buttons.map(button => button.render());
     await Promise.all(promises);
     this.setUses();
+    let closestMultiplier = 0;
+    [2, 3, 5, 7].forEach(multiplier => {
+      if (this._buttons.length % multiplier === 0) closestMultiplier = multiplier;
+    });
     if (this._buttons.length < 3) {
       buttonContainer.style.gridTemplateColumns = `repeat(${this._buttons.length}, 1fr)`;
-    } else if (this._buttons.length % 2 === 0) {
-      buttonContainer.style.gridTemplateColumns = `repeat(2, 1fr)`;
+    } else if (closestMultiplier) {
+      buttonContainer.style.gridTemplateColumns = `repeat(${closestMultiplier}, 1fr)`;
     }
     this.element.classList.add("show");
     const width = this.element.offsetWidth;
