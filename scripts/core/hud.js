@@ -301,6 +301,8 @@ export class CoreHUD extends Application{
 
   interceptNextDialog(element) {
 
+    if(!element) return;
+
     function getOffset(el) {
       const rect = el.getBoundingClientRect();
       const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;

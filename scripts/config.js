@@ -362,13 +362,8 @@ export function initConfig() {
         hint: game.i18n.localize("enhancedcombathud.settings.rangefinder.hint"),
         scope: "world",
         config: true,
-        type: String,
-        choices: {
-            none: game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.none"),
-            rangeOnly: game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.rangeOnly"),
-            full: game.i18n.localize("enhancedcombathud.settings.rangefinder.choices.full"),
-        },
-        default: "rangeOnly",
+        type: Boolean,
+        default: true,
     });
 
     game.settings.register("enhancedcombathud", "rangepicker", {

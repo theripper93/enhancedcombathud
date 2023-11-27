@@ -143,10 +143,7 @@
     "enhancedcombathud.settings.noAA.hint" : "Don't apply active effects when using special actions. (requires refresh)",
 
     "enhancedcombathud.settings.rangefinder.name": "3D Canvas - Range Finder",
-    "enhancedcombathud.settings.rangefinder.hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. 'Distance Only' will show the distance to the target - the distance will be Red if the target is out of range. 'Game Mode' will show the chance to hit the target (both attacks and saves).",
-    "enhancedcombathud.settings.rangefinder.choices.none": "Disabled",
-    "enhancedcombathud.settings.rangefinder.choices.rangeOnly": "Distance Only",
-    "enhancedcombathud.settings.rangefinder.choices.full": "Game Mode",
+    "enhancedcombathud.settings.rangefinder.hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. When enabled will show the distance to the target - the distance will be Red if the target is out of range.",
 
     "enhancedcombathud.settings.rangepicker.name": "Target Picker",
     "enhancedcombathud.settings.rangepicker.hint": "When using an item or action that requires a target, this will show a target count that follows the mouse cursor until the correct amount of target is selected, use the +/- keys to manually adjust the required targets if needed.",

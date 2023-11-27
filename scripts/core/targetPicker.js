@@ -80,6 +80,7 @@ export class TargetPicker{
   }
 
   update(event) {
+    if(!this.element) return;
     if (event) {
       const clientX = event.clientX;
       const clientY = event.clientY;

@@ -59,6 +59,10 @@ export class ItemButton extends ArgonComponent{
     return game.settings.get("enhancedcombathud", "rangepicker");
   }
 
+  get useRangeFinder() {
+    return game.Levels3DPreview._active && game.settings.get("enhancedcombathud", "rangefinder");
+  }
+
   get visible() {
     return !!this.item;
   }
@@ -102,6 +106,7 @@ export class ItemButton extends ArgonComponent{
   }
 
   async _onMouseEnter(event) {
+    if(!this.token || !this.useRangeFinder) return;
     showRangeRings(this.ranges.normal, this.ranges.long, this.token);
     showRangeFinder(this.ranges.normal, this.token);
   }
@@ -114,7 +119,7 @@ export class ItemButton extends ArgonComponent{
   async _onPreLeftClick(event) {
     if (this.useTargetPicker && this.targets > 0) {
       isTargetPicker = true;
-      const picker = new TargetPicker({token: this.token, targets: this.targets, ranges: this.range});
+      const picker = new TargetPicker({token: this.token, targets: this.targets, ranges: this.ranges});
       await picker.promise;
       isTargetPicker = false;
     }
@@ -158,6 +163,7 @@ const rangeRings = {
 }
 
 export function clearRanges(force = false) {
+  if(!game.Levels3DPreview?._active) return;
   if(isTargetPicker && !force) return;
   if (rangeRings.normal) {
     rangeRings.normal.remove();
@@ -172,12 +178,12 @@ export function clearRanges(force = false) {
 export function showRangeRings(normal, long, object) {
   if(!game.Levels3DPreview?._active) return;
   clearRanges();
-  if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, normal);
-  if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, long, "#ff0000");
+  if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, normal);
+  if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, long, "#ff0000");
 }
 
 export async function showRangeFinder(range, object){
-  if(!game.Levels3DPreview?._active || !itemName) return;
+  if(!game.Levels3DPreview?._active || !range) return;
   const sett = game.settings.get("enhancedcombathud", "rangefinder")
   const showRangeFinder = sett != "none";
   if(!showRangeFinder) return;
