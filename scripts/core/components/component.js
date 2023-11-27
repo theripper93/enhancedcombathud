@@ -39,7 +39,11 @@ export class ArgonComponent {
   
   get hasTooltip() {
     return false;
-  }
+    }
+    
+    get tooltipOrientation() {
+        return null;
+    }
 
     setColorScheme() {
         if (this.colorScheme === null) return;
@@ -92,7 +96,7 @@ export class ArgonComponent {
     async _onTooltipMouseEnter(event) {
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
-        this._tooltip = new Tooltip(tooltipData, this.element);
+        this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation);
         this._tooltip.render();
     }
 

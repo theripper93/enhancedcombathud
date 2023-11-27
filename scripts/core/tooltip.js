@@ -1,11 +1,12 @@
 import { PARTIALS_PATH } from "./hud.js";
 
 export class Tooltip {
-    constructor(tooltipData, triggerElement) {
+    constructor(tooltipData, triggerElement, orientation) {
         this.element = document.createElement("div");
         this.element.classList.add(...this.classes);
         this._tooltipData = tooltipData;
         this._triggerElement = triggerElement;
+        this._orientation = orientation;
     }
 
     get template() {
@@ -31,7 +32,7 @@ export class Tooltip {
         this.element.classList.add("ech-show-tooltip");
         const details = this.element.querySelector(".ech-tooltip-details");
         details.style.gridTemplateColumns = `repeat(${Math.min(details.children.length, 3)}, 1fr)`;
-      this.setPosition();
+      this.setPosition(this._orientation);
       this._scrollableElement = this.element.querySelector(".ech-tooltip-description");
       ui.ARGON._tooltip = this;
         return this.element;
@@ -44,9 +45,10 @@ export class Tooltip {
         const tempElement = document.createElement("div");
         tempElement.innerHTML = rendered;
         this.element.innerHTML = tempElement.firstElementChild.innerHTML;
+        if(!data.subtitle) this.element.classList.add("hide-subtitle");
     }
 
-    setPosition(orientation, scale, margin = 20) {
+    setPosition(orientation, scale, margin = 10) {
         const tooltipElement = this.element;
         const triggeringElement = this._triggerElement;
         orientation ??= TooltipManager.TOOLTIP_DIRECTIONS.UP;
