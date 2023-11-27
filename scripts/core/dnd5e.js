@@ -423,22 +423,22 @@ export function register() {
                     normal: item.system?.range?.value ?? touchRange,
                     long: item.system?.range?.long ?? null,
                 };
-          }
-          
-          get targets() {
-            const item = this.item;
-            const validTargets = ["creature", "ally", "enemy"];
-            const actionType = item.system.actionType;
-            const targetType = item.system.target?.type;
-            if (validTargets.includes(targetType)) {
-                return item.system.target.value;
-            } else {
-                if (actionType === "mwak" || actionType === "rwak") {
-                    return 1;
-                }
             }
-            return null;
-          }
+
+            get targets() {
+                const item = this.item;
+                const validTargets = ["creature", "ally", "enemy"];
+                const actionType = item.system.actionType;
+                const targetType = item.system.target?.type;
+                if (validTargets.includes(targetType)) {
+                    return item.system.target.value;
+                } else {
+                    if (actionType === "mwak" || actionType === "rwak") {
+                        return 1;
+                    }
+                }
+                return null;
+            }
 
             async getTooltipData() {
                 const tooltipData = await getTooltipDetails(this.item);
@@ -678,6 +678,7 @@ export function register() {
         CoreHUD.defineMainPanels([DND5eActionActionPanel, DND5eBonusActionPanel, DND5eReactionActionPanel, DND5eFreeActionPanel, ARGON.PREFAB.PassTurnPanel]);
         CoreHUD.defineMovementHud(DND5eMovementHud);
         CoreHUD.defineWeaponSets(DND5eWeaponSets);
+        CoreHUD.defineSupportedActorTypes(["character", "npc"]);
     });
 }
 

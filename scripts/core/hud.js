@@ -32,6 +32,8 @@ const mainSystemComponents = {
   MOVEMENT: MovementHud,
 }
 
+const supportedActorTypes = [];
+
 
 export class CoreHUD extends Application{
   constructor () {
@@ -232,6 +234,11 @@ export class CoreHUD extends Application{
       throw new Error("Invalid argument");
     }
     if (!this._actor) console.error("Argon: No actor found");
+    const actorType = this._actor.type;
+    if (supportedActorTypes.length && !supportedActorTypes.includes(actorType)) {
+      ui.notifications.error(localize("enhancedcombathud.err.unsupportedActorType").replace("%t", actorType));
+      return this.close();
+    }
     this._target = target;
     this.toggleUiElements(true);
     this.updateSceneControlButton();
@@ -383,7 +390,7 @@ export class CoreHUD extends Application{
           name: "echtoggle",
           title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
           onClick: function (toggle) {
-            const target = canvas.tokens.controlled[0] ?? _token;
+            const target = canvas.tokens.controlled[0] ?? game.user.character;
             ui.ARGON.bind(toggle ? target : null)
           },
           toggle: true,
@@ -397,7 +404,7 @@ export class CoreHUD extends Application{
       button.classList.toggle("active", !!ui.ARGON._target);
       html.querySelector(".col.left").prepend(button);
       button.onclick = (event) => {
-        const target = canvas.tokens.controlled[0] ?? _token;
+        const target = app.object ?? canvas.tokens.controlled[0];
         ui.ARGON.bind(!ui.ARGON._target ? target : null)
         button.classList.toggle("active");
       };
@@ -422,6 +429,10 @@ export class CoreHUD extends Application{
 
   static defineMovementHud(movementHud) {
     mainSystemComponents.MOVEMENT = movementHud;
+  }
+
+  static defineSupportedActorTypes(actorTypes) {
+    supportedActorTypes.push(...actorTypes);
   }
 
   static get ARGON() {
