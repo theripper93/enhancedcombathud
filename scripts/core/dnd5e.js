@@ -200,6 +200,12 @@ export function register() {
 
             get categories() {
                 const abilities = this.actor.system.abilities;
+                const skills = this.actor.system.skills;
+
+                const addSign = (value) => {
+                    if (value >= 0) return `+${value}`;
+                    return value;
+                }
 
                 const abilitiesButtons = Object.keys(abilities).map((ability) => {
                     const abilityData = abilities[ability];
@@ -209,13 +215,28 @@ export function register() {
                             onClick: () => console.log("Ability Clicked" + ability),
                         },
                         {
-                            label: abilityData.mod,
+                            label: addSign(abilityData.mod),
                             onClick: () => console.log("Ability Mod Clicked" + ability),
                         },
                         {
-                            label: abilityData.save,
-                            onClick: () => console.log("Ability Save Clicked" + ability), 
+                            label: addSign(abilityData.save),
+                            onClick: () => console.log("Ability Save Clicked" + ability),
                         }
+                    ]);
+                });
+
+                const skillsButtons = Object.keys(skills).map((skill) => {
+                    const skillData = skills[skill];
+                    return new ARGON.DRAWER.DrawerButton([
+                        {
+                            label: CONFIG.DND5E.skills[skill].label,
+                            onClick: () => console.log("Skill Clicked" + skill),
+                        },
+                        {
+                            label: `${addSign(skillData.mod)}<span style="margin: 0 1rem; filter: brightness(0.8)">(${skillData.passive})</span>`,
+                            onClick: () => console.log("Skill Mod Clicked" + skill),
+                            style: "display: flex; justify-content: flex-end;",
+                        },
                     ]);
                 });
 
@@ -224,17 +245,46 @@ export function register() {
                 return [
                     {
                         gridCols: "5fr 2fr 2fr",
-                        captions: ["Abilities", "Check", "Save"],
+                        captions: [
+                            {
+                                label: "Abilities",
+                                align: "left",
+                            },
+                            {
+                                label: "Check",
+                                align: "center",
+                            },
+                            {
+                                label: "Save",
+                                align: "center",
+                            },
+                        ],
+                        align: ["left", "center", "center"],
                         buttons: abilitiesButtons,
                     },
                     {
                         gridCols: "7fr 2fr",
-                        captions: ["Skills", ""]
+                        captions: [
+                            {
+                                label: "Skills",
+                            },
+                            {
+                                label: "",
+                            }
+                        ],
+                        buttons: skillsButtons,
                     },
                     {
                         gridCols: "7fr 2fr",
-                        captions: ["Tools", ""]
-                    }
+                        captions: [
+                            {
+                                label: "Tools",
+                            },
+                            {
+                                label: "",
+                            }
+                        ],
+                    },
                 ];
             }
 

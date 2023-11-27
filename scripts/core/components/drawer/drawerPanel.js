@@ -38,7 +38,8 @@ export class DrawerPanel extends ArgonComponent{
       if(!buttons) continue;
       for (const button of buttons) {
         container.after(button.element);
-        button.setGrid(category.gridCols)
+        button.setGrid(category.gridCols);
+        button.setAlign(category.captions.map((caption) => caption.align));
         buttonPromises.push(button.render());
       }
     }

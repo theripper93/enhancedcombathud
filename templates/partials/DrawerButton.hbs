@@ -1,7 +1,7 @@
 <li>
   {{#each buttons as |button|}}
 
-  <span data-index="{{@index}}">{{ button.label}}</span>
+  <span {{#if button.interactive}}style="cursor: pointer; {{button.style}}"{{else}}style="{{button.style}}"{{/if}}  data-index="{{@index}}">{{{button.label}}}</span>
 
   {{/each}}
 </li>

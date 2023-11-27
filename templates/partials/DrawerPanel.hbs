@@ -1,7 +1,7 @@
 <div>
 	<ul>
 		{{#each categories as |category|}}
-		<li data-index="{{@index}}" style="grid-template-columns: {{category.gridCols}};" class="ability ability-title">{{#each captions as |caption|}}<span>{{{localize caption}}}</span>{{/each}}</li>
+		<li data-index="{{@index}}" style="grid-template-columns: {{category.gridCols}};" class="ability ability-title">{{#each captions as |caption|}}<span {{#if caption.align}}style="text-align: {{caption.align}}"{{/if}}>{{{localize caption.label}}}</span>{{/each}}</li>
 		{{/each}}
 	</ul>
 	<ul class="ability-toggle">
