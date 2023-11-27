@@ -66,11 +66,7 @@
       "path": "languages/cn.json"
     }
   ],
-  "scripts": [
-    "scripts/config.js",
-    "scripts/ExtendedCombatHud.js",
-    "scripts/items.js"
-  ],
+  "scripts": [],
   "esmodules": [
     "scripts/main.js"
   ],
