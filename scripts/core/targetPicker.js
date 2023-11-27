@@ -1,3 +1,5 @@
+import { showRangeFinder, showRangeRings, clearRangeFinders, clearRanges } from "./components/main/buttons/itemButton.js";
+
 export class TargetPicker{
   constructor ({token, targets, ranges}) {
     this.ranges = ranges;
@@ -67,13 +69,14 @@ export class TargetPicker{
     return this._maxTargets;
   }
 
-  init() { 
+  init() {
+    if(game.settings.get("enhancedcombathud", "rangepickerclear")) (canvas.tokens.placeables[0] ?? _token)?.setTarget(false);
     const element = document.createElement("div");
     element.classList.add("ech-target-picker");
     document.body.appendChild(element);
     this.element = element;
     if (!this.maxTargets || this.targetCount == this.maxTargets) return this.end(true);
-    canvas.hud.enhancedcombathud.showRangeRings(this.ranges.normal, this.ranges.long);
+    showRangeRings(this.ranges.normal, this.ranges.long);
   }
 
   update(event) {
@@ -89,7 +92,7 @@ export class TargetPicker{
   end(res) {
     document.querySelector(".control-tool").click();
     this.resolve(res);
-    canvas.hud.enhancedcombathud.clearRanges(true);
+    clearRanges(true);
     this.element.remove();
     Hooks.off("targetToken", this.targetHook);
     document.removeEventListener("mousemove", this.movelistener);

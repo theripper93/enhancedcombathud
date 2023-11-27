@@ -260,9 +260,24 @@ export function register() {
                 }
             }
 
+          get showPreparedOnly() {
+            if (this.actor.type !== "character") return false;
+            const classes = Object.keys(this.actor.classes);
+            const requiresPreparation = ["cleric", "druid", "paladin", "wizard", "artificer", "ranger"].some((className) => classes.includes(className));
+            return requiresPreparation;  
+          }
+
             async _getPanel() {
                 if (this.type === "spell") {
-                    const spellLevels = CONFIG.DND5E.spellLevels;
+                  const spellLevels = CONFIG.DND5E.spellLevels;
+                  if (this.showPreparedOnly) {
+                    const allowIfNotPrepared = ["atwill", "innate", "pact"]
+                    this.items = this.items.filter((item) => {
+                      if (allowIfNotPrepared.includes(item.system.preparation.mode)) return true;
+                      if (item.system.level == 0) return true;
+                      return item.system.preparation.prepared
+                    });
+                  }
                     const spells = [
                         {
                             label: "DND5E.SpellPrepAtWill",

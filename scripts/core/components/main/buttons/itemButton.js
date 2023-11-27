@@ -56,7 +56,7 @@ export class ItemButton extends ArgonComponent{
   }
 
   get useTargetPicker() {
-    return true;
+    return game.settings.get("enhancedcombathud", "rangepicker");
   }
 
   get visible() {
@@ -157,7 +157,7 @@ const rangeRings = {
   long: null
 }
 
-function clearRanges(force = false) {
+export function clearRanges(force = false) {
   if(isTargetPicker && !force) return;
   if (rangeRings.normal) {
     rangeRings.normal.remove();
@@ -169,14 +169,14 @@ function clearRanges(force = false) {
   }
 }
 
-function showRangeRings(normal, long, object) {
+export function showRangeRings(normal, long, object) {
   if(!game.Levels3DPreview?._active) return;
   clearRanges();
   if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, normal);
   if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(this.object, long, "#ff0000");
 }
 
-async function showRangeFinder(range, object){
+export async function showRangeFinder(range, object){
   if(!game.Levels3DPreview?._active || !itemName) return;
   const sett = game.settings.get("enhancedcombathud", "rangefinder")
   const showRangeFinder = sett != "none";
@@ -204,7 +204,7 @@ async function showRangeFinder(range, object){
   
 }
 
-function clearRangeFinders() {
+export function clearRangeFinders() {
   if(!game.Levels3DPreview?._active) return;
   game.Levels3DPreview.rangeFinders.forEach(rf => {rf.destroy();})
 }

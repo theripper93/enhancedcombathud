@@ -41,10 +41,12 @@ export class CoreHUD extends Application{
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
+    Hooks.on("combatStart", this._onCombatStart.bind(this));
     Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
     Hooks.on("deleteCombat", this._onDeleteCombat.bind(this));
     Hooks.on("updateActor", this._onUpdateActor.bind(this));
     Hooks.on("updateToken", this._onUpdateToken.bind(this));
+    Hooks.on("controlToken", this._onControlToken.bind(this));
     CoreHUD.setColorSettings();
   }
 
@@ -82,6 +84,12 @@ export class CoreHUD extends Application{
     this.components.main.forEach(component => component.updateVisibility());
   }
 
+  _onCombatStart(combat) {
+    this.components.movement?._onNewRound(combat);
+    const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
+    if (openCombatStart) this.bind(canvas.tokens.controlled[0] ?? _token);
+  }
+
   _onUpdateCombat(combat, updates) {
     this.components.combat.forEach(component => component.updateVisibility());
     if("round" in updates) this.components.movement?._onNewRound(combat);
@@ -113,6 +121,12 @@ export class CoreHUD extends Application{
   _onUpdateToken(tokenDocument, updates) {
     if (tokenDocument !== this._token.document) return;
     this.components.movement?.onTokenUpdate(updates);
+  }
+
+  _onControlToken(token, controlled) {
+    if (!controlled) return;
+    const alwaysOn = game.settings.get("enhancedcombathud", "alwaysOn");
+    if(alwaysOn) this.bind(token);
   }
 
   async _renderInner(data) {
@@ -154,6 +168,10 @@ export class CoreHUD extends Application{
   }
 
   bind(target) {
+    if (!target) {
+      this.toggleUiElements(false);
+      return this.close();
+    }
     this._itemButtons = [];
     if (target instanceof Token || target instanceof TokenDocument) {
       this._actor = target.actor;
@@ -166,42 +184,26 @@ export class CoreHUD extends Application{
     else {
       throw new Error("Invalid argument");
     }
-    if(!this._actor) console.error("Argon: No actor found");
+    if (!this._actor) console.error("Argon: No actor found");
+    this.toggleUiElements(true);
     this.render(true);
+  }
+
+  toggleUiElements(toggle) {
+    const hideMacroPlayers = game.settings.get("enhancedcombathud", "hideMacroPlayers");
+    if(!hideMacroPlayers) toggle = false;
+    const hotbar = document.querySelector("#hotbar");
+    const fps = document.querySelector("#fps");
+    const players = document.querySelector("#players");
+    [hotbar, fps, players].filter(element => element).forEach(element => {
+      element.classList.toggle("ech-hidden", toggle);
+    });
   }
 
   collapseAllPanels() {
     this.element[0].querySelectorAll(".features-container.show").forEach(element => {
       element.classList.remove("show");
     });
-  }
-
-  toggleMinimizeJQ(forceState) {
-    $("body").toggleClass(
-      "minimize-ech-hud",
-      forceState ?? !$("body").hasClass("minimize-ech-hud")
-    );
-    $(".extended-combat-hud").toggleClass(
-      "minimize-hud",
-      $("body").hasClass("minimize-ech-hud")
-    );
-    let echHUDWidth = $(".extended-combat-hud").outerWidth();
-    let windowWidth = $(window).width() - 340;
-    let scale = true//game.settings.get("enhancedcombathud", "noAutoscale")
-      ? game.settings.get("enhancedcombathud", "scale")
-      : (1 / (echHUDWidth / windowWidth)) *
-        game.settings.get("enhancedcombathud", "scale");
-
-    const position = {
-      bottom: $(".extended-combat-hud").hasClass("minimize-hud")
-        ? `0px`
-        : `${game.settings.get("enhancedcombathud", "botPos")}px`,
-      transform: $(".extended-combat-hud").hasClass("minimize-hud")
-        ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)`
-        : `scale(${scale > 1 ? 1 : scale})`,
-      width: `calc(100vw * ${scale < 1 ? (1 + ((parseFloat(1 - scale) * 1))) : 1})`
-    };
-    $(".extended-combat-hud").css(position);
   }
 
   toggleMinimize(forceState) {
