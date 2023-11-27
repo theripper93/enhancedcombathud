@@ -364,6 +364,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: true,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "rangepicker", {
@@ -373,6 +374,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: true,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "rangepickerclear", {
@@ -382,6 +384,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "scale", {
@@ -396,6 +399,7 @@ export function initConfig() {
         },
         type: Number,
         default: 0.5,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "alwaysOn", {
@@ -405,6 +409,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "leftPos", {
@@ -414,6 +419,7 @@ export function initConfig() {
         config: true,
         type: Number,
         default: 15,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "botPos", {
@@ -423,6 +429,7 @@ export function initConfig() {
         config: true,
         type: Number,
         default: 15,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "hideMacroPlayers", {
@@ -432,12 +439,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: true,
-        onChange: (sett) => {
-            if (!sett) {
-                $("#players")[0].style.visibility = "visible";
-                $("#hotbar").show(500);
-            }
-        },
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "playerDetailsBottom", {
@@ -447,15 +449,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
-    });
-
-    game.settings.register("enhancedcombathud", "noAA", {
-        name: game.i18n.localize("enhancedcombathud.settings.noAA.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.noAA.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: false,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "openCombatStart", {
@@ -465,33 +459,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
-    });
-
-    game.settings.register("enhancedcombathud", "preparedSpells", {
-        name: game.i18n.localize("enhancedcombathud.settings.preparedSpells.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.preparedSpells.hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: false,
-    });
-
-    game.settings.register("enhancedcombathud", "showWeaponsItems", {
-        name: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: false,
-    });
-
-    game.settings.register("enhancedcombathud", "switchEquip", {
-        name: game.i18n.localize("enhancedcombathud.settings.switchEquip.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.switchEquip.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: true,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "showTooltips", {
@@ -501,6 +469,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: true,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "tooltipScale", {
@@ -514,40 +483,8 @@ export function initConfig() {
             step: 0.01,
         },
         type: Number,
-        default: 1,
-    });
-
-    game.settings.register("enhancedcombathud", "showTooltipsSpecial", {
-        name: game.i18n.localize("enhancedcombathud.settings.showTooltipsSpecial.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsSpecial.hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: true,
-    });
-    game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuAbilities", {
-        name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: true,
-    });
-    game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuSkills", {
-        name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: true,
-    });
-    game.settings.register("enhancedcombathud", "showTooltipsAbilityMenuTools", {
-        name: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuTools.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint"),
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: true,
+        default: 0.7,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "fadeOutInactive", {
@@ -557,6 +494,7 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "fadeoutDelay", {
@@ -566,6 +504,7 @@ export function initConfig() {
         config: true,
         type: Number,
         default: 4,
+        onChange: () => ui.ARGON.refresh(),
     });
 
     game.settings.register("enhancedcombathud", "fadeoutOpacity", {
@@ -580,5 +519,38 @@ export function initConfig() {
             step: 0.05,
         },
         default: 0.1,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
+    //DND5E Settings
+
+    game.settings.register("enhancedcombathud", "showWeaponsItems", {
+        name: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
+    game.settings.register("enhancedcombathud", "switchEquip", {
+        name: game.i18n.localize("enhancedcombathud.settings.switchEquip.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.switchEquip.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
+    game.settings.register("enhancedcombathud", "noAA", {
+        name: game.i18n.localize("enhancedcombathud.settings.noAA.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.noAA.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: () => ui.ARGON.refresh(),
     });
 }

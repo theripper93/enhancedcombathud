@@ -46,7 +46,8 @@ export class PortraitPanel extends ArgonComponent {
       isDying: this.isDying,
       deathIcon: this.deathIcon,
       successes: this.successes,
-      failures: this.failures
+      failures: this.failures,
+      playerDetailsBottom: game.settings.get("enhancedcombathud", "playerDetailsBottom"),
     }
     return data;
   }

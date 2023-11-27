@@ -40,6 +40,8 @@ export class CoreHUD extends Application{
     this._itemButtons = [];
     this._tooltip = null;
     this._target = null;
+    this.refresh = debounce(this.refresh, 200);
+
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
@@ -125,6 +127,11 @@ export class CoreHUD extends Application{
   _onUpdateActor(actor) {
     if (actor !== this._actor) return;
     this.components.portrait.render();
+    const itemCount = this._actor.items.length;
+    if (itemCount !== this._itemsCount) {
+      this._itemsCount = itemCount;
+      this.refresh();
+    }
   }
 
   _onUpdateToken(tokenDocument, updates) {
@@ -181,6 +188,7 @@ export class CoreHUD extends Application{
     this._updateActionContainers();
     this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
     if (!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
+    this._itemsCount = this._actor.items.length;
 
     return element;
   }
@@ -193,6 +201,7 @@ export class CoreHUD extends Application{
     //await this.close();
     if (!target) {
       this._target = null;
+      this._itemsCount = null;
       this.toggleUiElements(false);
       this.updateSceneControlButton();
       return this.close();
@@ -345,6 +354,10 @@ export class CoreHUD extends Application{
     setTimeout(() => {
       Hooks.off("renderDialog", hookId)
     }, 200);
+  }
+
+  refresh() {
+    if(this.rendered) this.render(true);
   }
 
   static setControlHooks() {
