@@ -38,6 +38,7 @@ export class CoreHUD extends Application{
     super();
     this.performModuleCheck();
     this._itemButtons = [];
+    this._tooltip = null;
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
@@ -48,6 +49,9 @@ export class CoreHUD extends Application{
     Hooks.on("updateToken", this._onUpdateToken.bind(this));
     Hooks.on("controlToken", this._onControlToken.bind(this));
     CoreHUD.setColorSettings();
+
+    document.addEventListener("wheel", (event) => ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY));
+
   }
 
   static get defaultOptions() {

@@ -31,7 +31,9 @@ export class Tooltip {
         this.element.classList.add("ech-show-tooltip");
         const details = this.element.querySelector(".ech-tooltip-details");
         details.style.gridTemplateColumns = `repeat(${Math.min(details.children.length, 3)}, 1fr)`;
-        this.setPosition();
+      this.setPosition();
+      this._scrollableElement = this.element.querySelector(".ech-tooltip-description");
+      ui.ARGON._tooltip = this;
         return this.element;
     }
 
@@ -106,9 +108,15 @@ export class Tooltip {
             default:
                 console.error("Invalid orientation:", orientation);
         }
-    }
+  }
+  
+  setScrollDelta(delta) {
+    if(!this._scrollableElement) return;
+    this._scrollableElement.scrollTop += delta;
+  }
 
   _destroy(force = false) {
+        if(ui.ARGON._tooltip === this) ui.ARGON._tooltip = null;
         if (force) {
             this.element.remove();
             return;
