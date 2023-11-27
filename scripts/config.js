@@ -208,7 +208,7 @@ export class echThemeOptions extends FormApplication {
             });
 
         await game.settings.set("enhancedcombathud", "echThemeData", formData);
-        canvas.hud.enhancedcombathud?.setColorSettings();
+        ui.ARGON.setColorSettings();
     }
 }
 
@@ -494,7 +494,10 @@ export function initConfig() {
         config: true,
         type: Boolean,
         default: false,
-        onChange: () => ui.ARGON.refresh(),
+        onChange: () => {
+            ui.ARGON.setColorSettings();
+            ui.ARGON.refresh()
+        },
     });
 
     game.settings.register("enhancedcombathud", "fadeoutDelay", {
@@ -504,7 +507,10 @@ export function initConfig() {
         config: true,
         type: Number,
         default: 4,
-        onChange: () => ui.ARGON.refresh(),
+        onChange: () => {
+            ui.ARGON.setColorSettings();
+            ui.ARGON.refresh()
+        },
     });
 
     game.settings.register("enhancedcombathud", "fadeoutOpacity", {
@@ -519,7 +525,10 @@ export function initConfig() {
             step: 0.05,
         },
         default: 0.1,
-        onChange: () => ui.ARGON.refresh(),
+        onChange: () => {
+            ui.ARGON.setColorSettings();
+            ui.ARGON.refresh()
+        },
     });
 
     //DND5E Settings

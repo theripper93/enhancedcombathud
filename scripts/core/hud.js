@@ -53,7 +53,7 @@ export class CoreHUD extends Application{
     Hooks.on("controlToken", this._onControlToken.bind(this));
     Hooks.on("createItem", this._onCreateItem.bind(this));
     Hooks.on("deleteItem", this._onDeleteItem.bind(this));
-    CoreHUD.setColorSettings();
+    this.setColorSettings();
 
     document.addEventListener("wheel", (event) => ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY));
 
@@ -462,7 +462,16 @@ export class CoreHUD extends Application{
     }
   }
 
-  static setColorSettings() {
+  setColorSettings() {
+    document.documentElement.style.setProperty(
+      "--ech-fadeout-deleay",
+      game.settings.get("enhancedcombathud", "fadeoutDelay") + "s"
+    );
+    document.documentElement.style.setProperty(
+      "--ech-fadeout-opacity",
+      game.settings.get("enhancedcombathud", "fadeoutOpacity")
+    );
+
     Object.flatten = function (data) {
       var result = {};
       function recurse(cur, prop) {
