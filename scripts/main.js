@@ -6,6 +6,6 @@ CoreHUD.setControlHooks();
 
 Hooks.on("ready", () => {
   initConfig();
-  register();
+  //register();
   ui.ARGON = new CoreHUD();
 });

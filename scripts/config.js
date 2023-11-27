@@ -530,36 +530,4 @@ export function initConfig() {
             ui.ARGON.refresh()
         },
     });
-
-    //DND5E Settings
-
-    game.settings.register("enhancedcombathud", "showWeaponsItems", {
-        name: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.showWeaponsItems.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: false,
-        onChange: () => ui.ARGON.refresh(),
-    });
-
-    game.settings.register("enhancedcombathud", "switchEquip", {
-        name: game.i18n.localize("enhancedcombathud.settings.switchEquip.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.switchEquip.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: true,
-        onChange: () => ui.ARGON.refresh(),
-    });
-
-    game.settings.register("enhancedcombathud", "noAA", {
-        name: game.i18n.localize("enhancedcombathud.settings.noAA.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.noAA.hint"),
-        scope: "world",
-        config: true,
-        type: Boolean,
-        default: false,
-        onChange: () => ui.ARGON.refresh(),
-    });
 }
