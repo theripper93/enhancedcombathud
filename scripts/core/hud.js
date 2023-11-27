@@ -42,7 +42,9 @@ export class CoreHUD extends Application{
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
     Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
+    Hooks.on("deleteCombat", this._onDeleteCombat.bind(this));
     Hooks.on("updateActor", this._onUpdateActor.bind(this));
+    Hooks.on("updateToken", this._onUpdateToken.bind(this));
     CoreHUD.setColorSettings();
   }
 
@@ -80,8 +82,13 @@ export class CoreHUD extends Application{
     this.components.main.forEach(component => component.updateVisibility());
   }
 
-  _onUpdateCombat(combat) {
+  _onUpdateCombat(combat, updates) {
     this.components.combat.forEach(component => component.updateVisibility());
+    if("round" in updates) this.components.movement?._onNewRound(combat);
+  }
+
+  _onDeleteCombat(combat) {
+    this.components.movement?._onCombatEnd(combat);
   }
 
   _onUpdateItem(item) {
@@ -103,12 +110,17 @@ export class CoreHUD extends Application{
     this.components.portrait.render();
   }
 
+  _onUpdateToken(tokenDocument, updates) {
+    if (tokenDocument !== this._token.document) return;
+    this.components.movement?.onTokenUpdate(updates);
+  }
+
   async _renderInner(data) {
     const element = await super._renderInner(data);
     const html = element[0];
     this.components = {
       weaponSets: new mainSystemComponents.WEAPONSETS(),
-      movement: new mainSystemComponents.MOVEMENT(),
+      movement: this._token ? new mainSystemComponents.MOVEMENT() : null,
       portrait: new mainSystemComponents.PORTRAIT(),
       drawer: new mainSystemComponents.DRAWER(),
       main: mainSystemComponents.MAIN.map(component => new component()),
@@ -117,7 +129,7 @@ export class CoreHUD extends Application{
     html.appendChild(this.components.weaponSets.element);
     html.appendChild(this.components.portrait.element);
     html.appendChild(this.components.drawer.element);
-    html.appendChild(this.components.movement.element);
+    if(this.components.movement) html.appendChild(this.components.movement.element);
 
     const actionHudElement = document.createElement("div");
     actionHudElement.classList.add("action-hud");
@@ -131,12 +143,13 @@ export class CoreHUD extends Application{
     
     const promises = []
     Object.values(this.components).forEach(component => {
-      Array.isArray(component) ? component.forEach(c => promises.push(c.render())) : promises.push(component.render());
+      if(component) Array.isArray(component) ? component.forEach(c => promises.push(c.render())) : promises.push(component.render());
     });
 
     await Promise.all(promises);
     this._updateActionContainers();
     this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
+    if(!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
     return element;
   }
 
