@@ -91,15 +91,12 @@
   word-break: break-all;
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-details {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  display: grid;
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-details > div {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  width: 50%;
 }
 .ech-tooltip.hideTargetRange .ech-tooltip-details > div {
   display: none;
@@ -123,6 +120,7 @@
 .ech-tooltip .ech-tooltip-body .ech-tooltip-properties h3 {
   opacity: 0.6;
   text-transform: uppercase;
+  border: none;
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
   border-radius: .25rem;

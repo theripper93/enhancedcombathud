@@ -16,6 +16,83 @@ export function register() {
             consumable: ["consumable", "equipment", "loot", "weapon"],
         };
 
+        async function getTooltipDetails(item, type) {
+            let title, description, itemType, subtitle, target, range, dt;
+            let damageTypes = [];
+            let properties = [];
+            let materialComponents = "";
+
+            if (type == "skill") {
+                title = CONFIG.DND5E.skills[item];
+                description = this.hudData.skills[item].tooltip;
+            } else if (type == "save") {
+                title = CONFIG.DND5E.abilities[item];
+                description = this.hudData.saves[item].tooltip;
+            } else {
+                if (!item || !item.system) return;
+
+                title = item.name;
+                description = item.system.description.value;
+                itemType = item.type;
+                target = item.labels?.target || "-";
+                range = item.labels?.range || "-";
+                properties = [];
+                dt = item.labels?.damageTypes?.split(", ");
+                damageTypes = dt && dt.length ? dt : [];
+                materialComponents = "";
+
+                switch (itemType) {
+                    case "weapon":
+                        subtitle = CONFIG.DND5E.weaponTypes[item.system.weaponType];
+                        properties.push(CONFIG.DND5E.itemActionTypes[item.system.actionType]);
+                        for (let [key, value] of Object.entries(item.system.properties)) {
+                            let prop = value && CONFIG.DND5E.weaponProperties[key] ? CONFIG.DND5E.weaponProperties[key] : undefined;
+                            if (prop) properties.push(prop);
+                        }
+                        break;
+                    case "spell":
+                        subtitle = `${item.labels.level} ${item.labels.school}`;
+                        properties.push(CONFIG.DND5E.spellSchools[item.system.school]);
+                        properties.push(item.labels.duration);
+                        properties.push(item.labels.save);
+                        for (let comp of item.labels.components.all) {
+                            properties.push(comp.abbr);
+                        }
+                        if (item.labels.materials) materialComponents = item.labels.materials;
+                        break;
+                    case "consumable":
+                        subtitle = CONFIG.DND5E.consumableTypes[item.system.consumableType];
+                        properties.push(CONFIG.DND5E.itemActionTypes[item.system.actionType]);
+                        break;
+                    case "feat":
+                        subtitle = item.system.requirements;
+                        properties.push(CONFIG.DND5E.itemActionTypes[item.system.actionType]);
+                        break;
+                }
+            }
+
+            if (description) description = await TextEditor.enrichHTML(description);
+            let details = [];
+            if (target || range) {
+                details = [
+                    {
+                        label: "enhancedcombathud.tooltip.target.name",
+                        value: target,
+                    },
+                    {
+                        label: "enhancedcombathud.tooltip.range.name",
+                        value: range,
+                    },
+                ];
+            }
+
+            const tooltipProperties = [];
+            if (damageTypes?.length) damageTypes.forEach((d) => tooltipProperties.push({label: d, primary: true}));
+            if (properties?.length) properties.forEach((p) => tooltipProperties.push({label: p, secondary: true}));
+
+            return { title, description, subtitle, details, properties: tooltipProperties, footerText: materialComponents };
+        }
+
         class DND5ePortraitPanel extends ARGON.PORTRAIT.PortraitPanel {
             constructor(...args) {
                 super(...args);
@@ -227,8 +304,18 @@ export function register() {
                 super(...args);
             }
 
+            get hasTooltip() {
+                return true;
+            }
+
+            async getTooltipData() {
+                const tooltipData = await getTooltipDetails(this.item);
+                tooltipData.propertiesLabel = "enhancedcombathud.tooltip.properties.name";
+                return tooltipData;
+            }
+
             async _onLeftClick(event) {
-                const used = await this.item.use({event}, {event});
+                const used = await this.item.use({ event }, { event });
                 if (used) {
                     DND5eItemButton.consumeActionEconomy(this.item);
                 }
@@ -237,8 +324,8 @@ export function register() {
             static consumeActionEconomy(item) {
                 const activationType = item.system.activation?.type;
                 let actionType = null;
-                for(const [type, types] of Object.entries(actionTypes)) {
-                    if(types.includes(activationType)) actionType = type;
+                for (const [type, types] of Object.entries(actionTypes)) {
+                    if (types.includes(activationType)) actionType = type;
                 }
                 if (!actionType) return;
                 if (actionType === "action") {

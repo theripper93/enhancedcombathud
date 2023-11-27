@@ -1,0 +1,32 @@
+<div class="ech-tooltip">
+  <div class="ech-tooltip-header">
+    <h2>{{title}}</h2>
+  </div>
+  <div class="ech-tooltip-body">
+    {{#if subtitle}}<h4 class="ech-tooltip-subtitle">{{subtitle}}</h4>{{/if}}
+    <div class="ech-tooltip-description">{{{description}}}</div>
+    <div class="ech-tooltip-details">
+      {{#each details}}
+      <div>
+        <span>{{localize label}}</span>
+        <span>{{value}}</span>
+      </div>
+      {{/each}}
+    </div>
+    {{#if properties.length}}
+    <div class="ech-tooltip-properties">
+      <h3>{{localize propertiesLabel}}</h3>
+      {{#each properties as |property|}}
+      {{#if property.label}}
+      {{#if property.isPrimary}}
+      <span class="ech-tooltip-badge damt">{{{localize property.label}}}</span>
+      {{else}}
+      <span class="ech-tooltip-badge prop">{{{localize property.label}}}</span>
+      {{/if}}
+      {{/if}}
+      {{/each}}
+    </div>
+    {{/if}}
+    {{#if footerText}}<i style="font-size: 0.8rem;">{{footerText}}</i>{{/if}}
+  </div>
+</div>

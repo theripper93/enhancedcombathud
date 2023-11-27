@@ -12,7 +12,7 @@ import {ActionPanel} from "./components/main/actionPanel.js";
 import {PortraitPanel} from "./components/portrait/portraitPanel.js";
 import {WeaponSets} from "./components/main/weaponSets.js";
 import { MovementHud } from "./components/main/movementHud.js";
-import {ArgonTooltip} from "./tooltip.js";
+import {Tooltip} from "./tooltip.js";
 
 import { PassTurnPanel } from "./prefab/passTurnPanel.js";
 
@@ -277,7 +277,7 @@ export class CoreHUD extends Application{
     return {
       CORE: {
         CoreHUD,
-        ArgonTooltip,
+        Tooltip,
         ArgonComponent,
       },
       MAIN: {
