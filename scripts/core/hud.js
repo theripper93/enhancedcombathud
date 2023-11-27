@@ -135,7 +135,15 @@ export class CoreHUD extends Application{
   _onControlToken(token, controlled) {
     if (!controlled) return;
     const alwaysOn = game.settings.get("enhancedcombathud", "alwaysOn");
-    if(alwaysOn) this.bind(token);
+    if (alwaysOn || this._target) {
+      this.bind(token)
+    }
+  }
+
+  async getData(data) {
+    return {
+      fadeOutInactive: game.settings.get("enhancedcombathud", "fadeOutInactive"),
+    }
   }
 
   async _renderInner(data) {
@@ -172,11 +180,17 @@ export class CoreHUD extends Application{
     await Promise.all(promises);
     this._updateActionContainers();
     this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
-    if(!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
+    if (!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
+
     return element;
   }
 
-  bind(target) {
+  activateListeners(html) {
+    this.toggleMinimize(document.body.classList.contains("minimize-ech-hud"));
+  }
+
+  async bind(target) {
+    //await this.close();
     if (!target) {
       this._target = null;
       this.toggleUiElements(false);
@@ -239,13 +253,13 @@ export class CoreHUD extends Application{
     body.classList.toggle("minimize-ech-hud", newState);
     html.classList.toggle("minimize-hud", newState);
 
-    this.setPosition();
+    this.setPosition(false);
   }
 
-  setPosition() {
+  setPosition(preventTransition = true) {
     const html = this.element[0];
 
-    html.style.transition = "none";
+    if(preventTransition) html.style.transition = "none";
   
     const isMinimizeHud = html.classList.contains("minimize-hud");
   
@@ -264,8 +278,9 @@ export class CoreHUD extends Application{
     for (let prop in position) {
       html.style[prop] = position[prop];
     }
-
-    html.style.transition = null;
+    setTimeout(() => {
+      html.style.transition = null;
+    }, 500);
   }
 
   performModuleCheck() {
