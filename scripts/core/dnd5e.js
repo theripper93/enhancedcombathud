@@ -72,10 +72,23 @@ export function register() {
                     .map((word) => word.charAt(0).toUpperCase())
                     .join("");
                 const SpellDC = game.i18n.localize("DND5E.SaveDC").replace("{ability}", "").replace("{dc}", "").trim();
+
+                const hpColor = this.actor.system.attributes.hp.temp ? "#6698f3" : "rgb(0 255 170)";
+                const tempMax = this.actor.system.attributes.hp.tempmax;
+                const hpMaxColor = tempMax ? (tempMax > 0 ? "rgb(222 91 255)" : "#ffb000") : "rgb(255 255 255)";
+
                 return [
                     [
                         {
-                            text: `${this.actor.system.attributes.hp.value + (this.actor.system.attributes.hp.temp ?? 0)} / ${this.actor.system.attributes.hp.max}`,
+                            text: `${this.actor.system.attributes.hp.value + (this.actor.system.attributes.hp.temp ?? 0)}`,
+                            color: hpColor,
+                        },
+                        {
+                            text: `/`,
+                        },
+                        {
+                            text: `${this.actor.system.attributes.hp.max + (this.actor.system.attributes.hp.tempmax ?? 0)}`,
+                            color: hpMaxColor,
                         },
                         {
                             text: HPText,
@@ -260,24 +273,24 @@ export function register() {
                 }
             }
 
-          get showPreparedOnly() {
-            if (this.actor.type !== "character") return false;
-            const classes = Object.keys(this.actor.classes);
-            const requiresPreparation = ["cleric", "druid", "paladin", "wizard", "artificer", "ranger"].some((className) => classes.includes(className));
-            return requiresPreparation;  
-          }
+            get showPreparedOnly() {
+                if (this.actor.type !== "character") return false;
+                const classes = Object.keys(this.actor.classes);
+                const requiresPreparation = ["cleric", "druid", "paladin", "wizard", "artificer", "ranger"].some((className) => classes.includes(className));
+                return requiresPreparation;
+            }
 
             async _getPanel() {
                 if (this.type === "spell") {
-                  const spellLevels = CONFIG.DND5E.spellLevels;
-                  if (this.showPreparedOnly) {
-                    const allowIfNotPrepared = ["atwill", "innate", "pact"]
-                    this.items = this.items.filter((item) => {
-                      if (allowIfNotPrepared.includes(item.system.preparation.mode)) return true;
-                      if (item.system.level == 0) return true;
-                      return item.system.preparation.prepared
-                    });
-                  }
+                    const spellLevels = CONFIG.DND5E.spellLevels;
+                    if (this.showPreparedOnly) {
+                        const allowIfNotPrepared = ["atwill", "innate", "pact"];
+                        this.items = this.items.filter((item) => {
+                            if (allowIfNotPrepared.includes(item.system.preparation.mode)) return true;
+                            if (item.system.level == 0) return true;
+                            return item.system.preparation.prepared;
+                        });
+                    }
                     const spells = [
                         {
                             label: "DND5E.SpellPrepAtWill",
@@ -335,55 +348,52 @@ export function register() {
             get movementMax() {
                 return this.actor.system.attributes.movement.walk / canvas.scene.dimensions.distance;
             }
-      }
-      
-      class DND5eWeaponSets extends ARGON.WeaponSets {
-
-        async getDefaultSets() {
-          const sets = await super.getDefaultSets();
-          if (this.actor.type !== "npc") return sets;
-          const actions = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "action");
-          const bonus = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "bonus");
-          return {
-            1: {
-              primary: actions[0]?.uuid ?? null,
-              secondary: bonus[0]?.uuid ?? null,
-            },
-            2: {
-              primary: actions[1]?.uuid ?? null,
-              secondary: bonus[1]?.uuid ?? null,
-            },
-            3: {
-              primary: actions[2]?.uuid ?? null,
-              secondary: bonus[2]?.uuid ?? null,
-            },
-          }
         }
 
-        get a() {
-          if (this.actor.type == "npc") {
-            sets = {
-              set1: {
-                primary: this.actions.attack[0],
-                secondary: this.bonus.attack[0],
-              },
-              set2: {
-                primary: this.actions.attack[1],
-                secondary: this.bonus.attack[1],
-              },
-              set3: {
-                primary: this.actions.attack[2],
-                secondary: this.bonus.attack[2],
-              },
-            };
-          }
+        class DND5eWeaponSets extends ARGON.WeaponSets {
+            async getDefaultSets() {
+                const sets = await super.getDefaultSets();
+                if (this.actor.type !== "npc") return sets;
+                const actions = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "action");
+                const bonus = this.actor.items.filter((item) => item.type === "weapon" && item.system.activation?.type === "bonus");
+                return {
+                    1: {
+                        primary: actions[0]?.uuid ?? null,
+                        secondary: bonus[0]?.uuid ?? null,
+                    },
+                    2: {
+                        primary: actions[1]?.uuid ?? null,
+                        secondary: bonus[1]?.uuid ?? null,
+                    },
+                    3: {
+                        primary: actions[2]?.uuid ?? null,
+                        secondary: bonus[2]?.uuid ?? null,
+                    },
+                };
+            }
+
+            async _onSetChange({sets, active}) {
+                const switchEquip = game.settings.get("enhancedcombathud", "switchEquip");
+                if (!switchEquip) return;
+                const updates = [];
+                const activeSet = sets[active];
+                const activeItems = Object.values(activeSet).filter((item) => item);
+                const inactiveSets = Object.values(sets).filter((set) => set !== activeSet);
+                const inactiveItems = inactiveSets.flatMap((set) => Object.values(set)).filter((item) => item);
+                activeItems.forEach((item) => {
+                    if(!item.system?.equipped) updates.push({_id: item.id, "system.equipped": true});
+                });
+                inactiveItems.forEach((item) => {
+                    if(item.system?.equipped) updates.push({_id: item.id, "system.equipped": false});
+                });
+                return await this.actor.updateEmbeddedDocuments("Item", updates);
+            }
         }
-      }
 
         CoreHUD.definePortraitPanel(DND5ePortraitPanel);
         CoreHUD.defineDrawerPanel(DND5eDrawerPanel);
         CoreHUD.defineMainPanels([DND5eActionActionPanel, DND5eBonusActionPanel, DND5eReactionActionPanel, DND5eFreeActionPanel, ARGON.PREFAB.PassTurnPanel]);
-      CoreHUD.defineMovementHud(DND5eMovementHud);
-      CoreHUD.defineWeaponSets(DND5eWeaponSets);
+        CoreHUD.defineMovementHud(DND5eMovementHud);
+        CoreHUD.defineWeaponSets(DND5eWeaponSets);
     });
 }
