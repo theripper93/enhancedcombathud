@@ -51,6 +51,8 @@ export class CoreHUD extends Application{
     Hooks.on("updateActor", this._onUpdateActor.bind(this));
     Hooks.on("updateToken", this._onUpdateToken.bind(this));
     Hooks.on("controlToken", this._onControlToken.bind(this));
+    Hooks.on("createItem", this._onCreateItem.bind(this));
+    Hooks.on("deleteItem", this._onDeleteItem.bind(this));
     CoreHUD.setColorSettings();
 
     document.addEventListener("wheel", (event) => ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY));
@@ -127,7 +129,18 @@ export class CoreHUD extends Application{
   _onUpdateActor(actor) {
     if (actor !== this._actor) return;
     this.components.portrait.render();
-    const itemCount = this._actor.items.length;
+  }
+
+  _onCreateItem(item) {
+    if(item.parent === this._actor) this._checkItemCount();
+  }
+
+  _onDeleteItem(item) {
+    if(item.parent === this._actor) this._checkItemCount();
+  }
+
+  _checkItemCount() {
+    const itemCount = this._actor.items.size;
     if (itemCount !== this._itemsCount) {
       this._itemsCount = itemCount;
       this.refresh();
@@ -188,7 +201,7 @@ export class CoreHUD extends Application{
     this._updateActionContainers();
     this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
     if (!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
-    this._itemsCount = this._actor.items.length;
+    this._itemsCount = this._actor.items.size;
 
     return element;
   }
