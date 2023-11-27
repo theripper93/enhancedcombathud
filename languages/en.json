@@ -80,9 +80,8 @@
     "enhancedcombathud.settings.rangepickerclear.name": "Target Picker - Clear Targets",
     "enhancedcombathud.settings.rangepickerclear.hint": "When using an item or action that requires a target, clear all targets before entering Target Picker mode.",
 
-    "enhancedcombathud.tooltip.target.name" : "Target",
-    "enhancedcombathud.tooltip.range.name" : "Range",
-    "enhancedcombathud.tooltip.properties.name" : "Properties",
+    "enhancedcombathud.hud.pass.name": "Pass",
+    "enhancedcombathud.hud.endturn.name": "End Turn",
 
     "enhancedcombathud.settings.thememenu.name": "Theme Customization",
     "enhancedcombathud.settings.thememenu.hint": "Configure, choose and cusomize Argon themes",
