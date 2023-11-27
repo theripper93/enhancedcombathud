@@ -201,6 +201,7 @@ export function register() {
             get categories() {
                 const abilities = this.actor.system.abilities;
                 const skills = this.actor.system.skills;
+                const tools = this.actor.itemTypes.tool;
 
                 const addSign = (value) => {
                     if (value >= 0) return `+${value}`;
@@ -212,15 +213,15 @@ export function register() {
                     return new ARGON.DRAWER.DrawerButton([
                         {
                             label: CONFIG.DND5E.abilities[ability].label,
-                            onClick: () => console.log("Ability Clicked" + ability),
+                            onClick: (event) => this.actor.rollAbility(ability, {event}),
                         },
                         {
                             label: addSign(abilityData.mod),
-                            onClick: () => console.log("Ability Mod Clicked" + ability),
+                            onClick: (event) => this.actor.rollAbilityTest(ability, {event}),
                         },
                         {
                             label: addSign(abilityData.save),
-                            onClick: () => console.log("Ability Save Clicked" + ability),
+                            onClick: (event) => this.actor.rollAbilitySave(ability, {event}),
                         }
                     ]);
                 });
@@ -230,17 +231,26 @@ export function register() {
                     return new ARGON.DRAWER.DrawerButton([
                         {
                             label: CONFIG.DND5E.skills[skill].label,
-                            onClick: () => console.log("Skill Clicked" + skill),
+                            onClick: (event) => this.actor.rollSkill(skill, {event})
                         },
                         {
                             label: `${addSign(skillData.mod)}<span style="margin: 0 1rem; filter: brightness(0.8)">(${skillData.passive})</span>`,
-                            onClick: () => console.log("Skill Mod Clicked" + skill),
                             style: "display: flex; justify-content: flex-end;",
                         },
                     ]);
                 });
 
-
+                const toolButtons = tools.map((tool) => {
+                    return new ARGON.DRAWER.DrawerButton([
+                        {
+                            label: tool.name,
+                            onClick: (event) => tool.rollToolCheck({event})
+                        },
+                        {
+                            label: addSign(abilities[tool.abilityMod].mod + tool.system.proficiencyMultiplier * this.actor.system.attributes.prof),
+                        },
+                    ]);
+                });
 
                 return [
                     {
@@ -284,6 +294,7 @@ export function register() {
                                 label: "",
                             }
                         ],
+                        buttons: toolButtons,
                     },
                 ];
             }
@@ -409,6 +420,7 @@ export function register() {
             }
 
             async _onLeftClick(event) {
+                ui.ARGON.interceptNextDialog(event.currentTarget)
                 const used = await this.item.use({ event }, { event });
                 if (used) {
                     DND5eItemButton.consumeActionEconomy(this.item);

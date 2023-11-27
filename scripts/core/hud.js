@@ -177,7 +177,9 @@ export class CoreHUD extends Application{
 
   bind(target) {
     if (!target) {
+      this._target = null;
       this.toggleUiElements(false);
+      this.updateSceneControlButton();
       return this.close();
     }
     this._itemButtons = [];
@@ -193,8 +195,16 @@ export class CoreHUD extends Application{
       throw new Error("Invalid argument");
     }
     if (!this._actor) console.error("Argon: No actor found");
+    this._target = target;
     this.toggleUiElements(true);
+    this.updateSceneControlButton();
     this.render(true);
+  }
+
+  updateSceneControlButton() {
+    const btn = document.querySelector(`.control-tool[data-tool="echtoggle"]`);
+    if(!btn) return;
+    document.querySelector(`.control-tool[data-tool="echtoggle"]`).classList.toggle("active", !!this._target);
   }
 
   toggleUiElements(toggle) {
@@ -255,6 +265,82 @@ export class CoreHUD extends Application{
     if (systemModule?.active) return;
     const systemModuleElement = `<a href="https://foundryvtt.com/packages/enhancedcombathud-${game.system.id}" target="_blank">Argon - Combat HUD (${game.system.id.toUpperCase()})</a>`;
     ui.notifications.error(localize("enhancedcombathud.err.moduleNotActive").replace("%m", systemModuleElement), {permanent: true});
+  }
+
+  interceptNextDialog(element) {
+
+    function getOffset(el) {
+      const rect = el.getBoundingClientRect();
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+      return {
+        top: rect.top + scrollTop,
+        left: rect.left + scrollLeft
+      };
+    }
+  
+    const offset = getOffset(element);
+  
+    // Close Previous Highjacked Windows
+    const previousWindows = document.querySelectorAll(".ech-highjack-window .close");
+    previousWindows.forEach(closeButton => closeButton.click());
+  
+    // Position Windows next to Saves/Skills/Tools Menu
+    const hookId = Hooks.once("renderDialog", (dialog, html) => {
+      html = html[0];
+      offset.top += -window.scrollY - dialog.position.height / 2;
+      offset.left +=
+        element.getBoundingClientRect().width + 10 - window.scrollX;
+  
+      html.style.top = offset.top > 0 ? offset.top + "px" : "0";
+      html.style.left = offset.left + "px";
+      html.classList.add("ech-highjack-window");
+  
+      // Update dialog with new position data for dragging.
+      dialog.position.left = offset.left;
+      dialog.position.top = offset.top > 0 ? offset.top : 0;
+  
+      // If Dialog allows you to select Modifier, use modifier from ability modifier by default
+      const abilitySelect = html.querySelector('select[name="ability"]');
+      if (abilitySelect && !abilitySelect.value) {
+        abilitySelect.value = element.dataset.modifier;
+      }
+    });
+  
+    setTimeout(() => {
+      Hooks.off("renderDialog", hookId)
+    }, 200);
+  }
+
+  static setControlHooks() {
+    Hooks.on("getSceneControlButtons", (controls, b, c) => {
+      controls
+        .find((x) => x.name == "token")
+        .tools.push({
+          active: ui.ARGON?._target,
+          icon: "fa-duotone fa-swords",
+          name: "echtoggle",
+          title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
+          onClick: function (toggle) {
+            const target = canvas.tokens.controlled[0] ?? _token;
+            ui.ARGON.bind(toggle ? target : null)
+          },
+          toggle: true,
+        });
+    });
+    Hooks.on("renderTokenHUD", (app, html, data) => {
+      html = html[0];
+      const button = document.createElement("div");
+      button.classList.add("control-icon");
+      button.innerHTML = '<i class="fa-duotone fa-swords"></i>';
+      button.classList.toggle("active", !!ui.ARGON._target);
+      html.querySelector(".col.left").prepend(button);
+      button.onclick = (event) => {
+        const target = canvas.tokens.controlled[0] ?? _token;
+        ui.ARGON.bind(toggle ? target : null)
+      };
+    });
   }
 
   static definePortraitPanel(panel) {
@@ -359,3 +445,5 @@ export class CoreHUD extends Application{
     }
   }
 }
+
+

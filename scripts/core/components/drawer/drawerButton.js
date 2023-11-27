@@ -15,6 +15,10 @@ export class DrawerButton extends ArgonComponent{
     return "li";
   }
 
+  get interceptDialogs() {
+    return true;
+  }
+
   setGrid(gridCols) {
     this.element.style.gridTemplateColumns = gridCols;
   }
@@ -37,7 +41,10 @@ export class DrawerButton extends ArgonComponent{
       const index = this._buttons.indexOf(button);
       const el = this.element.querySelector(`span[data-index="${index}"]`);
       if (!el) continue;
-      el.onclick = button.onClick;
+      el.onclick = (e) => {
+        if (this.interceptDialogs) ui.ARGON.interceptNextDialog(e.currentTarget.closest(".ability"))
+        button.onClick(e);
+      }
     }
     this.setTextAlign();
   }

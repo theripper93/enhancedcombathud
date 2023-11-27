@@ -672,6 +672,7 @@ Hooks.once("init", function () {
 //Color Settings
 
 Hooks.on("getSceneControlButtons", (controls, b, c) => {
+  return
   controls
     .find((x) => x.name == "token")
     .tools.push({
