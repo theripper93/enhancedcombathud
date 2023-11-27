@@ -216,6 +216,15 @@ export class CoreHUD extends Application{
     this.render(true);
   }
 
+  toggle(toggle) {
+    toggle = toggle ?? !this._target;
+    if (toggle) {
+      this.bind(canvas.tokens.controlled[0] ?? _token);
+    } else {
+      this.bind(null);
+    }
+  }
+
   updateSceneControlButton() {
     const btn = document.querySelector(`.control-tool[data-tool="echtoggle"]`);
     if (!btn) return;
