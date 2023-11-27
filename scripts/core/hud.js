@@ -142,7 +142,7 @@ export class CoreHUD extends Application{
     const html = element[0];
     this.components = {
       weaponSets: new mainSystemComponents.WEAPONSETS(),
-      movement: this._token ? new mainSystemComponents.MOVEMENT() : null,
+      movement: this._token && mainSystemComponents.MOVEMENT ? new mainSystemComponents.MOVEMENT() : null,
       portrait: new mainSystemComponents.PORTRAIT(),
       drawer: new mainSystemComponents.DRAWER(),
       main: mainSystemComponents.MAIN.map(component => new component()),
