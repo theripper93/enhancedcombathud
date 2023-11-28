@@ -33,6 +33,7 @@ export class ButtonPanel extends ArgonComponent{
   async _renderInner() {
     await super._renderInner();
     this._buttons.forEach(button => {
+      button._parent = this;
       this.element.appendChild(button.element);
     });
     const promises = this._buttons.map(button => button.render());

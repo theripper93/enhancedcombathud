@@ -34,11 +34,12 @@ export class AccordionPanel extends ArgonComponent{
     await super._renderInner();
     this._subPanels.forEach(panel => {
       this.element.appendChild(panel.element);
+      panel._parent = this;
     });
     const promises = this._subPanels.map(panel => panel.render());
     await Promise.all(promises);
     let totalActionBarWidth = ui.ARGON.actionBarWidth;
-    for(const panel of this._subPanels){
+    for (const panel of this._subPanels) { 
       totalActionBarWidth -= panel.totalWidth;
       if (totalActionBarWidth < 0) break;
       panel.toggle(true);

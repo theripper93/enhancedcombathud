@@ -6,6 +6,11 @@ export class ArgonComponent {
         this.element = document.createElement(this.elementType);
         this.element.classList.add(...this.classes);
         this._tooltip = null;
+        this._parent = null;
+    }
+
+    get parent() {
+        return this._parent;
     }
 
     get actor() {

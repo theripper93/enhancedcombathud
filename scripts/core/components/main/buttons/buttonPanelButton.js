@@ -50,6 +50,7 @@ export class ButtonPanelButton extends ArgonComponent{
     await super._renderInner();
     this.element.style.backgroundImage = `url(${this.icon})`;
     this.panel = await this._getPanel();
+    this.panel._parent = this;
     this.buttonPanelContainer.appendChild(this.panel.element);
     await this.panel.render();
   }

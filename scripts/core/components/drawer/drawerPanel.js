@@ -46,6 +46,7 @@ export class DrawerPanel extends ArgonComponent {
             if (!category.buttons) continue;
             const buttons = [...category.buttons].reverse();
             for (const button of buttons) {
+                button._parent = this;
                 container.after(button.element);
                 button.setGrid(category.gridCols);
                 button.setAlign(category.captions.map((caption) => caption.align));

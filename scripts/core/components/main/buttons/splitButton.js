@@ -19,6 +19,8 @@ export class SplitButton extends ArgonComponent{
     await super._renderInner();
     this.element.appendChild(this.button1.element);
     this.element.appendChild(this.button2.element);
+    this.button1._parent = this;
+    this.button2._parent = this;
     await this.button1.render();
     await this.button2.render();
   }

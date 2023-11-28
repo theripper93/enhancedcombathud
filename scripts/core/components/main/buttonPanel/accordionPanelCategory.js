@@ -86,6 +86,7 @@ export class AccordionPanelCategory extends ArgonComponent{
     await super._renderInner();
     const buttonContainer = this.buttonContainer;
     this._buttons.forEach(button => {
+      button._parent = this;
       buttonContainer.appendChild(button.element);
     });
     const promises = this._buttons.map(button => button.render());

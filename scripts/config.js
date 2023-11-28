@@ -420,7 +420,7 @@ export function initConfig() {
     game.settings.register("enhancedcombathud", "autoScale", {
         name: game.i18n.localize("enhancedcombathud.settings.autoScale.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.autoScale.hint"),
-        scope: "world",
+        scope: "client",
         config: true,
         type: Boolean,
         default: true,

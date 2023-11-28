@@ -97,6 +97,7 @@ export class ActionPanel extends ArgonComponent{
     const buttons = await this._getButtons();
     this._buttons = buttons;
     for (const button of buttons) {
+      button._parent = this;
       this.element.appendChild(button.element);
       button.render();
     }
