@@ -150,7 +150,7 @@ export class CoreHUD extends Application{
   }
 
   _onUpdateToken(tokenDocument, updates) {
-    if (tokenDocument !== this._token.document) return;
+    if (tokenDocument !== this._token?.document) return;
     this.components.movement?.onTokenUpdate(updates);
   }
 
