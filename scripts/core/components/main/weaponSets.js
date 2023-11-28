@@ -11,6 +11,9 @@ export class WeaponSets extends ArgonComponent {
       //set.addEventListener("dragover", this._onDragOver.bind(this));
       set.addEventListener("drop", this._onDrop.bind(this));
       set.addEventListener("click", this._onClick.bind(this));
+      set.addEventListener("dragstart", this._onDragStart.bind(this));
+      set.addEventListener("dragend", this._onDragEnd.bind(this));
+      set.addEventListener("contextmenu", this._onContextMenu.bind(this));
     });
     const activeSet = this.actor.getFlag("enhancedcombathud", "activeWeaponSet") || "1";
     this.element.querySelectorAll(".weapon-set").forEach(element => {
@@ -87,6 +90,45 @@ export class WeaponSets extends ArgonComponent {
     });
     await this.actor.setFlag("enhancedcombathud", "activeWeaponSet", set);
     this.onSetChange(await this.getSetData());
+  }
+
+  async _onDragEnd(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const set = event.currentTarget.dataset.set;
+    const slot = event.currentTarget.dataset.slot;
+    const sets = this.actor.getFlag("enhancedcombathud", "weaponSets") || {};
+    sets[set] = sets[set] || {};
+    sets[set][slot] = null;
+
+    await this.actor.setFlag("enhancedcombathud", "weaponSets", sets);
+    await this.render();
+  }
+
+  async _onDragStart(event) {
+    const set = event.currentTarget.dataset.set;
+    const slot = event.currentTarget.dataset.slot;
+    const sets = this.actor.getFlag("enhancedcombathud", "weaponSets") || {};
+    sets[set] = sets[set] || {};
+    const uuid = sets[set][slot];
+    if (!uuid) return;
+    event.dataTransfer.setData("text/plain", JSON.stringify({
+      type: "Item",
+      uuid
+    }));
+  }
+
+  async _onContextMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const set = event.currentTarget.dataset.set;
+    const slot = event.currentTarget.dataset.slot;
+    const sets = this.actor.getFlag("enhancedcombathud", "weaponSets") || {};
+    sets[set] = sets[set] || {};
+    sets[set][slot] = null;
+
+    await this.actor.setFlag("enhancedcombathud", "weaponSets", sets);
+    await this.render();
   }
 
   async onSetChange({sets, active}) {
