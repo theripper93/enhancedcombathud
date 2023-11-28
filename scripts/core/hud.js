@@ -476,7 +476,7 @@ export class CoreHUD extends Application{
     }
   }
 
-  setColorSettings() {
+  async setColorSettings() {
     document.documentElement.style.setProperty(
       "--ech-fadeout-deleay",
       game.settings.get("enhancedcombathud", "fadeoutDelay") + "s"
@@ -521,12 +521,15 @@ export class CoreHUD extends Application{
     if (theme.theme == "custom") {
       setThemeColors(theme.colors);
     } else {
-      fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`)
-        .then((response) => response.json())
-        .then((colors) => {
+      const file = await fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`)
+      const json = await file.json();
+      setThemeColors(json);
+        
+        /*.then((colors) => {
           setThemeColors(colors);
-        });
+        });noBlur*/
     }
+    
   }
 }
 

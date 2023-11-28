@@ -16,7 +16,7 @@
     pointer-events: all;
 }
 
-.portrait-hud .death-saves{
+.portrait-hud .death-saves {
     width: 100%;
     height: 100%;
     display: grid;
@@ -27,34 +27,34 @@
     background-color: #ff000059;
 }
 
-.portrait-hud .death-saves.hidden{
+.portrait-hud .death-saves.hidden {
     display: none;
 }
 
-.portrait-hud .death-saves div{
+.portrait-hud .death-saves div {
     display: flex;
     justify-content: center;
 }
 
-.portrait-hud .death-saves div.hidden{
+.portrait-hud .death-saves div.hidden {
     display: none;
 }
 
-.portrait-hud .death-save-result-container{
+.portrait-hud .death-save-result-container {
     font-size: 3rem;
     flex-direction: column;
     align-items: center;
 }
 
-.portrait-hud .death-save-btn{
+.portrait-hud .death-save-btn {
     font-size: 10rem;
 }
 
-.portrait-hud .death-save-btn:hover{
+.portrait-hud .death-save-btn:hover {
     color: white;
 }
 
-.portrait-hud-image{
+.portrait-hud-image {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -76,9 +76,9 @@
     position: relative;
     gap: 0.5ch;
 }
-.portrait-stat-block:not(.player-details):before{
-    backdrop-filter: blur(6px);
-    content: '';
+.portrait-stat-block:not(.player-details):before {
+    backdrop-filter: var(--ech-blur-amount);
+    content: "";
     height: 100%;
     left: 0px;
     position: absolute;
@@ -110,7 +110,7 @@
     z-index: -1;
     flex-direction: column-reverse;
     padding-bottom: 3.5rem;
-    background: linear-gradient(0deg, rgba(65,75,85,0.9) 0%, rgba(70,80,90,0.8) 75%, rgba(75,85,95,0) 100%);
+    background: linear-gradient(0deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 75%, rgba(75, 85, 95, 0) 100%);
 }
 
 .portrait-stat-block.player-details .player-detail {
@@ -132,24 +132,24 @@
 }
 
 .player-button {
-  align-items: center;
-  background: no-repeat center;
-  background-origin: content-box;
-  background-size: contain;
-  cursor: pointer;
-  display: flex;
-  font-size: 1.5rem;
-  height: 50px;
-  justify-content: center;
-  padding: 0.5rem;
-  position: relative;
-  width: 50px;
-  
-  pointer-events: all;
+    align-items: center;
+    background: no-repeat center;
+    background-origin: content-box;
+    background-size: contain;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.5rem;
+    height: 50px;
+    justify-content: center;
+    padding: 0.5rem;
+    position: relative;
+    width: 50px;
+
+    pointer-events: all;
 }
 .player-button:before {
-    backdrop-filter: blur(6px);
-    content: '';
+    backdrop-filter: var(--ech-blur-amount);
+    content: "";
     height: 100%;
     left: 0px;
     position: absolute;
@@ -162,7 +162,7 @@
 }
 .minimize-hud .player-button.ech-close i {
     transform: rotate(180deg);
-    margin-top: 0.5rem;  
+    margin-top: 0.5rem;
 }
 
 .ability-menu {
@@ -177,9 +177,9 @@
     z-index: 1000;
 }
 .ability-menu:before {
-    backdrop-filter: blur(6px);
+    backdrop-filter: var(--ech-blur-amount);
     border: 1px solid transparent;
-    content: '';
+    content: "";
     height: 100%;
     left: 0px;
     position: absolute;
@@ -219,7 +219,7 @@
 .ability-menu ul > li.ability-title > div > span {
     width: 75px;
     display: inline-block;
-    text-align: center; 
+    text-align: center;
 }
 .ability-menu ul > li.proficiency-is-not-proficient:before,
 .ability-menu ul > li.proficiency-is-half-proficiency:before,
@@ -235,7 +235,7 @@
     font-weight: 400;
     line-height: 1;
 
-    content: "\f111"
+    content: "\f111";
 }
 .ability-menu ul > li.proficiency-is-half-proficiency:before {
     content: "\f042";
@@ -258,7 +258,7 @@
 .ability-menu ul > li .ability-code select {
     border-width: 0px;
     color: inherit;
-    height: auto;  
+    height: auto;
     text-transform: uppercase;
 }
 .ability-menu ul > li .ability-code select:focus {
@@ -289,7 +289,7 @@
 .ability-menu ul > li.is-save > div > span {
     width: 75px;
     display: inline-block;
-    text-align: center; 
+    text-align: center;
 }
 .ability-menu ul > li.is-save > div > span:hover {
     cursor: pointer;
@@ -337,19 +337,19 @@
 
 .weapon-set {
     align-items: center;
-    backdrop-filter: blur(6px);
+    backdrop-filter: var(--ech-blur-amount);
     border: 1px solid transparent;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-right: 0.75rem; 
+    margin-right: 0.75rem;
 
     pointer-events: all;
 }
 .weapon-set:before {
     border-radius: 0%;
     border: 1px solid transparent;
-    content: '';
+    content: "";
     height: 0px;
     left: 50%;
     position: absolute;
@@ -367,7 +367,7 @@
 }
 .weapon-set.active:after {
     border-radius: 50%;
-    content: '';
+    content: "";
     height: 15px;
     left: 50%;
     position: absolute;
@@ -387,7 +387,7 @@
 .weapon-set > .set.set-primary:before,
 .weapon-set > .set.set-primary:after {
     border-left: 2px solid transparent;
-    content: '';
+    content: "";
     height: 25px;
     left: 50%;
     position: absolute;
@@ -451,4 +451,3 @@
     max-width: 25px;
     width: 100%;
 }
-

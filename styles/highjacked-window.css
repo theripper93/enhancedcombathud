@@ -1,17 +1,17 @@
 .ech-highjack-window *,
 .ech-highjack-window :before,
 .ech-highjack-window :after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .ech-highjack-window {
-	height: auto !important;
+    height: auto !important;
     z-index: 10000 !important;
 }
 
 .ech-highjack-window .window-header {
-	backdrop-filter: blur(6px);
-	border-bottom-width: 0px;
+    backdrop-filter: var(--ech-blur-amount);
+    border-bottom-width: 0px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding: 1rem 0.5rem;
@@ -23,33 +23,33 @@
     line-height: 1;
 }
 .ech-highjack-window .window-header .window-title {
-	font-weight: 600;
+    font-weight: 600;
     text-transform: uppercase;
 }
 .ech-highjack-window .window-header .close {
-	font-size: 0px;
-	position: absolute;
-	right: 5px;
-	top: 5px;
+    font-size: 0px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 .ech-highjack-window .window-header .close i {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .ech-highjack-window .window-content {
-	backdrop-filter: blur(6px);
-	background-image: none;
+    backdrop-filter: var(--ech-blur-amount);
+    background-image: none;
     border: 1px solid transparent;
-	border-top-width: 0px;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
+    border-top-width: 0px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .ech-highjack-window .window-content .form-group {
-	margin: 0.5rem 0rem;
+    margin: 0.5rem 0rem;
 }
 .ech-highjack-window .window-content .form-group input,
 .ech-highjack-window .window-content .form-group select {
-	border-radius: 0px;
+    border-radius: 0px;
     padding: 0.5rem;
     height: auto;
     border-width: 0px;
@@ -60,10 +60,10 @@
 }
 .ech-highjack-window .window-content .form-group input:disabled,
 .ech-highjack-window .window-content .form-group input::placeholder {
-	opacity: 0.6;
+    opacity: 0.6;
 }
 .ech-highjack-window .dialog-buttons {
-	margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
 .ech-highjack-window .dialog-buttons button {
     border: 1px solid transparent;
