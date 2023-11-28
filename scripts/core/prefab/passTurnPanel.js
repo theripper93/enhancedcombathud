@@ -33,7 +33,7 @@ class PassTurnButton extends ActionButton{
   }
 
   get icon() {
-    return "modules/enhancedcombathud/icons/duration.svg";
+    return "modules/enhancedcombathud/icons/duration.webp";
   }
 
   async _onLeftClick(event) {
