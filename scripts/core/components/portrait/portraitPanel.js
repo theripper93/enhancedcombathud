@@ -120,11 +120,13 @@ export class PortraitPanel extends ArgonComponent {
       buttonsContainer.appendChild(btn);
     }
     const deathContainer = this.element.querySelector(".death-saves");
+    deathContainer.classList.remove("no-buttons");
     if (!this.isDead && !this.isDying) {
       deathContainer.classList.add("hidden");
     } else {
       if (this.isDead) {
-        deathContainer.childNodes.forEach(node => node.classList.add("hidden"));
+        deathContainer.childNodes.forEach(node => node.classList && node.classList.add("hidden"));
+        deathContainer.classList.add("no-buttons");
         const deathBtn = deathContainer.querySelector(".death-save-btn");
         deathBtn.classList.remove("hidden");
         deathBtn.style.pointerEvents = "none";

@@ -141,16 +141,20 @@ export class ItemButton extends ArgonComponent{
     }
     this.element.style.display = "";
     this.element.style.backgroundImage = `url(${this.icon})`;
-    if(Number.isNumeric(this.quantity)) {
+    const quantity = this.quantity;
+    if(Number.isNumeric(quantity)) {
       this.element.classList.add("has-count");
-      this.element.dataset.itemCount = this.quantity;
+      this.element.dataset.itemCount = quantity;
+      this.element.style.filter = quantity === 0 ? "grayscale(1)" : null;
     }
     if (this.inActionPanel) {
       this.element.classList.remove("feature-element");
       this.element.classList.add("action-element", "item-button");
       const title = this.element.querySelector(".feature-element-title");
-      title.classList.remove("feature-element-title");
-      title.classList.add("action-element-title");
+      if (title) {        
+        title.classList.remove("feature-element-title");
+        title.classList.add("action-element-title");
+      }
     }
   }
 }

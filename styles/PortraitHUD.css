@@ -25,6 +25,12 @@
     align-items: center;
     color: rgba(255, 255, 255, 0.693);
     background-color: #ff000059;
+    z-index: 1;
+}
+
+.portrait-hud .death-saves.no-buttons{
+    display: flex;
+    justify-content: center;
 }
 
 .portrait-hud .death-saves.hidden {
