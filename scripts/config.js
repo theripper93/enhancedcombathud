@@ -347,7 +347,7 @@ export function initConfig() {
         } else {
           return options.inverse(this);
         }
-      });
+    });
 
     Hooks.on("pickerDone", (element, color) => {
         // Handle Theme
@@ -400,6 +400,16 @@ export function initConfig() {
     game.settings.register("enhancedcombathud", "rangepickerclear", {
         name: game.i18n.localize("enhancedcombathud.settings.rangepickerclear.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.rangepickerclear.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
+    game.settings.register("enhancedcombathud", "openCombatStart", {
+        name: game.i18n.localize("enhancedcombathud.settings.openCombatStart.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.openCombatStart.hint"),
         scope: "world",
         config: true,
         type: Boolean,
@@ -466,16 +476,6 @@ export function initConfig() {
         name: game.i18n.localize("enhancedcombathud.settings.playerDetailsBottom.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.playerDetailsBottom.hint"),
         scope: "client",
-        config: true,
-        type: Boolean,
-        default: false,
-        onChange: () => ui.ARGON.refresh(),
-    });
-
-    game.settings.register("enhancedcombathud", "openCombatStart", {
-        name: game.i18n.localize("enhancedcombathud.settings.openCombatStart.name"),
-        hint: game.i18n.localize("enhancedcombathud.settings.openCombatStart.hint"),
-        scope: "world",
         config: true,
         type: Boolean,
         default: false,
@@ -561,6 +561,18 @@ export function initConfig() {
         onChange: () => {
             ui.ARGON.setColorSettings();
             ui.ARGON.refresh()
+        },
+    });
+}
+
+export function registerKeybindings() {
+    game.keybindings.register("enhancedcombathud", "toggleHud", {
+        name: "enhancedcombathud.hotkey.toggle.name",
+        editable: [{ key: "KeyA", modifiers: [KeyboardManager.MODIFIER_KEYS.SHIFT] }],
+        restricted: false,
+        onDown: () => {},
+        onUp: () => {
+            ui.ARGON.toggle();
         },
     });
 }

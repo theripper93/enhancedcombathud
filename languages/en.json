@@ -147,6 +147,8 @@
     "enhancedcombathud.themeOptions.movementDashMovement" : "Background/Box Shadow of box indicating dash movement spaces",
     "enhancedcombathud.themeOptions.movementDangerMovement" : "Background/Box Shadow of box indicating exceeded movement spaces",
 
+    "enhancedcombathud.hotkey.toggle.name": "Toggle Argon Combat HUD",
+
     "enhancedcombathud.err.unsupportedActorType": "Argon: The Actor type '%t' is not supported by Argon Combat HUD.",
     "enhancedcombathud.err.moduleNotActive": "Argon CORE: System specific module not installed or not active, please install and enable the %m module if available."
 
