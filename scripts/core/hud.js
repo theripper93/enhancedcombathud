@@ -524,11 +524,11 @@ export class CoreHUD extends Application{
       const file = await fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`)
       const json = await file.json();
       setThemeColors(json);
-        
-        /*.then((colors) => {
-          setThemeColors(colors);
-        });noBlur*/
     }
+
+    const noBlur = game.settings.get("enhancedcombathud", "noBlur");
+
+    if (noBlur)document.documentElement.style.setProperty("--ech-blur-amount", "");
     
   }
 }

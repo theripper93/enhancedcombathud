@@ -71,6 +71,9 @@
     "enhancedcombathud.settings.showWeaponsItems.hint" : "Show weapons in the 'Use Item' section. Usefull if your weapon slots are not enough",
     "enhancedcombathud.settings.noAA.name" : "Don't Apply Active Effects",
     "enhancedcombathud.settings.noAA.hint" : "Don't apply active effects when using special actions. (requires refresh)",
+    "enhancedcombathud.settings.noBlur.name": "Disable Blur Effects",
+    "enhancedcombathud.settings.noBlur.hint": "Disable blur effects on the HUD. This is a performance setting and should only be used if you experience performance issues.",
+
 
     "enhancedcombathud.settings.rangefinder.name": "3D Canvas - Range Finder",
     "enhancedcombathud.settings.rangefinder.hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. When enabled will show the distance to the target - the distance will be Red if the target is out of range.",
