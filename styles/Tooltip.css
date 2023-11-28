@@ -63,6 +63,7 @@
     border-bottom-right-radius: 3px;
     padding: 2rem 1rem 1rem;
     text-align: left;
+    position: relative;
 }
 .ech-tooltip.hide-subtitle .ech-tooltip-body {
     padding: 1rem;

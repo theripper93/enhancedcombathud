@@ -528,7 +528,7 @@ export class CoreHUD extends Application{
 
     const noBlur = game.settings.get("enhancedcombathud", "noBlur");
 
-    if (noBlur)document.documentElement.style.setProperty("--ech-blur-amount", "");
+    if (noBlur) document.documentElement.style.setProperty("--ech-blur-amount", "");
     
   }
 }

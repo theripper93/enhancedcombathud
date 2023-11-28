@@ -117,7 +117,7 @@ export class Tooltip {
     this._scrollableElement.scrollTop += delta;
   }
 
-  _destroy(force = false) {
+    _destroy(force = false) {
         if(ui.ARGON._tooltip === this) ui.ARGON._tooltip = null;
         if (force) {
             this.element.remove();
