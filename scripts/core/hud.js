@@ -164,6 +164,11 @@ export class CoreHUD extends Application{
   }
 
   _onControlToken(token, controlled) {
+    if (!controlled && !canvas.tokens.controlled.length) {
+      setTimeout(() => {
+        if(!canvas.tokens.controlled.length) this.close();
+      }, 100);
+    }
     if (!controlled) return;
     if (this._target || game.settings.get("enhancedcombathud", "alwaysOn")) {
       this.bind(token)
