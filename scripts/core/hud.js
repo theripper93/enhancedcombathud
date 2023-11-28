@@ -134,6 +134,7 @@ export class CoreHUD extends Application{
     for (const itemButton of this.itemButtons) {
       if (Number.isNumeric(itemButton.quantity)) itemButton.render();
     }
+    this.components.main.forEach(component => component.updateActionUse());
   }
 
   _onCreateItem(item) {

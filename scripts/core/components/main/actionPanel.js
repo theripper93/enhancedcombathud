@@ -8,7 +8,6 @@ export class ActionPanel extends ArgonComponent{
   constructor (...args) {
     super(...args);
     this._buttons = [];
-    this._isActionUsed = false;
   }
 
   get classes() {
@@ -31,13 +30,7 @@ export class ActionPanel extends ArgonComponent{
     return null;
   }
 
-  set isActionUsed(value) {
-    this._isActionUsed = value;
-    this.updateActionUse();
-  }
-
   _onNewRound(combat) {
-    this.isActionUsed = false;
   }
 
   updateVisibility() {
@@ -50,6 +43,7 @@ export class ActionPanel extends ArgonComponent{
   }
 
   updateActionUse() {
+    if(this.maxActions === null || this.currentActions === null) return;
     const actionsContainer = this.element.querySelector(".actions-uses-container");
     if (!actionsContainer) return;
 
