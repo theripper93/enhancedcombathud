@@ -42,6 +42,9 @@ export class CoreHUD extends Application{
     this._itemButtons = [];
     this._tooltip = null;
     this._target = null;
+    this.components = {
+      main: [],
+    };
     this.refresh = debounce(this.refresh, 200);
 
     Hooks.callAll(`argonInit`, CoreHUD);
@@ -96,10 +99,10 @@ export class CoreHUD extends Application{
   }
 
   _onCombatStart(combat) {
-    this.components.movement?._onNewRound(combat);
-    this.components.main.forEach(component => component._onNewRound(combat));
     const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
     if (openCombatStart) this.bind(canvas.tokens.controlled[0] ?? _token);
+    this.components.movement?._onNewRound(combat);
+    this.components.main.forEach(component => component._onNewRound(combat));
   }
 
   _onUpdateCombat(combat, updates) {
@@ -112,6 +115,8 @@ export class CoreHUD extends Application{
 
   _onDeleteCombat(combat) {
     this.components.movement?._onCombatEnd(combat);
+    const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
+    if (openCombatStart) this.bind(null);
   }
 
   _onUpdateItem(item) {
