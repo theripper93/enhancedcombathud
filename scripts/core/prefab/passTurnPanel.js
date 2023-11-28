@@ -21,7 +21,7 @@ export class PassTurnPanel extends ActionPanel {
 class PassTurnButton extends ActionButton{
 
   get visible() {
-    return game.combat?.started && game.combat?.combatant?.actor === this.actor;
+    return !!game.combat?.started && game.combat?.combatant?.actor === this.actor;
   }
 
   get colorScheme() {
