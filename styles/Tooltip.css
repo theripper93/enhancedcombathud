@@ -93,6 +93,7 @@
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-details {
     display: grid;
+    gap: 1rem;
 }
 .ech-tooltip .ech-tooltip-body .ech-tooltip-details > div {
     align-items: flex-start;
