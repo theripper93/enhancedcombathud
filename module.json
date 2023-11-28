@@ -92,6 +92,13 @@
         "compatibility": {}
       }
     ],
+    "recommends": [
+      {
+        "id": "enhancedcombathud-dnd5e",
+        "type": "module",
+        "compatibility": {}
+      }
+    ],
     "systems": []
   },
   "compatibility": {
