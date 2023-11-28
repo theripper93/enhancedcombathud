@@ -329,6 +329,18 @@ export class echThemeOptions extends FormApplication {
 }
 
 export function initConfig() {
+
+
+    Handlebars.registerHelper("echLocalize", (data, data2, data3) => {
+        let str = `.${data}`;
+        if (typeof data2 == "string")
+          str += `${data2.charAt(0).toUpperCase() + data2.slice(1)}`;
+        if (typeof data3 == "string")
+          str += `${data3.charAt(0).toUpperCase() + data3.slice(1)}`;
+      
+        return game.i18n.localize(`enhancedcombathud.themeOptions${str}`);
+      });
+
     Hooks.on("pickerDone", (element, color) => {
         // Handle Theme
         let $element = $(element);
