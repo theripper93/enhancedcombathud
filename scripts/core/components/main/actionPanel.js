@@ -24,11 +24,11 @@ export class ActionPanel extends ArgonComponent{
   }
 
   get maxActions() {
-    return 3;
+    return null;
   }
   
   get currentActions() {
-    return 2;
+    return null;
   }
 
   set isActionUsed(value) {
