@@ -43,8 +43,10 @@ export class ActionPanel extends ArgonComponent{
   }
 
   updateActionUse() {
-    if(this.maxActions === null || this.currentActions === null) return;
     const actionsContainer = this.element.querySelector(".actions-uses-container");
+    if (this.maxActions === null || this.currentActions === null) {
+      actionsContainer.innerHTML = "";
+    }
     if (!actionsContainer) return;
 
     const childrenArray = Array.from(actionsContainer.children);
