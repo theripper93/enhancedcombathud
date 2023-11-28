@@ -23,13 +23,12 @@ export class ActionPanel extends ArgonComponent{
     return this._buttons;
   }
 
-  get hasAction() {
-    return false;
+  get maxActions() {
+    return 3;
   }
-
-  get isActionUsed() {
-    if(!game.combat?.started) return false;
-    return this._isActionUsed;
+  
+  get currentActions() {
+    return 2;
   }
 
   set isActionUsed(value) {
@@ -51,8 +50,26 @@ export class ActionPanel extends ArgonComponent{
   }
 
   updateActionUse() {
-    this.element.classList.toggle("has-actions", this.hasAction);
-    this.element.classList.toggle("actions-used", this.isActionUsed);
+    const actionsContainer = this.element.querySelector(".actions-uses-container");
+    if (!actionsContainer) return;
+
+    const childrenArray = Array.from(actionsContainer.children);
+
+    if (childrenArray.length !== this.maxActions) {
+      actionsContainer.innerHTML = "";
+      for (let i = 0; i < this.maxActions; i++) {
+        const action = document.createElement("div");
+        action.classList.add("action-pip");
+        actionsContainer.appendChild(action);
+      }
+    }
+
+    let availableActions = this.currentActions;
+    for (const child of childrenArray) {
+      child.classList.toggle("actions-used", availableActions <= 0);
+      availableActions--;
+    }
+
   }
 
   updateItem(item) {
@@ -70,6 +87,12 @@ export class ActionPanel extends ArgonComponent{
   async _getButtons() {
     console.warn("ActionPanel._getButtons() is not implemented");
     return [];
+  }
+
+  async getData() {
+    return {
+      maxActions: Array.apply(null, Array(this.maxActions)),
+    }
   }
 
   async _renderInner() {

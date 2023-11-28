@@ -131,6 +131,9 @@ export class CoreHUD extends Application{
   _onUpdateActor(actor) {
     if (actor !== this._actor) return;
     this.components.portrait.render();
+    for (const itemButton of this.itemButtons) {
+      if (Number.isNumeric(itemButton.quantity)) itemButton.render();
+    }
   }
 
   _onCreateItem(item) {
@@ -156,8 +159,7 @@ export class CoreHUD extends Application{
 
   _onControlToken(token, controlled) {
     if (!controlled) return;
-    const alwaysOn = game.settings.get("enhancedcombathud", "alwaysOn");
-    if (alwaysOn || this._target) {
+    if (this._target || game.settings.get("enhancedcombathud", "alwaysOn")) {
       this.bind(token)
     }
   }
@@ -248,7 +250,7 @@ export class CoreHUD extends Application{
   toggle(toggle) {
     toggle = toggle ?? !this._target;
     if (toggle) {
-      this.bind(canvas.tokens.controlled[0] ?? _token);
+      this.bind(canvas.tokens.controlled[0] ?? game.user.character);
     } else {
       this.bind(null);
     }

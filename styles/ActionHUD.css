@@ -37,17 +37,24 @@
   text-transform: uppercase;
   width: calc(100% - 1rem);
 }
-.actions-container.has-actions:after {
+.actions-container .action-pip{
   border-radius: 3px;
-  bottom: -5px;
-  content: "";
   height: 10px;
+  width: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.actions-container .actions-uses-container{
+  bottom: -5px;
   left: 50%;
   position: absolute;
   transform: translateX(-50%);
-  transition: all 0.3s ease-in-out;
-  width: 50px;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+  pointer-events: none;
 }
+
 .action-element {
   display: flex;
   min-height: 200px;

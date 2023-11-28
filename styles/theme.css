@@ -11,12 +11,12 @@
   border: 1px solid var(--ech-mainAction-base-border);
   color: rgb(200 200 200);
 }
-.actions-container.has-actions:after {
+.actions-container.has-actions:after, .actions-container .action-pip {
 	/* ADD THEME OPTIONS */
   background-color: rgb(180, 210, 225);
   box-shadow: 0px 0px 10px 0px rgba(200, 230, 245, 0.8);
 }
-.actions-container.has-actions.actions-used:after {
+.actions-container.has-actions.actions-used:after, .actions-container .action-pip.actions-used {
 	/* ADD THEME OPTIONS */
   background-color: rgb(120, 130, 145);
   box-shadow: none;
