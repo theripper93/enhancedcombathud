@@ -40,12 +40,14 @@ export class CoreHUD extends Application{
     super();
     this.performModuleCheck();
     this._itemButtons = [];
+    this._batchItemsUpdates = new Set();
     this._tooltip = null;
     this._target = null;
     this.components = {
       main: [],
     };
     this.refresh = debounce(this.refresh, 200);
+    this._batchUpdateItemButtons = debounce(this._batchUpdateItemButtons, 200);
 
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
@@ -127,10 +129,16 @@ export class CoreHUD extends Application{
   }
 
   updateItemButtons(items) {
-    if(!Array.isArray(items)) items = [items];
+    if (!Array.isArray(items)) items = [items];
+    this._batchItemsUpdates.add(...items);
+    this._batchUpdateItemButtons();
+  }
+
+  _batchUpdateItemButtons() {
     for (const itemButton of this.itemButtons) {
-      if (items.includes(itemButton.item)) itemButton.render();
+      if (this._batchItemsUpdates.has(itemButton.item)) itemButton.render();
     }
+    this._batchItemsUpdates.clear();
   }
 
   _onUpdateActor(actor) {
@@ -230,6 +238,7 @@ export class CoreHUD extends Application{
     if (!target) {
       this._target = null;
       this._itemsCount = null;
+      this._batchItemsUpdates.clear();
       this.toggleUiElements(false);
       this.updateSceneControlButton();
       return this.close();
@@ -253,6 +262,7 @@ export class CoreHUD extends Application{
       return this.close();
     }
     this._target = target;
+    this._batchItemsUpdates.clear();
     this.toggleUiElements(true);
     this.updateSceneControlButton();
     this.render(true);
