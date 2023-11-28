@@ -417,6 +417,16 @@ export function initConfig() {
         onChange: () => ui.ARGON.refresh(),
     });
 
+    game.settings.register("enhancedcombathud", "autoScale", {
+        name: game.i18n.localize("enhancedcombathud.settings.autoScale.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.autoScale.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
     game.settings.register("enhancedcombathud", "scale", {
         name: game.i18n.localize("enhancedcombathud.settings.scale.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.scale.hint"),
