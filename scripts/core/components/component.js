@@ -99,7 +99,6 @@ export class ArgonComponent {
     }
 
     async _onTooltipMouseEnter(event) {
-        console.log("Tooltip mouse enter");
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
         this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation);
