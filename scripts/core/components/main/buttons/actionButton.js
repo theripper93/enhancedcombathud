@@ -62,7 +62,7 @@ export class ActionButton extends ArgonComponent{
 
   async _renderInner() {
     await super._renderInner();
-    this.element.style.backgroundImage = `url(${this.icon})`;
+    this.element.style.backgroundImage = `url("${this.icon}")`;
     if(Number.isNumeric(this.quantity)) {
       this.element.classList.add("has-count");
       this.element.dataset.itemCount = this.quantity;

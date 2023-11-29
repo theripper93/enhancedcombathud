@@ -140,7 +140,7 @@ export class ItemButton extends ArgonComponent{
       return;
     }
     this.element.style.display = "";
-    this.element.style.backgroundImage = `url(${this.icon})`;
+    this.element.style.backgroundImage = `url("${this.icon}")`;
     const quantity = this.quantity;
     if(Number.isNumeric(quantity)) {
       this.element.classList.add("has-count");
