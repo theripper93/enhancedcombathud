@@ -40,12 +40,12 @@ export class ArgonComponent {
 
     get visible() {
         return true;
-  }
-  
-  get hasTooltip() {
-    return false;
     }
-    
+
+    get hasTooltip() {
+        return false;
+    }
+
     get tooltipOrientation() {
         return null;
     }
@@ -91,14 +91,15 @@ export class ArgonComponent {
         return {};
     }
 
-  async activateTooltipListeners() {
-      if(!game.settings.get("enhancedcombathud", "showTooltips")) return;
+    async activateTooltipListeners() {
+        if (!game.settings.get("enhancedcombathud", "showTooltips")) return;
         const html = this.element;
-        html.addEventListener("mouseenter", this._onTooltipMouseEnter.bind(this));
-        html.addEventListener("mouseleave", this._onTooltipMouseLeave.bind(this));
+        html.onmouseenter = this._onTooltipMouseEnter.bind(this);
+        html.onmouseleave = this._onTooltipMouseLeave.bind(this);
     }
 
     async _onTooltipMouseEnter(event) {
+        console.log("Tooltip mouse enter");
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
         this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation);
@@ -113,8 +114,8 @@ export class ArgonComponent {
 
     async render() {
         await this._renderInner();
-      await this.activateListeners(this.element);
-      if(this.hasTooltip) await this.activateTooltipListeners();
+        await this.activateListeners(this.element);
+        if (this.hasTooltip) await this.activateTooltipListeners();
         return this.element;
     }
 

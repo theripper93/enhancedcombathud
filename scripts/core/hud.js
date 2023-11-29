@@ -43,6 +43,7 @@ export class CoreHUD extends Application{
     this._batchItemsUpdates = new Set();
     this._tooltip = null;
     this._target = null;
+    this._enabled = false;
     this.components = {
       main: [],
     };
@@ -174,11 +175,11 @@ export class CoreHUD extends Application{
   _onControlToken(token, controlled) {
     if (!controlled && !canvas.tokens.controlled.length) {
       setTimeout(() => {
-        if(!canvas.tokens.controlled.length) this.close();
+        if(!canvas.tokens.controlled.length) this.bind(null);
       }, 100);
     }
     if (!controlled) return;
-    if (this._target || game.settings.get("enhancedcombathud", "alwaysOn")) {
+    if (this.enabled || game.settings.get("enhancedcombathud", "alwaysOn")) {
       this.bind(token)
     }
   }
@@ -233,10 +234,22 @@ export class CoreHUD extends Application{
     this.toggleMinimize(document.body.classList.contains("minimize-ech-hud"));
   }
 
+  get enabled() {
+    return this._enabled;
+  }
+
+  set enabled(value) {
+    const target = typeof value === 'boolean' ? canvas.tokens.controlled[0] ?? game.user.character : value;
+    this._enabled = !!value;
+    this.bind(value ? target ?? null : null)
+  }
+
   async bind(target) {
     //await this.close();
     if (!target) {
       this._target = null;
+      this._token = null;
+      this._actor = null;
       this._itemsCount = null;
       this._batchItemsUpdates.clear();
       this.toggleUiElements(false);
@@ -259,9 +272,13 @@ export class CoreHUD extends Application{
     const actorType = this._actor.type;
     if (supportedActorTypes.length && !supportedActorTypes.includes(actorType)) {
       ui.notifications.error(localize("enhancedcombathud.err.unsupportedActorType").replace("%t", actorType));
+      this._target = null;
+      this._token = null;
+      this._actor = null;
       return this.close();
     }
     this._target = target;
+    this._enabled = true;
     this._batchItemsUpdates.clear();
     this.toggleUiElements(true);
     this.updateSceneControlButton();
@@ -269,12 +286,8 @@ export class CoreHUD extends Application{
   }
 
   toggle(toggle) {
-    toggle = toggle ?? !this._target;
-    if (toggle) {
-      this.bind(canvas.tokens.controlled[0] ?? game.user.character);
-    } else {
-      this.bind(null);
-    }
+    toggle = toggle ?? !this.enabled;
+    this.enabled = toggle;
   }
 
   updateSceneControlButton() {
@@ -413,8 +426,7 @@ export class CoreHUD extends Application{
           name: "echtoggle",
           title: game.i18n.localize("enhancedcombathud.controls.toggle.title"),
           onClick: function (toggle) {
-            const target = canvas.tokens.controlled[0] ?? game.user.character;
-            ui.ARGON.bind(toggle ? target : null)
+            ui.ARGON.toggle(toggle);
           },
           toggle: true,
         });
@@ -424,11 +436,11 @@ export class CoreHUD extends Application{
       const button = document.createElement("div");
       button.classList.add("control-icon");
       button.innerHTML = '<i class="fa-duotone fa-swords"></i>';
-      button.classList.toggle("active", !!ui.ARGON._target);
+      button.classList.toggle("active", ui.ARGON.enabled);
       html.querySelector(".col.left").prepend(button);
       button.onclick = (event) => {
         const target = app.object ?? canvas.tokens.controlled[0];
-        ui.ARGON.bind(!ui.ARGON._target ? target : null)
+        ui.ARGON.toggle(!ui.ARGON.enabled ? target : null)
         button.classList.toggle("active");
       };
     });

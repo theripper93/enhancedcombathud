@@ -255,19 +255,12 @@ export class echThemeOptions extends FormApplication {
 
         echThemeOptions.defaultOptions.buildDropdown(game.settings.get("enhancedcombathud", "echThemeData").theme);
 
-        /*FilePicker.browse('user', `./modules/enhancedcombathud/scripts/themes`, { extensions: ['.json'] }).then(response => {
-      let files = response.files;
-      if (files.length > 0) {
-        return files;
-      }
-      throw TypeError(`No theme files found in enhancedcombathud/scripts/themes`);
-    }).then(files => {
-      files.forEach(file => {
-        let filename = file.split('/')[file.split('/').length - 1].replace(/\.json/gi, '')
-        $(html).find('select[name="theme"]').append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
-      })
-      $(html).find('select[name="theme"]').val(game.settings.get("enhancedcombathud", "echThemeData").theme);
-    }).catch(error => console.log(error));*/
+        $(html).on("click", "li h4.toggleOptions", (event) => {
+          let isOpened = $(event.currentTarget).closest("li").hasClass("show");
+        
+          $(event.currentTarget).closest("ul").find("li.show").removeClass("show");
+          $(event.currentTarget).closest("li").toggleClass("show", !isOpened);
+        });
 
         // Handle Theme Selection
         $(html)

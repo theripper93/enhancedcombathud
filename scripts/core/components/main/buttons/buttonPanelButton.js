@@ -37,7 +37,7 @@ export class ButtonPanelButton extends ArgonComponent{
 
   async activateListeners(html) {
     await super.activateListeners(html);
-    this.element.addEventListener("click", this._onClick.bind(this));
+    this.element.onclick = this._onClick.bind(this);
   }
 
   async _onClick(event) {
