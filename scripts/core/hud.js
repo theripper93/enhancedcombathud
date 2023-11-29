@@ -213,8 +213,8 @@ export class CoreHUD extends Application{
   }
 
   async _renderInner(data) {
-    const _prevState = this._hudState.get(this._target);
-    if(!_prevState) this._hudState.set(this._target, {});
+    const _prevState = this._hudState.get(this._actor);
+    if(!_prevState) this._hudState.set(this._actor, {});
     const element = await super._renderInner(data);
     const html = element[0];
     this.components = {
