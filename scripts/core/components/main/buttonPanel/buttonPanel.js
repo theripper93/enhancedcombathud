@@ -1,10 +1,12 @@
 import { ArgonComponent } from "../../component.js";
 
 export class ButtonPanel extends ArgonComponent{
-  constructor ({buttons}) {
+  constructor ({buttons, id}) {
     super();
     this.element.dataset.iscontainer = true;
+    this._id = id ?? null;
     this._buttons = buttons;
+    this.saveState = debounce(this.saveState, 100);
   }
 
   get classes() {
@@ -15,12 +17,34 @@ export class ButtonPanel extends ArgonComponent{
     return this.element.classList.contains("show");
   }
 
+  get id() {
+    return this._id;
+  }
+
   setVisibility(){}
 
-  toggle(toggle) {
+  toggle(toggle, noTransition = false) {
     if (toggle === undefined) toggle = !this.visible;
-    if(toggle) ui.ARGON.collapseAllPanels();
+    if (toggle) ui.ARGON.collapseAllPanels();
+    if(noTransition) this.element.style.transition = "none";
     this.element.classList.toggle("show", toggle);
+    if (noTransition) setTimeout(() => this.element.style.transition = null, 1);
+    this.saveState();
+  }
+
+  saveState() {
+    if (!this.id) return;
+    const state = {
+      visible: this.visible,
+    }
+    ui.ARGON.setPanelState(state, this)
+  }
+  
+  restoreState() {
+    if (!this.id) return;
+    const state = ui.ARGON.getPanelState(this);
+    if (!state) return;
+    this.toggle(state.visible, true);
   }
 
   updateItem(item) {
@@ -38,5 +62,6 @@ export class ButtonPanel extends ArgonComponent{
     });
     const promises = this._buttons.map(button => button.render());
     await Promise.all(promises);
+    this.restoreState();
   }
 }

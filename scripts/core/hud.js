@@ -41,6 +41,7 @@ export class CoreHUD extends Application{
     this.performModuleCheck();
     this._itemButtons = [];
     this._batchItemsUpdates = new Set();
+    this._hudState = new Map();
     this._tooltip = null;
     this._target = null;
     this._enabled = false;
@@ -190,7 +191,30 @@ export class CoreHUD extends Application{
     }
   }
 
+  getState() {
+    return this._hudState.get(this._target);
+  }
+
+  setState(state) {
+    this._hudState.set(this._target, state);
+  }
+
+  getPanelState(panel) {
+    const state = this.getState();
+    if (!state) return;
+    return state[panel.id];
+  }
+
+  setPanelState(state, panel) {
+    const currState = this.getState();
+    if (!currState) return;
+    currState[panel.id] = state;
+    this.setState(currState);
+  }
+
   async _renderInner(data) {
+    const _prevState = this._hudState.get(this._target);
+    if(!_prevState) this._hudState.set(this._target, {});
     const element = await super._renderInner(data);
     const html = element[0];
     this.components = {

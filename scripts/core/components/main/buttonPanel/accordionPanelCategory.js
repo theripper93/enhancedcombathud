@@ -76,10 +76,19 @@ export class AccordionPanelCategory extends ArgonComponent{
     });
   }
 
-  toggle(toggle) {
+  toggle(toggle, noTransition = false) {
     if (toggle === undefined) toggle = !this.visible;
+    if (noTransition) {
+      this.element.style.transition = "none";
+      this.buttonContainer.style.transition = "none";
+    }
     this.element.classList.toggle("show", toggle);
     this.element.style.width = toggle ? `${this._realWidth}px` : "0px";
+    if (noTransition) setTimeout(() => {
+      this.element.style.transition = null;
+      this.buttonContainer.style.transition = null;
+    }, 1);
+    this.parent.saveState();
   }
 
   async _renderInner() {
