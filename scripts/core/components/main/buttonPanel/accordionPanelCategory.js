@@ -8,7 +8,7 @@ export class AccordionPanelCategory extends ArgonComponent{
     if(typeof uses === 'object' && !uses.max) uses.max = uses.value;
     this._uses = uses;
     this._buttons = buttons;
-    ui.ARGON.accordionPanelCategories.add(this);
+    ui.ARGON._accordionPanelCategories.add(this);
     this.setUses = debounce(this.setUses, 100);
   }
 

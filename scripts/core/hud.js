@@ -39,7 +39,7 @@ export class CoreHUD extends Application{
   constructor () {
     super();
     this.performModuleCheck();
-    this._itemButtons = [];
+    this._itemButtons = new Set();
     this._accordionPanelCategories = new Set();
     this._batchItemsUpdates = new Set();
     this._hudState = new Map();
@@ -96,7 +96,7 @@ export class CoreHUD extends Application{
   }
 
   get itemButtons() {
-    return this._itemButtons;
+    return Array.from(this._itemButtons);
   }
 
   get accordionPanelCategories() {
@@ -286,7 +286,8 @@ export class CoreHUD extends Application{
       this.updateSceneControlButton();
       return this.close();
     }
-    this._itemButtons = [];
+    this._itemButtons.clear();
+    this._accordionPanelCategories.clear();
     if (target instanceof Token || target instanceof TokenDocument) {
       this._actor = target.actor;
       this._token = target instanceof Token ? target : target.object;
