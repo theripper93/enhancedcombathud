@@ -326,7 +326,7 @@ export class CoreHUD extends Application{
   
     const echHUDWidth = html.offsetWidth;
     const windowWidth = window.innerWidth - 340;
-    const scale = game.settings.get("enhancedcombathud", "autoScale")
+    const scale = !game.settings.get("enhancedcombathud", "autoScale")
       ? game.settings.get("enhancedcombathud", "scale")
       : window.innerHeight / 2000//(1 / (echHUDWidth / windowWidth)) * game.settings.get("enhancedcombathud", "scale");
   
