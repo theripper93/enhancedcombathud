@@ -5,9 +5,11 @@ export class AccordionPanelCategory extends ArgonComponent{
     super();
     this.element.dataset.iscontainer = true;
     this._label = label;
-    if(!uses.max) uses.max = uses.value;
+    if(typeof uses === 'object' && !uses.max) uses.max = uses.value;
     this._uses = uses;
     this._buttons = buttons;
+    ui.ARGON.accordionPanelCategories.add(this);
+    this.setUses = debounce(this.setUses, 100);
   }
 
   get classes() {
@@ -27,7 +29,7 @@ export class AccordionPanelCategory extends ArgonComponent{
   }
 
   get uses() {
-    return this._uses;
+    return typeof this._uses === 'object' ? this._uses : this._uses();
   }
 
   get buttons() {
@@ -54,8 +56,13 @@ export class AccordionPanelCategory extends ArgonComponent{
   }
 
   setUses() {
+    this._setUses();
+  }
+
+  _setUses() {
     if(!Number.isNumeric(this.uses.value)) return;
     const usesElement = this.buttonContainer.querySelector(".feature-spell-slots");
+    usesElement.innerHTML = "";
     if (this.uses.value === Infinity) {
       usesElement.innerHTML = `<span class="spell-slot spell-cantrip"><i class="fas fa-infinity"></i></span>`;
       return;
@@ -100,7 +107,7 @@ export class AccordionPanelCategory extends ArgonComponent{
     });
     const promises = this._buttons.map(button => button.render());
     await Promise.all(promises);
-    this.setUses();
+    this._setUses();
     let closestMultiplier = 0;
     [2, 3, 5, 7].forEach(multiplier => {
       if (this._buttons.length % multiplier === 0) closestMultiplier = multiplier;

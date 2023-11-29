@@ -40,6 +40,7 @@ export class CoreHUD extends Application{
     super();
     this.performModuleCheck();
     this._itemButtons = [];
+    this._accordionPanelCategories = new Set();
     this._batchItemsUpdates = new Set();
     this._hudState = new Map();
     this._tooltip = null;
@@ -98,6 +99,10 @@ export class CoreHUD extends Application{
     return this._itemButtons;
   }
 
+  get accordionPanelCategories() {
+    return Array.from(this._accordionPanelCategories);
+  }
+
   async _updateActionContainers() {
     this.components.main.forEach(component => component.updateVisibility());
   }
@@ -125,6 +130,7 @@ export class CoreHUD extends Application{
 
   _onUpdateItem(item) {
     if (item.parent !== this._actor) return;
+    this.accordionPanelCategories.forEach(category => category.setUses(item));
     for (const itemButton of this.itemButtons) {
       if (itemButton.item === item) itemButton.render();
     }
