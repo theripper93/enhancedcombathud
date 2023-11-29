@@ -112,6 +112,7 @@ export class AccordionPanelCategory extends ArgonComponent{
     }
     this.element.style.transition = "none";
     this.element.style.width = `unset`;
+    await new Promise(resolve => setTimeout(resolve, 1));
     const width = this.element.offsetWidth;
     this._realWidth = width;
     this.element.style.width = `0px`;

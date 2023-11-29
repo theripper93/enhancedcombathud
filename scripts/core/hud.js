@@ -192,11 +192,11 @@ export class CoreHUD extends Application{
   }
 
   getState() {
-    return this._hudState.get(this._target);
+    return this._hudState.get(this._actor);
   }
 
   setState(state) {
-    this._hudState.set(this._target, state);
+    this._hudState.set(this._actor, state);
   }
 
   getPanelState(panel) {
