@@ -115,9 +115,9 @@ export class CoreHUD extends Application{
   }
 
   _onUpdateCombat(combat, updates) {
-    this.components.combat.forEach(component => component.updateVisibility());
+    this.components.combat?.forEach(component => component.updateVisibility());
     if ("round" in updates) {
-      this.components.main.forEach(component => component._onNewRound(combat));
+      this.components.main?.forEach(component => component._onNewRound(combat));
       this.components.movement?._onNewRound(combat);
     }
   }
@@ -125,7 +125,7 @@ export class CoreHUD extends Application{
   _onDeleteCombat(combat) {
     this.components.movement?._onCombatEnd(combat);
     const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
-    if (openCombatStart) this.bind(null);
+    if (openCombatStart) this.enabled = false;
   }
 
   _onUpdateItem(item) {
