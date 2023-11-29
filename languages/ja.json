@@ -1,136 +1,196 @@
 {
-    "enhancedcombathud.controls.toggle.title": "Argon Combat HUD切り替え",
-    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: コマが選択されていません。コマを選択してから再び実行してください。",
-
-    "enhancedcombathud.settings.color.label" : "色設定",
-    "enhancedcombathud.settings.fore-color.text" : "テキスト色",
-    "enhancedcombathud.settings.fore-color.hint" : "テキスト色",
-    "enhancedcombathud.settings.color.text" : "メイン色",
-    "enhancedcombathud.settings.color.hint" : "HUDの他のアクションタブの色",
-    "enhancedcombathud.settings.color-bonus-action.text" : "ボーナス・アクション色",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "ボーナス・アクションタブの色",
-    "enhancedcombathud.settings.color-free-action.text" : "フリー・アクション色",
-    "enhancedcombathud.settings.color-free-action.hint" : "フリー・アクションタブの色",
-    "enhancedcombathud.settings.color-reaction.text" : "リアクション色",
-    "enhancedcombathud.settings.color-reaction.hint" : "リアクションタブの色",
-    "enhancedcombathud.settings.color-end-turn.text" : "ターン終了色",
-    "enhancedcombathud.settings.color-end-turn.hint" : "ターン終了タブの色",
-    "enhancedcombathud.settings.color-tooltip.text" : "ツールチップ色",
-    "enhancedcombathud.settings.color-tooltip.hint" : "セーヴ・技能・道具のツールチップの色",
-
-    "enhancedcombathud.settings.theme.name" : "テーマ",
-    "enhancedcombathud.settings.theme.hint" : "HUDのテーマ選択",
-    "enhancedcombathud.settings.theme.custom" : "カスタム",
-    "enhancedcombathud.settings.theme.helium" : "Helium",
-    "enhancedcombathud.settings.theme.neon" : "Neon",
-    "enhancedcombathud.settings.theme.argon" : "Argon",
-    "enhancedcombathud.settings.theme.krypton" : "Krypton",
-    "enhancedcombathud.settings.theme.xenon" : "Xenon",
-    "enhancedcombathud.settings.theme.radon" : "Radon",
-    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
-
-    "enhancedcombathud.settings.scale.name" : "スケール",
-    "enhancedcombathud.settings.scale.hint" : "HUDの縮尺を設定します。自動スケールが使用されている場合は、それにかけ合わさる状態で使用されます。",
-    "enhancedcombathud.settings.noAutoscale.name" : "自動スケールしない",
-    "enhancedcombathud.settings.noAutoscale.hint" : "自動的にスケールせず、スケール設定の数字を実際のスケールとして使用します。",
-    "enhancedcombathud.settings.leftPos.name" : "左位置",
-    "enhancedcombathud.settings.leftPos.hint" : "左から何ピクセルぶんずれて表示されるのかを設定します。",
-    "enhancedcombathud.settings.botPos.name" : "下位置",
-    "enhancedcombathud.settings.botPos.hint" : "下から何ピクセルぶんずれて表示されるのかを設定します。",
-    "enhancedcombathud.settings.playerDetailsBottom.name" : "プレイヤー詳細の位置を下に置く",
-    "enhancedcombathud.settings.playerDetailsBottom.hint" : "プレイヤーキャラの情報をキャラ画像の下に置きます。",
-    "enhancedcombathud.settings.preparedSpells.name" : "準備呪文のみ",
-    "enhancedcombathud.settings.preparedSpells.hint" : "準備された呪文のみを表示します。",
-    "enhancedcombathud.settings.showTooltips.name" : "ツールチップを表示",
-    "enhancedcombathud.settings.showTooltips.hint" : "マウスホバー時にツールチップを表示",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "特殊なアクションのツールチップを表示",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "離脱、回避、早足などのアクションにマウスホバーするとツールチップを表示します。",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "能力値のツールチップを表示",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "マウスホバー時に能力値のツールチップを表示",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "技能のツールチップ表示",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "マウスホバー時に技能のツールチップを表示",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "道具のツールチップ表示",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "マウスホバー時に道具のツールチップを表示",
-    "enhancedcombathud.settings.fadeOutInactive.name" : "フェードアウト",
-    "enhancedcombathud.settings.fadeOutInactive.hint" : "５秒使用されなかったらHUDをフェードアウトさせ透明化させます。",
-    "enhancedcombathud.settings.fadeoutDelay.name" : "フェードアウトの待機時間",
-    "enhancedcombathud.settings.fadeoutDelay.hint" : "フェードアウトするまでの時間（秒）",
-    "enhancedcombathud.settings.fadeoutOpacity.name" : "フェードアウト時の不透明度",
-    "enhancedcombathud.settings.fadeoutOpacity.hint" : "フェードアウト時の不透明度",
-    "enhancedcombathud.settings.hideMacroPlayers.name" : "マクロバーとプレイヤーリストを隠す",
-    "enhancedcombathud.settings.hideMacroPlayers.hint" : "HUDが開いているとき、プレイヤーリストとマクロバーを隠します。",
-    "enhancedcombathud.settings.openCombatStart.name" : "戦闘開始時に開く",
-    "enhancedcombathud.settings.openCombatStart.hint" : "戦闘が開始したら自動的に開きます",
-    "enhancedcombathud.settings.tooltipScale.name" : "ツールチップスケール",
-    "enhancedcombathud.settings.tooltipScale.hint" : "ツールチップの縮尺",
-    "enhancedcombathud.settings.switchEquip.name" : "自動装備",
-    "enhancedcombathud.settings.switchEquip.hint" : "セット切り替えるときにキャラクターシートでも自動的に装備します。",
-    "enhancedcombathud.settings.showWeaponsItems.name" : "武器を「アイテム使用」に表示する",
-    "enhancedcombathud.settings.showWeaponsItems.hint" : "武器を「アイテム使用」に表示します。武器スロットが足りないときに便利です。",
-    "enhancedcombathud.settings.noAA.name" : "アクティブ効果を適用しない",
-    "enhancedcombathud.settings.noAA.hint" : "特殊なアクション（隠密、押出等）を使用したときに状態異常を付与しない。（再起動必要）",
-
-    "enhancedcombathud.tooltip.target.name" : "ターゲット",
-    "enhancedcombathud.tooltip.range.name" : "距離",
-    "enhancedcombathud.tooltip.properties.name" : "特性",
-
-    "enhancedcombathud.settings.thememenu.name": "テーマ",
-    "enhancedcombathud.settings.thememenu.hint": "Argonのテーマを選択肢、設定します。",
-    "enhancedcombathud.settings.thememenu.label": "テーマ詳細設定",
-
-
-    "enhancedcombathud.themeOptions.save": "設定保存",
-    "enhancedcombathud.themeOptions.export": "テーマを出力",
-    "enhancedcombathud.themeOptions.autoTextColorTitle" : "背景から文字色を自動識別",
-    "enhancedcombathud.themeOptions.autoTextColorHint" : "自動的にテキストの色を背景とコントラストして読みやすい色に変更します。",
-    "enhancedcombathud.themeOptions.exportThemeName": "出力テーマ名",
-    "enhancedcombathud.themeOptions.exportTheme.save": "保存",
-    "enhancedcombathud.themeOptions.exportTheme.cancel": "キャンセル",
-
-    "enhancedcombathud.themeOptions.themeTitle": "テーマ選択",
-    "enhancedcombathud.themeOptions.themeHint": "テーマを選択するとそのテーマの彩色設定を引き継ぎます",
-    
-
-
-    "enhancedcombathud.themeOptions.mainAction" : "アクション色",
-    "enhancedcombathud.themeOptions.bonusAction" : "ボーナス・アクション色",
-    "enhancedcombathud.themeOptions.freeAction" : "フリー・アクション色",
-    "enhancedcombathud.themeOptions.reaction" : "リアクション色",
-    "enhancedcombathud.themeOptions.endTurn" : "ターン終了色",
-    "enhancedcombathud.themeOptions.tooltip" : "ツールチップ色",
-    "enhancedcombathud.themeOptions.abilityMenu" : "技能メニュー色",
-    "enhancedcombathud.themeOptions.buttons" : "ボタン色",
-    "enhancedcombathud.themeOptions.movement" : "移動ボックスの色",
-    
-    "enhancedcombathud.themeOptions.background" : "背景色",
-    "enhancedcombathud.themeOptions.color" : "テキスト色",
-    "enhancedcombathud.themeOptions.border" : "枠色",
-    "enhancedcombathud.themeOptions.boxShadow" : "枠の影の色",
-
-    "enhancedcombathud.themeOptions.mainActionBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.mainActionHover" : "マウスホバーしているときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.bonusActionBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.bonusActionHover" : "マウスホバーしているときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.freeActionBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.freeActionHover" : "マウスホバーしているときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.reactionBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.reactionHover" : "マウスホバーしているときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.endTurnBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.endTurnHover" : "マウスホバーしているときの背景/前景/枠の色",
-    
-    "enhancedcombathud.themeOptions.tooltipHeader" : "ツールチップやウィンドウのヘッダーの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.tooltipSubtitle" : "ツールチップやウィンドウのサブタイトルの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.tooltipBody" : "ツールチップやウィンドウ本文の背景/前景/枠の色",
-
-    "enhancedcombathud.themeOptions.abilityMenuBase" : "マウスホバーされていないときの前景/枠の色",
-    "enhancedcombathud.themeOptions.abilityMenuHover" : "マウスホバーされているときの前景/枠の色",
-
-    "enhancedcombathud.themeOptions.buttonsBase" : "マウスホバーしていないときの背景/前景/枠の色",
-    "enhancedcombathud.themeOptions.buttonsHover" : "マウスホバーしているときの背景/前景/枠の色",
-
-    "enhancedcombathud.themeOptions.movementUsed" : "消費した移動を示す箱の背景/枠の色",
-    "enhancedcombathud.themeOptions.movementBaseMovement" : "残りの移動を示す箱の背景/枠の色",
-    "enhancedcombathud.themeOptions.movementDashMovement" : "早足の移動ぶんを示す箱の背景/枠の色",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "超過ぶんの移動を示す箱の背景/枠の色"
-
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Argon Combat HUD切り替え",
+        "warning": "Argon Combat HUD: コマが選択されていません。コマを選択してから再び実行してください。"
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "色設定",
+        "text": "メイン色",
+        "hint": "HUDの他のアクションタブの色"
+      },
+      "fore-color": {
+        "text": "テキスト色",
+        "hint": "テキスト色"
+      },
+      "color-bonus-action": {
+        "text": "ボーナス・アクション色",
+        "hint": "ボーナス・アクションタブの色"
+      },
+      "color-free-action": {
+        "text": "フリー・アクション色",
+        "hint": "フリー・アクションタブの色"
+      },
+      "color-reaction": {
+        "text": "リアクション色",
+        "hint": "リアクションタブの色"
+      },
+      "color-end-turn": {
+        "text": "ターン終了色",
+        "hint": "ターン終了タブの色"
+      },
+      "color-tooltip": {
+        "text": "ツールチップ色",
+        "hint": "セーヴ・技能・道具のツールチップの色"
+      },
+      "theme": {
+        "name": "テーマ",
+        "hint": "HUDのテーマ選択",
+        "custom": "カスタム",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "scale": {
+        "name": "スケール",
+        "hint": "HUDの縮尺を設定します。自動スケールが使用されている場合は、それにかけ合わさる状態で使用されます。"
+      },
+      "noAutoscale": {
+        "name": "自動スケールしない",
+        "hint": "自動的にスケールせず、スケール設定の数字を実際のスケールとして使用します。"
+      },
+      "leftPos": {
+        "name": "左位置",
+        "hint": "左から何ピクセルぶんずれて表示されるのかを設定します。"
+      },
+      "botPos": {
+        "name": "下位置",
+        "hint": "下から何ピクセルぶんずれて表示されるのかを設定します。"
+      },
+      "playerDetailsBottom": {
+        "name": "プレイヤー詳細の位置を下に置く",
+        "hint": "プレイヤーキャラの情報をキャラ画像の下に置きます。"
+      },
+      "preparedSpells": {
+        "name": "準備呪文のみ",
+        "hint": "準備された呪文のみを表示します。"
+      },
+      "showTooltips": {
+        "name": "ツールチップを表示",
+        "hint": "マウスホバー時にツールチップを表示"
+      },
+      "showTooltipsSpecial": {
+        "name": "特殊なアクションのツールチップを表示",
+        "hint": "離脱、回避、早足などのアクションにマウスホバーするとツールチップを表示します。"
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "能力値のツールチップを表示",
+        "hint": "マウスホバー時に能力値のツールチップを表示"
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "技能のツールチップ表示",
+        "hint": "マウスホバー時に技能のツールチップを表示"
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "道具のツールチップ表示",
+        "hint": "マウスホバー時に道具のツールチップを表示"
+      },
+      "fadeOutInactive": {
+        "name": "フェードアウト",
+        "hint": "５秒使用されなかったらHUDをフェードアウトさせ透明化させます。"
+      },
+      "fadeoutDelay": {
+        "name": "フェードアウトの待機時間",
+        "hint": "フェードアウトするまでの時間（秒）"
+      },
+      "fadeoutOpacity": {
+        "name": "フェードアウト時の不透明度",
+        "hint": "フェードアウト時の不透明度"
+      },
+      "hideMacroPlayers": {
+        "name": "マクロバーとプレイヤーリストを隠す",
+        "hint": "HUDが開いているとき、プレイヤーリストとマクロバーを隠します。"
+      },
+      "openCombatStart": {
+        "name": "戦闘開始時に開く",
+        "hint": "戦闘が開始したら自動的に開きます"
+      },
+      "tooltipScale": {
+        "name": "ツールチップスケール",
+        "hint": "ツールチップの縮尺"
+      },
+      "switchEquip": {
+        "name": "自動装備",
+        "hint": "セット切り替えるときにキャラクターシートでも自動的に装備します。"
+      },
+      "showWeaponsItems": {
+        "name": "武器を「アイテム使用」に表示する",
+        "hint": "武器を「アイテム使用」に表示します。武器スロットが足りないときに便利です。"
+      },
+      "noAA": {
+        "name": "アクティブ効果を適用しない",
+        "hint": "特殊なアクション（隠密、押出等）を使用したときに状態異常を付与しない。（再起動必要）"
+      },
+      "thememenu": {
+        "name": "テーマ",
+        "hint": "Argonのテーマを選択肢、設定します。",
+        "label": "テーマ詳細設定"
+      }
+    },
+    "tooltip": {
+      "target": {
+        "name": "ターゲット"
+      },
+      "range": {
+        "name": "距離"
+      },
+      "properties": {
+        "name": "特性"
+      }
+    },
+    "themeOptions": {
+      "save": "設定保存",
+      "export": "テーマを出力",
+      "autoTextColorTitle": "背景から文字色を自動識別",
+      "autoTextColorHint": "自動的にテキストの色を背景とコントラストして読みやすい色に変更します。",
+      "exportThemeName": "出力テーマ名",
+      "exportTheme": {
+        "save": "保存",
+        "cancel": "キャンセル"
+      },
+      "themeTitle": "テーマ選択",
+      "themeHint": "テーマを選択するとそのテーマの彩色設定を引き継ぎます",
+      "mainAction": "アクション色",
+      "bonusAction": "ボーナス・アクション色",
+      "freeAction": "フリー・アクション色",
+      "reaction": "リアクション色",
+      "endTurn": "ターン終了色",
+      "tooltip": "ツールチップ色",
+      "abilityMenu": "技能メニュー色",
+      "buttons": "ボタン色",
+      "movement": "移動ボックスの色",
+      "background": "背景色",
+      "color": "テキスト色",
+      "border": "枠色",
+      "boxShadow": "枠の影の色",
+      "mainActionBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "mainActionHover": "マウスホバーしているときの背景/前景/枠の色",
+      "bonusActionBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "bonusActionHover": "マウスホバーしているときの背景/前景/枠の色",
+      "freeActionBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "freeActionHover": "マウスホバーしているときの背景/前景/枠の色",
+      "reactionBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "reactionHover": "マウスホバーしているときの背景/前景/枠の色",
+      "endTurnBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "endTurnHover": "マウスホバーしているときの背景/前景/枠の色",
+      "tooltipHeader": "ツールチップやウィンドウのヘッダーの背景/前景/枠の色",
+      "tooltipSubtitle": "ツールチップやウィンドウのサブタイトルの背景/前景/枠の色",
+      "tooltipBody": "ツールチップやウィンドウ本文の背景/前景/枠の色",
+      "abilityMenuBase": "マウスホバーされていないときの前景/枠の色",
+      "abilityMenuHover": "マウスホバーされているときの前景/枠の色",
+      "buttonsBase": "マウスホバーしていないときの背景/前景/枠の色",
+      "buttonsHover": "マウスホバーしているときの背景/前景/枠の色",
+      "movementUsed": "消費した移動を示す箱の背景/枠の色",
+      "movementBaseMovement": "残りの移動を示す箱の背景/枠の色",
+      "movementDashMovement": "早足の移動ぶんを示す箱の背景/枠の色",
+      "movementDangerMovement": "超過ぶんの移動を示す箱の背景/枠の色"
+    }
+  }
 }

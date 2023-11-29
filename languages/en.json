@@ -1,155 +1,224 @@
 {
-    "enhancedcombathud.controls.toggle.title": "Toggle Argon Combat HUD",
-    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: No token selected. Please select a token to enable the HUD",
-
-    "enhancedcombathud.settings.color.label" : "Color",
-    "enhancedcombathud.settings.fore-color.text" : "Text Color",
-    "enhancedcombathud.settings.fore-color.hint" : "Text color",
-    "enhancedcombathud.settings.color.text" : "Main Color",
-    "enhancedcombathud.settings.color.hint" : "Color of the actions tab and other main features of the HUD",
-    "enhancedcombathud.settings.color-bonus-action.text" : "Bonus Action Color",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "Color of the bonus action tab",
-    "enhancedcombathud.settings.color-free-action.text" : "Free Action Color",
-    "enhancedcombathud.settings.color-free-action.hint" : "Color of the free action tab",
-    "enhancedcombathud.settings.color-reaction.text" : "Reaction Color",
-    "enhancedcombathud.settings.color-reaction.hint" : "Color of the reaction tab",
-    "enhancedcombathud.settings.color-end-turn.text" : "End Turn Color",
-    "enhancedcombathud.settings.color-end-turn.hint" : "Color of the end turn tab",
-    "enhancedcombathud.settings.color-tooltip.text" : "Tooltip Color",
-    "enhancedcombathud.settings.color-tooltip.hint" : "Color of the tooltips and save/skills/tools popup",
-
-    "enhancedcombathud.settings.theme.name" : "Theme",
-    "enhancedcombathud.settings.theme.hint" : "Theme of the HUD",
-    "enhancedcombathud.settings.theme.custom" : "Custom",
-    "enhancedcombathud.settings.theme.helium" : "Helium",
-    "enhancedcombathud.settings.theme.neon" : "Neon",
-    "enhancedcombathud.settings.theme.argon" : "Argon",
-    "enhancedcombathud.settings.theme.krypton" : "Krypton",
-    "enhancedcombathud.settings.theme.xenon" : "Xenon",
-    "enhancedcombathud.settings.theme.radon" : "Radon",
-    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
-
-    "enhancedcombathud.settings.scale.name" : "Scale",
-    "enhancedcombathud.settings.scale.hint" : "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale",
-    "enhancedcombathud.settings.autoScale.name": "Auto Scale",
-    "enhancedcombathud.settings.autoScale.hint": "Automatically scale the HUD based on the screen size. Ignores the scale setting",
-    "enhancedcombathud.settings.alwaysOn.name": "Always On",
-    "enhancedcombathud.settings.alwaysOn.hint": "Automatically show the hud whenever you select a token",   
-    "enhancedcombathud.settings.leftPos.name" : "Left Position",
-    "enhancedcombathud.settings.leftPos.hint" : "Distance from the left border in pixels",
-    "enhancedcombathud.settings.botPos.name" : "Bottom Position",
-    "enhancedcombathud.settings.botPos.hint" : "Distance from the bottom border in pixels",
-    "enhancedcombathud.settings.playerDetailsBottom.name" : "Player Details on Bottom",
-    "enhancedcombathud.settings.playerDetailsBottom.hint" : "Positions players name and class information at bottom for portrait",
-    "enhancedcombathud.settings.preparedSpells.name" : "Prepared Spells Only",
-    "enhancedcombathud.settings.preparedSpells.hint" : "Show only prepared spells",
-    "enhancedcombathud.settings.showTooltips.name" : "Show Tooltips",
-    "enhancedcombathud.settings.showTooltips.hint" : "Show tooltips on hover",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "Show Tooltips for Special Actions",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "Show tooltips on hover for special actions (dodge,disengage,shove...)",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "Show Tooltips for Abilities",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "Show tooltips on hover for abilities in the ability menu",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "Show Tooltips for Skills",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "Show tooltips on hover for skills in the ability menu",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "Show Tooltips for Tools",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Show tooltips on hover for tools in the ability menu",
-    "enhancedcombathud.settings.fadeOutInactive.name" : "Fade Out",
-    "enhancedcombathud.settings.fadeOutInactive.hint" : "Fade out the HUD after not mouse overing it for 5 seconds",
-    "enhancedcombathud.settings.fadeoutDelay.name" : "Fadeout Delay",
-    "enhancedcombathud.settings.fadeoutDelay.hint" : "Delay before fading out the HUD in seconds",
-    "enhancedcombathud.settings.fadeoutOpacity.name" : "Fadeout Opacity",
-    "enhancedcombathud.settings.fadeoutOpacity.hint" : "Opacity of the HUD when faded out",
-    "enhancedcombathud.settings.hideMacroPlayers.name" : "Hide Macro Bar and Player list",
-    "enhancedcombathud.settings.hideMacroPlayers.hint" : "Hide Macro Bar and Player list while the HUD is opened",
-    "enhancedcombathud.settings.openCombatStart.name" : "Open on Combat Start",
-    "enhancedcombathud.settings.openCombatStart.hint" : "Open the HUD when a combat is started",
-    "enhancedcombathud.settings.tooltipScale.name" : "Tooltip Scale",
-    "enhancedcombathud.settings.tooltipScale.hint" : "Scale of the tooltips",
-    "enhancedcombathud.settings.switchEquip.name" : "Auto Equip",
-    "enhancedcombathud.settings.switchEquip.hint" : "Automatically equip/unequip items when switching sets",
-    "enhancedcombathud.settings.showWeaponsItems.name" : "Show Weapons in 'Use Item' Section",
-    "enhancedcombathud.settings.showWeaponsItems.hint" : "Show weapons in the 'Use Item' section. Usefull if your weapon slots are not enough",
-    "enhancedcombathud.settings.noAA.name" : "Don't Apply Active Effects",
-    "enhancedcombathud.settings.noAA.hint" : "Don't apply active effects when using special actions. (requires refresh)",
-    "enhancedcombathud.settings.noBlur.name": "Disable Blur Effects",
-    "enhancedcombathud.settings.noBlur.hint": "Disable blur effects on the HUD. This is a performance setting and should only be used if you experience performance issues.",
-
-
-    "enhancedcombathud.settings.rangefinder.name": "3D Canvas - Range Finder",
-    "enhancedcombathud.settings.rangefinder.hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. When enabled will show the distance to the target - the distance will be Red if the target is out of range.",
-
-    "enhancedcombathud.settings.rangepicker.name": "Target Picker",
-    "enhancedcombathud.settings.rangepicker.hint": "When using an item or action that requires a target, this will show a target count that follows the mouse cursor until the correct amount of target is selected, use the +/- keys to manually adjust the required targets if needed.",
-    "enhancedcombathud.settings.rangepickerclear.name": "Target Picker - Clear Targets",
-    "enhancedcombathud.settings.rangepickerclear.hint": "When using an item or action that requires a target, clear all targets before entering Target Picker mode.",
-
-    "enhancedcombathud.hud.pass.name": "Pass",
-    "enhancedcombathud.hud.endturn.name": "End Turn",
-
-    "enhancedcombathud.settings.thememenu.name": "Theme Customization",
-    "enhancedcombathud.settings.thememenu.hint": "Configure, choose and cusomize Argon themes",
-    "enhancedcombathud.settings.thememenu.label": "Configure Themes",
-
-
-    "enhancedcombathud.themeOptions.save": "Save Changes",
-    "enhancedcombathud.themeOptions.export": "Export Theme",
-    "enhancedcombathud.themeOptions.autoTextColorTitle" : "Autoset Text Colors Based off Background",
-    "enhancedcombathud.themeOptions.autoTextColorHint" : "This setting adjust the text color based on the background color to a color that should be legiable.",
-    "enhancedcombathud.themeOptions.exportThemeName": "Export Theme Name:",
-    "enhancedcombathud.themeOptions.exportTheme.save": "Save",
-    "enhancedcombathud.themeOptions.exportTheme.cancel": "Cancel",
-
-    "enhancedcombathud.themeOptions.themeTitle": "Choose a Theme",
-    "enhancedcombathud.themeOptions.themeHint": "Selecting a theme will apply a predefined color pallet to Argon.",
-    
-
-
-    "enhancedcombathud.themeOptions.portrait": "Portrait Colors",
-    "enhancedcombathud.themeOptions.mainAction" : "Main Action Colors",
-    "enhancedcombathud.themeOptions.bonusAction" : "Bonus Action Colors",
-    "enhancedcombathud.themeOptions.freeAction" : "Free Action Colors",
-    "enhancedcombathud.themeOptions.reaction" : "Reaction Colors",
-    "enhancedcombathud.themeOptions.endTurn" : "End Turn Colors",
-    "enhancedcombathud.themeOptions.tooltip" : "Tooltip Colors",
-    "enhancedcombathud.themeOptions.abilityMenu" : "Ability Menu Colors",
-    "enhancedcombathud.themeOptions.buttons" : "Button Colors",
-    "enhancedcombathud.themeOptions.movement" : "Movement Box Colors",
-    
-    "enhancedcombathud.themeOptions.background" : "Background Color",
-    "enhancedcombathud.themeOptions.color" : "Text Color",
-    "enhancedcombathud.themeOptions.border" : "Border Color",
-    "enhancedcombathud.themeOptions.boxShadow" : "Box Shadow Color",
-
-    "enhancedcombathud.themeOptions.portraitBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.mainActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.mainActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-    "enhancedcombathud.themeOptions.bonusActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.bonusActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-    "enhancedcombathud.themeOptions.freeActionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.freeActionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-    "enhancedcombathud.themeOptions.reactionBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.reactionHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-    "enhancedcombathud.themeOptions.endTurnBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.endTurnHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-    
-    "enhancedcombathud.themeOptions.tooltipHeader" : "Background/Foreground/Border Colors of the Header of Tooltips/Windows",
-    "enhancedcombathud.themeOptions.tooltipSubtitle" : "Background/Foreground/Border Colors of the Subtitle in Tooltips",
-    "enhancedcombathud.themeOptions.tooltipBody" : "Background/Foreground/Border Colors of the Body of Tooltips/Windows",
-
-    "enhancedcombathud.themeOptions.abilityMenuBase" : "Foreground/Box Shadow Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.abilityMenuHover" : "Foreground/Box Shadow Colors when Mouse is over Element",
-
-    "enhancedcombathud.themeOptions.buttonsBase" : "Background/Foreground/Border Colors when Mouse isn't over Element",
-    "enhancedcombathud.themeOptions.buttonsHover" : "Background/Foreground/Border Colors when Mouse is over Element",
-
-    "enhancedcombathud.themeOptions.movementUsed" : "Background/Box Shadow of box indicating used movement spaces",
-    "enhancedcombathud.themeOptions.movementBaseMovement" : "Background/Box Shadow of box indicating available movement spaces",
-    "enhancedcombathud.themeOptions.movementDashMovement" : "Background/Box Shadow of box indicating dash movement spaces",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "Background/Box Shadow of box indicating exceeded movement spaces",
-
-    "enhancedcombathud.hotkey.toggle.name": "Toggle Argon Combat HUD",
-
-    "enhancedcombathud.err.unsupportedActorType": "Argon: The Actor type '%t' is not supported by Argon Combat HUD.",
-    "enhancedcombathud.err.moduleNotActive": "Argon CORE: System specific module not installed or not active, please install and enable the %m module if available."
-
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Toggle Argon Combat HUD",
+        "warning": "Argon Combat HUD: No token selected. Please select a token to enable the HUD"
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "Color",
+        "text": "Main Color",
+        "hint": "Color of the actions tab and other main features of the HUD"
+      },
+      "fore-color": {
+        "text": "Text Color",
+        "hint": "Text color"
+      },
+      "color-bonus-action": {
+        "text": "Bonus Action Color",
+        "hint": "Color of the bonus action tab"
+      },
+      "color-free-action": {
+        "text": "Free Action Color",
+        "hint": "Color of the free action tab"
+      },
+      "color-reaction": {
+        "text": "Reaction Color",
+        "hint": "Color of the reaction tab"
+      },
+      "color-end-turn": {
+        "text": "End Turn Color",
+        "hint": "Color of the end turn tab"
+      },
+      "color-tooltip": {
+        "text": "Tooltip Color",
+        "hint": "Color of the tooltips and save/skills/tools popup"
+      },
+      "theme": {
+        "name": "Theme",
+        "hint": "Theme of the HUD",
+        "custom": "Custom",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "scale": {
+        "name": "Scale",
+        "hint": "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale"
+      },
+      "autoScale": {
+        "name": "Auto Scale",
+        "hint": "Automatically scale the HUD based on the screen size. Ignores the scale setting"
+      },
+      "alwaysOn": {
+        "name": "Always On",
+        "hint": "Automatically show the hud whenever you select a token"
+      },
+      "leftPos": {
+        "name": "Left Position",
+        "hint": "Distance from the left border in pixels"
+      },
+      "botPos": {
+        "name": "Bottom Position",
+        "hint": "Distance from the bottom border in pixels"
+      },
+      "playerDetailsBottom": {
+        "name": "Player Details on Bottom",
+        "hint": "Positions players name and class information at bottom for portrait"
+      },
+      "preparedSpells": {
+        "name": "Prepared Spells Only",
+        "hint": "Show only prepared spells"
+      },
+      "showTooltips": {
+        "name": "Show Tooltips",
+        "hint": "Show tooltips on hover"
+      },
+      "showTooltipsSpecial": {
+        "name": "Show Tooltips for Special Actions",
+        "hint": "Show tooltips on hover for special actions (dodge,disengage,shove...)"
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "Show Tooltips for Abilities",
+        "hint": "Show tooltips on hover for abilities in the ability menu"
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "Show Tooltips for Skills",
+        "hint": "Show tooltips on hover for skills in the ability menu"
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "Show Tooltips for Tools",
+        "hint": "Show tooltips on hover for tools in the ability menu"
+      },
+      "fadeOutInactive": {
+        "name": "Fade Out",
+        "hint": "Fade out the HUD after not mouse overing it for 5 seconds"
+      },
+      "fadeoutDelay": {
+        "name": "Fadeout Delay",
+        "hint": "Delay before fading out the HUD in seconds"
+      },
+      "fadeoutOpacity": {
+        "name": "Fadeout Opacity",
+        "hint": "Opacity of the HUD when faded out"
+      },
+      "hideMacroPlayers": {
+        "name": "Hide Macro Bar and Player list",
+        "hint": "Hide Macro Bar and Player list while the HUD is opened"
+      },
+      "openCombatStart": {
+        "name": "Open on Combat Start",
+        "hint": "Open the HUD when a combat is started"
+      },
+      "tooltipScale": {
+        "name": "Tooltip Scale",
+        "hint": "Scale of the tooltips"
+      },
+      "switchEquip": {
+        "name": "Auto Equip",
+        "hint": "Automatically equip/unequip items when switching sets"
+      },
+      "showWeaponsItems": {
+        "name": "Show Weapons in 'Use Item' Section",
+        "hint": "Show weapons in the 'Use Item' section. Usefull if your weapon slots are not enough"
+      },
+      "noAA": {
+        "name": "Don't Apply Active Effects",
+        "hint": "Don't apply active effects when using special actions. (requires refresh)"
+      },
+      "noBlur": {
+        "name": "Disable Blur Effects",
+        "hint": "Disable blur effects on the HUD. This is a performance setting and should only be used if you experience performance issues."
+      },
+      "rangefinder": {
+        "name": "3D Canvas - Range Finder",
+        "hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. When enabled will show the distance to the target - the distance will be Red if the target is out of range."
+      },
+      "rangepicker": {
+        "name": "Target Picker",
+        "hint": "When using an item or action that requires a target, this will show a target count that follows the mouse cursor until the correct amount of target is selected, use the +/- keys to manually adjust the required targets if needed."
+      },
+      "rangepickerclear": {
+        "name": "Target Picker - Clear Targets",
+        "hint": "When using an item or action that requires a target, clear all targets before entering Target Picker mode."
+      },
+      "thememenu": {
+        "name": "Theme Customization",
+        "hint": "Configure, choose and cusomize Argon themes",
+        "label": "Configure Themes"
+      }
+    },
+    "hud": {
+      "pass": {
+        "name": "Pass"
+      },
+      "endturn": {
+        "name": "End Turn"
+      }
+    },
+    "themeOptions": {
+      "save": "Save Changes",
+      "export": "Export Theme",
+      "autoTextColorTitle": "Autoset Text Colors Based off Background",
+      "autoTextColorHint": "This setting adjust the text color based on the background color to a color that should be legiable.",
+      "exportThemeName": "Export Theme Name:",
+      "exportTheme": {
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "themeTitle": "Choose a Theme",
+      "themeHint": "Selecting a theme will apply a predefined color pallet to Argon.",
+      "portrait": "Portrait Colors",
+      "mainAction": "Main Action Colors",
+      "bonusAction": "Bonus Action Colors",
+      "freeAction": "Free Action Colors",
+      "reaction": "Reaction Colors",
+      "endTurn": "End Turn Colors",
+      "tooltip": "Tooltip Colors",
+      "abilityMenu": "Ability Menu Colors",
+      "buttons": "Button Colors",
+      "movement": "Movement Box Colors",
+      "background": "Background Color",
+      "color": "Text Color",
+      "border": "Border Color",
+      "boxShadow": "Box Shadow Color",
+      "portraitBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "mainActionBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "mainActionHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "bonusActionBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "bonusActionHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "freeActionBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "freeActionHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "reactionBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "reactionHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "endTurnBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "endTurnHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "tooltipHeader": "Background/Foreground/Border Colors of the Header of Tooltips/Windows",
+      "tooltipSubtitle": "Background/Foreground/Border Colors of the Subtitle in Tooltips",
+      "tooltipBody": "Background/Foreground/Border Colors of the Body of Tooltips/Windows",
+      "abilityMenuBase": "Foreground/Box Shadow Colors when Mouse isn't over Element",
+      "abilityMenuHover": "Foreground/Box Shadow Colors when Mouse is over Element",
+      "buttonsBase": "Background/Foreground/Border Colors when Mouse isn't over Element",
+      "buttonsHover": "Background/Foreground/Border Colors when Mouse is over Element",
+      "movementUsed": "Background/Box Shadow of box indicating used movement spaces",
+      "movementBaseMovement": "Background/Box Shadow of box indicating available movement spaces",
+      "movementDashMovement": "Background/Box Shadow of box indicating dash movement spaces",
+      "movementDangerMovement": "Background/Box Shadow of box indicating exceeded movement spaces"
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Toggle Argon Combat HUD"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon: The Actor type '%t' is not supported by Argon Combat HUD.",
+      "moduleNotActive": "Argon CORE: System specific module not installed or not active, please install and enable the %m module if available."
+    }
+  }
 }

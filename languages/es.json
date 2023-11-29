@@ -1,132 +1,188 @@
 {
-    "enhancedcombathud.controls.toggle.title": "Activar Argon Combat HUD",
-    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: No se ha seleccionado ninguna ficha. Por favor, seleccione una ficha para activar el HUD.",
-
-    "enhancedcombathud.settings.color.label" : "Color",
-    "enhancedcombathud.settings.fore-color.text" : "Color del Texto",
-    "enhancedcombathud.settings.fore-color.hint" : "Color del texto.",
-    "enhancedcombathud.settings.color.text" : "Color Principal",
-    "enhancedcombathud.settings.color.hint" : "Color de la pestaña de acciones y otras características principales del HUD.",
-    "enhancedcombathud.settings.color-bonus-action.text" : "Color de Acción Adicional",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "Color de la pestaña de acciones adicionales.",
-    "enhancedcombathud.settings.color-free-action.text" : "Color de Acción Gratis",
-    "enhancedcombathud.settings.color-free-action.hint" : "Color de la pestaña de acciones gratis.",
-    "enhancedcombathud.settings.color-reaction.text" : "Color de Reacción",
-    "enhancedcombathud.settings.color-reaction.hint" : "Color de la pestaña de reacciones.",
-    "enhancedcombathud.settings.color-end-turn.text" : "Color de Fin de Turno",
-    "enhancedcombathud.settings.color-end-turn.hint" : "Color de la pestaña de finalización de turno.",
-    "enhancedcombathud.settings.color-tooltip.text" : "Color de Cuadros de Información",
-    "enhancedcombathud.settings.color-tooltip.hint" : "Color de los cuadros de Información y de las ventanas emergentes de salvación/habilidad/herramientas.",
-
-    "enhancedcombathud.settings.theme.name" : "Tema",
-    "enhancedcombathud.settings.theme.hint" : "Tema del HUD",
-    "enhancedcombathud.settings.theme.custom" : "Personalizado",
-    "enhancedcombathud.settings.theme.helium" : "Helium",
-    "enhancedcombathud.settings.theme.neon" : "Neon",
-    "enhancedcombathud.settings.theme.argon" : "Argon",
-    "enhancedcombathud.settings.theme.krypton" : "Krypton",
-    "enhancedcombathud.settings.theme.xenon" : "Xenon",
-    "enhancedcombathud.settings.theme.radon" : "Radon",
-    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
-
-    "enhancedcombathud.settings.scale.name" : "Escala",
-    "enhancedcombathud.settings.scale.hint" : "Escala del HUD: si la escala automática está activada, este ajuste se utilizará como multiplicador sobre la escala calculada.",
-    "enhancedcombathud.settings.noAutoscale.name" : "No autoescalar",
-    "enhancedcombathud.settings.noAutoscale.hint" : "No escalar el HUD para que se ajuste a la pantalla, utilizar el valor fijo en la configuración de la Escala.",
-    "enhancedcombathud.settings.leftPos.name" : "Posición Izquierda",
-    "enhancedcombathud.settings.leftPos.hint" : "Distancia del borde izquierdo en píxeles.",
-    "enhancedcombathud.settings.botPos.name" : "Posición Inferior",
-    "enhancedcombathud.settings.botPos.hint" : "Distancia del borde inferior en píxeles.",
-    "enhancedcombathud.settings.playerDetailsBottom.name" : "Detalles del Jugador en la parte inferior",
-    "enhancedcombathud.settings.playerDetailsBottom.hint" : "Coloca el nombre de los jugadores y la información de la clase en la parte inferior.",
-    "enhancedcombathud.settings.preparedSpells.name" : "Sólo conjuros preparados",
-    "enhancedcombathud.settings.preparedSpells.hint" : "Mostrar sólo los hechizos preparados.",
-    "enhancedcombathud.settings.showTooltips.name" : "Mostrar Cuadros de Información",
-    "enhancedcombathud.settings.showTooltips.hint" : "Mostrar cuadros de información al pasar el ratón por encima.",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "Mostrar Cuadros de Información para Acciones Especiales",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "Mostrar cuadros de información al pasar el ratón por encima de las acciones especiales (esquivar,destrabarse,empujar...).",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "Mostrar Cuadros de Información para Características",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "Mostrar cuadros de información al pasar el ratón por encima para características en el menú de características.",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "Mostrar Cuadros de Información para Habilidades",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "Mostrar cuadros de información al pasar el ratón por encima para habilidades en el menú de características.",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "Mostrar Cuadros de Información para Herramientas",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Mostrar cuadros de información al pasar el ratón por encima para herramientas en el menú de características.",
-    "enhancedcombathud.settings.fadeOutInactive.name" : "Desvanecer",
-    "enhancedcombathud.settings.fadeOutInactive.hint" : "Desvanecer el HUD después de no pasar el ratón por encima durante 5 segundos.",
-    "enhancedcombathud.settings.fadeoutDelay.name" : "Retraso para Desvanecer",
-    "enhancedcombathud.settings.fadeoutDelay.hint" : "Retraso antes de desvanecer el HUD en segundos.",
-    "enhancedcombathud.settings.fadeoutOpacity.name" : "Opacidad del Desvanecimiento",
-    "enhancedcombathud.settings.fadeoutOpacity.hint" : "Opacidad del HUD cuando se desvanece.",
-    "enhancedcombathud.settings.hideMacroPlayers.name" : "Ocultar la Barra de Macros y la Lista de Jugadores",
-    "enhancedcombathud.settings.hideMacroPlayers.hint" : "Ocultar la barra de macros y la lista de jugadores mientras este abierto el HUD.",
-    "enhancedcombathud.settings.openCombatStart.name" : "Abrir al Inicio del Combate",
-    "enhancedcombathud.settings.openCombatStart.hint" : "Abrir el HUD cuando se inicia un combate.",
-    "enhancedcombathud.settings.tooltipScale.name" : "Escala de Cuadro de Información",
-    "enhancedcombathud.settings.tooltipScale.hint" : "Escala de los cuadros de información.",
-    "enhancedcombathud.settings.switchEquip.name" : "Equipar Automáticamente",
-    "enhancedcombathud.settings.switchEquip.hint" : "Equipar/desequipar automáticamente los objetos al cambiar de conjunto.",
-
-    "enhancedcombathud.tooltip.target.name" : "Objetivo",
-    "enhancedcombathud.tooltip.range.name" : "Alcance",
-    "enhancedcombathud.tooltip.properties.name" : "Propiedades",
-
-    "enhancedcombathud.settings.thememenu.name": "Personalización del Tema",
-    "enhancedcombathud.settings.thememenu.hint": "Configure, elija y personalice los temas de Argon.",
-    "enhancedcombathud.settings.thememenu.label": "Configurar Temas",
-
-
-    "enhancedcombathud.themeOptions.save": "Guardar Cambios",
-    "enhancedcombathud.themeOptions.export": "Exportar Tema",
-    "enhancedcombathud.themeOptions.autoTextColorTitle" : "Establecer color del Texto en función del Fondo",
-    "enhancedcombathud.themeOptions.autoTextColorHint" : "Esta configuración ajusta automáticamente el color del texto en función del color de fondo a un color legible.",
-    "enhancedcombathud.themeOptions.exportThemeName": "Nombre del Tema a Exportar:",
-    "enhancedcombathud.themeOptions.exportTheme.save": "Guardar",
-    "enhancedcombathud.themeOptions.exportTheme.cancel": "Cancelar",
-
-    "enhancedcombathud.themeOptions.themeTitle": "Elegir un Tema",
-    "enhancedcombathud.themeOptions.themeHint": "Al seleccionar un tema se aplicará una paleta de colores predefinida a Argon.",
-    
-
-
-    "enhancedcombathud.themeOptions.mainAction" : "Colores de Acción Principal",
-    "enhancedcombathud.themeOptions.bonusAction" : "Colores de Acción Adicional",
-    "enhancedcombathud.themeOptions.freeAction" : "Colores de Acción Gratis",
-    "enhancedcombathud.themeOptions.reaction" : "Colores de Reacción",
-    "enhancedcombathud.themeOptions.endTurn" : "Colores del Fin de Turno",
-    "enhancedcombathud.themeOptions.tooltip" : "Colores de Cuadros de Información",
-    "enhancedcombathud.themeOptions.abilityMenu" : "Colores de Menú de Características",
-    "enhancedcombathud.themeOptions.buttons" : "Colores de Botones",
-    "enhancedcombathud.themeOptions.movement" : "Colores del Cuadro de Movimiento",
-    
-    "enhancedcombathud.themeOptions.background" : "Color de Fondo",
-    "enhancedcombathud.themeOptions.color" : "Color del Texto",
-    "enhancedcombathud.themeOptions.border" : "Color de Bordes",
-    "enhancedcombathud.themeOptions.boxShadow" : "Color de Sombra de los Cuadros",
-
-    "enhancedcombathud.themeOptions.mainActionBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.mainActionHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-    "enhancedcombathud.themeOptions.bonusActionBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.bonusActionHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-    "enhancedcombathud.themeOptions.freeActionBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.freeActionHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-    "enhancedcombathud.themeOptions.reactionBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.reactionHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-    "enhancedcombathud.themeOptions.endTurnBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.endTurnHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-    
-    "enhancedcombathud.themeOptions.tooltipHeader" : "Color Principal/Fondo/Borde de cabecera de Cuadros de Información y Ventanas",
-    "enhancedcombathud.themeOptions.tooltipSubtitle" : "Color Principal/Fondo/Borde del subtítulo de Cuadros de Información",
-    "enhancedcombathud.themeOptions.tooltipBody" : "Color Principal/Fondo/Borde del cuerpo de Cuadros de Información y Ventanas",
-
-    "enhancedcombathud.themeOptions.abilityMenuBase" : "Color Principal/Sombra cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.abilityMenuHover" : "Color Principal/Sombra cuando el ratón está sobre el elemento",
-
-    "enhancedcombathud.themeOptions.buttonsBase" : "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-    "enhancedcombathud.themeOptions.buttonsHover" : "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-
-    "enhancedcombathud.themeOptions.movementUsed" : "Color de Fondo/Sombra del cuadro de espacios de movimiento usados",
-    "enhancedcombathud.themeOptions.movementBaseMovement" : "Color de Fondo/Sombra del cuadro de espacios de movimiento disponibles",
-    "enhancedcombathud.themeOptions.movementDashMovement" : "Color de Fondo/Sombra del cuadro de espacios de movimiento al correr",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "Color de Fondo/Sombra del cuadro de espacios de movimiento excedidos"
-
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Activar Argon Combat HUD",
+        "warning": "Argon Combat HUD: No se ha seleccionado ninguna ficha. Por favor, seleccione una ficha para activar el HUD."
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "Color",
+        "text": "Color Principal",
+        "hint": "Color de la pestaña de acciones y otras características principales del HUD."
+      },
+      "fore-color": {
+        "text": "Color del Texto",
+        "hint": "Color del texto."
+      },
+      "color-bonus-action": {
+        "text": "Color de Acción Adicional",
+        "hint": "Color de la pestaña de acciones adicionales."
+      },
+      "color-free-action": {
+        "text": "Color de Acción Gratis",
+        "hint": "Color de la pestaña de acciones gratis."
+      },
+      "color-reaction": {
+        "text": "Color de Reacción",
+        "hint": "Color de la pestaña de reacciones."
+      },
+      "color-end-turn": {
+        "text": "Color de Fin de Turno",
+        "hint": "Color de la pestaña de finalización de turno."
+      },
+      "color-tooltip": {
+        "text": "Color de Cuadros de Información",
+        "hint": "Color de los cuadros de Información y de las ventanas emergentes de salvación/habilidad/herramientas."
+      },
+      "theme": {
+        "name": "Tema",
+        "hint": "Tema del HUD",
+        "custom": "Personalizado",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "scale": {
+        "name": "Escala",
+        "hint": "Escala del HUD: si la escala automática está activada, este ajuste se utilizará como multiplicador sobre la escala calculada."
+      },
+      "noAutoscale": {
+        "name": "No autoescalar",
+        "hint": "No escalar el HUD para que se ajuste a la pantalla, utilizar el valor fijo en la configuración de la Escala."
+      },
+      "leftPos": {
+        "name": "Posición Izquierda",
+        "hint": "Distancia del borde izquierdo en píxeles."
+      },
+      "botPos": {
+        "name": "Posición Inferior",
+        "hint": "Distancia del borde inferior en píxeles."
+      },
+      "playerDetailsBottom": {
+        "name": "Detalles del Jugador en la parte inferior",
+        "hint": "Coloca el nombre de los jugadores y la información de la clase en la parte inferior."
+      },
+      "preparedSpells": {
+        "name": "Sólo conjuros preparados",
+        "hint": "Mostrar sólo los hechizos preparados."
+      },
+      "showTooltips": {
+        "name": "Mostrar Cuadros de Información",
+        "hint": "Mostrar cuadros de información al pasar el ratón por encima."
+      },
+      "showTooltipsSpecial": {
+        "name": "Mostrar Cuadros de Información para Acciones Especiales",
+        "hint": "Mostrar cuadros de información al pasar el ratón por encima de las acciones especiales (esquivar,destrabarse,empujar...)."
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "Mostrar Cuadros de Información para Características",
+        "hint": "Mostrar cuadros de información al pasar el ratón por encima para características en el menú de características."
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "Mostrar Cuadros de Información para Habilidades",
+        "hint": "Mostrar cuadros de información al pasar el ratón por encima para habilidades en el menú de características."
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "Mostrar Cuadros de Información para Herramientas",
+        "hint": "Mostrar cuadros de información al pasar el ratón por encima para herramientas en el menú de características."
+      },
+      "fadeOutInactive": {
+        "name": "Desvanecer",
+        "hint": "Desvanecer el HUD después de no pasar el ratón por encima durante 5 segundos."
+      },
+      "fadeoutDelay": {
+        "name": "Retraso para Desvanecer",
+        "hint": "Retraso antes de desvanecer el HUD en segundos."
+      },
+      "fadeoutOpacity": {
+        "name": "Opacidad del Desvanecimiento",
+        "hint": "Opacidad del HUD cuando se desvanece."
+      },
+      "hideMacroPlayers": {
+        "name": "Ocultar la Barra de Macros y la Lista de Jugadores",
+        "hint": "Ocultar la barra de macros y la lista de jugadores mientras este abierto el HUD."
+      },
+      "openCombatStart": {
+        "name": "Abrir al Inicio del Combate",
+        "hint": "Abrir el HUD cuando se inicia un combate."
+      },
+      "tooltipScale": {
+        "name": "Escala de Cuadro de Información",
+        "hint": "Escala de los cuadros de información."
+      },
+      "switchEquip": {
+        "name": "Equipar Automáticamente",
+        "hint": "Equipar/desequipar automáticamente los objetos al cambiar de conjunto."
+      },
+      "thememenu": {
+        "name": "Personalización del Tema",
+        "hint": "Configure, elija y personalice los temas de Argon.",
+        "label": "Configurar Temas"
+      }
+    },
+    "tooltip": {
+      "target": {
+        "name": "Objetivo"
+      },
+      "range": {
+        "name": "Alcance"
+      },
+      "properties": {
+        "name": "Propiedades"
+      }
+    },
+    "themeOptions": {
+      "save": "Guardar Cambios",
+      "export": "Exportar Tema",
+      "autoTextColorTitle": "Establecer color del Texto en función del Fondo",
+      "autoTextColorHint": "Esta configuración ajusta automáticamente el color del texto en función del color de fondo a un color legible.",
+      "exportThemeName": "Nombre del Tema a Exportar:",
+      "exportTheme": {
+        "save": "Guardar",
+        "cancel": "Cancelar"
+      },
+      "themeTitle": "Elegir un Tema",
+      "themeHint": "Al seleccionar un tema se aplicará una paleta de colores predefinida a Argon.",
+      "mainAction": "Colores de Acción Principal",
+      "bonusAction": "Colores de Acción Adicional",
+      "freeAction": "Colores de Acción Gratis",
+      "reaction": "Colores de Reacción",
+      "endTurn": "Colores del Fin de Turno",
+      "tooltip": "Colores de Cuadros de Información",
+      "abilityMenu": "Colores de Menú de Características",
+      "buttons": "Colores de Botones",
+      "movement": "Colores del Cuadro de Movimiento",
+      "background": "Color de Fondo",
+      "color": "Color del Texto",
+      "border": "Color de Bordes",
+      "boxShadow": "Color de Sombra de los Cuadros",
+      "mainActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "mainActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "bonusActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "bonusActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "freeActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "freeActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "reactionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "reactionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "endTurnBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "endTurnHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "tooltipHeader": "Color Principal/Fondo/Borde de cabecera de Cuadros de Información y Ventanas",
+      "tooltipSubtitle": "Color Principal/Fondo/Borde del subtítulo de Cuadros de Información",
+      "tooltipBody": "Color Principal/Fondo/Borde del cuerpo de Cuadros de Información y Ventanas",
+      "abilityMenuBase": "Color Principal/Sombra cuando el ratón no está sobre el elemento",
+      "abilityMenuHover": "Color Principal/Sombra cuando el ratón está sobre el elemento",
+      "buttonsBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
+      "buttonsHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
+      "movementUsed": "Color de Fondo/Sombra del cuadro de espacios de movimiento usados",
+      "movementBaseMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento disponibles",
+      "movementDashMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento al correr",
+      "movementDangerMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento excedidos"
+    }
+  }
 }

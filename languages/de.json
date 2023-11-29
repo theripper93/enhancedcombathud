@@ -1,136 +1,196 @@
 {
-    "enhancedcombathud.controls.toggle.title": "Argon Combat HUD umschalten",
-    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: Keine Figur ausgewählt. Wähle bitte eine Figur um das HUD zu aktivieren.",
-
-    "enhancedcombathud.settings.color.label" : "Farbe",
-    "enhancedcombathud.settings.fore-color.text" : "Schriftfarbe",
-    "enhancedcombathud.settings.fore-color.hint" : "Schriftfarbe",
-    "enhancedcombathud.settings.color.text" : "Hauptfarbe",
-    "enhancedcombathud.settings.color.hint" : "Farbe des Aktions-Reiters und anderer Hauptfunktionen des HUDs",
-    "enhancedcombathud.settings.color-bonus-action.text" : "Farbe Bonusaktion",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "Farbe des Reiters für Bonusaktionen",
-    "enhancedcombathud.settings.color-free-action.text" : "Farbe freie Aktion",
-    "enhancedcombathud.settings.color-free-action.hint" : "Farbe des Reiters für freie Aktionen",
-    "enhancedcombathud.settings.color-reaction.text" : "Farbe Reaktion",
-    "enhancedcombathud.settings.color-reaction.hint" : "Farbe des Reiters für Reaktionen",
-    "enhancedcombathud.settings.color-end-turn.text" : "Farbe Zug beenden",
-    "enhancedcombathud.settings.color-end-turn.hint" : "Farbe des Reiters für Zug beenden",
-    "enhancedcombathud.settings.color-tooltip.text" : "Farbe Tooltip",
-    "enhancedcombathud.settings.color-tooltip.hint" : "Farbe des Tooltips und RW-/Fertigkeiten- und Werkzeugpopups",
-
-    "enhancedcombathud.settings.theme.name" : "Theme",
-    "enhancedcombathud.settings.theme.hint" : "Theme des HUDs",
-    "enhancedcombathud.settings.theme.custom" : "Benutzerdefiniert",
-    "enhancedcombathud.settings.theme.helium" : "Helium",
-    "enhancedcombathud.settings.theme.neon" : "Neon",
-    "enhancedcombathud.settings.theme.argon" : "Argon",
-    "enhancedcombathud.settings.theme.krypton" : "Krypton",
-    "enhancedcombathud.settings.theme.xenon" : "Xenon",
-    "enhancedcombathud.settings.theme.radon" : "Radon",
-    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
-
-    "enhancedcombathud.settings.scale.name" : "Skalierung",
-    "enhancedcombathud.settings.scale.hint" : "HUD Skalierung - wenn die Autoskalierung aktiviert ist, wird diese Einstellunge zusätzlich zur berechneten Skalierung als Multiplikator verwendet",
-    "enhancedcombathud.settings.noAutoscale.name" : "Nicht automatisch Skalieren",
-    "enhancedcombathud.settings.noAutoscale.hint" : "Skaliere das HUD nicht um sich an den Bildschirm anzupassen, verwende stattdessen den festen Wert in den Skalierungseinstellungen.",
-    "enhancedcombathud.settings.leftPos.name" : "Linke Position",
-    "enhancedcombathud.settings.leftPos.hint" : "Die Entfernung vom linken Rand in Pixeln",
-    "enhancedcombathud.settings.botPos.name" : "Untere Position",
-    "enhancedcombathud.settings.botPos.hint" : "Die Entfernung vom unteren Rand in Pixeln",
-    "enhancedcombathud.settings.playerDetailsBottom.name" : "Spielerdetails unten",
-    "enhancedcombathud.settings.playerDetailsBottom.hint" : "Platziert den Spieler Namen und Klasseninformationen unterhalb des Portraits",
-    "enhancedcombathud.settings.preparedSpells.name" : "Nur vorbereitete Zauber",
-    "enhancedcombathud.settings.preparedSpells.hint" : "Zeige nur vorbereitete Zauber an",
-    "enhancedcombathud.settings.showTooltips.name" : "Zeige Tooltips",
-    "enhancedcombathud.settings.showTooltips.hint" : "Zeige Tooltips an, wenn der Mauszeiger darüber schwebt.",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "Zeige Tooltips für Spezialaktionen",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "Zeige Tooltips, wenn der Mauszeiger über Spezialaktionen schwebt (Ausweichen,Rückzug,Stoßen...)",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "Zeige Tooltips für Attribute",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "Zeige Tooltips, wenn der Mauszeiger über Attributen im Attributsmenü schwebt",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "Zeige Tooltips für Fertigkeiten",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "Zeige Tooltips, wenn der Mauszeiger über Fertigkeiten im Fertigkeitsmenü schwebt",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "Zeige Tooltips für Werkzeuge",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "Zeige Tooltips, wenn der Mauszeiger über Werkzeuge im Attributsmenü schwebt",
-    "enhancedcombathud.settings.fadeOutInactive.name" : "Ausblenden",
-    "enhancedcombathud.settings.fadeOutInactive.hint" : "Blende das HUD aus, wenn der Mauszeiger sich für 5 Sekunden nicht über ihm befindet",
-    "enhancedcombathud.settings.fadeoutDelay.name" : "Ausblendeverzögerung",
-    "enhancedcombathud.settings.fadeoutDelay.hint" : "Die Verzögern bevor das HUD ausgeblendet wird in Sekunden",
-    "enhancedcombathud.settings.fadeoutOpacity.name" : "Ausblendetransparenz",
-    "enhancedcombathud.settings.fadeoutOpacity.hint" : "Transparenz des HUDs wenn es ausgeblendet ist",
-    "enhancedcombathud.settings.hideMacroPlayers.name" : "Verstecke Makroleiste und Spielerliste",
-    "enhancedcombathud.settings.hideMacroPlayers.hint" : "Versteckt die Makroleiste und die Spielerliste, während das HUD geöffnet ist",
-    "enhancedcombathud.settings.openCombatStart.name" : "Öffne beim Start eines Kampfes",
-    "enhancedcombathud.settings.openCombatStart.hint" : "Öffnet das HUD, wenn ein Kampf startet",
-    "enhancedcombathud.settings.tooltipScale.name" : "Tooltip Skalierung",
-    "enhancedcombathud.settings.tooltipScale.hint" : "Skalierung der Tooltips",
-    "enhancedcombathud.settings.switchEquip.name" : "Automatisches Ausrüsten",
-    "enhancedcombathud.settings.switchEquip.hint" : "Automatisches ausrüsten/ablegen von Gegenständen beim Wechsel von Sets",
-    "enhancedcombathud.settings.showWeaponsItems.name" : "Zeige Waffen im 'Gegenstand verwenden' Bereich",
-    "enhancedcombathud.settings.showWeaponsItems.hint" : "Zeigt die Waffen im 'Gegenstand verwenden' Bereich an. Nützlich wenn die Waffenplätze nicht ausreichen.",
-    "enhancedcombathud.settings.noAA.name" : "Aktive Effekte nicht anwenden",
-    "enhancedcombathud.settings.noAA.hint" : "Beim Einsatz einer Spezialaktion den aktiven Effekt nicht anwenden. (erfordert Aktualisierung)",
-    
-    "enhancedcombathud.tooltip.target.name" : "Ziel",
-    "enhancedcombathud.tooltip.range.name" : "Reichweite",
-    "enhancedcombathud.tooltip.properties.name" : "Eigenschaften",
-
-    "enhancedcombathud.settings.thememenu.name": "Theme Anpassung",
-    "enhancedcombathud.settings.thememenu.hint": "Konfiguriere, wähle und passe die Argon themes an",
-    "enhancedcombathud.settings.thememenu.label": "Konfiguriere Themes",
-
-
-    "enhancedcombathud.themeOptions.save": "Änderung speichern",
-    "enhancedcombathud.themeOptions.export": "Theme Exportieren",
-    "enhancedcombathud.themeOptions.autoTextColorTitle" : "Automatisches Schriftfarbe basierend auf dem Hintergrund",
-    "enhancedcombathud.themeOptions.autoTextColorHint" : "Diese Einstellunge passt die Schriftfarbe basierend auf der Hintergrundfarbe zu einer lesbaren Farbe an.",
-    "enhancedcombathud.themeOptions.exportThemeName": "Export Theme Name:",
-    "enhancedcombathud.themeOptions.exportTheme.save": "Speichern",
-    "enhancedcombathud.themeOptions.exportTheme.cancel": "Abbrechen",
-
-    "enhancedcombathud.themeOptions.themeTitle": "Wähle Theme",
-    "enhancedcombathud.themeOptions.themeHint": "Ein Theme auszuwählen, wendet eine vordefinierte Farbpalette auf Argon an.",
-    
-
-
-    "enhancedcombathud.themeOptions.mainAction" : "Farben Hauptaktion",
-    "enhancedcombathud.themeOptions.bonusAction" : "Farben Bonusaktion",
-    "enhancedcombathud.themeOptions.freeAction" : "Farben freie Aktion",
-    "enhancedcombathud.themeOptions.reaction" : "Farben Reaktion",
-    "enhancedcombathud.themeOptions.endTurn" : "Farben Zug beenden",
-    "enhancedcombathud.themeOptions.tooltip" : "Farben Tooltip",
-    "enhancedcombathud.themeOptions.abilityMenu" : "Farben Attributsmenü",
-    "enhancedcombathud.themeOptions.buttons" : "Farben Schaltflächen",
-    "enhancedcombathud.themeOptions.movement" : "Farben Bewegungsbox",
-    
-    "enhancedcombathud.themeOptions.background" : "Hintergrundfarbe",
-    "enhancedcombathud.themeOptions.color" : "Schriftfarbe",
-    "enhancedcombathud.themeOptions.border" : "Randfarbe",
-    "enhancedcombathud.themeOptions.boxShadow" : "Boxschattenfarbe",
-
-    "enhancedcombathud.themeOptions.mainActionBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.mainActionHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-    "enhancedcombathud.themeOptions.bonusActionBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.bonusActionHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-    "enhancedcombathud.themeOptions.freeActionBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.freeActionHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-    "enhancedcombathud.themeOptions.reactionBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.reactionHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-    "enhancedcombathud.themeOptions.endTurnBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.endTurnHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-    
-    "enhancedcombathud.themeOptions.tooltipHeader" : "Hintergrund-/Vordergrund-/Randfarbe der Kopfzeile bei Tooltips/Fenstern",
-    "enhancedcombathud.themeOptions.tooltipSubtitle" : "Hintergrund-/Vordergrund-/Randfarbe des Untertitels in Tooltips",
-    "enhancedcombathud.themeOptions.tooltipBody" : "Hintergrund-/Vordergrund-/Randfarbe des Inhalts in Tooltips/Fenstern",
-
-    "enhancedcombathud.themeOptions.abilityMenuBase" : "Vordergrund-/Boxschattenfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.abilityMenuHover" : "Vordergrund-/Boxschattenfarbe wenn die Maus über dem Element ist",
-
-    "enhancedcombathud.themeOptions.buttonsBase" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
-    "enhancedcombathud.themeOptions.buttonsHover" : "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
-
-    "enhancedcombathud.themeOptions.movementUsed" : "Hintergrund/Boxschatten des Kastens der verwendete Bewegungsfelder darstellt",
-    "enhancedcombathud.themeOptions.movementBaseMovement" : "Hintergrund/Boxschatten des Kastens der verfügbare Bewegungsfelder darstellt",
-    "enhancedcombathud.themeOptions.movementDashMovement" : "Hintergrund/Boxschatten des Kastens der Spurt-Bewegungsfelder darstellt",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "Hintergrund/Boxschatten des Kastens der überschrittene Bewegungsfelder darstellt"
-
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Argon Combat HUD umschalten",
+        "warning": "Argon Combat HUD: Keine Figur ausgewählt. Wähle bitte eine Figur um das HUD zu aktivieren."
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "Farbe",
+        "text": "Hauptfarbe",
+        "hint": "Farbe des Aktions-Reiters und anderer Hauptfunktionen des HUDs"
+      },
+      "fore-color": {
+        "text": "Schriftfarbe",
+        "hint": "Schriftfarbe"
+      },
+      "color-bonus-action": {
+        "text": "Farbe Bonusaktion",
+        "hint": "Farbe des Reiters für Bonusaktionen"
+      },
+      "color-free-action": {
+        "text": "Farbe freie Aktion",
+        "hint": "Farbe des Reiters für freie Aktionen"
+      },
+      "color-reaction": {
+        "text": "Farbe Reaktion",
+        "hint": "Farbe des Reiters für Reaktionen"
+      },
+      "color-end-turn": {
+        "text": "Farbe Zug beenden",
+        "hint": "Farbe des Reiters für Zug beenden"
+      },
+      "color-tooltip": {
+        "text": "Farbe Tooltip",
+        "hint": "Farbe des Tooltips und RW-/Fertigkeiten- und Werkzeugpopups"
+      },
+      "theme": {
+        "name": "Theme",
+        "hint": "Theme des HUDs",
+        "custom": "Benutzerdefiniert",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "scale": {
+        "name": "Skalierung",
+        "hint": "HUD Skalierung - wenn die Autoskalierung aktiviert ist, wird diese Einstellunge zusätzlich zur berechneten Skalierung als Multiplikator verwendet"
+      },
+      "noAutoscale": {
+        "name": "Nicht automatisch Skalieren",
+        "hint": "Skaliere das HUD nicht um sich an den Bildschirm anzupassen, verwende stattdessen den festen Wert in den Skalierungseinstellungen."
+      },
+      "leftPos": {
+        "name": "Linke Position",
+        "hint": "Die Entfernung vom linken Rand in Pixeln"
+      },
+      "botPos": {
+        "name": "Untere Position",
+        "hint": "Die Entfernung vom unteren Rand in Pixeln"
+      },
+      "playerDetailsBottom": {
+        "name": "Spielerdetails unten",
+        "hint": "Platziert den Spieler Namen und Klasseninformationen unterhalb des Portraits"
+      },
+      "preparedSpells": {
+        "name": "Nur vorbereitete Zauber",
+        "hint": "Zeige nur vorbereitete Zauber an"
+      },
+      "showTooltips": {
+        "name": "Zeige Tooltips",
+        "hint": "Zeige Tooltips an, wenn der Mauszeiger darüber schwebt."
+      },
+      "showTooltipsSpecial": {
+        "name": "Zeige Tooltips für Spezialaktionen",
+        "hint": "Zeige Tooltips, wenn der Mauszeiger über Spezialaktionen schwebt (Ausweichen,Rückzug,Stoßen...)"
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "Zeige Tooltips für Attribute",
+        "hint": "Zeige Tooltips, wenn der Mauszeiger über Attributen im Attributsmenü schwebt"
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "Zeige Tooltips für Fertigkeiten",
+        "hint": "Zeige Tooltips, wenn der Mauszeiger über Fertigkeiten im Fertigkeitsmenü schwebt"
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "Zeige Tooltips für Werkzeuge",
+        "hint": "Zeige Tooltips, wenn der Mauszeiger über Werkzeuge im Attributsmenü schwebt"
+      },
+      "fadeOutInactive": {
+        "name": "Ausblenden",
+        "hint": "Blende das HUD aus, wenn der Mauszeiger sich für 5 Sekunden nicht über ihm befindet"
+      },
+      "fadeoutDelay": {
+        "name": "Ausblendeverzögerung",
+        "hint": "Die Verzögern bevor das HUD ausgeblendet wird in Sekunden"
+      },
+      "fadeoutOpacity": {
+        "name": "Ausblendetransparenz",
+        "hint": "Transparenz des HUDs wenn es ausgeblendet ist"
+      },
+      "hideMacroPlayers": {
+        "name": "Verstecke Makroleiste und Spielerliste",
+        "hint": "Versteckt die Makroleiste und die Spielerliste, während das HUD geöffnet ist"
+      },
+      "openCombatStart": {
+        "name": "Öffne beim Start eines Kampfes",
+        "hint": "Öffnet das HUD, wenn ein Kampf startet"
+      },
+      "tooltipScale": {
+        "name": "Tooltip Skalierung",
+        "hint": "Skalierung der Tooltips"
+      },
+      "switchEquip": {
+        "name": "Automatisches Ausrüsten",
+        "hint": "Automatisches ausrüsten/ablegen von Gegenständen beim Wechsel von Sets"
+      },
+      "showWeaponsItems": {
+        "name": "Zeige Waffen im 'Gegenstand verwenden' Bereich",
+        "hint": "Zeigt die Waffen im 'Gegenstand verwenden' Bereich an. Nützlich wenn die Waffenplätze nicht ausreichen."
+      },
+      "noAA": {
+        "name": "Aktive Effekte nicht anwenden",
+        "hint": "Beim Einsatz einer Spezialaktion den aktiven Effekt nicht anwenden. (erfordert Aktualisierung)"
+      },
+      "thememenu": {
+        "name": "Theme Anpassung",
+        "hint": "Konfiguriere, wähle und passe die Argon themes an",
+        "label": "Konfiguriere Themes"
+      }
+    },
+    "tooltip": {
+      "target": {
+        "name": "Ziel"
+      },
+      "range": {
+        "name": "Reichweite"
+      },
+      "properties": {
+        "name": "Eigenschaften"
+      }
+    },
+    "themeOptions": {
+      "save": "Änderung speichern",
+      "export": "Theme Exportieren",
+      "autoTextColorTitle": "Automatisches Schriftfarbe basierend auf dem Hintergrund",
+      "autoTextColorHint": "Diese Einstellunge passt die Schriftfarbe basierend auf der Hintergrundfarbe zu einer lesbaren Farbe an.",
+      "exportThemeName": "Export Theme Name:",
+      "exportTheme": {
+        "save": "Speichern",
+        "cancel": "Abbrechen"
+      },
+      "themeTitle": "Wähle Theme",
+      "themeHint": "Ein Theme auszuwählen, wendet eine vordefinierte Farbpalette auf Argon an.",
+      "mainAction": "Farben Hauptaktion",
+      "bonusAction": "Farben Bonusaktion",
+      "freeAction": "Farben freie Aktion",
+      "reaction": "Farben Reaktion",
+      "endTurn": "Farben Zug beenden",
+      "tooltip": "Farben Tooltip",
+      "abilityMenu": "Farben Attributsmenü",
+      "buttons": "Farben Schaltflächen",
+      "movement": "Farben Bewegungsbox",
+      "background": "Hintergrundfarbe",
+      "color": "Schriftfarbe",
+      "border": "Randfarbe",
+      "boxShadow": "Boxschattenfarbe",
+      "mainActionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "mainActionHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "bonusActionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "bonusActionHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "freeActionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "freeActionHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "reactionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "reactionHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "endTurnBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "endTurnHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "tooltipHeader": "Hintergrund-/Vordergrund-/Randfarbe der Kopfzeile bei Tooltips/Fenstern",
+      "tooltipSubtitle": "Hintergrund-/Vordergrund-/Randfarbe des Untertitels in Tooltips",
+      "tooltipBody": "Hintergrund-/Vordergrund-/Randfarbe des Inhalts in Tooltips/Fenstern",
+      "abilityMenuBase": "Vordergrund-/Boxschattenfarbe wenn die Maus nicht über dem Element ist",
+      "abilityMenuHover": "Vordergrund-/Boxschattenfarbe wenn die Maus über dem Element ist",
+      "buttonsBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
+      "buttonsHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
+      "movementUsed": "Hintergrund/Boxschatten des Kastens der verwendete Bewegungsfelder darstellt",
+      "movementBaseMovement": "Hintergrund/Boxschatten des Kastens der verfügbare Bewegungsfelder darstellt",
+      "movementDashMovement": "Hintergrund/Boxschatten des Kastens der Spurt-Bewegungsfelder darstellt",
+      "movementDangerMovement": "Hintergrund/Boxschatten des Kastens der überschrittene Bewegungsfelder darstellt"
+    }
+  }
 }

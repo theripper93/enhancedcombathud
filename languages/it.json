@@ -1,48 +1,86 @@
 {
-    "enhancedcombathud.settings.color.label" : "Colore",
-    "enhancedcombathud.settings.fore-color.text" : "Colore Testo",
-    "enhancedcombathud.settings.fore-color.hint" : "Colore testo",
-    "enhancedcombathud.settings.color.text" : "Colore Principale",
-    "enhancedcombathud.settings.color.hint" : "Colore di sfondo delle azioni e altre caratteristiche principali dell'HUD",
-    "enhancedcombathud.settings.color-bonus-action.text" : "Colore Azione Bonus",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "Colore di sfondo dell'azione bonus",
-    "enhancedcombathud.settings.color-free-action.text" : "Colore Azione Gratuita",
-    "enhancedcombathud.settings.color-free-action.hint" : "Colore di sfondo dell'azione gratuita",
-    "enhancedcombathud.settings.color-reaction.text" : "Colore Reazione",
-    "enhancedcombathud.settings.color-reaction.hint" : "Colore di sfondo della reazione",
-    "enhancedcombathud.settings.color-end-turn.text" : "Colore Fine Turno",
-    "enhancedcombathud.settings.color-end-turn.hint" : "Colore di sfondo del fine turno",
-    "enhancedcombathud.settings.color-tooltip.text" : "Colore Tooltip",
-    "enhancedcombathud.settings.color-tooltip.hint" : "Colore delle descrizioni comandi e pop-up di tiri salvezza/abilità/strumenti",
-
-    "enhancedcombathud.settings.theme.name" : "Tema",
-    "enhancedcombathud.settings.theme.hint" : "Tema del HUD",
-    "enhancedcombathud.settings.theme.custom" : "Personalizzato",
-    "enhancedcombathud.settings.theme.helium" : "Helium",
-    "enhancedcombathud.settings.theme.neon" : "Neon",
-    "enhancedcombathud.settings.theme.argon" : "Argon",
-    "enhancedcombathud.settings.theme.krypton" : "Krypton",
-    "enhancedcombathud.settings.theme.xenon" : "Xenon",
-    "enhancedcombathud.settings.theme.radon" : "Radon",
-    "enhancedcombathud.settings.theme.oganesson" : "Oganesson",
-
-    "enhancedcombathud.settings.scale.name" : "Dimensione",
-    "enhancedcombathud.settings.scale.hint" : "Dimensione HUD - se la Dimensione Automatica è abilitata, questa impostazione verrà utilizzata come moltiplicatore alla dimensione calcolata",
-    "enhancedcombathud.settings.noAutoscale.name" : "Disattiva Dimensione Automatica",
-    "enhancedcombathud.settings.noAutoscale.hint" : "Non ridimensionare l'HUD per adattarlo allo schermo, usa invece il valore assegnato nell'impostazione Dimensione",
-    "enhancedcombathud.settings.leftPos.name" : "Posiziona a Sinistra",
-    "enhancedcombathud.settings.leftPos.hint" : "Distanza da sinistra in pixel",
-    "enhancedcombathud.settings.botPos.name" : "Posiziona in Basso",
-    "enhancedcombathud.settings.botPos.hint" : "Distanza dal basso in pixel",
-    "enhancedcombathud.settings.preparedSpells.name" : "Solo Incantesimi Preparati",
-    "enhancedcombathud.settings.preparedSpells.hint" : "Mostra solo incantesimi preparati",
-    "enhancedcombathud.settings.showTooltips.name" : "Mostra Suggerimanti",
-    "enhancedcombathud.settings.showTooltips.hint" : "Mostra Suggerimenti col passaggio del mouse",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "Mostra Suggerimenti per Azioni Speciali",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "Mostra Suggerimenti col passaggio del mouse per le azioni speciali (schivare, disimpegno, spingere...)",
-
-    "enhancedcombathud.tooltip.target.name" : "Bersaglio",
-    "enhancedcombathud.tooltip.range.name" : "Distanza",
-    "enhancedcombathud.tooltip.properties.name" : "Proprietà"
-
+  "enhancedcombathud": {
+    "settings": {
+      "color": {
+        "label": "Colore",
+        "text": "Colore Principale",
+        "hint": "Colore di sfondo delle azioni e altre caratteristiche principali dell'HUD"
+      },
+      "fore-color": {
+        "text": "Colore Testo",
+        "hint": "Colore testo"
+      },
+      "color-bonus-action": {
+        "text": "Colore Azione Bonus",
+        "hint": "Colore di sfondo dell'azione bonus"
+      },
+      "color-free-action": {
+        "text": "Colore Azione Gratuita",
+        "hint": "Colore di sfondo dell'azione gratuita"
+      },
+      "color-reaction": {
+        "text": "Colore Reazione",
+        "hint": "Colore di sfondo della reazione"
+      },
+      "color-end-turn": {
+        "text": "Colore Fine Turno",
+        "hint": "Colore di sfondo del fine turno"
+      },
+      "color-tooltip": {
+        "text": "Colore Tooltip",
+        "hint": "Colore delle descrizioni comandi e pop-up di tiri salvezza/abilità/strumenti"
+      },
+      "theme": {
+        "name": "Tema",
+        "hint": "Tema del HUD",
+        "custom": "Personalizzato",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "scale": {
+        "name": "Dimensione",
+        "hint": "Dimensione HUD - se la Dimensione Automatica è abilitata, questa impostazione verrà utilizzata come moltiplicatore alla dimensione calcolata"
+      },
+      "noAutoscale": {
+        "name": "Disattiva Dimensione Automatica",
+        "hint": "Non ridimensionare l'HUD per adattarlo allo schermo, usa invece il valore assegnato nell'impostazione Dimensione"
+      },
+      "leftPos": {
+        "name": "Posiziona a Sinistra",
+        "hint": "Distanza da sinistra in pixel"
+      },
+      "botPos": {
+        "name": "Posiziona in Basso",
+        "hint": "Distanza dal basso in pixel"
+      },
+      "preparedSpells": {
+        "name": "Solo Incantesimi Preparati",
+        "hint": "Mostra solo incantesimi preparati"
+      },
+      "showTooltips": {
+        "name": "Mostra Suggerimanti",
+        "hint": "Mostra Suggerimenti col passaggio del mouse"
+      },
+      "showTooltipsSpecial": {
+        "name": "Mostra Suggerimenti per Azioni Speciali",
+        "hint": "Mostra Suggerimenti col passaggio del mouse per le azioni speciali (schivare, disimpegno, spingere...)"
+      }
+    },
+    "tooltip": {
+      "target": {
+        "name": "Bersaglio"
+      },
+      "range": {
+        "name": "Distanza"
+      },
+      "properties": {
+        "name": "Proprietà"
+      }
+    }
+  }
 }

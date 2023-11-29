@@ -1,136 +1,196 @@
 {
-    "enhancedcombathud.controls.toggle.title": "Argon Combat HUD 켜기",
-    "enhancedcombathud.controls.toggle.warning" : "Argon Combat HUD: 토큰이 선택되지 않았습니다. HUD를 켜려면 토큰을 선택하십시오.",
-
-    "enhancedcombathud.settings.color.label" : "색상",
-    "enhancedcombathud.settings.fore-color.text" : "텍스트 색상",
-    "enhancedcombathud.settings.fore-color.hint" : "텍스트 색상",
-    "enhancedcombathud.settings.color.text" : "메인 색상",
-    "enhancedcombathud.settings.color.hint" : "행동 탭과 기타 메인 HUD 기능의 색상",
-    "enhancedcombathud.settings.color-bonus-action.text" : "추가 행동 색상",
-    "enhancedcombathud.settings.color-bonus-action.hint" : "추가 행동 탭의 색상",
-    "enhancedcombathud.settings.color-free-action.text" : "자유 행동 색상",
-    "enhancedcombathud.settings.color-free-action.hint" : "자유 행동 탭의 색상",
-    "enhancedcombathud.settings.color-reaction.text" : "반응 행동 색상",
-    "enhancedcombathud.settings.color-reaction.hint" : "반응 행동 탭의 색상",
-    "enhancedcombathud.settings.color-end-turn.text" : "턴 종료 색상",
-    "enhancedcombathud.settings.color-end-turn.hint" : "턴 종료 탭의 색상",
-    "enhancedcombathud.settings.color-tooltip.text" : "설명 색상",
-    "enhancedcombathud.settings.color-tooltip.hint" : "설명과 내성 굴림, 기술, 도구 설명 팝업창의 색상",
-
-    "enhancedcombathud.settings.theme.name" : "테마",
-    "enhancedcombathud.settings.theme.hint" : "HUD 테마",
-    "enhancedcombathud.settings.theme.custom" : "커스텀",
-    "enhancedcombathud.settings.theme.helium" : "헬륨",
-    "enhancedcombathud.settings.theme.neon" : "네온",
-    "enhancedcombathud.settings.theme.argon" : "아르곤",
-    "enhancedcombathud.settings.theme.krypton" : "크립톤",
-    "enhancedcombathud.settings.theme.xenon" : "제논",
-    "enhancedcombathud.settings.theme.radon" : "라돈",
-    "enhancedcombathud.settings.theme.oganesson" : "오가네손",
-
-    "enhancedcombathud.settings.scale.name" : "크기",
-    "enhancedcombathud.settings.scale.hint" : "HUD 크기 - 자동 조절이 활성화되어있다면 이 설정의 수가 자동계산되는 수에 곱해진 크기가 됩니다.",
-    "enhancedcombathud.settings.noAutoscale.name" : "자동 조절 끄기",
-    "enhancedcombathud.settings.noAutoscale.hint" : "화면에 맞게 HUD의 크기를 조정하지 않고 크기 조정 설정에서 고정 값을 사용합니다.",
-    "enhancedcombathud.settings.leftPos.name" : "좌측 위치",
-    "enhancedcombathud.settings.leftPos.hint" : "좌측의 여백(픽셀 수)",
-    "enhancedcombathud.settings.botPos.name" : "하단 위치",
-    "enhancedcombathud.settings.botPos.hint" : "하단의 여백(픽셀 수)",
-    "enhancedcombathud.settings.playerDetailsBottom.name" : "하단에 플레이어 세부사항 표기",
-    "enhancedcombathud.settings.playerDetailsBottom.hint" : "플레이어의 이름과 클래스에 대한 정보를 캐릭터 이미지 하단에 표시합니다.",
-    "enhancedcombathud.settings.preparedSpells.name" : "준비된 주문만 표기",
-    "enhancedcombathud.settings.preparedSpells.hint" : "준비된 주문만 나타나게 합니다.",
-    "enhancedcombathud.settings.showTooltips.name" : "설명 보이기",
-    "enhancedcombathud.settings.showTooltips.hint" : "마우스를 올리면 설명을 볼 수 있도록 합니다.",
-    "enhancedcombathud.settings.showTooltipsSpecial.name" : "특수 행동에 대한 설명 보이기",
-    "enhancedcombathud.settings.showTooltipsSpecial.hint" : "특수 행동에 마우스를 올리면 그에 대한 설명을 볼 수 있도록 합니다(질주, 퇴각, 밀어붙이기 등).",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.name": "특성치 설명 보이기",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuAbilities.hint": "특성치 메뉴에서 마우스를 올리면 능력치에 대한 설명을 볼 수 있도록 합니다.",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.name" : "기술 설명 보이기",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuSkills.hint" : "특성치 메뉴에서 마우스를 올리면 기술에 대한 설명을 볼 수 있도록 합니다.",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.name": "도구 설명 보이기",
-    "enhancedcombathud.settings.showTooltipsAbilityMenuTools.hint": "특성치 메뉴에서 마우스를 올리면 도구에 대한 설명을 볼 수 있도록 합니다.",
-    "enhancedcombathud.settings.fadeOutInactive.name" : "사라지게 하기",
-    "enhancedcombathud.settings.fadeOutInactive.hint" : "마우스를 올리고 있지 않은 시간이 5초가 넘어가면 HUD가 사라지도록 합니다.",
-    "enhancedcombathud.settings.fadeoutDelay.name" : "사라짐 속도",
-    "enhancedcombathud.settings.fadeoutDelay.hint" : "HUD가 사라지는 속도를 조정합니다.",
-    "enhancedcombathud.settings.fadeoutOpacity.name" : "사라짐 투명도",
-    "enhancedcombathud.settings.fadeoutOpacity.hint" : "HUD가 사라졌을 때의 투명도를 조정합니다.",
-    "enhancedcombathud.settings.hideMacroPlayers.name" : "매크로 바와 플레이어 목록 가리기",
-    "enhancedcombathud.settings.hideMacroPlayers.hint" : "HUD가 열려 있을 때 매크로 바와 플레이어 목록을 가립니다.",
-    "enhancedcombathud.settings.openCombatStart.name" : "전투 시작시 열기",
-    "enhancedcombathud.settings.openCombatStart.hint" : "전투가 시작되면 HUD가 나타나도록 합니다.",
-    "enhancedcombathud.settings.tooltipScale.name" : "설명 크기",
-    "enhancedcombathud.settings.tooltipScale.hint" : "설명 창의 크기를 조정합니다.",
-    "enhancedcombathud.settings.switchEquip.name" : "자동 장비",
-    "enhancedcombathud.settings.switchEquip.hint" : "착용 세트를 바꾸면 자동으로 장비 상태를 바꿉니다.",
-    "enhancedcombathud.settings.showWeaponsItems.name" : "무기를 아이템 사용 섹션으로 보이기",
-    "enhancedcombathud.settings.showWeaponsItems.hint" : "무기를 '아이템 사용' 섹션에 나타나도록 합니다. 무기 칸이 충분하지 않을 때 유용합니다.",
-    "enhancedcombathud.settings.noAA.name" : "활성화된 효과 미적용",
-    "enhancedcombathud.settings.noAA.hint" : "특수 행동을 사용할 때 활성화된 효과를 적용하지 않습니다(새로고침 필요)",
-
-    "enhancedcombathud.tooltip.target.name" : "목표",
-    "enhancedcombathud.tooltip.range.name" : "사거리",
-    "enhancedcombathud.tooltip.properties.name" : "분류",
-
-    "enhancedcombathud.settings.thememenu.name": "테마 커스텀",
-    "enhancedcombathud.settings.thememenu.hint": "Argon의 테마를 조정, 교체, 커스텀합니다.",
-    "enhancedcombathud.settings.thememenu.label": "테마 조정",
-
-
-    "enhancedcombathud.themeOptions.save": "설정 저장",
-    "enhancedcombathud.themeOptions.export": "설정 내보내기",
-    "enhancedcombathud.themeOptions.autoTextColorTitle" : "배경에 맞추어 글씨 색상 자동 설정",
-    "enhancedcombathud.themeOptions.autoTextColorHint" : "이 설정은 배경색을 기반으로 하여 텍스트 색상을 읽기 쉬운 색상으로 조정합니다.",
-    "enhancedcombathud.themeOptions.exportThemeName": "내보내는 테마 이름:",
-    "enhancedcombathud.themeOptions.exportTheme.save": "저장",
-    "enhancedcombathud.themeOptions.exportTheme.cancel": "취소",
-
-    "enhancedcombathud.themeOptions.themeTitle": "테마 선택",
-    "enhancedcombathud.themeOptions.themeHint": "테마를 선택하면 조합되어 있는 색상 팔레트가 Argon에 적용됩니다.",
-    
-
-
-    "enhancedcombathud.themeOptions.mainAction" : "행동 색상",
-    "enhancedcombathud.themeOptions.bonusAction" : "추가 행동 색상",
-    "enhancedcombathud.themeOptions.freeAction" : "자유 행동 색상",
-    "enhancedcombathud.themeOptions.reaction" : "반응 행동 색상",
-    "enhancedcombathud.themeOptions.endTurn" : "턴 종료 색상",
-    "enhancedcombathud.themeOptions.tooltip" : "설명 창 색상",
-    "enhancedcombathud.themeOptions.abilityMenu" : "특성치 메뉴 색상",
-    "enhancedcombathud.themeOptions.buttons" : "버튼 색상",
-    "enhancedcombathud.themeOptions.movement" : "속도 칸 색상",
-    
-    "enhancedcombathud.themeOptions.background" : "배경 색상",
-    "enhancedcombathud.themeOptions.color" : "글씨 색상",
-    "enhancedcombathud.themeOptions.border" : "테두리 색상",
-    "enhancedcombathud.themeOptions.boxShadow" : "칸 그림자 색상",
-
-    "enhancedcombathud.themeOptions.mainActionBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.mainActionHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.bonusActionBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.bonusActionHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.freeActionBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.freeActionHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.reactionBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.reactionHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.endTurnBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.endTurnHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-    
-    "enhancedcombathud.themeOptions.tooltipHeader" : "설명 창 상단의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.tooltipSubtitle" : "설명 창 부가 설명의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.tooltipBody" : "설명과 기타 창 메인 영역의 배경/전경/테두리 색상",
-
-    "enhancedcombathud.themeOptions.abilityMenuBase" : "마우스를 올리지 않았을 때의 전경/칸 그림자 색상",
-    "enhancedcombathud.themeOptions.abilityMenuHover" : "마우스를 올렸을 때의 전경/칸 그림자 색상",
-
-    "enhancedcombathud.themeOptions.buttonsBase" : "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
-    "enhancedcombathud.themeOptions.buttonsHover" : "마우스를 올렸을 때의 배경/전경/테두리 색상",
-
-    "enhancedcombathud.themeOptions.movementUsed" : "움직인 수를 나타내는 칸의 배경/그림자 색상",
-    "enhancedcombathud.themeOptions.movementBaseMovement" : "움직일 수 있는 수를 나타내는 칸의 배경/그림자 색상",
-    "enhancedcombathud.themeOptions.movementDashMovement" : "질주 시의 속도를 나타내는 칸의 배경/그림자 색상",
-    "enhancedcombathud.themeOptions.movementDangerMovement" : "이동 수가 초과된 만큼을 나타내는 칸의 배경/그림자 색상"
-
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Argon Combat HUD 켜기",
+        "warning": "Argon Combat HUD: 토큰이 선택되지 않았습니다. HUD를 켜려면 토큰을 선택하십시오."
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "색상",
+        "text": "메인 색상",
+        "hint": "행동 탭과 기타 메인 HUD 기능의 색상"
+      },
+      "fore-color": {
+        "text": "텍스트 색상",
+        "hint": "텍스트 색상"
+      },
+      "color-bonus-action": {
+        "text": "추가 행동 색상",
+        "hint": "추가 행동 탭의 색상"
+      },
+      "color-free-action": {
+        "text": "자유 행동 색상",
+        "hint": "자유 행동 탭의 색상"
+      },
+      "color-reaction": {
+        "text": "반응 행동 색상",
+        "hint": "반응 행동 탭의 색상"
+      },
+      "color-end-turn": {
+        "text": "턴 종료 색상",
+        "hint": "턴 종료 탭의 색상"
+      },
+      "color-tooltip": {
+        "text": "설명 색상",
+        "hint": "설명과 내성 굴림, 기술, 도구 설명 팝업창의 색상"
+      },
+      "theme": {
+        "name": "테마",
+        "hint": "HUD 테마",
+        "custom": "커스텀",
+        "helium": "헬륨",
+        "neon": "네온",
+        "argon": "아르곤",
+        "krypton": "크립톤",
+        "xenon": "제논",
+        "radon": "라돈",
+        "oganesson": "오가네손"
+      },
+      "scale": {
+        "name": "크기",
+        "hint": "HUD 크기 - 자동 조절이 활성화되어있다면 이 설정의 수가 자동계산되는 수에 곱해진 크기가 됩니다."
+      },
+      "noAutoscale": {
+        "name": "자동 조절 끄기",
+        "hint": "화면에 맞게 HUD의 크기를 조정하지 않고 크기 조정 설정에서 고정 값을 사용합니다."
+      },
+      "leftPos": {
+        "name": "좌측 위치",
+        "hint": "좌측의 여백(픽셀 수)"
+      },
+      "botPos": {
+        "name": "하단 위치",
+        "hint": "하단의 여백(픽셀 수)"
+      },
+      "playerDetailsBottom": {
+        "name": "하단에 플레이어 세부사항 표기",
+        "hint": "플레이어의 이름과 클래스에 대한 정보를 캐릭터 이미지 하단에 표시합니다."
+      },
+      "preparedSpells": {
+        "name": "준비된 주문만 표기",
+        "hint": "준비된 주문만 나타나게 합니다."
+      },
+      "showTooltips": {
+        "name": "설명 보이기",
+        "hint": "마우스를 올리면 설명을 볼 수 있도록 합니다."
+      },
+      "showTooltipsSpecial": {
+        "name": "특수 행동에 대한 설명 보이기",
+        "hint": "특수 행동에 마우스를 올리면 그에 대한 설명을 볼 수 있도록 합니다(질주, 퇴각, 밀어붙이기 등)."
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "특성치 설명 보이기",
+        "hint": "특성치 메뉴에서 마우스를 올리면 능력치에 대한 설명을 볼 수 있도록 합니다."
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "기술 설명 보이기",
+        "hint": "특성치 메뉴에서 마우스를 올리면 기술에 대한 설명을 볼 수 있도록 합니다."
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "도구 설명 보이기",
+        "hint": "특성치 메뉴에서 마우스를 올리면 도구에 대한 설명을 볼 수 있도록 합니다."
+      },
+      "fadeOutInactive": {
+        "name": "사라지게 하기",
+        "hint": "마우스를 올리고 있지 않은 시간이 5초가 넘어가면 HUD가 사라지도록 합니다."
+      },
+      "fadeoutDelay": {
+        "name": "사라짐 속도",
+        "hint": "HUD가 사라지는 속도를 조정합니다."
+      },
+      "fadeoutOpacity": {
+        "name": "사라짐 투명도",
+        "hint": "HUD가 사라졌을 때의 투명도를 조정합니다."
+      },
+      "hideMacroPlayers": {
+        "name": "매크로 바와 플레이어 목록 가리기",
+        "hint": "HUD가 열려 있을 때 매크로 바와 플레이어 목록을 가립니다."
+      },
+      "openCombatStart": {
+        "name": "전투 시작시 열기",
+        "hint": "전투가 시작되면 HUD가 나타나도록 합니다."
+      },
+      "tooltipScale": {
+        "name": "설명 크기",
+        "hint": "설명 창의 크기를 조정합니다."
+      },
+      "switchEquip": {
+        "name": "자동 장비",
+        "hint": "착용 세트를 바꾸면 자동으로 장비 상태를 바꿉니다."
+      },
+      "showWeaponsItems": {
+        "name": "무기를 아이템 사용 섹션으로 보이기",
+        "hint": "무기를 '아이템 사용' 섹션에 나타나도록 합니다. 무기 칸이 충분하지 않을 때 유용합니다."
+      },
+      "noAA": {
+        "name": "활성화된 효과 미적용",
+        "hint": "특수 행동을 사용할 때 활성화된 효과를 적용하지 않습니다(새로고침 필요)"
+      },
+      "thememenu": {
+        "name": "테마 커스텀",
+        "hint": "Argon의 테마를 조정, 교체, 커스텀합니다.",
+        "label": "테마 조정"
+      }
+    },
+    "tooltip": {
+      "target": {
+        "name": "목표"
+      },
+      "range": {
+        "name": "사거리"
+      },
+      "properties": {
+        "name": "분류"
+      }
+    },
+    "themeOptions": {
+      "save": "설정 저장",
+      "export": "설정 내보내기",
+      "autoTextColorTitle": "배경에 맞추어 글씨 색상 자동 설정",
+      "autoTextColorHint": "이 설정은 배경색을 기반으로 하여 텍스트 색상을 읽기 쉬운 색상으로 조정합니다.",
+      "exportThemeName": "내보내는 테마 이름:",
+      "exportTheme": {
+        "save": "저장",
+        "cancel": "취소"
+      },
+      "themeTitle": "테마 선택",
+      "themeHint": "테마를 선택하면 조합되어 있는 색상 팔레트가 Argon에 적용됩니다.",
+      "mainAction": "행동 색상",
+      "bonusAction": "추가 행동 색상",
+      "freeAction": "자유 행동 색상",
+      "reaction": "반응 행동 색상",
+      "endTurn": "턴 종료 색상",
+      "tooltip": "설명 창 색상",
+      "abilityMenu": "특성치 메뉴 색상",
+      "buttons": "버튼 색상",
+      "movement": "속도 칸 색상",
+      "background": "배경 색상",
+      "color": "글씨 색상",
+      "border": "테두리 색상",
+      "boxShadow": "칸 그림자 색상",
+      "mainActionBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "mainActionHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "bonusActionBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "bonusActionHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "freeActionBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "freeActionHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "reactionBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "reactionHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "endTurnBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "endTurnHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "tooltipHeader": "설명 창 상단의 배경/전경/테두리 색상",
+      "tooltipSubtitle": "설명 창 부가 설명의 배경/전경/테두리 색상",
+      "tooltipBody": "설명과 기타 창 메인 영역의 배경/전경/테두리 색상",
+      "abilityMenuBase": "마우스를 올리지 않았을 때의 전경/칸 그림자 색상",
+      "abilityMenuHover": "마우스를 올렸을 때의 전경/칸 그림자 색상",
+      "buttonsBase": "마우스를 올리지 않았을 때의 배경/전경/테두리 색상",
+      "buttonsHover": "마우스를 올렸을 때의 배경/전경/테두리 색상",
+      "movementUsed": "움직인 수를 나타내는 칸의 배경/그림자 색상",
+      "movementBaseMovement": "움직일 수 있는 수를 나타내는 칸의 배경/그림자 색상",
+      "movementDashMovement": "질주 시의 속도를 나타내는 칸의 배경/그림자 색상",
+      "movementDangerMovement": "이동 수가 초과된 만큼을 나타내는 칸의 배경/그림자 색상"
+    }
+  }
 }
