@@ -76,7 +76,7 @@ export class TargetPicker{
     document.body.appendChild(element);
     this.element = element;
     if (!this.maxTargets || this.targetCount == this.maxTargets) return this.end(true);
-    showRangeRings(this.ranges.normal, this.ranges.long);
+    showRangeRings(this.ranges.normal, this.ranges.long, this.token);
   }
 
   update(event) {
@@ -91,9 +91,9 @@ export class TargetPicker{
   }
 
   end(res) {
+    clearRanges(true);
     document.querySelector(".control-tool").click();
     this.resolve(res);
-    clearRanges(true);
     this.element.remove();
     Hooks.off("targetToken", this.targetHook);
     document.removeEventListener("mousemove", this.movelistener);

@@ -181,7 +181,7 @@ export function clearRanges(force = false) {
 
 export function showRangeRings(normal, long, object) {
   if(!game.Levels3DPreview?._active) return;
-  clearRanges();
+  clearRanges(true);
   if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, normal);
   if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, long, "#ff0000");
 }

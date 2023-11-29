@@ -79,7 +79,7 @@ export class AccordionPanelCategory extends ArgonComponent{
   toggle(toggle) {
     if (toggle === undefined) toggle = !this.visible;
     this.element.classList.toggle("show", toggle);
-    this.element.style.width = toggle ? `${this._realWidth}px` : "0px";
+    this.element.style.width = toggle ? `unset` : "0px";
   }
 
   async _renderInner() {
@@ -101,10 +101,10 @@ export class AccordionPanelCategory extends ArgonComponent{
     } else if (closestMultiplier) {
       buttonContainer.style.gridTemplateColumns = `repeat(${closestMultiplier}, 1fr)`;
     }
-    this.element.classList.add("show");
+    this.element.style.width = `unset`;
+    await new Promise(resolve => setTimeout(resolve, 5));
     const width = this.element.offsetWidth;
     this.element.style.width = `0px`;
-    this.element.classList.remove("show");
     this._realWidth = width;
   }
 }
