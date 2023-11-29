@@ -130,7 +130,7 @@ export class CoreHUD extends Application{
 
   _onUpdateItem(item) {
     if (item.parent !== this._actor) return;
-    this.accordionPanelCategories.forEach(category => category.setUses(item));
+    this.accordionPanelCategories.forEach(category => category.setUses());
     for (const itemButton of this.itemButtons) {
       if (itemButton.item === item) itemButton.render();
     }
@@ -152,6 +152,7 @@ export class CoreHUD extends Application{
   _onUpdateActor(actor) {
     if (actor !== this._actor) return;
     this.components.portrait.render();
+    this.accordionPanelCategories.forEach(category => category.setUses());
     for (const itemButton of this.itemButtons) {
       if (Number.isNumeric(itemButton.quantity)) itemButton.render();
     }
