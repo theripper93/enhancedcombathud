@@ -141,7 +141,7 @@ export class echThemeOptions extends FormApplication {
                                 console.log(echThemeOptions.defaultOptions.getThemeColors());
                                 const themeName = $(event).find('input[name="echExportThemeName"]').val();
                                 const theme = new File([new Blob([JSON.stringify(echThemeOptions.defaultOptions.getThemeColors())], { type: "application/json" })], `${themeName}.json`);
-                                FilePicker.upload("data", "./modules/enhancedcombathud/scripts/themes/", theme).then((response) => {
+                                FilePicker.uploadPersistent("enhancedcombathud", "themes", theme).then((response) => {
                                     echThemeOptions.defaultOptions.buildDropdown(themeName);
                                 });
                             },
@@ -192,30 +192,41 @@ export class echThemeOptions extends FormApplication {
                 // Export Theme
                 return theme.colors;
             },
-            buildDropdown: (selectedTheme) => {
+            buildDropdown: async (selectedTheme) => {
                 if (typeof selectedTheme == "undefined") game.settings.get("enhancedcombathud", "echThemeData").theme;
 
-                $("#echThemeOptions").find('select[name="theme"] option').remove();
+                const echThemeOptions = document.getElementById("echThemeOptions");
+                const selectTheme = echThemeOptions.querySelector('select[name="theme"]');
+                selectTheme.innerHTML = "";
 
-                FilePicker.browse("user", `./modules/enhancedcombathud/scripts/themes`, { extensions: [".json"] })
-                    .then((response) => {
-                        let files = response.files;
-                        if (files.length > 0) {
-                            return files;
-                        }
-                        throw TypeError(`No theme files found in enhancedcombathud/scripts/themes`);
-                    })
-                    .then((files) => {
-                        $("#echThemeOptions").find('select[name="theme"]').append(`<option value="custom">Custom</option>`);
-                        files.forEach((file) => {
-                            let filename = file.split("/")[file.split("/").length - 1].replace(/\.json/gi, "");
-                            $("#echThemeOptions")
-                                .find('select[name="theme"]')
-                                .append(`<option value="${filename}">${filename[0].toUpperCase() + filename.substring(1)}</option>`);
-                        });
-                        $("#echThemeOptions").find('select[name="theme"]').val(selectedTheme);
-                    })
-                    .catch((error) => console.log(error));
+                const coreThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/scripts/themes`, {extensions: [".json"]})).files;
+
+                const customThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/storage/themes`, {extensions: [".json"]})).files;
+
+
+
+                function createOption(file) {
+                    const filename = file.split("/")[file.split("/").length - 1].replace(/\.json/gi, "");
+                    const option = document.createElement("option");
+                    option.value = filename;
+                    option.text = filename[0].toUpperCase() + filename.substring(1);
+                    selectTheme.appendChild(option);
+                }
+
+                function createOptGroup(label) {
+                    const optgroup = document.createElement("optgroup");
+                    optgroup.label = label;
+                    selectTheme.appendChild(optgroup);
+                }
+
+                createOption("custom");
+                createOptGroup("Core Themes");
+                coreThemes.forEach(createOption);
+                createOptGroup("Custom Themes");
+                customThemes.forEach(createOption);
+
+                echThemeOptions.querySelector('select[name="theme"]').value = selectedTheme;
+
             },
         };
     }
@@ -285,17 +296,20 @@ export class echThemeOptions extends FormApplication {
                 };
 
                 if (selectedTheme != "custom") {
-                    fetch(`./modules/enhancedcombathud/scripts/themes/${selectedTheme}.json`)
-                        .then((response) => response.json())
-                        .then((colors) => {
-                            updateColors(colors);
-                        });
+                    ui.ARGON.getThemeJson(selectedTheme).then((theme) => {
+                        updateColors(theme);
+                    });
                 } else {
                     updateColors(game.settings.get("enhancedcombathud", "echThemeData").colors);
                 }
             });
 
-        // Update Custom Themes
+        // Export theme
+
+        html[0].querySelector('button[name="export"]').addEventListener("click", (event) => {
+            event.preventDefault();
+            echThemeOptions.defaultOptions.createTheme()
+        });
     }
     async _updateObject(event, formData) {
         function setDeepObj(obj, path, val) {

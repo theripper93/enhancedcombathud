@@ -594,8 +594,7 @@ export class CoreHUD extends Application{
     if (theme.theme == "custom") {
       setThemeColors(theme.colors);
     } else {
-      const file = await fetch(`./modules/enhancedcombathud/scripts/themes/${theme.theme}.json`)
-      const json = await file.json();
+      const json = await this.getThemeJson(theme.theme);
       setThemeColors(json);
     }
 
@@ -603,6 +602,15 @@ export class CoreHUD extends Application{
 
     if (noBlur) document.documentElement.style.setProperty("--ech-blur-amount", "");
     
+  }
+
+  async getThemeJson(themeName) {
+    debugger
+    let file;
+    file = await fetch(`./modules/enhancedcombathud/scripts/themes/${themeName}.json`)
+    if(!file.ok) file = await fetch(`./modules/enhancedcombathud/storage/themes/${themeName}.json`)
+    const json = await file.json();
+    return json;
   }
 }
 
