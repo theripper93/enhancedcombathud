@@ -44,6 +44,10 @@ export class ItemButton extends ArgonComponent{
     return null;
   }
 
+  get quantitySecondary() {
+    return null;
+  }
+
   get ranges(){
     return {
       normal: null,
@@ -68,10 +72,16 @@ export class ItemButton extends ArgonComponent{
   }
 
   async getData() {
-    if(!this.visible) return {};
+    if (!this.visible) return {};
+    const quantity = this.quantity;
+    const quantitySecondary = this.quantitySecondary;
     return {
       label: this.label,
-      icon: this.icon
+      icon: this.icon,
+      quantity: quantity,
+      hasQuantity: Number.isNumeric(quantity),
+      quantitySecondary: this.quantitySecondary,
+      hasQuantitySecondary: Number.isNumeric(quantitySecondary),
     }
   }
 
@@ -142,10 +152,10 @@ export class ItemButton extends ArgonComponent{
     this.element.style.display = "";
     this.element.style.backgroundImage = `url("${this.icon}")`;
     const quantity = this.quantity;
-    if(Number.isNumeric(quantity)) {
-      this.element.classList.add("has-count");
-      this.element.dataset.itemCount = quantity;
-      this.element.style.filter = quantity === 0 ? "grayscale(1)" : null;
+    const quantitySecondary = this.quantitySecondary;
+    if (Number.isNumeric(quantity) || Number.isNumeric(quantitySecondary)) {
+      const isBothZero = (( quantity ?? 0) + (quantitySecondary ?? 0)) === 0;
+      this.element.style.filter = isBothZero ? "grayscale(1)" : null;
     }
     if (this.inActionPanel) {
       this.element.classList.remove("feature-element");

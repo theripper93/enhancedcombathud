@@ -72,29 +72,6 @@
 .action-element.item-button:hover {
     filter: brightness(150%);
 }
-.action-element.has-count:before {
-    border-top: 4rem solid transparent;
-    border-right: 4rem solid transparent;
-    content: "";
-    filter: brightness(150%);
-    height: 0;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 0;
-}
-.action-element.has-count:after {
-    align-items: center;
-    content: attr(data-item-count);
-    display: flex;
-    font-size: 1.5rem;
-    height: 2.5rem;
-    justify-content: center;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 2.5rem;
-}
 
 .action-element-title {
     align-items: center;
@@ -281,8 +258,19 @@
 .features-container.is-spells .feature-element {
     margin-right: 0rem;
 }
+.action-hud .quantity-1 {
+    align-items: center;
+    display: flex;
+    font-size: 1.5rem;
+    height: 2.5rem;
+    justify-content: center;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 2.5rem;
+}
 
-.feature-element.has-count:before {
+.action-hud .quantity-1 .border-triangle {
     border-top: 4rem solid transparent;
     border-right: 4rem solid transparent;
     content: "";
@@ -292,17 +280,32 @@
     top: 0px;
     width: 0;
 }
-.feature-element.has-count:after {
+
+.action-hud .quantity-2 {
     align-items: center;
-    content: attr(data-item-count);
     display: flex;
     font-size: 1.5rem;
     height: 2.5rem;
     justify-content: center;
-    left: 0px;
+    right: 0px;
     position: absolute;
     top: 0px;
     width: 2.5rem;
+}
+
+.action-hud .quantity-2 .border-triangle{
+    border-top: 4rem solid transparent;
+    border-left: 4rem solid transparent;
+    content: "";
+    height: 0;
+    right: 0px;
+    position: absolute;
+    top: 0px;
+    width: 0;
+}
+
+.action-hud .quantity-2 span, .action-hud .quantity-1 span {
+    z-index: 1;
 }
 
 .feature-element-title {

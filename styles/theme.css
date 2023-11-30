@@ -86,7 +86,7 @@
 	border-color: var(--ech-endTurn-hover-border);
 	color: var(--ech-endTurn-hover-color);
 }
-.action-element.has-count:before {
+.action-element.has-count:before, .action-element .quantity-1 .border-triangle, .action-element .quantity-2 .border-triangle {
 	/* ADD THEME OPTIONS */
 	border-top-color: var(--ech-mainAction-base-background);
 }
@@ -126,7 +126,7 @@
 	/* ADD THEME OPTIONS */
   	filter: var(150%);
 }
-.feature-element.has-count:before {
+.feature-element.has-count:before, .feature-element .quantity-1 .border-triangle, .feature-element .quantity-2 .border-triangle {
 	/* ADD THEME OPTIONS */
 	border-top-color: var(--ech-mainAction-hover-background);
 }
