@@ -63,6 +63,10 @@ export class CoreHUD extends Application{
     Hooks.on("controlToken", this._onControlToken.bind(this));
     Hooks.on("createItem", this._onCreateItem.bind(this));
     Hooks.on("deleteItem", this._onDeleteItem.bind(this));
+    Hooks.on("createActiveEffect", this._onChangeActiveEffect.bind(this));
+    Hooks.on("deleteActiveEffect", this._onChangeActiveEffect.bind(this));
+    Hooks.on("updateActiveEffect", this._onChangeActiveEffect.bind(this));
+
     this.setColorSettings();
 
     document.addEventListener("wheel", (event) => ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY));
@@ -151,7 +155,7 @@ export class CoreHUD extends Application{
 
   _onUpdateActor(actor) {
     if (actor !== this._actor) return;
-    this.components.portrait.render();
+    this.components.portrait.refresh();
     this.accordionPanelCategories.forEach(category => category.setUses());
     for (const itemButton of this.itemButtons) {
       if (Number.isNumeric(itemButton.quantity)) itemButton.render();
@@ -165,6 +169,11 @@ export class CoreHUD extends Application{
 
   _onDeleteItem(item) {
     if(item.parent === this._actor) this._checkItemCount();
+  }
+
+  _onChangeActiveEffect(activeEffect) {
+    if(activeEffect.parent !== this._actor) return;
+    this.components.portrait.refresh();
   }
 
   _checkItemCount() {

@@ -1,6 +1,12 @@
 import {ArgonComponent} from "../component.js";
 
 export class PortraitPanel extends ArgonComponent {
+
+  constructor (...args) {
+    super(...args);
+    this.refresh = debounce(this.refresh.bind(this), 100);
+  }
+
   get classes() {
     return ["portrait-hud"]
   }
@@ -92,6 +98,10 @@ export class PortraitPanel extends ArgonComponent {
         onClick: (e) => ui.ARGON.toggleMinimize()
       }
     ];
+  }
+
+  refresh() {
+    this.render();
   }
   
   async _renderInner(data) {
