@@ -386,6 +386,7 @@ export class CoreHUD extends Application{
   
     const position = {
       bottom: isMinimizeHud ? "0px" : `${game.settings.get("enhancedcombathud", "botPos")}px`,
+      left: `${game.settings.get("enhancedcombathud", "leftPos")}px`,
       transform: isMinimizeHud ? `scale(${scale > 1 ? 1 : scale}) translateY(100%)` : `scale(${scale > 1 ? 1 : scale})`,
       width: `calc(100vw * ${scale < 1 ? 1 + parseFloat(1 - scale) * 1 : 1})`,
     };

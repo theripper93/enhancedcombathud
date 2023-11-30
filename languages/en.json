@@ -48,6 +48,14 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "Theme Mode",
+        "hint": "If set to 'Client' every player will be able to choose it's own theme. If set to 'World' the theme selected by the GM will be the same for every player.",
+        "choices": {
+          "client": "Client",
+          "world": "World"
+        }
+      },
       "scale": {
         "name": "Scale",
         "hint": "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale"

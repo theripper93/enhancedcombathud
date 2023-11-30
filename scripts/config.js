@@ -366,12 +366,33 @@ export function initConfig() {
         }
     });
 
+    game.settings.register("enhancedcombathud", "globalTheme", {
+        name: game.i18n.localize("enhancedcombathud.settings.globalTheme.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.globalTheme.hint"),
+        scope: "world",
+        config: true,
+        type: String,
+        requiresReload: true,
+        choices: {
+            client: game.i18n.localize("enhancedcombathud.settings.globalTheme.choices.client"),
+            world: game.i18n.localize("enhancedcombathud.settings.globalTheme.choices.world"),
+        },
+        default: "client",
+        onChange: () => ui.ARGON.refresh(),
+    });
+
+    const globalTheme = game.settings.get("enhancedcombathud", "globalTheme");
+
     game.settings.register("enhancedcombathud", "echThemeData", {
         name: "Data used for Theming",
         type: Object,
         default: defaultTheme,
-        scope: "client",
-        config: false, // Doesn't show up in config
+        scope: globalTheme,
+        config: false,
+        onChange: () => {
+            ui.ARGON.setColorSettings();
+            ui.ARGON.refresh()
+        },
     });
 
     // Define a settings submenu which handles advanced configuration needs
@@ -381,7 +402,7 @@ export function initConfig() {
         hint: game.i18n.localize("enhancedcombathud.settings.thememenu.hint"),
         icon: "fas fa-bars",
         type: echThemeOptions,
-        restricted: false,
+        restricted: globalTheme === "world",
     });
 
     game.settings.register("enhancedcombathud", "rangefinder", {
