@@ -605,7 +605,6 @@ export class CoreHUD extends Application{
   }
 
   async getThemeJson(themeName) {
-    debugger
     let file;
     file = await fetch(`./modules/enhancedcombathud/scripts/themes/${themeName}.json`)
     if (!file.ok) file = await fetch(`./modules/enhancedcombathud/storage/themes/${themeName}.json`)
