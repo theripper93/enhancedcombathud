@@ -130,8 +130,9 @@ export class ItemButton extends ArgonComponent{
     if (this.useTargetPicker && this.targets > 0) {
       isTargetPicker = true;
       const picker = new TargetPicker({token: this.token, targets: this.targets, ranges: this.ranges});
-      await picker.promise;
+      const result = await picker.promise;
       isTargetPicker = false;
+      if(!result) return;
     }
     this._onLeftClick(event);
   }
