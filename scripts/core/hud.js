@@ -186,7 +186,8 @@ export class CoreHUD extends Application{
 
   _onUpdateToken(tokenDocument, updates) {
     if (tokenDocument !== this._token?.document) return;
-    this.components.movement?.onTokenUpdate(updates);
+    if(updates.actorId) this.bind(tokenDocument);
+    else this.components.movement?.onTokenUpdate(updates);
   }
 
   _onControlToken(token, controlled) {
