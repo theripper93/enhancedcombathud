@@ -60,6 +60,10 @@
         "name": "Scale",
         "hint": "HUD Scale - if autoscale is enabled this setting will be used as a multiplier on top of the calculated scale"
       },
+      "dialogTheme": {
+        "name": "Dialog Theme",
+        "hint": "Apply the Argon Theme to Dialogs opened from the HUD"
+      },
       "autoScale": {
         "name": "Auto Scale",
         "hint": "Automatically scale the HUD based on the screen size. Ignores the scale setting"

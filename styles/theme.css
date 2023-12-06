@@ -139,36 +139,36 @@
 .ech-highjack-window {
     font-family: var(--ech-font-family);
 }
-.ech-highjack-window .window-header {
+.ech-highjack-window.window-app .window-header {
     background-color: var(--ech-tooltip-header-background);
 	border-color: var(--ech-tooltip-header-border);
 	color: var(--ech-tooltip-header-color);
 }
-.ech-highjack-window .window-content {
+.ech-highjack-window.window-app .window-content {
     background-color: var(--ech-tooltip-body-background);
 	border-color: var(--ech-tooltip-body-border);
 	color: var(--ech-tooltip-body-color);
 }
-.ech-highjack-window .window-content .form-group label,
-.ech-highjack-window .window-content .form-group input,
-.ech-highjack-window .window-content .form-group select {
+.ech-highjack-window.window-app .window-content .form-group label,
+.ech-highjack-window.window-app .window-content .form-group input,
+.ech-highjack-window.window-app .window-content .form-group select {
 	color: var(--ech-tooltip-body-color);
 }
-.ech-highjack-window .window-content .form-group input,
-.ech-highjack-window .window-content .form-group select {
+.ech-highjack-window.window-app .window-content .form-group input,
+.ech-highjack-window.window-app .window-content .form-group select {
 	/* ADD THEME OPTIONS */
     background: rgba(0 0 0 / 0.5);
 }
-.ech-highjack-window .window-content .form-group select * {
+.ech-highjack-window.window-app .window-content .form-group select * {
     background-color: var(--ech-tooltip-body-background);
 	border-color: var(--ech-tooltip-body-border);
 }
-.ech-highjack-window .window-content .form-group input:disabled,
-.ech-highjack-window .window-content .form-group input::placeholder {
+.ech-highjack-window.window-app .window-content .form-group input:disabled,
+.ech-highjack-window.window-app .window-content .form-group input::placeholder {
 	color: var(--ech-tooltip-body-color);
 }
 
-.ech-highjack-window .dialog-buttons button {
+.ech-highjack-window.dialog .dialog-buttons button {
     background-color: var(--ech-buttons-base-background);
     border-color: var(--ech-buttons-base-border);
 	border-style: solid;
@@ -177,17 +177,17 @@
 	opacity: 0.7;
 	transition: all 0.3s ease-in-out;
 }
-.ech-highjack-window .dialog-buttons button.default {
+.ech-highjack-window.dialog .dialog-buttons button.default {
     background-color: var(--ech-buttons-hover-background);
     border-color: var(--ech-buttons-hover-border);
 	border-style: solid;
     color: var(--ech-buttons-hover-color);
 	opacity: 0.8;
 }
-.ech-highjack-window .dialog-buttons button:hover, 
-.ech-highjack-window .dialog-buttons button:active, 
-.ech-highjack-window .dialog-buttons button:focus, 
-.ech-highjack-window .dialog-buttons button .active {
+.ech-highjack-window.dialog .dialog-buttons button:hover, 
+.ech-highjack-window.dialog .dialog-buttons button:active, 
+.ech-highjack-window.dialog .dialog-buttons button:focus, 
+.ech-highjack-window.dialog .dialog-buttons button .active {
     background-color: var(--ech-buttons-hover-background);
     border-color: var(--ech-buttons-hover-border);
     color: var(--ech-buttons-hover-color);

@@ -437,7 +437,7 @@ export class CoreHUD extends Application{
   
       html.style.top = offset.top > 0 ? offset.top + "px" : "0";
       html.style.left = offset.left + "px";
-      html.classList.add("ech-highjack-window");
+      if(game.settings.get("enhancedcombathud", "dialogTheme")) html.classList.add("ech-highjack-window");
   
       // Update dialog with new position data for dragging.
       dialog.position.left = offset.left;

@@ -9,7 +9,7 @@
     z-index: 10000 !important;
 }
 
-.ech-highjack-window .window-header {
+.ech-highjack-window.window-app .window-header {
     backdrop-filter: var(--ech-blur-amount);
     border-bottom-width: 0px;
     border-top-left-radius: 3px;
@@ -22,21 +22,21 @@
     font-weight: 900;
     line-height: 1;
 }
-.ech-highjack-window .window-header .window-title {
+.ech-highjack-window.window-app .window-header .window-title {
     font-weight: 600;
     text-transform: uppercase;
 }
-.ech-highjack-window .window-header .close {
+.ech-highjack-window.window-app .window-header .close {
     font-size: 0px;
     position: absolute;
     right: 5px;
     top: 5px;
 }
-.ech-highjack-window .window-header .close i {
+.ech-highjack-window.window-app .window-header .close i {
     font-size: 16px;
 }
 
-.ech-highjack-window .window-content {
+.ech-highjack-window.window-app .window-content {
     backdrop-filter: var(--ech-blur-amount);
     background-image: none;
     border: 1px solid transparent;
@@ -44,38 +44,38 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.ech-highjack-window .window-content .form-group {
+.ech-highjack-window.window-app .window-content .form-group {
     margin: 0.5rem 0rem;
 }
-.ech-highjack-window .window-content .form-group input,
-.ech-highjack-window .window-content .form-group select {
+.ech-highjack-window.window-app .window-content .form-group input,
+.ech-highjack-window.window-app .window-content .form-group select {
     border-radius: 0px;
     padding: 0.5rem;
     height: auto;
     border-width: 0px;
 }
 
-.ech-highjack-window .window-content .form-group select * {
+.ech-highjack-window.window-app .window-content .form-group select * {
     padding: 0.5rem 0.75rem;
 }
-.ech-highjack-window .window-content .form-group input:disabled,
-.ech-highjack-window .window-content .form-group input::placeholder {
+.ech-highjack-window.window-app .window-content .form-group input:disabled,
+.ech-highjack-window.window-app .window-content .form-group input::placeholder {
     opacity: 0.6;
 }
-.ech-highjack-window .dialog-buttons {
+.ech-highjack-window.dialog .dialog-buttons {
     margin-top: 0.5rem;
 }
-.ech-highjack-window .dialog-buttons button {
+.ech-highjack-window.dialog .dialog-buttons button {
     border: 1px solid transparent;
     border-radius: 0;
     margin: 0px;
 }
-.ech-highjack-window .dialog-buttons button:first-child {
+.ech-highjack-window.dialog .dialog-buttons button:first-child {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-right-width: 0px;
 }
-.ech-highjack-window .dialog-buttons button:last-child {
+.ech-highjack-window.dialog .dialog-buttons button:last-child {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-left-width: 0px;
