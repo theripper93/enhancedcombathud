@@ -231,6 +231,18 @@
     "err": {
       "unsupportedActorType": "Argon: The Actor type '%t' is not supported by Argon Combat HUD.",
       "moduleNotActive": "Argon CORE: System specific module not installed or not active, please install and enable the %m module if available."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Target Picker Tutorial",
+        "content": "When this feature is enabled, whenever you click on an action in the HUD, you will be prompted with a target selection mode.\nWhile in target selection:",
+        "list": {
+          "0": "The number of Selected/Required targets will follow your cursor",
+          "1": "Left click (or press T) to target a token",
+          "2": "Right click to cancel target selection",
+          "3": "Press the `+` or `-` key to increase/decrease the number of maximum targets manually"
+        }
+      }
     }
   }
 }

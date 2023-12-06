@@ -395,6 +395,13 @@ export function initConfig() {
         },
     });
 
+    game.settings.register("enhancedcombathud", "targetPickerGuideShown", {
+        type: Boolean,
+        default: false,
+        scope: "client",
+        config: false,
+    });
+
     // Define a settings submenu which handles advanced configuration needs
     game.settings.registerMenu("enhancedcombathud", "echThemeOptions", {
         name: game.i18n.localize("enhancedcombathud.settings.thememenu.name"),

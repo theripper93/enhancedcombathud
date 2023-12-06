@@ -13,6 +13,7 @@ import {PortraitPanel} from "./components/portrait/portraitPanel.js";
 import {WeaponSets} from "./components/main/weaponSets.js";
 import { MovementHud } from "./components/main/movementHud.js";
 import {Tooltip} from "./tooltip.js";
+import { showTargetPickerGuide } from "./targetPicker.js";
 
 import { PassTurnPanel } from "./prefab/passTurnPanel.js";
 
@@ -453,6 +454,13 @@ export class CoreHUD extends Application{
     setTimeout(() => {
       Hooks.off("renderDialog", hookId)
     }, 200);
+  }
+
+  showTargetPickerGuide() {
+    showTargetPickerGuide();
+    Hooks.once("renderDialog", (dialog, html) => {
+      if(game.settings.get("enhancedcombathud", "dialogTheme")) html[0].classList.add("ech-highjack-window");
+    });
   }
 
   refresh() {
