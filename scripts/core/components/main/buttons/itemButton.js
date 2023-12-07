@@ -9,7 +9,7 @@ export class ItemButton extends ArgonComponent{
     this._isPrimary = isPrimary;
     this._inActionPanel = inActionPanel ?? isWeaponSet;
     if (this.isWeaponSet) this.hookId = Hooks.on("argon-onSetChangeUpdateItem", this._onSetChange.bind(this));
-    ui.ARGON.itemButtons.push(this);
+    ui.ARGON.addItemButtons(this);
   }
 
   get classes() {

@@ -104,6 +104,11 @@ export class CoreHUD extends Application{
     return Array.from(this._itemButtons);
   }
 
+  addItemButtons(buttons) {
+    if (!Array.isArray(buttons)) buttons = [buttons];
+    this._itemButtons.add(...buttons);
+  }
+
   get accordionPanelCategories() {
     return Array.from(this._accordionPanelCategories);
   }
