@@ -117,6 +117,19 @@
     text-transform: lowercase;
 }
 
+.action-element-container .feature-element {
+    max-height: 100px;
+    max-width: 105px;
+    min-height: 100px;
+    min-width: 105px;
+    margin: 0;
+}
+
+.action-element-container .feature-element .feature-element-title {
+    max-height: 2.5rem;
+    text-align: center;
+}
+
 .features-container {
     bottom: 270px;
     display: flex;
