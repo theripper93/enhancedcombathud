@@ -118,7 +118,8 @@ export async function showTargetPickerGuide() {
   }
   const result = await Dialog.prompt({
     title: game.i18n.localize("enhancedcombathud.targetPicker.dialog.title"),
-    content: `${game.i18n.localize("enhancedcombathud.targetPicker.dialog.content")}<ul class="guide-list" style="list-style:none;padding:0">${list}</ul>`
+    content: `<ul class="guide-list" style="list-style:none;padding:0">${list}</ul>`,
+    close: () => {return false},
   });
   if(result) game.settings.set("enhancedcombathud", "targetPickerGuideShown", true);
 }

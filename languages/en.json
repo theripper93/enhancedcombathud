@@ -235,7 +235,6 @@
     "targetPicker": {
       "dialog": {
         "title": "Target Picker Tutorial",
-        "content": "When this feature is enabled, whenever you click on an action in the HUD, you will be prompted with a target selection mode.\nWhile in target selection:",
         "list": {
           "0": "The number of Selected/Required targets will follow your cursor",
           "1": "<span>Left click</span> or press <span>T</span> to target a token",
