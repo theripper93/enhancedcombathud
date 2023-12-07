@@ -459,3 +459,24 @@
     max-width: 25px;
     width: 100%;
 }
+
+/* Configuration Button */
+
+.portrait-hud .portrait-actor-configuration{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: xxx-large;
+    padding: 1rem;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.portrait-hud .portrait-actor-configuration:hover{
+    opacity: 1;
+}
+
+.portrait-hud .portrait-actor-configuration i{
+    cursor: pointer;
+}

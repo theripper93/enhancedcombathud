@@ -43,6 +43,10 @@ export class PortraitPanel extends ArgonComponent {
     return 0;
   }
 
+  get configurationTemplate() {
+    return null;
+  }
+
   async getData() {
     const data = {
       name: this.name,
@@ -61,6 +65,8 @@ export class PortraitPanel extends ArgonComponent {
   async activateListeners(html) {
     super.activateListeners(html);
     html.querySelector(".death-save-btn").addEventListener("click", this._onDeathSave.bind(this));
+    if(this.configurationTemplate) html.querySelector("#argon-actor-config")?.addEventListener("click", this._onConfigure.bind(this));
+    else html.querySelector(".portrait-actor-configuration")?.remove();
     const toggleMinimizeButton = this._buttons.find(button => button.id === "toggle-minimize");
     if(toggleMinimizeButton) {
       toggleMinimizeButton.element.addEventListener("click", (e) => {
@@ -142,5 +148,48 @@ export class PortraitPanel extends ArgonComponent {
         deathBtn.style.pointerEvents = "none";
       }
     }
+  }
+
+  async _onConfigure(event) {
+    event.preventDefault();
+    const template = this.configurationTemplate;
+
+
+    (new ArgonPortraitConfig(this.actor, template)).render(true);
+  }
+}
+
+class ArgonPortraitConfig extends FormApplication {
+  constructor(actor, template) {
+    super();
+    this.actor = actor;
+    this._template = template;
+  }
+
+  get title() {
+    return `Configure ${this.actor.name}`;
+  }
+
+  get template() {
+    return this._template;
+  }
+
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      id: "argon-actor-config-form",
+      title: ``,
+      template: "",
+      width: 400,
+      height: "auto",
+      closeOnSubmit: true
+    });
+  }
+
+  getData() {
+    return {actor: this.actor, ...this.actor};
+  }
+
+  async _updateObject(event, formData) {
+    await this.actor.update(formData);
   }
 }

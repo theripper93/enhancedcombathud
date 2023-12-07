@@ -84,6 +84,7 @@
     text-transform: uppercase;
     width: 100%;
     text-align: center;
+    overflow: hidden;
 }
 
 .action-element.item-button .action-element-title {
@@ -126,8 +127,10 @@
 }
 
 .action-element-container .feature-element .feature-element-title {
-    max-height: 2.5rem;
+    max-height: 3rem;
     text-align: center;
+    text-transform: uppercase;
+    font-size: small;
 }
 
 .features-container {
