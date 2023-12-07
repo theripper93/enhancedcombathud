@@ -167,7 +167,7 @@ class ArgonPortraitConfig extends FormApplication {
   }
 
   get title() {
-    return `Configure ${this.actor.name}`;
+    return `${game.i18n.localize("Configure")} ${this.actor.name}`;
   }
 
   get template() {
@@ -191,5 +191,6 @@ class ArgonPortraitConfig extends FormApplication {
 
   async _updateObject(event, formData) {
     await this.actor.update(formData);
+    ui.ARGON.refresh()
   }
 }
