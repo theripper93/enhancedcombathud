@@ -114,11 +114,11 @@ export async function showTargetPickerGuide() {
   let list = "";
   const elementsCount = 4;
   for (let i = 0; i < elementsCount; i++) {
-    list += `<li style="font-weight: 900">${game.i18n.localize(`enhancedcombathud.targetPicker.dialog.list.${i}`)}</li>`;
+    list += `<li class="notification info" style="font-weight: 900">${game.i18n.localize(`enhancedcombathud.targetPicker.dialog.list.${i}`)}</li>`;
   }
   const result = await Dialog.prompt({
     title: game.i18n.localize("enhancedcombathud.targetPicker.dialog.title"),
-    content: `${game.i18n.localize("enhancedcombathud.targetPicker.dialog.content")}<ul>${list}</ul>`
+    content: `${game.i18n.localize("enhancedcombathud.targetPicker.dialog.content")}<ul class="guide-list" style="list-style:none;padding:0">${list}</ul>`
   });
   if(result) game.settings.set("enhancedcombathud", "targetPickerGuideShown", true);
 }
