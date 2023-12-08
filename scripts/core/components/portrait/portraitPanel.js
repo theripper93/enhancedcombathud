@@ -120,6 +120,7 @@ export class PortraitPanel extends ArgonComponent {
         const span = document.createElement("span");
         span.innerText = stat.text;
         span.style.color = stat.color;
+        if (stat.id != undefined) span.id = stat.id;
         sb.appendChild(span);
       }
       this.element.appendChild(sb);
