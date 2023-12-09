@@ -15,28 +15,32 @@
     width: 115px;
 
     pointer-events: all;
-}
-.movement-hud .movement-current,
-.movement-hud i.fas {
-    font-size: 1.8rem;
-}
-.movement-spaces {
-    align-items: center;
-    align-content: center;
-    display: flex;
-    flex-flow: wrap;
-    flex-direction: column-reverse;
-    margin-bottom: 0.5rem;
-    max-height: 246px;
-    width: 100%;
-}
-.movement-spaces .movement-space {
-    border-radius: 3px;
-    box-shadow: none;
-    height: 25px;
-    margin: 0.5rem 0.3rem;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-    max-width: 25px;
-    width: 100%;
+
+    .movement-current,
+    i.fas {
+        font-size: 1.8rem;
+    }
+
+    .movement-spaces {
+        align-items: center;
+        align-content: center;
+        display: flex;
+        flex-flow: wrap;
+        flex-direction: column-reverse;
+        margin-bottom: 0.5rem;
+        max-height: 246px;
+        width: 100%;
+    }
+
+    .movement-spaces .movement-space {
+        border-radius: 3px;
+        box-shadow: none;
+        height: 25px;
+        margin: 0.5rem 0.3rem;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        max-width: 25px;
+        width: 100%;
+    }
+
 }

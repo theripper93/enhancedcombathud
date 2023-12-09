@@ -20,125 +20,126 @@
     z-index: 10000;
 
     pointer-events: all;
-}
 
-.ech-tooltip.ability-tooltip {
-    transform-origin: left center;
-}
+    &.ability-tooltip {
+        transform-origin: left center;
+    }
+    
+    &.ech-show-tooltip {
+        opacity: 1;
+    }
+    .ech-tooltip-header {
+        backdrop-filter: var(--ech-blur-amount);
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding: 1rem 0.5rem 2rem;
+        position: relative;
+        text-align: center;
+    }
+    &.hide-subtitle .ech-tooltip-header {
+        padding: 1rem 0.5rem;
+    }
+    .ech-tooltip-header h2 {
+        border-width: 0px;
+    }
+    .ech-tooltip-subtitle {
+        border-radius: 3px;
+        left: 50%;
+        margin-bottom: 0px;
+        padding: 0.5rem 1rem;
+        position: absolute;
+        top: 0px;
+        transform: translate(-50%, -17.5px);
+        z-index: 10000;
+    }
+    &.hide-subtitle .ech-tooltip-subtitle {
+        display: none;
+    }
+    
+    .ech-tooltip-body {
+        backdrop-filter: var(--ech-blur-amount);
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        padding: 2rem 1rem 1rem;
+        text-align: left;
+        position: relative;
+    }
+    &.hide-subtitle .ech-tooltip-body {
+        padding: 1rem;
+    }
+    .ech-tooltip-body .ech-tooltip-description {
+        margin-bottom: 0.5rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        max-height: 200px;
+        padding: 0rem 1rem;
+        overflow: auto;
+        scroll-behavior: smooth;
+    }
+    .ech-tooltip-body .ech-tooltip-description a.entity-link {
+        border-radius: 0.25rem;
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        margin-right: 0.25rem;
+        padding: 0.35em 0.65em;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        word-break: break-all;
+    }
+    .ech-tooltip-body .ech-tooltip-details {
+        display: grid;
+        gap: 1rem;
+    }
+    .ech-tooltip-body .ech-tooltip-details > div {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+    }
+    &.hideTargetRange .ech-tooltip-details > div {
+        display: none;
+    }
+    .ech-tooltip-body .ech-tooltip-details > div > span {
+        padding: 0.25rem 0rem;
+    }
+    .ech-tooltip-body .ech-tooltip-details > div > span:first-child {
+        opacity: 0.6;
+        text-transform: uppercase;
+    }
+    .ech-tooltip-body .ech-tooltip-details > div > span:last-child {
+        font-size: 1.3rem;
+    }
+    .ech-tooltip-body .ech-tooltip-properties {
+        margin-top: 1rem;
+    }
+    &.hideProperties .ech-tooltip-body .ech-tooltip-properties {
+        display: none;
+    }
+    .ech-tooltip-body .ech-tooltip-properties h3 {
+        opacity: 0.6;
+        text-transform: uppercase;
+        border: none;
+    }
+    .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
+        border-radius: 0.25rem;
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        margin-right: 0.25rem;
+        padding: 0.35em 0.65em;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+    }
+    
+    .ech-tooltip:hover + .extended-combat-hud{
+        opacity: 1;
+        transition-delay: 0s;
+    }
 
-.ech-tooltip.ech-show-tooltip {
-    opacity: 1;
-}
-.ech-tooltip .ech-tooltip-header {
-    backdrop-filter: var(--ech-blur-amount);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 1rem 0.5rem 2rem;
-    position: relative;
-    text-align: center;
-}
-.ech-tooltip.hide-subtitle .ech-tooltip-header {
-    padding: 1rem 0.5rem;
-}
-.ech-tooltip .ech-tooltip-header h2 {
-    border-width: 0px;
-}
-.ech-tooltip .ech-tooltip-subtitle {
-    border-radius: 3px;
-    left: 50%;
-    margin-bottom: 0px;
-    padding: 0.5rem 1rem;
-    position: absolute;
-    top: 0px;
-    transform: translate(-50%, -17.5px);
-    z-index: 10000;
-}
-.ech-tooltip.hide-subtitle .ech-tooltip-subtitle {
-    display: none;
-}
-
-.ech-tooltip .ech-tooltip-body {
-    backdrop-filter: var(--ech-blur-amount);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    padding: 2rem 1rem 1rem;
-    text-align: left;
-    position: relative;
-}
-.ech-tooltip.hide-subtitle .ech-tooltip-body {
-    padding: 1rem;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description {
-    margin-bottom: 0.5rem;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    max-height: 200px;
-    padding: 0rem 1rem;
-    overflow: auto;
-    scroll-behavior: smooth;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link {
-    border-radius: 0.25rem;
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    margin-right: 0.25rem;
-    padding: 0.35em 0.65em;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    word-break: break-all;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-details {
-    display: grid;
-    gap: 1rem;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-}
-.ech-tooltip.hideTargetRange .ech-tooltip-details > div {
-    display: none;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div > span {
-    padding: 0.25rem 0rem;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div > span:first-child {
-    opacity: 0.6;
-    text-transform: uppercase;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-details > div > span:last-child {
-    font-size: 1.3rem;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties {
-    margin-top: 1rem;
-}
-.ech-tooltip.hideProperties .ech-tooltip-body .ech-tooltip-properties {
-    display: none;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties h3 {
-    opacity: 0.6;
-    text-transform: uppercase;
-    border: none;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
-    border-radius: 0.25rem;
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    margin-right: 0.25rem;
-    padding: 0.35em 0.65em;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-}
-
-.ech-tooltip:hover + .extended-combat-hud{
-    opacity: 1;
-    transition-delay: 0s;
 }

@@ -14,182 +14,188 @@
     position: relative;
     transition: all 0.3s ease-in-out;
     pointer-events: all;
-}
 
-.portrait-hud .death-saves {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    position: absolute;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.693);
-    background-color: #ff000059;
-    z-index: 1;
-}
+    .death-saves {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        position: absolute;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.693);
+        background-color: #ff000059;
+        z-index: 1;
+    }
 
-.portrait-hud .death-saves.no-buttons{
-    display: flex;
-    justify-content: center;
-}
+    .death-saves.no-buttons {
+        display: flex;
+        justify-content: center;
+    }
 
-.portrait-hud .death-saves.hidden {
-    display: none;
-}
+    .death-saves.hidden {
+        display: none;
+    }
 
-.portrait-hud .death-saves div {
-    display: flex;
-    justify-content: center;
-}
+    .death-saves div {
+        display: flex;
+        justify-content: center;
+    }
 
-.portrait-hud .death-saves div.hidden {
-    display: none;
-}
+    .death-saves div.hidden {
+        display: none;
+    }
 
-.portrait-hud .death-save-result-container {
-    font-size: 3rem;
-    flex-direction: column;
-    align-items: center;
-}
+    .death-save-result-container {
+        font-size: 3rem;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.portrait-hud .death-save-btn {
-    font-size: 10rem;
-}
+    .death-save-btn {
+        font-size: 10rem;
+    }
 
-.portrait-hud .death-save-btn:hover {
-    color: white;
-}
+    .death-save-btn:hover {
+        color: white;
+    }
 
-.portrait-hud-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    /*z-index: -10;*/
-}
+    .portrait-hud-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+        /*z-index: -10;*/
+    }
 
-.portrait-stat-block {
-    align-items: center;
-    border: 1px solid transparent;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.25rem;
-    font-weight: 900;
-    justify-content: center;
-    margin-bottom: -1px;
-    padding: 0.75rem;
-    position: relative;
-    gap: 0.5ch;
-    z-index: 1;
-}
-.portrait-stat-block:not(.player-details):before {
-    backdrop-filter: var(--ech-blur-amount);
-    content: "";
-    height: 100%;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    z-index: -1;
-}
+    .portrait-stat-block {
+        align-items: center;
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: row;
+        font-size: 1.25rem;
+        font-weight: 900;
+        justify-content: center;
+        margin-bottom: -1px;
+        padding: 0.75rem;
+        position: relative;
+        gap: 0.5ch;
+        z-index: 1;
+    }
 
-.portrait-stat-block.player-details {
-    align-items: flex-start;
-    border-width: 0px;
-    backdrop-filter: none;
-    display: flex;
-    flex-direction: column;
-    font-size: 1.5rem;
-    left: 0px;
-    margin-bottom: 0px;
-    margin-left: 0rem;
-    margin-top: auto;
-    padding: 1rem;
-    position: absolute;
-    text-shadow: 0 0 black;
-    top: 0px;
-    width: 100%;
-}
-.portrait-stat-block.player-details.player-details-bottom {
-    top: auto;
-    bottom: 0px;
-    z-index: -1;
-    flex-direction: column-reverse;
-    padding-bottom: 3.5rem;
-    background: linear-gradient(0deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 75%, rgba(75, 85, 95, 0) 100%);
-}
+    .portrait-stat-block:not(.player-details):before {
+        backdrop-filter: var(--ech-blur-amount);
+        content: "";
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        z-index: -1;
+    }
 
-.portrait-stat-block.player-details .player-detail {
-    font-size: 1rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-}
+    .portrait-stat-block.player-details {
+        align-items: flex-start;
+        border-width: 0px;
+        backdrop-filter: none;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem;
+        left: 0px;
+        margin-bottom: 0px;
+        margin-left: 0rem;
+        margin-top: auto;
+        padding: 1rem;
+        position: absolute;
+        text-shadow: 0 0 black;
+        top: 0px;
+        width: 100%;
+    }
 
-.player-buttons {
-    display: flex;
-    font-size: 2rem;
-    height: 50px;
-    justify-content: center;
-    position: absolute;
-    right: -115px;
-    top: calc((-50px - 1rem - 37px));
-}
+    .portrait-stat-block.player-details.player-details-bottom {
+        top: auto;
+        bottom: 0px;
+        z-index: -1;
+        flex-direction: column-reverse;
+        padding-bottom: 3.5rem;
+        background: linear-gradient(0deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 75%, rgba(75, 85, 95, 0) 100%);
+    }
 
-.player-button {
-    align-items: center;
-    background: no-repeat center;
-    background-origin: content-box;
-    background-size: contain;
-    cursor: pointer;
-    display: flex;
-    font-size: 1.5rem;
-    height: 50px;
-    justify-content: center;
-    padding: 0.5rem;
-    position: relative;
-    width: 50px;
+    .portrait-stat-block.player-details .player-detail {
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+    }
 
-    pointer-events: all;
-}
-.player-button:before {
-    backdrop-filter: var(--ech-blur-amount);
-    content: "";
-    height: 100%;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    z-index: -1;
-}
-.player-button.ech-close i {
-    margin-top: -0.5rem;
-}
-.minimize-hud .player-button.ech-close i {
-    transform: rotate(180deg);
-    margin-top: 0.5rem;
-}
+    .player-buttons {
+        display: flex;
+        font-size: 2rem;
+        height: 50px;
+        justify-content: center;
+        position: absolute;
+        right: -115px;
+        top: calc((-50px - 1rem - 37px));
+    }
 
-/* Configuration Button */
+    .player-button {
+        align-items: center;
+        background: no-repeat center;
+        background-origin: content-box;
+        background-size: contain;
+        cursor: pointer;
+        display: flex;
+        font-size: 1.5rem;
+        height: 50px;
+        justify-content: center;
+        padding: 0.5rem;
+        position: relative;
+        width: 50px;
 
-.portrait-hud .portrait-actor-configuration{
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: xxx-large;
-    padding: 1rem;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
+        pointer-events: all;
+    }
 
-.portrait-hud .portrait-actor-configuration:hover{
-    opacity: 1;
-}
+    .player-button:before {
+        backdrop-filter: var(--ech-blur-amount);
+        content: "";
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        z-index: -1;
+    }
 
-.portrait-hud .portrait-actor-configuration i{
-    cursor: pointer;
+    .player-button.ech-close i {
+        margin-top: -0.5rem;
+    }
+
+    .minimize-hud .player-button.ech-close i {
+        transform: rotate(180deg);
+        margin-top: 0.5rem;
+    }
+
+    /* Configuration Button */
+
+    .portrait-actor-configuration {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: xxx-large;
+        padding: 1rem;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .portrait-actor-configuration:hover {
+        opacity: 1;
+    }
+
+    .portrait-actor-configuration i {
+        cursor: pointer;
+    }
+
 }

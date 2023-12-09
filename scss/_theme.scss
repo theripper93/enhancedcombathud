@@ -1,381 +1,453 @@
 /* ========== ECH.css ========== */
 .extended-combat-hud {
-	color: var(--ech-mainAction-base-color);
-	font-family: var(--ech-font-family);
-}
+    color: var(--ech-mainAction-base-color);
+    font-family: var(--ech-font-family);
 
-/* ========== ActionHud.css - Action Containers ========== */
-.actions-container:before {
-	/* ADD THEME OPTIONS */
-  background-color: var(--ech-mainAction-background-color);
-  border: 1px solid var(--ech-mainAction-base-border);
-  color: rgb(200 200 200);
-}
-.actions-container.has-actions:after, .actions-container .action-pip {
-	/* ADD THEME OPTIONS */
-  background-color: rgb(180, 210, 225);
-  box-shadow: 0px 0px 10px 0px rgba(200, 230, 245, 0.8);
-}
-.actions-container.has-actions.actions-used:after, .actions-container .action-pip.actions-used {
-	/* ADD THEME OPTIONS */
-  background-color: rgb(120, 130, 145);
-  box-shadow: none;
-}
-.action-element {
-	background: var(--ech-mainAction-base-background) center no-repeat;
-	background-origin: content-box;
-	background-size: contain;
-	border: 1px solid var(--ech-mainAction-base-border);
-	color: var(--ech-mainAction-base-color);
-}
-.action-element[data-set=setp], .action-element[data-set=sets] {
-	color: rgb(150, 150, 150);
-}
-.action-element.bonus-action {
-	background-color: var(--ech-bonusAction-base-background);
-	border-color: var(--ech-bonusAction-base-border);
-	color: var(--ech-bonusAction-base-color);
-}
-.action-element.free-action {
-	background-color: var(--ech-freeAction-base-background);
-	border-color: var(--ech-freeAction-base-border);
-	color: var(--ech-freeAction-base-color);
-}
-.action-element.reaction {
-	background-color: var(--ech-reaction-base-background);
-	border-color: var(--ech-reaction-base-border);
-	color: var(--ech-reaction-base-color);
-}
-.action-element.end-turn {
-	background-color: var(--ech-endTurn-base-background);
-	border-color: var(--ech-endTurn-base-border);
-	color: var(--ech-endTurn-base-color);
-}
-.action-element:hover,
-.action-element:active,
-.action-element.active {
-	background-color: var(--ech-mainAction-hover-background);
-	border-color: var(--ech-mainAction-hover-border);
-	color: var(--ech-mainAction-hover-color);
-}
-.action-element.bonus-action:hover,
-.action-element.bonus-action:active,
-.action-element.bonus-action.active {
-	background-color: var(--ech-bonusAction-hover-background);
-	border-color: var(--ech-bonusAction-hover-border);
-	color: var(--ech-bonusAction-hover-color);
-}
-.action-element.free-action:hover,
-.action-element.free-action:active,
-.action-element.free-action.active {
-	background-color: var(--ech-freeAction-hover-background);
-	border-color: var(--ech-freeAction-hover-border);
-	color: var(--ech-freeAction-hover-color);
-}
-.action-element.reaction:hover,
-.action-element.reaction:active,
-.action-element.reaction.active {
-	background-color: var(--ech-reaction-hover-background);
-	border-color: var(--ech-reaction-hover-border);
-	color: var(--ech-reaction-hover-color);
-}
-.action-element.end-turn:hover,
-.action-element.end-turn:active,
-.action-element.end-turn.active {
-	background-color: var(--ech-endTurn-hover-background);
-	border-color: var(--ech-endTurn-hover-border);
-	color: var(--ech-endTurn-hover-color);
-}
-.action-element.has-count:before, .action-element .quantity-1 .border-triangle, .action-element .quantity-2 .border-triangle {
-	/* ADD THEME OPTIONS */
-	border-top-color: var(--ech-mainAction-base-background);
-}
+    /* ========== ActionHud.css - Action Containers ========== */
+    .actions-container:before {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-mainAction-background-color);
+        border: 1px solid var(--ech-mainAction-base-border);
+        color: rgb(200 200 200);
+    }
 
-/* ========== ActionHud.css - Features Containers ========== */
-.feature-accordion-title {
-	/* ADD THEME OPTIONS */
-    background-color: var(--ech-mainAction-background-color);
-    border-color: var(--ech-mainAction-base-border);
-	color: rgb(200 200 200);
-}
-.feature-spell-slots {
-	/* ADD THEME OPTIONS */
-  	background-color: var(--ech-mainAction-background-color);
-	border-color: var(--ech-mainAction-base-border);
-}
-.feature-spell-slots .spell-slot {
-	/* ADD THEME OPTIONS */
-    background-color: rgb(180, 210, 225);
-    box-shadow: 0px 0px 10px 0px rgb(200 230 245 / 80%);
-}
-.feature-spell-slots .spell-slot.spell-used {
-	/* ADD THEME OPTIONS */
-}
-.feature-spell-slots .spell-slot.spell-used:after {
-	/* ADD THEME OPTIONS */
-}
-.feature-element {
-	/* ADD THEME OPTIONS */
-	border-color: var(--ech-mainAction-base-border);
-	color: var(--ech-mainAction-base-color);
-}
-.feature-element:hover, 
-.feature-element:active, 
-.feature-element:focus, 
-.feature-element.active {
-	/* ADD THEME OPTIONS */
-  	filter: var(150%);
-}
-.feature-element.has-count:before, .feature-element .quantity-1 .border-triangle, .feature-element .quantity-2 .border-triangle {
-	/* ADD THEME OPTIONS */
-	border-top-color: var(--ech-mainAction-hover-background);
-}
-.feature-element-title {
-	/* ADD THEME OPTIONS */
-	border-color: var(--ech-mainAction-base-background);
+    .actions-container.has-actions:after,
+    .actions-container .action-pip {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(180, 210, 225);
+        box-shadow: 0px 0px 10px 0px rgba(200, 230, 245, 0.8);
+    }
+
+    .actions-container.has-actions.actions-used:after,
+    .actions-container .action-pip.actions-used {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(120, 130, 145);
+        box-shadow: none;
+    }
+
+    .action-element {
+        background: var(--ech-mainAction-base-background) center no-repeat;
+        background-origin: content-box;
+        background-size: contain;
+        border: 1px solid var(--ech-mainAction-base-border);
+        color: var(--ech-mainAction-base-color);
+    }
+
+    .action-element[data-set=setp],
+    .action-element[data-set=sets] {
+        color: rgb(150, 150, 150);
+    }
+
+    .action-element.bonus-action {
+        background-color: var(--ech-bonusAction-base-background);
+        border-color: var(--ech-bonusAction-base-border);
+        color: var(--ech-bonusAction-base-color);
+    }
+
+    .action-element.free-action {
+        background-color: var(--ech-freeAction-base-background);
+        border-color: var(--ech-freeAction-base-border);
+        color: var(--ech-freeAction-base-color);
+    }
+
+    .action-element.reaction {
+        background-color: var(--ech-reaction-base-background);
+        border-color: var(--ech-reaction-base-border);
+        color: var(--ech-reaction-base-color);
+    }
+
+    .action-element.end-turn {
+        background-color: var(--ech-endTurn-base-background);
+        border-color: var(--ech-endTurn-base-border);
+        color: var(--ech-endTurn-base-color);
+    }
+
+    .action-element:hover,
+    .action-element:active,
+    .action-element.active {
+        background-color: var(--ech-mainAction-hover-background);
+        border-color: var(--ech-mainAction-hover-border);
+        color: var(--ech-mainAction-hover-color);
+    }
+
+    .action-element.bonus-action:hover,
+    .action-element.bonus-action:active,
+    .action-element.bonus-action.active {
+        background-color: var(--ech-bonusAction-hover-background);
+        border-color: var(--ech-bonusAction-hover-border);
+        color: var(--ech-bonusAction-hover-color);
+    }
+
+    .action-element.free-action:hover,
+    .action-element.free-action:active,
+    .action-element.free-action.active {
+        background-color: var(--ech-freeAction-hover-background);
+        border-color: var(--ech-freeAction-hover-border);
+        color: var(--ech-freeAction-hover-color);
+    }
+
+    .action-element.reaction:hover,
+    .action-element.reaction:active,
+    .action-element.reaction.active {
+        background-color: var(--ech-reaction-hover-background);
+        border-color: var(--ech-reaction-hover-border);
+        color: var(--ech-reaction-hover-color);
+    }
+
+    .action-element.end-turn:hover,
+    .action-element.end-turn:active,
+    .action-element.end-turn.active {
+        background-color: var(--ech-endTurn-hover-background);
+        border-color: var(--ech-endTurn-hover-border);
+        color: var(--ech-endTurn-hover-color);
+    }
+
+    .action-element.has-count:before,
+    .action-element .quantity-1 .border-triangle,
+    .action-element .quantity-2 .border-triangle {
+        /* ADD THEME OPTIONS */
+        border-top-color: var(--ech-mainAction-base-background);
+    }
+
+    /* ========== ActionHud.css - Features Containers ========== */
+    .feature-accordion-title {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-mainAction-background-color);
+        border-color: var(--ech-mainAction-base-border);
+        color: rgb(200 200 200);
+    }
+
+    .feature-spell-slots {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-mainAction-background-color);
+        border-color: var(--ech-mainAction-base-border);
+    }
+
+    .feature-spell-slots .spell-slot {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(180, 210, 225);
+        box-shadow: 0px 0px 10px 0px rgb(200 230 245 / 80%);
+    }
+
+    .feature-spell-slots .spell-slot.spell-used {
+        /* ADD THEME OPTIONS */
+    }
+
+    .feature-spell-slots .spell-slot.spell-used:after {
+        /* ADD THEME OPTIONS */
+    }
+
+    .feature-element {
+        /* ADD THEME OPTIONS */
+        border-color: var(--ech-mainAction-base-border);
+        color: var(--ech-mainAction-base-color);
+    }
+
+    .feature-element:hover,
+    .feature-element:active,
+    .feature-element:focus,
+    .feature-element.active {
+        /* ADD THEME OPTIONS */
+        filter: var(150%);
+    }
+
+    .feature-element.has-count:before,
+    .feature-element .quantity-1 .border-triangle,
+    .feature-element .quantity-2 .border-triangle {
+        /* ADD THEME OPTIONS */
+        border-top-color: var(--ech-mainAction-hover-background);
+    }
+
+    .feature-element-title {
+        /* ADD THEME OPTIONS */
+        border-color: var(--ech-mainAction-base-background);
+    }
+
 }
 
 /* ========== highjacked-window.css ========== */
 .ech-highjack-window {
     font-family: var(--ech-font-family);
-}
-.ech-highjack-window.window-app .window-header {
-    background-color: var(--ech-tooltip-header-background);
-	border-color: var(--ech-tooltip-header-border);
-	color: var(--ech-tooltip-header-color);
-}
-.ech-highjack-window.window-app .window-content {
-    background-color: var(--ech-tooltip-body-background);
-	border-color: var(--ech-tooltip-body-border);
-	color: var(--ech-tooltip-body-color);
-}
-.ech-highjack-window.window-app .window-content .form-group label,
-.ech-highjack-window.window-app .window-content .form-group input,
-.ech-highjack-window.window-app .window-content .form-group select {
-	color: var(--ech-tooltip-body-color);
-}
-.ech-highjack-window.window-app .window-content .form-group input,
-.ech-highjack-window.window-app .window-content .form-group select {
-	/* ADD THEME OPTIONS */
-    background: rgba(0 0 0 / 0.5);
-}
-.ech-highjack-window.window-app .window-content .form-group select * {
-    background-color: var(--ech-tooltip-body-background);
-	border-color: var(--ech-tooltip-body-border);
-}
-.ech-highjack-window.window-app .window-content .form-group input:disabled,
-.ech-highjack-window.window-app .window-content .form-group input::placeholder {
-	color: var(--ech-tooltip-body-color);
-}
 
-.ech-highjack-window.dialog .dialog-buttons button {
-    background-color: var(--ech-buttons-base-background);
-    border-color: var(--ech-buttons-base-border);
-	border-style: solid;
-    color: var(--ech-buttons-base-color);
-	cursor: pointer;
-	opacity: 0.7;
-	transition: all 0.3s ease-in-out;
-}
-.ech-highjack-window.dialog .dialog-buttons button.default {
-    background-color: var(--ech-buttons-hover-background);
-    border-color: var(--ech-buttons-hover-border);
-	border-style: solid;
-    color: var(--ech-buttons-hover-color);
-	opacity: 0.8;
-}
-.ech-highjack-window.dialog .dialog-buttons button:hover, 
-.ech-highjack-window.dialog .dialog-buttons button:active, 
-.ech-highjack-window.dialog .dialog-buttons button:focus, 
-.ech-highjack-window.dialog .dialog-buttons button .active {
-    background-color: var(--ech-buttons-hover-background);
-    border-color: var(--ech-buttons-hover-border);
-    color: var(--ech-buttons-hover-color);
-	opacity: 1;
-	/* REMOVE FOUNDRY STYLING */
-    outline: none;
-    box-shadow: none;
+    &.window-app .window-header {
+        background-color: var(--ech-tooltip-header-background);
+        border-color: var(--ech-tooltip-header-border);
+        color: var(--ech-tooltip-header-color);
+    }
+
+    &.window-app .window-content {
+        background-color: var(--ech-tooltip-body-background);
+        border-color: var(--ech-tooltip-body-border);
+        color: var(--ech-tooltip-body-color);
+    }
+
+    &.window-app .window-content .form-group label,
+    &.window-app .window-content .form-group input,
+    &.window-app .window-content .form-group select {
+        color: var(--ech-tooltip-body-color);
+    }
+
+    &.window-app .window-content .form-group input,
+    &.window-app .window-content .form-group select {
+        /* ADD THEME OPTIONS */
+        background: rgba(0 0 0 / 0.5);
+    }
+
+    &.window-app .window-content .form-group select * {
+        background-color: var(--ech-tooltip-body-background);
+        border-color: var(--ech-tooltip-body-border);
+    }
+
+    &.window-app .window-content .form-group input:disabled,
+    &.window-app .window-content .form-group input::placeholder {
+        color: var(--ech-tooltip-body-color);
+    }
+
+    &.dialog .dialog-buttons button {
+        background-color: var(--ech-buttons-base-background);
+        border-color: var(--ech-buttons-base-border);
+        border-style: solid;
+        color: var(--ech-buttons-base-color);
+        cursor: pointer;
+        opacity: 0.7;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &.dialog .dialog-buttons button.default {
+        background-color: var(--ech-buttons-hover-background);
+        border-color: var(--ech-buttons-hover-border);
+        border-style: solid;
+        color: var(--ech-buttons-hover-color);
+        opacity: 0.8;
+    }
+
+    &.dialog .dialog-buttons button:hover,
+    &.dialog .dialog-buttons button:active,
+    &.dialog .dialog-buttons button:focus,
+    &.dialog .dialog-buttons button .active {
+        background-color: var(--ech-buttons-hover-background);
+        border-color: var(--ech-buttons-hover-border);
+        color: var(--ech-buttons-hover-color);
+        opacity: 1;
+        /* REMOVE FOUNDRY STYLING */
+        outline: none;
+        box-shadow: none;
+    }
+
 }
 
 /* ========== Tooltip.css ========== */
 .ech-tooltip {
     font-family: var(--ech-font-family);
-}
-.ech-tooltip .ech-tooltip-header {
-    background-color: var(--ech-tooltip-header-background);
-	border-color: var(--ech-tooltip-header-border);
-	color: var(--ech-tooltip-header-color);
-}
-.ech-tooltip .ech-tooltip-subtitle {
-    background-color: var(--ech-tooltip-subtitle-background);
-	border-color: var(--ech-tooltip-subtitle-border);
-	color: var(--ech-tooltip-subtitle-color);
-}
-.ech-tooltip .ech-tooltip-body {
-    background-color: var(--ech-tooltip-body-background);
-	border-color: var(--ech-tooltip-body-border);
-	color: var(--ech-tooltip-body-color);
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link {
-    background-color: var(--ech-buttons-base-background);
-    border: 1px solid var(--ech-buttons-base-border);
-	color: var(--ech-buttons-base-color);
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:hover,
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:active,
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link:focus,
-.ech-tooltip .ech-tooltip-body .ech-tooltip-description a.entity-link.active {
-    background-color: var(--ech-buttons-hover-background);
-    border: 1px solid var(--ech-buttons-hover-border);
-	color: var(--ech-buttons-hover-color);
-	text-shadow: none;
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
-    background-color: var(--ech-buttons-base-background);
-	border-color: var(--ech-buttons-base-border);
-	color: var(--ech-buttons-base-color);
-}
-.ech-tooltip .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge:first-of-type {
-    background-color: var(--ech-buttons-hover-background);
-	border-color: var(--ech-buttons-hover-border);
-	color: var(--ech-buttons-hover-color);
+
+    .ech-tooltip-header {
+        background-color: var(--ech-tooltip-header-background);
+        border-color: var(--ech-tooltip-header-border);
+        color: var(--ech-tooltip-header-color);
+    }
+
+    .ech-tooltip-subtitle {
+        background-color: var(--ech-tooltip-subtitle-background);
+        border-color: var(--ech-tooltip-subtitle-border);
+        color: var(--ech-tooltip-subtitle-color);
+    }
+
+    .ech-tooltip-body {
+        background-color: var(--ech-tooltip-body-background);
+        border-color: var(--ech-tooltip-body-border);
+        color: var(--ech-tooltip-body-color);
+    }
+
+    .ech-tooltip-body .ech-tooltip-description a.entity-link {
+        background-color: var(--ech-buttons-base-background);
+        border: 1px solid var(--ech-buttons-base-border);
+        color: var(--ech-buttons-base-color);
+    }
+
+    .ech-tooltip-body .ech-tooltip-description a.entity-link:hover,
+    .ech-tooltip-body .ech-tooltip-description a.entity-link:active,
+    .ech-tooltip-body .ech-tooltip-description a.entity-link:focus,
+    .ech-tooltip-body .ech-tooltip-description a.entity-link.active {
+        background-color: var(--ech-buttons-hover-background);
+        border: 1px solid var(--ech-buttons-hover-border);
+        color: var(--ech-buttons-hover-color);
+        text-shadow: none;
+    }
+
+    .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge {
+        background-color: var(--ech-buttons-base-background);
+        border-color: var(--ech-buttons-base-border);
+        color: var(--ech-buttons-base-color);
+    }
+
+    .ech-tooltip-body .ech-tooltip-properties .ech-tooltip-badge:first-of-type {
+        background-color: var(--ech-buttons-hover-background);
+        border-color: var(--ech-buttons-hover-border);
+        color: var(--ech-buttons-hover-color);
+    }
+
 }
 
 /* ========== Portrait.css ========== */
 .portrait-hud {
-	/* ADD THEME OPTIONS */
-	background-color: var(--ech-portrait-base-background);
-	border-color: var(--ech-portrait-base-border);
-	color: var(--ech-portrait-base-color);
-}
-.portrait-stat-block {
-	/* ADD THEME OPTIONS */
-	border-color: var(--ech-mainAction-base-border);
-    color: rgb(255, 255, 255);
-    text-shadow: 0 0 10px rgba(0 0 0 / 0.7);
-}
-.portrait-stat-block:not(.player-details):before{
-	/* ADD THEME OPTIONS */
-    background-color: rgb(0 0 0 / 50%);
-}
-/*.portrait-stat-block [data-hp-value]:after {
-	 ADD THEME OPTIONS 
-    color: rgb(0 255 170);
-}*/
-.portrait-stat-block [data-ac-value]:after {
-	/* ADD THEME OPTIONS */
-    color: rgb(90, 190, 245);
-}
+    /* ADD THEME OPTIONS */
+    background-color: var(--ech-portrait-base-background);
+    border-color: var(--ech-portrait-base-border);
+    color: var(--ech-portrait-base-color);
 
-.portrait-stat-block [data-spell-dc]:after {
-	/* ADD THEME OPTIONS */
-    color: rgb(90, 190, 245);
-}
-.portrait-stat-block.player-details {
-	/* ADD THEME OPTIONS */
-    background-color: rgba(0 0 0 / 0.1);
-    background: linear-gradient(180deg, rgba(65,75,85,0.9) 0%, rgba(70,80,90,0.8) 50%, rgba(75,85,95,0) 100%);
-}
+    .portrait-stat-block {
+        /* ADD THEME OPTIONS */
+        border-color: var(--ech-mainAction-base-border);
+        color: rgb(255, 255, 255);
+        text-shadow: 0 0 10px rgba(0 0 0 / 0.7);
+    }
 
-/* ========== Portrait.css - Player Buttons ========== */
-.player-button {
-	border-color: var(--ech-mainAction-base-border);
-	color: rgb(225, 225, 225);
-}
-.player-button:before {
-	/* ADD THEME OPTIONS */
-    background-color: rgb(0 0 0 / 50%);
-}
-.player-button:hover {
-	border-color: var(--ech-mainAction-hover-border);
-	color: rgb(255, 255, 255);
+    .portrait-stat-block:not(.player-details):before {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(0 0 0 / 50%);
+    }
+
+    /*.portrait-stat-block [data-hp-value]:after {
+         ADD THEME OPTIONS 
+        color: rgb(0 255 170);
+    }*/
+    .portrait-stat-block [data-ac-value]:after {
+        /* ADD THEME OPTIONS */
+        color: rgb(90, 190, 245);
+    }
+
+    .portrait-stat-block [data-spell-dc]:after {
+        /* ADD THEME OPTIONS */
+        color: rgb(90, 190, 245);
+    }
+
+    .portrait-stat-block.player-details {
+        /* ADD THEME OPTIONS */
+        background-color: rgba(0 0 0 / 0.1);
+        background: linear-gradient(180deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 50%, rgba(75, 85, 95, 0) 100%);
+    }
+
+    /* ========== Portrait.css - Player Buttons ========== */
+    .player-button {
+        border-color: var(--ech-mainAction-base-border);
+        color: rgb(225, 225, 225);
+    }
+
+    .player-button:before {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(0 0 0 / 50%);
+    }
+
+    .player-button:hover {
+        border-color: var(--ech-mainAction-hover-border);
+        color: rgb(255, 255, 255);
+    }
+
 }
 
 /* ========== Portrait.css - Ability Menu ========== */
 .ability-menu {
-	color: var(--ech-abilityMenu-color);/* REMOVE STYLE */
-}
-.ability-menu:before {
-    background-color: var(--ech-abilityMenu-background);
-    border-color: var(--ech-abilityMenu-border);
-}
-.ability-menu ul > li {
-    border-color: var(--ech-abilityMenu-border);
-	color: var(--ech-abilityMenu-base-color);
-    text-shadow: 0px 0px 10px var(--ech-abilityMenu-base-boxShadow);
-}
-.ability-menu ul > li .ability-code select * {
-    background-color: var(--ech-abilityMenu-background);
-    border-color: var(--ech-abilityMenu-border);
-}
-.ability-menu ul:last-child > li:hover,
-.ability-menu ul:last-child > li:active,
-.ability-menu ul:last-child > li:focus,
-.ability-menu ul > li .ability-name:hover,
-.ability-menu ul > li .ability-name:active,
-.ability-menu ul > li .ability-name:focus,
-.ability-menu ul > li .ability-name.active {
-	color: var(--ech-abilityMenu-hover-color);
-    text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
-}
-.ability-menu ul > li.is-save > div > span:hover,
-.ability-menu ul > li.is-save > div > span:active,
-.ability-menu ul > li.is-save > div > span:focus,
-.ability-menu ul > li.is-save > div > span.active {
-	color: var(--ech-abilityMenu-hover-color);
-    text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
-}
-.ability-menu ul.ability-toggle li {
-    border-color: var(--ech-abilityMenu-border);
+    color: var(--ech-abilityMenu-color);
+    /* REMOVE STYLE */
+
+    &:before {
+        background-color: var(--ech-abilityMenu-background);
+        border-color: var(--ech-abilityMenu-border);
+    }
+
+    ul > li {
+        border-color: var(--ech-abilityMenu-border);
+        color: var(--ech-abilityMenu-base-color);
+        text-shadow: 0px 0px 10px var(--ech-abilityMenu-base-boxShadow);
+    }
+
+    ul > li .ability-code select * {
+        background-color: var(--ech-abilityMenu-background);
+        border-color: var(--ech-abilityMenu-border);
+    }
+
+    ul:last-child > li:hover,
+    ul:last-child > li:active,
+    ul:last-child > li:focus,
+    ul > li .ability-name:hover,
+    ul > li .ability-name:active,
+    ul > li .ability-name:focus,
+    ul > li .ability-name.active {
+        color: var(--ech-abilityMenu-hover-color);
+        text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
+    }
+
+    ul > li.is-save > div > span:hover,
+    ul > li.is-save > div > span:active,
+    ul > li.is-save > div > span:focus,
+    ul > li.is-save > div > span.active {
+        color: var(--ech-abilityMenu-hover-color);
+        text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
+    }
+
+    ul.ability-toggle li {
+        border-color: var(--ech-abilityMenu-border);
+    }
 }
 
+
+
 /* ========== Portrait.css - Weapon Sets ========== */
-.weapon-set {
-	/* ADD THEME OPTIONS */
-    background-color: rgb(0 0 0 / 50%);
-	border-color: var(--ech-mainAction-base-border);
-    color: rgb(255, 255, 255);
-}
-.weapon-set:before {
-	/* ADD THEME OPTIONS */
-    background-color: rgba(0 0 0 / 0.7);
-	border-color: var(--ech-mainAction-base-border);
-}
-.weapon-set.active:after {
-	/* ADD THEME OPTIONS */
-    background-color: var(--ech-mainAction-base-border);
-}
-.weapon-set > .set.set-primary:before,
-.weapon-set > .set.set-primary:after {
-	/* ADD THEME OPTIONS */
-	border-color: var(--ech-mainAction-base-border);
+.weapon-sets {
+    .weapon-set {
+        /* ADD THEME OPTIONS */
+        background-color: rgb(0 0 0 / 50%);
+        border-color: var(--ech-mainAction-base-border);
+        color: rgb(255, 255, 255);
+    }
+
+    .weapon-set:before {
+        /* ADD THEME OPTIONS */
+        background-color: rgba(0 0 0 / 0.7);
+        border-color: var(--ech-mainAction-base-border);
+    }
+
+    .weapon-set.active:after {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-mainAction-base-border);
+    }
+
+    .weapon-set > .set.set-primary:before,
+    .weapon-set > .set.set-primary:after {
+        /* ADD THEME OPTIONS */
+        border-color: var(--ech-mainAction-base-border);
+    }
 }
 
 /* ========== Portrait.css - Movement HUD ========== */
 .movement-hud {
-	/* ADD THEME OPTIONS */
-	background-color: var(--ech-mainAction-background-color);
-	border-color: var(--ech-mainAction-base-border);
+    /* ADD THEME OPTIONS */
+    background-color: var(--ech-mainAction-background-color);
+    border-color: var(--ech-mainAction-base-border);
     color: rgb(200 200 200);
-}
-.movement-hud .movement-current {
-	/* ADD THEME OPTIONS */
-    color: rgb(90, 190, 245);
-}
-.movement-spaces .movement-space {
-    background-color: var(--ech-movement-used-background);
-	box-shadow: 0px 0px 10px 0px var(--ech-movement-used-boxShadow);
-}
-.movement-spaces .movement-space.base-movement {
-    background-color: var(--ech-movement-baseMovement-background);
-	box-shadow: 0px 0px 10px 0px var(--ech-movement-baseMovement-boxShadow);
-}
-.movement-spaces .movement-space.dash-movement {
-    background-color: var(--ech-movement-dashMovement-background);
-	box-shadow: 0px 0px 10px 0px var(--ech-movement-dashMovement-boxShadow);
-}
-.movement-spaces .movement-space.danger-movement {
-    background-color: var(--ech-movement-dangerMovement-background);
-	box-shadow: 0px 0px 10px 0px var(--ech-movement-dangerMovement-boxShadow);
-}
 
+    .movement-current {
+        /* ADD THEME OPTIONS */
+        color: rgb(90, 190, 245);
+    }
+
+    .movement-spaces .movement-space {
+        background-color: var(--ech-movement-used-background);
+        box-shadow: 0px 0px 10px 0px var(--ech-movement-used-boxShadow);
+    }
+
+    .movement-spaces .movement-space.base-movement {
+        background-color: var(--ech-movement-baseMovement-background);
+        box-shadow: 0px 0px 10px 0px var(--ech-movement-baseMovement-boxShadow);
+    }
+
+    .movement-spaces .movement-space.dash-movement {
+        background-color: var(--ech-movement-dashMovement-background);
+        box-shadow: 0px 0px 10px 0px var(--ech-movement-dashMovement-boxShadow);
+    }
+
+    .movement-spaces .movement-space.danger-movement {
+        background-color: var(--ech-movement-dangerMovement-background);
+        box-shadow: 0px 0px 10px 0px var(--ech-movement-dangerMovement-boxShadow);
+    }
+}
