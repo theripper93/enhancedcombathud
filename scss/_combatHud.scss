@@ -1,0 +1,72 @@
+.extended-combat-hud {
+    backface-visibility: hidden;
+    bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    left: 15px;
+    opacity: 1;
+    position: absolute;
+    transform-origin: bottom left;
+    /* USED TO ALLOW USERS TO CLICK THROUGH AND AROUND ECH*/
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    z-index: 100;
+
+    *,
+    :before,
+    :after {
+        box-sizing: border-box;
+    }
+    
+    .ech-remove-set .portrait-hud:after {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        background-color: rgb(255 28 12 / 60%);
+        content: "\f1f8";
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8rem;
+        color: rgb(255, 255, 255);
+    }
+    
+    .ech-blur:before {
+        backdrop-filter: var(--ech-blur-amount);
+        content: "";
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &.loaded {
+        transition: all 0.3s ease-in-out;
+    }
+
+    &.fade-out-inactive-true {
+        opacity: var(--ech-fadeout-opacity);
+        transition-property: opacity;
+        transition-duration: 1s;
+        transition-delay: var(--ech-fadeout-deleay);
+    }
+
+    &:hover {
+        opacity: 1;
+        transition-delay: 0s;
+    }
+
+}

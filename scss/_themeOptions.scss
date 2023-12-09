@@ -1,0 +1,127 @@
+#echThemeOptions .window-content h3 {
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    justify-content: space-between;
+    margin: 0px;
+    padding: 0.75rem 0.75rem 0rem;
+}
+#echThemeOptions .window-content h3 button {
+    flex: 0;
+    white-space: nowrap;
+}
+#echThemeOptions .window-content ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+#echThemeOptions .window-content ul > li {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: background 0.3s ease;
+}
+#echThemeOptions .window-content ul > li:first-child {
+    border-top-width: 0px;
+}
+#echThemeOptions .window-content ul > li h4 {
+    cursor: pointer;
+    margin: 0px;
+    padding: 0.75rem;
+}
+#echThemeOptions .window-content ul > li h4:after {
+    content: "\f13a";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Free";
+    line-height: 1;
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    transform: rotate(0deg);
+    transition: all 0.3s ease-in-out;
+}
+#echThemeOptions .window-content ul > li.show h4:after {
+    transform: rotate(180deg);
+}
+
+#echThemeOptions .window-content ul li > ul {
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+#echThemeOptions .window-content ul li.show > ul {
+    max-height: 100%;
+}
+#echThemeOptions .window-content ul li > ul li {
+    padding: 0.75rem;
+}
+
+#echThemeOptions .window-content .picker_wrapper {
+    width: 100%;
+}
+
+#echThemeOptions .window-content .form-group {
+    margin: 0;
+    padding: 0.75rem;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+    position: relative;
+    margin: 0 0 0.25rem 0rem;
+    justify-content: flex-start;
+}
+#echThemeOptions .window-content .form-group label {
+    flex-grow: unset;
+    flex-basis: unset;
+    flex: 1 1 100%;
+    line-height: 1.2;
+    margin: 0 0 0.25rem calc(13px + 1rem);
+    order: -1;
+    flex-basis: 100% !important;
+}
+#echThemeOptions .window-content .form-group .form-fields {
+    margin: 0 0 0.25rem calc(13px + 1rem);
+    justify-content: flex-start;
+}
+#echThemeOptions .window-content .form-group .form-fields > input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    transition: border 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 2px rgb(0 0 0 / 30%) inset;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    margin: 0;
+    transform-origin: 0 50%;
+    position: absolute;
+    top: 0.6rem;
+    left: 1rem;
+    cursor: pointer;
+}
+#echThemeOptions .window-content .form-group .form-fields > input[type="checkbox"]:checked::after {
+    content: "";
+    display: block;
+    background: url(../icons/check-solid.svg) center no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#echThemeOptions .window-content .form-group .notes,
+#echThemeOptions .window-content .form-group .hint {
+    flex: 0 1 100%;
+    margin: 0 0 0 calc(13px + 1rem);
+    order: 3;
+}

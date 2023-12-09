@@ -2,5 +2,5 @@
     "i18n-ally.localesPaths": [
         "languages"
     ],
-    "editor.tabSize": 2
+    "liveSassCompile.settings.autoprefix": null
 }

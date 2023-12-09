@@ -72,13 +72,7 @@
     "scripts/main.js"
   ],
   "styles": [
-    "styles/ECH.css",
-    "styles/CombatHUD.css",
-    "styles/ActionHUD.css",
-    "styles/PortraitHUD.css",
-    "styles/Tooltip.css",
-    "styles/highjacked-window.css",
-    "styles/theme.css"
+    "styles/module.css"
   ],
   "packs": [],
   "url": "https://github.com/theripper93/enhancedcombathud",

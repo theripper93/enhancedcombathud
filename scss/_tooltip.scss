@@ -137,3 +137,8 @@
     vertical-align: baseline;
     white-space: nowrap;
 }
+
+.ech-tooltip:hover + .extended-combat-hud{
+    opacity: 1;
+    transition-delay: 0s;
+}
