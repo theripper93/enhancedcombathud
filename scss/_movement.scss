@@ -17,7 +17,7 @@
     pointer-events: all;
 
     &.hidden{
-        display: none;
+        display: none !important;
     }
 
     .movement-current,
