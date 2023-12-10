@@ -2,5 +2,8 @@
     "i18n-ally.localesPaths": [
         "languages"
     ],
-    "liveSassCompile.settings.autoprefix": null
+    "liveSassCompile.settings.autoprefix": null,
+    "cSpell.words": [
+        "BUTTONHUD"
+    ]
 }

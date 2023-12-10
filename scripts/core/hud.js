@@ -11,7 +11,8 @@ import {SplitButton} from "./components/main/buttons/splitButton.js";
 import {ActionPanel} from "./components/main/actionPanel.js";
 import {PortraitPanel} from "./components/portrait/portraitPanel.js";
 import {WeaponSets} from "./components/main/weaponSets.js";
-import { MovementHud } from "./components/main/movementHud.js";
+import {MovementHud} from "./components/main/movementHud.js";
+import { ButtonHud } from "./components/main/buttonHud.js";
 import {Tooltip} from "./tooltip.js";
 import { showTargetPickerGuide } from "./targetPicker.js";
 
@@ -31,6 +32,7 @@ const mainSystemComponents = {
   MAIN: [],
   WEAPONSETS: WeaponSets,
   MOVEMENT: MovementHud,
+  BUTTONHUD: null,
 }
 
 const supportedActorTypes = [];
@@ -122,6 +124,7 @@ export class CoreHUD extends Application{
     if (openCombatStart) this.bind(canvas.tokens.controlled[0] ?? _token);
     this.components.movement?._onNewRound(combat);
     this.components.main.forEach(component => component._onNewRound(combat));
+    this.updateSidePortraitHuds();
   }
 
   _onUpdateCombat(combat, updates) {
@@ -130,12 +133,14 @@ export class CoreHUD extends Application{
       this.components.main?.forEach(component => component._onNewRound(combat));
       this.components.movement?._onNewRound(combat);
     }
+    this.updateSidePortraitHuds();
   }
 
   _onDeleteCombat(combat) {
     this.components.movement?._onCombatEnd(combat);
     const openCombatStart = game.settings.get("enhancedcombathud", "openCombatStart");
     if (openCombatStart) this.enabled = false;
+    this.updateSidePortraitHuds();
   }
 
   _onUpdateItem(item) {
@@ -243,6 +248,7 @@ export class CoreHUD extends Application{
     this.components = {
       weaponSets: new mainSystemComponents.WEAPONSETS(),
       movement: this._token && mainSystemComponents.MOVEMENT ? new mainSystemComponents.MOVEMENT() : null,
+      buttonHud: mainSystemComponents.BUTTONHUD ? new mainSystemComponents.BUTTONHUD() : null,
       portrait: new mainSystemComponents.PORTRAIT(),
       drawer: new mainSystemComponents.DRAWER(),
       main: mainSystemComponents.MAIN.map(component => new component()),
@@ -251,7 +257,8 @@ export class CoreHUD extends Application{
     html.appendChild(this.components.weaponSets.element);
     html.appendChild(this.components.portrait.element);
     html.appendChild(this.components.drawer.element);
-    if(this.components.movement) html.appendChild(this.components.movement.element);
+    if (this.components.movement) html.appendChild(this.components.movement.element);
+    if (this.components.buttonHud) html.appendChild(this.components.buttonHud.element);
 
     const actionHudElement = document.createElement("div");
     actionHudElement.classList.add("action-hud");
@@ -270,8 +277,8 @@ export class CoreHUD extends Application{
 
     await Promise.all(promises);
     this._updateActionContainers();
+    this.updateSidePortraitHuds();
     this.components.combat = this.components.main.filter(component => component instanceof PassTurnPanel);
-    if (!this.components.movement) this.components.portrait.element.style.marginRight = "0px";
     this._itemsCount = this._actor.items.size;
 
     return element;
@@ -362,6 +369,13 @@ export class CoreHUD extends Application{
     this.element[0].querySelectorAll(".features-container.show").forEach(element => {
       element.classList.remove("show");
     });
+  }
+
+  updateSidePortraitHuds() {
+    this.components.movement?.setVisibility();
+    this.components.buttonHud?.setVisibility();
+    if (!this.components.movement?.visible && !this.components.buttonHud?.visible) this.components.portrait.element.style.marginRight = "0px";
+    else this.components.portrait.element.style.marginRight = "";
   }
 
   toggleMinimize(forceState) {
@@ -522,6 +536,10 @@ export class CoreHUD extends Application{
     mainSystemComponents.MOVEMENT = movementHud;
   }
 
+  static defineButtonHud(buttonHud) {
+    mainSystemComponents.BUTTONHUD = buttonHud;
+  }
+
   static defineSupportedActorTypes(actorTypes) {
     supportedActorTypes.push(...actorTypes);
   }
@@ -558,6 +576,7 @@ export class CoreHUD extends Application{
       },
       WeaponSets,
       MovementHud,
+      ButtonHud,
       PREFAB: {
         PassTurnPanel,
       }

@@ -25,7 +25,7 @@
         box-shadow: none;
     }
 
-    .action-element {
+    .action-element, .button-hud-button {
         background: var(--ech-mainAction-base-background) center no-repeat;
         background-origin: content-box;
         background-size: contain;
@@ -63,6 +63,7 @@
     }
 
     .action-element:hover,
+    .button-hud-button:hover,
     .action-element:active,
     .action-element.active {
         background-color: var(--ech-mainAction-hover-background);
@@ -153,6 +154,168 @@
     .feature-element-title {
         /* ADD THEME OPTIONS */
         border-color: var(--ech-mainAction-base-background);
+    }
+
+    /* ========== Portrait.css ========== */
+    .portrait-hud {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-portrait-base-background);
+        border-color: var(--ech-portrait-base-border);
+        color: var(--ech-portrait-base-color);
+
+        .portrait-stat-block {
+            /* ADD THEME OPTIONS */
+            border-color: var(--ech-mainAction-base-border);
+            color: rgb(255, 255, 255);
+            text-shadow: 0 0 10px rgba(0 0 0 / 0.7);
+        }
+
+        .portrait-stat-block:not(.player-details):before {
+            /* ADD THEME OPTIONS */
+            background-color: rgb(0 0 0 / 50%);
+        }
+
+        /*.portrait-stat-block [data-hp-value]:after {
+         ADD THEME OPTIONS 
+        color: rgb(0 255 170);
+    }*/
+        .portrait-stat-block [data-ac-value]:after {
+            /* ADD THEME OPTIONS */
+            color: rgb(90, 190, 245);
+        }
+
+        .portrait-stat-block [data-spell-dc]:after {
+            /* ADD THEME OPTIONS */
+            color: rgb(90, 190, 245);
+        }
+
+        .portrait-stat-block.player-details {
+            /* ADD THEME OPTIONS */
+            background-color: rgba(0 0 0 / 0.1);
+            background: linear-gradient(180deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 50%, rgba(75, 85, 95, 0) 100%);
+        }
+
+        /* ========== Portrait.css - Player Buttons ========== */
+        .player-button {
+            border-color: var(--ech-mainAction-base-border);
+            color: rgb(225, 225, 225);
+        }
+
+        .player-button:before {
+            /* ADD THEME OPTIONS */
+            background-color: rgb(0 0 0 / 50%);
+        }
+
+        .player-button:hover {
+            border-color: var(--ech-mainAction-hover-border);
+            color: rgb(255, 255, 255);
+        }
+
+    }
+
+    /* ========== Portrait.css - Ability Menu ========== */
+    .ability-menu {
+        color: var(--ech-abilityMenu-color);
+        /* REMOVE STYLE */
+
+        &:before {
+            background-color: var(--ech-abilityMenu-background);
+            border-color: var(--ech-abilityMenu-border);
+        }
+
+        ul > li {
+            border-color: var(--ech-abilityMenu-border);
+            color: var(--ech-abilityMenu-base-color);
+            text-shadow: 0px 0px 10px var(--ech-abilityMenu-base-boxShadow);
+        }
+
+        ul > li .ability-code select * {
+            background-color: var(--ech-abilityMenu-background);
+            border-color: var(--ech-abilityMenu-border);
+        }
+
+        ul:last-child > li:hover,
+        ul:last-child > li:active,
+        ul:last-child > li:focus,
+        ul > li .ability-name:hover,
+        ul > li .ability-name:active,
+        ul > li .ability-name:focus,
+        ul > li .ability-name.active {
+            color: var(--ech-abilityMenu-hover-color);
+            text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
+        }
+
+        ul > li.is-save > div > span:hover,
+        ul > li.is-save > div > span:active,
+        ul > li.is-save > div > span:focus,
+        ul > li.is-save > div > span.active {
+            color: var(--ech-abilityMenu-hover-color);
+            text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
+        }
+
+        ul.ability-toggle li {
+            border-color: var(--ech-abilityMenu-border);
+        }
+    }
+
+    /* ========== Portrait.css - Weapon Sets ========== */
+    .weapon-sets {
+        .weapon-set {
+            /* ADD THEME OPTIONS */
+            background-color: rgb(0 0 0 / 50%);
+            border-color: var(--ech-mainAction-base-border);
+            color: rgb(255, 255, 255);
+        }
+
+        .weapon-set:before {
+            /* ADD THEME OPTIONS */
+            background-color: rgba(0 0 0 / 0.7);
+            border-color: var(--ech-mainAction-base-border);
+        }
+
+        .weapon-set.active:after {
+            /* ADD THEME OPTIONS */
+            background-color: var(--ech-mainAction-base-border);
+        }
+
+        .weapon-set > .set.set-primary:before,
+        .weapon-set > .set.set-primary:after {
+            /* ADD THEME OPTIONS */
+            border-color: var(--ech-mainAction-base-border);
+        }
+    }
+
+    /* ========== Portrait.css - Movement HUD ========== */
+    .movement-hud {
+        /* ADD THEME OPTIONS */
+        background-color: var(--ech-mainAction-background-color);
+        border-color: var(--ech-mainAction-base-border);
+        color: rgb(200 200 200);
+
+        .movement-current {
+            /* ADD THEME OPTIONS */
+            color: rgb(90, 190, 245);
+        }
+
+        .movement-spaces .movement-space {
+            background-color: var(--ech-movement-used-background);
+            box-shadow: 0px 0px 10px 0px var(--ech-movement-used-boxShadow);
+        }
+
+        .movement-spaces .movement-space.base-movement {
+            background-color: var(--ech-movement-baseMovement-background);
+            box-shadow: 0px 0px 10px 0px var(--ech-movement-baseMovement-boxShadow);
+        }
+
+        .movement-spaces .movement-space.dash-movement {
+            background-color: var(--ech-movement-dashMovement-background);
+            box-shadow: 0px 0px 10px 0px var(--ech-movement-dashMovement-boxShadow);
+        }
+
+        .movement-spaces .movement-space.danger-movement {
+            background-color: var(--ech-movement-dangerMovement-background);
+            box-shadow: 0px 0px 10px 0px var(--ech-movement-dangerMovement-boxShadow);
+        }
     }
 
 }
@@ -278,168 +441,4 @@
         color: var(--ech-buttons-hover-color);
     }
 
-}
-
-/* ========== Portrait.css ========== */
-.portrait-hud {
-    /* ADD THEME OPTIONS */
-    background-color: var(--ech-portrait-base-background);
-    border-color: var(--ech-portrait-base-border);
-    color: var(--ech-portrait-base-color);
-
-    .portrait-stat-block {
-        /* ADD THEME OPTIONS */
-        border-color: var(--ech-mainAction-base-border);
-        color: rgb(255, 255, 255);
-        text-shadow: 0 0 10px rgba(0 0 0 / 0.7);
-    }
-
-    .portrait-stat-block:not(.player-details):before {
-        /* ADD THEME OPTIONS */
-        background-color: rgb(0 0 0 / 50%);
-    }
-
-    /*.portrait-stat-block [data-hp-value]:after {
-         ADD THEME OPTIONS 
-        color: rgb(0 255 170);
-    }*/
-    .portrait-stat-block [data-ac-value]:after {
-        /* ADD THEME OPTIONS */
-        color: rgb(90, 190, 245);
-    }
-
-    .portrait-stat-block [data-spell-dc]:after {
-        /* ADD THEME OPTIONS */
-        color: rgb(90, 190, 245);
-    }
-
-    .portrait-stat-block.player-details {
-        /* ADD THEME OPTIONS */
-        background-color: rgba(0 0 0 / 0.1);
-        background: linear-gradient(180deg, rgba(65, 75, 85, 0.9) 0%, rgba(70, 80, 90, 0.8) 50%, rgba(75, 85, 95, 0) 100%);
-    }
-
-    /* ========== Portrait.css - Player Buttons ========== */
-    .player-button {
-        border-color: var(--ech-mainAction-base-border);
-        color: rgb(225, 225, 225);
-    }
-
-    .player-button:before {
-        /* ADD THEME OPTIONS */
-        background-color: rgb(0 0 0 / 50%);
-    }
-
-    .player-button:hover {
-        border-color: var(--ech-mainAction-hover-border);
-        color: rgb(255, 255, 255);
-    }
-
-}
-
-/* ========== Portrait.css - Ability Menu ========== */
-.ability-menu {
-    color: var(--ech-abilityMenu-color);
-    /* REMOVE STYLE */
-
-    &:before {
-        background-color: var(--ech-abilityMenu-background);
-        border-color: var(--ech-abilityMenu-border);
-    }
-
-    ul > li {
-        border-color: var(--ech-abilityMenu-border);
-        color: var(--ech-abilityMenu-base-color);
-        text-shadow: 0px 0px 10px var(--ech-abilityMenu-base-boxShadow);
-    }
-
-    ul > li .ability-code select * {
-        background-color: var(--ech-abilityMenu-background);
-        border-color: var(--ech-abilityMenu-border);
-    }
-
-    ul:last-child > li:hover,
-    ul:last-child > li:active,
-    ul:last-child > li:focus,
-    ul > li .ability-name:hover,
-    ul > li .ability-name:active,
-    ul > li .ability-name:focus,
-    ul > li .ability-name.active {
-        color: var(--ech-abilityMenu-hover-color);
-        text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
-    }
-
-    ul > li.is-save > div > span:hover,
-    ul > li.is-save > div > span:active,
-    ul > li.is-save > div > span:focus,
-    ul > li.is-save > div > span.active {
-        color: var(--ech-abilityMenu-hover-color);
-        text-shadow: 0px 0px 10px var(--ech-abilityMenu-hover-boxShadow);
-    }
-
-    ul.ability-toggle li {
-        border-color: var(--ech-abilityMenu-border);
-    }
-}
-
-
-
-/* ========== Portrait.css - Weapon Sets ========== */
-.weapon-sets {
-    .weapon-set {
-        /* ADD THEME OPTIONS */
-        background-color: rgb(0 0 0 / 50%);
-        border-color: var(--ech-mainAction-base-border);
-        color: rgb(255, 255, 255);
-    }
-
-    .weapon-set:before {
-        /* ADD THEME OPTIONS */
-        background-color: rgba(0 0 0 / 0.7);
-        border-color: var(--ech-mainAction-base-border);
-    }
-
-    .weapon-set.active:after {
-        /* ADD THEME OPTIONS */
-        background-color: var(--ech-mainAction-base-border);
-    }
-
-    .weapon-set > .set.set-primary:before,
-    .weapon-set > .set.set-primary:after {
-        /* ADD THEME OPTIONS */
-        border-color: var(--ech-mainAction-base-border);
-    }
-}
-
-/* ========== Portrait.css - Movement HUD ========== */
-.movement-hud {
-    /* ADD THEME OPTIONS */
-    background-color: var(--ech-mainAction-background-color);
-    border-color: var(--ech-mainAction-base-border);
-    color: rgb(200 200 200);
-
-    .movement-current {
-        /* ADD THEME OPTIONS */
-        color: rgb(90, 190, 245);
-    }
-
-    .movement-spaces .movement-space {
-        background-color: var(--ech-movement-used-background);
-        box-shadow: 0px 0px 10px 0px var(--ech-movement-used-boxShadow);
-    }
-
-    .movement-spaces .movement-space.base-movement {
-        background-color: var(--ech-movement-baseMovement-background);
-        box-shadow: 0px 0px 10px 0px var(--ech-movement-baseMovement-boxShadow);
-    }
-
-    .movement-spaces .movement-space.dash-movement {
-        background-color: var(--ech-movement-dashMovement-background);
-        box-shadow: 0px 0px 10px 0px var(--ech-movement-dashMovement-boxShadow);
-    }
-
-    .movement-spaces .movement-space.danger-movement {
-        background-color: var(--ech-movement-dangerMovement-background);
-        box-shadow: 0px 0px 10px 0px var(--ech-movement-dangerMovement-boxShadow);
-    }
 }
