@@ -107,7 +107,7 @@
     .action-element .quantity-1 .border-triangle,
     .action-element .quantity-2 .border-triangle {
         /* ADD THEME OPTIONS */
-        border-top-color: var(--ech-mainAction-base-background) !important;
+        border-top-color: var(--ech-mainAction-base-background);
     }
 
     /* ========== ActionHud.css - Features Containers ========== */
@@ -148,7 +148,7 @@
     .feature-element .quantity-1 .border-triangle,
     .feature-element .quantity-2 .border-triangle {
         /* ADD THEME OPTIONS */
-        border-top-color: var(--ech-mainAction-hover-background) !important;
+        border-top-color: var(--ech-mainAction-hover-background);
     }
 
     .feature-element-title {
