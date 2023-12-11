@@ -29,7 +29,8 @@ export class DrawerPanel extends ArgonComponent {
 
     _processCategories() {
         let categories = this.categories;
-        if (!categories[0]?.categories) categories = [{title: this.tile, categories}];
+        const title = this.title;
+        if (!categories[0]?.categories) categories = [{title, categories}];
         this._categories = categories
     }
 
