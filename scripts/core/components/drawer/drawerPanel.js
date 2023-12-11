@@ -2,6 +2,7 @@ import {ArgonComponent} from "../component.js";
 import { localize } from "../../hud.js";
 
 export class DrawerPanel extends ArgonComponent {
+
     get classes() {
         return ["ability-menu"];
     }
@@ -19,41 +20,73 @@ export class DrawerPanel extends ArgonComponent {
     }
 
     async getData() {
+        this._processCategories();
         return {
             title: this.title,
-            categories: this.categories,
+            categories: this._categories,
         };
     }
 
+    _processCategories() {
+        let categories = this.categories;
+        if (!categories[0]?.categories) categories = [{title: this.tile, categories}];
+        this._categories = categories
+    }
+
     async activateListeners(html) {
-        html.querySelector(".ability-toggle").addEventListener("click", function (event) {
-            document.body.classList.toggle("ech-show-ability-menu");
-            const element = ui.ARGON.element[0];
-            const ratio = parseFloat(element.style.transform.split(" ")[0].replace(/[^0-9.]+/g, ""));
-            const scaleHeight = (window.innerHeight - document.querySelector(".portrait-hud").offsetHeight * ratio) / ratio - 70;
-            document.querySelector(".ability-menu ul").style.maxHeight = document.body.classList.contains("ech-show-ability-menu") ? `${scaleHeight}px` : "0px";
+        html.querySelectorAll(".ability-toggle .ability.ability-title").forEach(el => {
+            el.addEventListener("click", (event) => {
+                const index = el.dataset.index;
+                this._expandPanel(index);
+            });
+        })
+    }
+
+    _expandPanel(index) {
+        if(isNaN(index)) return;
+        const el = this.element.querySelector(`.ability-toggle .ability.ability-title[data-index="${index}"]`);
+        const element = ui.ARGON.element[0];
+        const ratio = parseFloat(element.style.transform.split(" ")[0].replace(/[^0-9.]+/g, ""));
+        const scaleHeight = (window.innerHeight - document.querySelector(".portrait-hud").offsetHeight * ratio) / ratio - 70;
+        let expanded = null;
+        this.element.querySelectorAll(`.ability-toggle .ability.ability-title`).forEach(el => el.classList.remove("active"));
+        this.element.querySelectorAll(`.collapsible-panel`).forEach(el => {
+            if(el.style.maxHeight !== "0px") expanded = el.dataset.index;
+            el.style.maxHeight = "0px"
         });
+        if (expanded != index) {
+            ui.ARGON._lastExpandedDrawer = index;
+            this.element.querySelector(`.collapsible-panel[data-index="${index}"]`).style.maxHeight = `${scaleHeight}px`;
+            el.classList.add("active");
+        } else {
+            ui.ARGON._lastExpandedDrawer = null;
+        }
+        document.body.classList.toggle("ech-show-ability-menu", expanded != index);
     }
 
     async _renderInner() {
         await super._renderInner();
         const buttonPromises = [];
-        const categories = this.categories;
-        for (const category of categories) {
-            const index = categories.indexOf(category);
-            const container = this.element.querySelector(`.ability-title[data-index="${index}"]`);
-            if (!container) continue;
-            if (!category.buttons) continue;
-            const buttons = [...category.buttons].reverse();
-            for (const button of buttons) {
-                button._parent = this;
-                container.after(button.element);
-                button.setGrid(category.gridCols);
-                button.setAlign(category.captions.map((caption) => caption.align));
-                buttonPromises.push(button.render());
+        for (const panel of this._categories) {
+            const panelIndex = this._categories.indexOf(panel);
+            for (const category of panel.categories) {
+                const index = panel.categories.indexOf(category);
+                const container = this.element.querySelector(`.collapsible-panel[data-index="${panelIndex}"] .ability-title[data-index="${index}"]`);
+                if (!container) continue;
+                if (!category.buttons) continue;
+                const buttons = [...category.buttons].reverse();
+                for (const button of buttons) {
+                    button._parent = this;
+                    container.after(button.element);
+                    button.setGrid(category.gridCols);
+                    button.setAlign(category.captions.map((caption) => caption.align));
+                    buttonPromises.push(button.render());
+                }
             }
         }
         await Promise.all(buttonPromises);
+        this.element.querySelectorAll(`.collapsible-panel`).forEach(el => {el.style.maxHeight = "0px"});
+        this._expandPanel(ui.ARGON._lastExpandedDrawer);
         return this.element;
     }
 }

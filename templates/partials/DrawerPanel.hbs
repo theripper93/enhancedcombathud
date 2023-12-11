@@ -1,10 +1,14 @@
 <div>
-	<ul>
-		{{#each categories as |category|}}
+		{{#each categories as |panel|}}
+	<ul class="collapsible-panel" data-index="{{@index}}">
+		{{#each panel.categories as |category|}}
 		<li data-index="{{@index}}" style="grid-template-columns: {{category.gridCols}};" class="ability ability-title">{{#each captions as |caption|}}<span {{#if caption.align}}style="text-align: {{caption.align}}"{{/if}}>{{{localize caption.label}}}</span>{{/each}}</li>
 		{{/each}}
 	</ul>
+		{{/each}}
 	<ul class="ability-toggle">
-		<li class="ability ability-title">{{{localize title}}}</li>
+		{{#each categories as |panel|}}
+		<li class="ability ability-title" data-index="{{@index}}">{{{localize panel.title}}}</li>
+		{{/each}}
 	</ul>
 </div>

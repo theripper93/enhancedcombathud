@@ -131,10 +131,13 @@
     
     ul.ability-toggle {
         max-height: 100%;
+        display: flex;
     }
     ul.ability-toggle li {
         border-top: 1px solid transparent;
         cursor: pointer;
+        flex: 1;
+        position: relative;
     }
     ul.ability-toggle li:after {
         content: "\f13a";
@@ -149,8 +152,12 @@
         font-weight: 900;
         position: absolute;
         right: 15px;
-        transform: rotate(180deg);
+        transform: translateY(50%);
         transition: all 0.3s ease-in-out;
     }
 
+    ul.ability-toggle li.active:after {
+        transform: rotate(180deg) translateY(-50%);
+    }
+    
 }
