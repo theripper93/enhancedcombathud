@@ -21,6 +21,12 @@
 
     pointer-events: all;
 
+    .content-link{
+        background-color: transparent;
+        border: none;
+        text-decoration: underline;
+    }
+
     &.ability-tooltip {
         transform-origin: left center;
     }
