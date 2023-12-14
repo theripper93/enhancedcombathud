@@ -47,8 +47,8 @@ export class DrawerPanel extends ArgonComponent {
         if(isNaN(index)) return;
         const el = this.element.querySelector(`.ability-toggle .ability.ability-title[data-index="${index}"]`);
         const element = ui.ARGON.element[0];
-        const ratio = parseFloat(element.style.transform.split(" ")[0].replace(/[^0-9.]+/g, ""));
-        const scaleHeight = (window.innerHeight - document.querySelector(".portrait-hud").offsetHeight * ratio) / ratio - 70;
+        const ratio = parseFloat(element?.style.transform.split(" ")[0].replace(/[^0-9.]+/g, "") ?? 1);
+        const scaleHeight = (window.innerHeight - (document.querySelector(".portrait-hud")?.offsetHeight || 200) * ratio) / ratio - 70;
         let expanded = null;
         this.element.querySelectorAll(`.ability-toggle .ability.ability-title`).forEach(el => el.classList.remove("active"));
         this.element.querySelectorAll(`.collapsible-panel`).forEach(el => {
