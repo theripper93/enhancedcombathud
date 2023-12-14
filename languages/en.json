@@ -148,6 +148,10 @@
         "name": "Disable Blur Effects",
         "hint": "Disable blur effects on the HUD. This is a performance setting and should only be used if you experience performance issues."
       },
+      "suppressWarnings": {
+        "name": "Suppress Warnings",
+        "hint": "If an error occurs, don't show a warning message and silently fail instead."
+      },
       "rangefinder": {
         "name": "3D Canvas - Range Finder",
         "hint": "Enable 3D Canvas Range Finder when hovering items in the HUD. When enabled will show the distance to the target - the distance will be Red if the target is out of range."

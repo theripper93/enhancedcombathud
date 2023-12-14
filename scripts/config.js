@@ -618,6 +618,15 @@ export function initConfig() {
             ui.ARGON.refresh()
         },
     });
+
+    game.settings.register("enhancedcombathud", "suppressWarnings", {
+        name: game.i18n.localize("enhancedcombathud.settings.suppressWarnings.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.suppressWarnings.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
 }
 
 export function registerKeybindings() {

@@ -326,7 +326,9 @@ export class CoreHUD extends Application{
     if (!this._actor) console.error("Argon: No actor found");
     const actorType = this._actor.type;
     if (supportedActorTypes.length && !supportedActorTypes.includes(actorType)) {
-      ui.notifications.error(localize("enhancedcombathud.err.unsupportedActorType").replace("%t", actorType));
+      const suppressWarnings = game.settings.get("enhancedcombathud", "suppressWarnings");
+      if(!suppressWarnings) ui.notifications.error(localize("enhancedcombathud.err.unsupportedActorType").replace("%t", actorType));
+      else console.error(localize("enhancedcombathud.err.unsupportedActorType").replace("%t", actorType));
       this._target = null;
       this._token = null;
       this._actor = null;
