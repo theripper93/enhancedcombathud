@@ -36,10 +36,10 @@ export class MovementHud extends ArgonComponent {
 
   updateMovement() {
     if (!game.combat?.started) this.movementUsed = 0;
-
+    debugger
     const movementColor = movementColors[Math.min(Math.floor((this.movementUsed) / this.movementMax), 2)]
 
-    const disabledBars = this.movementUsed % this.movementMax;
+    const disabledBars = (this.movementUsed % this.movementMax) || 0;
 
     const barsNumber = this.movementMax - disabledBars;
 
@@ -53,7 +53,7 @@ export class MovementHud extends ArgonComponent {
       newHtml += `<div class="movement-space"></div>`;
     }
     this.element.querySelector(".movement-current").innerText = barsNumber;
-    this.element.querySelector(".movement-max").innerText = (Math.floor((this.movementUsed) / this.movementMax) + 1) * this.movementMax;
+    this.element.querySelector(".movement-max").innerText = ((Math.floor((this.movementUsed) / this.movementMax) + 1) * this.movementMax) || 0;
     barsContainer.innerHTML = newHtml;
   }
 
