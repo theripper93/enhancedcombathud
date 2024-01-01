@@ -36,7 +36,6 @@ export class MovementHud extends ArgonComponent {
 
   updateMovement() {
     if (!game.combat?.started) this.movementUsed = 0;
-    debugger
     const movementColor = movementColors[Math.min(Math.floor((this.movementUsed) / this.movementMax), 2)]
 
     const disabledBars = (this.movementUsed % this.movementMax) || 0;
