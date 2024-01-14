@@ -1,8 +1,12 @@
 import { showRangeFinder, showRangeRings, clearRangeFinders, clearRanges } from "./components/main/buttons/itemButton.js";
 
+let activeTargetPicker = null;
+
 export class TargetPicker{
   constructor ({token, targets, ranges}) {
     checkShowTargetPickerGuide();
+    if (activeTargetPicker) activeTargetPicker.end(false);
+    activeTargetPicker = this;
     this.ranges = ranges;
     this.token = token;
     this.resolve = null;
@@ -94,6 +98,7 @@ export class TargetPicker{
   end(res) {
     clearRanges(true);
     document.querySelector(".control-tool").click();
+    activeTargetPicker = null;
     this.resolve(res);
     this.element.remove();
     Hooks.off("targetToken", this.targetHook);
