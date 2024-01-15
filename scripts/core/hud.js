@@ -58,7 +58,7 @@ export class CoreHUD extends Application{
     Hooks.callAll(`argonInit`, CoreHUD);
     Hooks.on("argon-onSetChangeComplete", this._updateActionContainers.bind(this));
     Hooks.on("updateItem", this._onUpdateItem.bind(this));
-    Hooks.on("combatStart", this._onCombatStart.bind(this));
+    //Hooks.on("combatStart", this._onCombatStart.bind(this)); #Hook is only firing for the user starting the combat for some reason
     Hooks.on("updateCombat", this._onUpdateCombat.bind(this));
     Hooks.on("deleteCombat", this._onDeleteCombat.bind(this));
     Hooks.on("updateActor", this._onUpdateActor.bind(this));
@@ -133,6 +133,7 @@ export class CoreHUD extends Application{
       this.components.main?.forEach(component => component._onNewRound(combat));
       this.components.movement?._onNewRound(combat);
     }
+    if(updates.round === 1 && updates.turn === 0) this._onCombatStart(combat);
     this.updateSidePortraitHuds();
   }
 
@@ -376,6 +377,7 @@ export class CoreHUD extends Application{
   updateSidePortraitHuds() {
     this.components.movement?.setVisibility();
     this.components.buttonHud?.setVisibility();
+    if(!this.components?.portrait?.element) return;
     if (!this.components.movement?.visible && !this.components.buttonHud?.visible) this.components.portrait.element.style.marginRight = "0px";
     else this.components.portrait.element.style.marginRight = "";
   }
