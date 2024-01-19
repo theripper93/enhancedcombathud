@@ -115,6 +115,9 @@ export class ArgonComponent {
         await this._renderInner();
         await this.activateListeners(this.element);
         if (this.hasTooltip) await this.activateTooltipListeners();
+        const parentClass = Object.getPrototypeOf(this.constructor);
+        Hooks.callAll(`render${parentClass.name}ArgonComponent`, this, this.element, this.actor);
+        Hooks.callAll(`render${this.constructor.name}ArgonComponent`, this, this.element, this.actor);
         return this.element;
     }
 
