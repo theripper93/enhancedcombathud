@@ -104,10 +104,10 @@
     },
     "hud": {
       "pass": {
-        "name": "Pass"
+        "name": "Passer"
       },
       "endturn": {
-        "name": "End Turn"
+        "name": "Fin de tour"
       }
     },
     "tooltip": {
