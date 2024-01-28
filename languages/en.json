@@ -230,6 +230,9 @@
     "hotkey": {
       "toggle": {
         "name": "Toggle Argon Combat HUD"
+      },
+      "pinTooltip": {
+        "name": "Pin tooltip"
       }
     },
     "err": {
