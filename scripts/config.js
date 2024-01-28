@@ -639,4 +639,14 @@ export function registerKeybindings() {
             ui.ARGON.toggle();
         },
     });
+
+    game.keybindings.register("enhancedcombathud", "pinTooltip", {
+        name: "enhancedcombathud.hotkey.pinTooltip.name",
+        editable: [{ key: "AltLeft"}],
+        restricted: false,
+        onDown: () => {},
+        onUp: () => {
+            Hooks.call("argon-releaseTooltip");
+        },
+    });
 }
