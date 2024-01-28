@@ -102,6 +102,14 @@
         "label": "Configurer les thèmes"
       }
     },
+    "hud": {
+      "pass": {
+        "name": "Passer"
+      },
+      "endturn": {
+        "name": "Fin de tour"
+      }
+    },
     "tooltip": {
       "target": {
         "name": "Cible"
