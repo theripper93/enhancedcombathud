@@ -191,6 +191,14 @@
       "movementBaseMovement": "Hintergrund/Boxschatten des Kastens der verfügbare Bewegungsfelder darstellt",
       "movementDashMovement": "Hintergrund/Boxschatten des Kastens der Spurt-Bewegungsfelder darstellt",
       "movementDangerMovement": "Hintergrund/Boxschatten des Kastens der überschrittene Bewegungsfelder darstellt"
-    }
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Argon Combat HUD umschalten"
+      },
+      "pinTooltip": {
+        "name": "Tooltips anpinnen"
+      }
+    },
   }
 }
