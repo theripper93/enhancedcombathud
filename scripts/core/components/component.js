@@ -106,9 +106,24 @@ export class ArgonComponent {
     }
 
     async _onTooltipMouseLeave(event) {
-        if (!this._tooltip) return;
-        this._tooltip._destroy();
-        this._tooltip = null;
+		if (!this._tooltip) return;
+		
+		const destroyTooltips = () => {
+			if (!this._tooltip) return;
+			this._tooltip._destroy();
+			this._tooltip = null;
+		}
+		
+		if (!game.keybindings.get("enhancedcombathud", "pinTooltip").find(keybind => keyboard.downKeys.has(keybind.key))) {
+			//only directly destroy tooltip if pin key is not pressed
+			destroyTooltips();
+		}
+		else {
+			//else delay until pin key is released
+			Hooks.on("argon-releaseTooltip", () => {
+				destroyTooltips();			
+			});
+		}
     }
 
     async render() {
