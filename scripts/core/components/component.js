@@ -96,17 +96,23 @@ export class ArgonComponent {
         const html = this.element;
         html.onmouseenter = this._onTooltipMouseEnter.bind(this);
         html.onmouseleave = this._onTooltipMouseLeave.bind(this);
+        //add listener for middle mouse click
+        html.addEventListener("mouseup", (event) => {
+            const isWheelClick = event.button === 1;
+            if(isWheelClick) this._onTooltipMouseEnter(event, true);
+        });
     }
 
-    async _onTooltipMouseEnter(event) {
+    async _onTooltipMouseEnter(event, locked = false) {
+        if(locked && this._tooltip) this._tooltip._destroy();
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
-        this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation);
+        this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation, locked);
         this._tooltip.render();
     }
 
     async _onTooltipMouseLeave(event) {
-        if (!this._tooltip) return;
+        if (!this._tooltip || this._tooltip._locked) return;
         this._tooltip._destroy();
         this._tooltip = null;
     }

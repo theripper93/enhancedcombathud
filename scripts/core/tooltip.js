@@ -1,12 +1,13 @@
 import { PARTIALS_PATH } from "./hud.js";
 
 export class Tooltip {
-    constructor(tooltipData, triggerElement, orientation) {
+    constructor(tooltipData, triggerElement, orientation, locked = false) {
         this.element = document.createElement("div");
         this.element.classList.add(...this.classes);
         this._tooltipData = tooltipData;
         this._triggerElement = triggerElement;
         this._orientation = orientation;
+        this._locked = locked;
     }
 
     get template() {
@@ -24,12 +25,17 @@ export class Tooltip {
     async render(...args) {
         await this._renderInner();
         const activeTooltips = document.querySelectorAll(".ech-tooltip") || [];
-        activeTooltips.forEach((tooltip) => tooltip.remove());
+        activeTooltips.forEach((tooltip) => !tooltip.classList.contains("ech-locked") && tooltip.remove());
 
         this.element.style.top = 0;
         this.element.style.left = 0;
         document.querySelector("body").append(this.element);
         this.element.classList.add("ech-show-tooltip");
+        if (this._locked) {
+            this.element.classList.add("ech-locked");
+            this.element.style.pointerEvents = "all";
+            this.element.addEventListener("mouseleave", () => this._destroy());
+        }
         const details = this.element.querySelector(".ech-tooltip-details");
         let closestMultiplier = 3;
         [2, 3].forEach(multiplier => {

@@ -21,6 +21,10 @@
 
     pointer-events: all;
 
+    &.ech-locked{
+        outline: 2px solid var(--ech-tooltip-header-background);
+    }
+
     .content-link{
         background-color: transparent;
         border: none;
