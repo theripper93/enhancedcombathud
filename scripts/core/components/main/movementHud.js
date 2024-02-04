@@ -22,6 +22,10 @@ export class MovementHud extends ArgonComponent {
 
   get movementMax() { }
 
+  get movementColor() {
+    return movementColors[Math.min(Math.floor((this.movementUsed) / this.movementMax), 2)];
+  }
+
   onTokenUpdate(updates) {
     if (updates.x === undefined && updates.y === undefined) return;
     const ray = new Ray({ x: this.token.x, y: this.token.y }, { x: updates.x ?? this.token.x, y: updates.y ?? this.token.y });
@@ -36,7 +40,7 @@ export class MovementHud extends ArgonComponent {
 
   updateMovement() {
     if (!game.combat?.started) this.movementUsed = 0;
-    const movementColor = movementColors[Math.min(Math.floor((this.movementUsed) / this.movementMax), 2)]
+    const movementColor = this.movementColor;
 
     const disabledBars = (this.movementUsed % this.movementMax) || 0;
 
