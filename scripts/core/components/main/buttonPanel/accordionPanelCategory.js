@@ -98,6 +98,10 @@ export class AccordionPanelCategory extends ArgonComponent{
     this.parent.saveState();
   }
 
+  get buttonMultipliers() {
+    return [2, 3, 5, 7];
+  }
+
   async _renderInner() {
     await super._renderInner();
     const buttonContainer = this.buttonContainer;
@@ -109,7 +113,7 @@ export class AccordionPanelCategory extends ArgonComponent{
     await Promise.all(promises);
     this._setUses();
     let closestMultiplier = 0;
-    [2, 3, 5, 7].forEach(multiplier => {
+    this.buttonMultipliers.forEach(multiplier => {
       if (this._buttons.length % multiplier === 0) closestMultiplier = multiplier;
     });
     if (this._buttons.length < 3) {
