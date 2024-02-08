@@ -9,7 +9,8 @@
 #players.ech-hidden,
 #hotbar.ech-hidden,
 #fps.ech-hidden {
-    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .ech-show-ability-menu .ability-menu ul{
