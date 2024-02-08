@@ -13,11 +13,12 @@
     pointer-events: none !important;
 }
 
-.ech-show-ability-menu .ability-menu ul{
-    &:first-child{
+.ech-show-ability-menu .ability-menu ul {
+    &:first-child {
         max-height: calc(100vh - (375px + 37px + 1rem));
     }
-    &.ability-toggle li:after{
+
+    &.ability-toggle li:after {
         transform: rotate(0deg);
     }
 }
