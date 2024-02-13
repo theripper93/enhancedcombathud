@@ -6,7 +6,8 @@ import { AccordionPanelCategory } from "./components/main/buttonPanel/accordionP
 import { ButtonPanel } from "./components/main/buttonPanel/buttonPanel.js";
 import { ActionButton } from "./components/main/buttons/actionButton.js";
 import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton.js";
-import { ItemButton } from "./components/main/buttons/itemButton.js";
+import {ItemButton} from "./components/main/buttons/itemButton.js";
+import { MacroButton } from "./components/main/buttons/macroButton.js";
 import {SplitButton} from "./components/main/buttons/splitButton.js";
 import {ActionPanel} from "./components/main/actionPanel.js";
 import {PortraitPanel} from "./components/portrait/portraitPanel.js";
@@ -561,6 +562,7 @@ export class CoreHUD extends Application{
           ActionButton,
           ButtonPanelButton,
           ItemButton,
+          MacroButton,
           SplitButton,
         },
         ActionPanel,
