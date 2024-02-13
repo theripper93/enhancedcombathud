@@ -7,6 +7,7 @@ export class ArgonComponent {
         this.element.classList.add(...this.classes);
         this._tooltip = null;
         this._parent = null;
+		this._tooltipClass = Tooltip;
     }
 
     get parent() {
@@ -49,6 +50,10 @@ export class ArgonComponent {
     get tooltipOrientation() {
         return null;
     }
+	
+	get tooltipClass() {
+		return this._tooltipClass;
+	}
 
     setColorScheme() {
         if (this.colorScheme === null) return;
@@ -107,7 +112,7 @@ export class ArgonComponent {
         if(locked && this._tooltip) this._tooltip._destroy();
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
-        this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation, locked);
+        this._tooltip = new this.tooltipClass(tooltipData, this.element, this.tooltipOrientation, locked);
         this._tooltip.render();
     }
 
