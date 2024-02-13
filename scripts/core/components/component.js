@@ -7,7 +7,7 @@ export class ArgonComponent {
         this.element.classList.add(...this.classes);
         this._tooltip = null;
         this._parent = null;
-		this._tooltipClass = Tooltip;
+	this._tooltipClass = Tooltip;
     }
 
     get parent() {
@@ -51,9 +51,9 @@ export class ArgonComponent {
         return null;
     }
 	
-	get tooltipClass() {
-		return this._tooltipClass;
-	}
+    get tooltipClass() {
+        return this._tooltipClass;
+    }
 
     setColorScheme() {
         if (this.colorScheme === null) return;
