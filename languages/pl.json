@@ -1,0 +1,255 @@
+{
+    "enhancedcombathud": {
+      "controls": {
+        "toggle": {
+          "title": "Przełącz Argon Combat HUD",
+          "warning": "Argon Combat HUD: Nie wybrano żadnego tokena. Proszę wybrać token, aby włączyć HUD."
+        }
+      },
+      "settings": {
+        "color": {
+          "label": "Kolor",
+          "text": "Główny Kolor",
+          "hint": "Kolor zakładki działań i innych głównych funkcji HUD"
+        },
+        "fore-color": {
+          "text": "Kolor Tekstu",
+          "hint": "Kolor tekstu"
+        },
+        "color-bonus-action": {
+          "text": "Kolor Akcji Dodatkowej",
+          "hint": "Kolor zakładki z dodatkową akcją"
+        },
+        "color-free-action": {
+          "text": "Kolor Akcji Darmowej",
+          "hint": "Kolor zakładki z darmową akcją"
+        },
+        "color-reaction": {
+          "text": "Kolor Reakcji",
+          "hint": "Kolor zakładki z reakcją"
+        },
+        "color-end-turn": {
+          "text": "Kolor Zakończenia Tury",
+          "hint": "Kolor zakładki zakończenia tury"
+        },
+        "color-tooltip": {
+          "text": "Kolor Podpowiedzi",
+          "hint": "Kolor podpowiedzi i okienka rzutów obronnych/umiejętności/narzędzi"
+        },
+        "theme": {
+          "name": "Motyw",
+          "hint": "Motyw HUD",
+          "custom": "Niestandardowy",
+          "helium": "Hel",
+          "neon": "Neon",
+          "argon": "Argon",
+          "krypton": "Krypton",
+          "xenon": "Ksenon",
+          "radon": "Radon",
+          "oganesson": "Oganesson"
+        },
+        "globalTheme": {
+          "name": "Tryb Motywu",
+          "hint": "Jeśli ustawione na 'Klient', każdy gracz będzie mógł wybrać swój własny motyw. Jeśli ustawione na 'Świat', motyw wybrany przez MG będzie taki sam dla każdego gracza.",
+          "choices": {
+            "client": "Klient",
+            "world": "Świat"
+          }
+        },
+        "scale": {
+          "name": "Skala",
+          "hint": "Skala HUD - jeśli włączona jest automatyczna skalowanie, ta ustawienie będzie używane jako mnożnik na podstawie obliczonej skali."
+        },
+        "dialogTheme": {
+          "name": "Motyw Dialogu",
+          "hint": "Zastosuj motyw Argon do dialogów otwieranych z HUD."
+        },
+        "autoScale": {
+          "name": "Auto Skala",
+          "hint": "Automatycznie skaluj HUD na podstawie rozmiaru ekranu. Ignoruje ustawienie skali."
+        },
+        "alwaysOn": {
+          "name": "Zawsze Włączone",
+          "hint": "Automatycznie pokazuj hud za każdym razem, gdy wybierasz token."
+        },
+        "leftPos": {
+          "name": "Pozycja Lewa",
+          "hint": "Odległość od lewej krawędzi w pikselach"
+        },
+        "botPos": {
+          "name": "Pozycja Dolna",
+          "hint": "Odległość od dolnej krawędzi w pikselach"
+        },
+        "playerDetailsBottom": {
+          "name": "Szczegóły Gracza na Dole",
+          "hint": "Pozycje graczy nazwa i informacje o klasie na dole dla portretu"
+        },
+        "preparedSpells": {
+          "name": "Tylko Przygotowane Zaklęcia",
+          "hint": "Pokaż tylko przygotowane zaklęcia"
+        },
+        "showTooltips": {
+          "name": "Pokaż Podpowiedzi",
+          "hint": "Pokaż podpowiedzi po najechaniu kursorem"
+        },
+        "showTooltipsSpecial": {
+          "name": "Pokaż Podpowiedzi dla Specjalnych Akcji",
+          "hint": "Pokaż podpowiedzi po najechaniu kursorem na specjalne akcje (unik, wycofanie się, pchnięcie...)"
+        },
+        "showTooltipsAbilityMenuAbilities": {
+          "name": "Pokaż Podpowiedzi dla Zdolności",
+          "hint": "Pokaż podpowiedzi po najechaniu myszką na zdolności w menu zdolności."
+        },
+        "showTooltipsAbilityMenuSkills": {
+          "name": "Pokaż Podpowiedzi dla Umiejętności",
+          "hint": "Pokaż podpowiedzi po najechaniu myszką na umiejętności w menu umiejętności."
+        },
+        "showTooltipsAbilityMenuTools": {
+          "name": "Pokaż Podpowiedzi dla Narzędzi",
+          "hint": "Pokaż podpowiedzi po najechaniu myszką na narzędzia w menu zdolności."
+        },
+        "fadeOutInactive": {
+          "name": "Zanikanie",
+          "hint": "Zanikaj HUD po 5 sekundach braku najechania na niego myszką."
+        },
+        "fadeoutDelay": {
+          "name": "Opóźnienie Zanikania",
+          "hint": "Opóźnienie przed zaniknięciem HUD w sekundach"
+        },
+        "fadeoutOpacity": {
+          "name": "Przezroczystość Zanikania",
+          "hint": "Przezroczystość HUD po zaniknięciu"
+        },
+        "hideMacroPlayers": {
+          "name": "Ukryj Pasek Makr i Listę Graczy",
+          "hint": "Ukryj Pasek Makr i Listę Graczy podczas otwartego HUD."
+        },
+        "openCombatStart": {
+          "name": "Otwórz po Rozpoczęciu Walki",
+          "hint": "Otwórz HUD, gdy rozpocznie się walka."
+        },
+        "tooltipScale": {
+          "name": "Skala Podpowiedzi",
+          "hint": "Skala podpowiedzi"
+        },
+        "switchEquip": {
+          "name": "Auto Wyposażenie",
+          "hint": "Automatycznie wyposażaj/odziewaj przedmioty podczas przełączania zestawów"
+        },
+        "showWeaponsItems": {
+          "name": "Pokaż Broń w Sekcji \"Użyj Przedmiotu\"",
+          "hint": "Pokaż broń w sekcji \"Użyj Przedmiotu\". Przydatne, jeśli sloty na broń są niewystarczające."
+        },
+        "noAA": {
+          "name": "Nie Stosuj Aktywnych Efektów",
+          "hint": "Nie stosuj aktywnych efektów podczas korzystania z specjalnych akcji. (wymaga odświeżenia)"
+        },
+        "noBlur": {
+          "name": "Wyłącz Efekty Rozmycia",
+          "hint": "Wyłącz efekty rozmycia na HUDzie. Jest to ustawienie wydajnościowe i powinno być używane tylko w przypadku problemów z wydajnością."
+        },
+        "suppressWarnings": {
+          "name": "Wyłączenie Ostrzeżeń",
+          "hint": "Jeśli wystąpi błąd, nie wyświetlaj komunikatu ostrzegawczego i zamiast tego cicho zakończ działanie."
+        },
+        "rangefinder": {
+          "name": "3D Canvas - Zasięg Mierzenia",
+          "hint": "Włącz 3D Canvas Range Finder podczas najechania na elementy w HUD. Po włączeniu pokaże odległość do celu - odległość będzie czerwona, jeśli cel jest poza zasięgiem."
+        },
+        "rangepicker": {
+          "name": "Wybieranie Celów",
+          "hint": "Kiedy używasz przedmiotu lub akcji, które wymaga celu, zostanie wyświetlona liczba celów, która podąża za kursorem myszy, aż zostanie wybrane odpowiednia ilość celów, użyj klawiszy +/-, aby ręcznie dostosować wymagane cele, jeśli jest to konieczne."
+        },
+        "rangepickerclear": {
+          "name": "Wybieranie Celów - Wyczyść Cele",
+          "hint": "Podczas korzystania z przedmiotu lub akcji, które wymaga celu, wyczyść wszystkie cele przed wejściem w tryb wyboru celu."
+        },
+        "thememenu": {
+          "name": "Dostosowywanie Motywu",
+          "hint": "Skonfiguruj, wybierz i dostosuj motywy Argon.",
+          "label": "Konfigurowanie Motywów"
+        }
+      },
+      "hud": {
+        "pass": {
+          "name": "Tura"
+        },
+        "endturn": {
+          "name": "Zakończ Turę"
+        },
+        "macro": {
+          "name": "Makro",
+          "page": "Strona"
+        }
+      },
+      "themeOptions": {
+        "save": "Zapisz Zmiany",
+        "export": "Wyeksportuj Motyw",
+        "autoTextColorTitle": "Autoustawienie koloró tekstu na podstawie Tła",
+        "autoTextColorHint": "To ustawienie dostosowuje kolor tekstu do koloru tła, aby był czytelny.",
+        "exportThemeName": "Nazwa Eksportowanego Motywu:",
+        "exportTheme": {
+          "save": "Zapisz",
+          "cancel": "Anuluj"
+        },
+        "themeTitle": "Wybierz Motyw",
+        "themeHint": "Wybór motywu spowoduje zastosowanie predefiniowanej palety kolorów do Argon.",
+        "portrait": "Kolory Portretu",
+        "mainAction": "Kolory Głównych Akcji",
+        "bonusAction": "Kolory Akcji Dodatkowej",
+        "freeAction": "Kolory Akcji Darmowych",
+        "reaction": "Kolory Reakcji",
+        "endTurn": "Kolory Zakończenia Tury",
+        "tooltip": "Kolory Podpowiedzi",
+        "abilityMenu": "Kolory Menu Zdolności",
+        "buttons": "Kolory Przycisków",
+        "movement": "Kolory Pól Ruchu",
+        "background": "Kolor Tła",
+        "color": "Kolor Tekstu",
+        "border": "Kolor Obramowania",
+        "boxShadow": "Kolor Cienia Pola",
+        "portraitBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "mainActionBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "mainActionHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "bonusActionBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "bonusActionHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "freeActionBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "freeActionHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "reactionBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "reactionHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "endTurnBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "endTurnHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "tooltipHeader": "Kolor Tła / Pierwszego planu / Obramowania nagłówka podpowiedzi/okien",
+        "tooltipSubtitle": "Kolor Tła / Pierwszego planu / Obramowania podtytułu w etykietach podpowiedzi",
+        "tooltipBody": "Kolor Tła / Pierwszego planu / Obramowania treści podpowiedzi/okien",
+        "abilityMenuBase": "Kolory Pierwszego Planu/Cienia Pola, gdy kursor nie znajduje się nad elementem",
+        "abilityMenuHover": "Kolory Pierwszego Planu/Cienia Pola, gdy kursor znajduje się nad elementem",
+        "buttonsBase": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor nie znajduje się nad elementem",
+        "buttonsHover": "Kolor Tła / Pierwszego planu / Obramowania, gdy kursor znajduje się nad elementem",
+        "movementUsed": "Tło/Cień Pola wskazującego używany ruch",
+        "movementBaseMovement": "Tło/Cień Pola wskazującego dostępne przestrzenie do poruszania się",
+        "movementDashMovement": "Tło/Cień Pola wskazującego przestrzenie ruchu w trybie sprintu",
+        "movementDangerMovement": "Tło/Cień Pola wskazującego przekroczone przestrzenie do poruszania się"
+      },
+      "hotkey": {
+        "toggle": {
+          "name": "Przełącz Argon Combat HUD"
+        }
+      },
+      "err": {
+        "unsupportedActorType": "Argon: Typ aktora '%t' nie jest obsługiwany przez Argon Combat HUD.",
+        "moduleNotActive": "Argon CORE: Moduł specyficzny dla systemu nie jest zainstalowany lub nie jest aktywny, proszę zainstalować i włączyć moduł %m, jeśli jest dostępny."
+      },
+      "targetPicker": {
+        "dialog": {
+          "title": "Tutorial Wyboru Celu",
+          "list": {
+            "0": "Liczba wybranych/wymaganych celów będzie podążać za twoim kursorsem",
+            "1": "<text_to_translate><span>Kliknij lewym przyciskiem myszy</span> lub naciśnij <span>T</span>, aby wybrać token jako cel</text_to_translate>",
+            "2": "<span>Kliknij prawym przyciskiem myszy</span>, aby anulować wybór celu",
+            "3": "Naciśnij klawisz <span>+</span> lub <span>-</span>, aby ręcznie zwiększyć/zmniejszyć liczbę wymaganych celów."
+          }
+        }
+      }
+    }
+  }

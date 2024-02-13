@@ -65,6 +65,11 @@
       "lang": "cn",
       "name": "中文",
       "path": "languages/cn.json"
+    },
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "languages/pl.json"
     }
   ],
   "scripts": [],
