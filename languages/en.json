@@ -176,6 +176,10 @@
       },
       "endturn": {
         "name": "End Turn"
+      },
+      "macro": {
+        "name": "Macro",
+        "page": "Page"
       }
     },
     "themeOptions": {
