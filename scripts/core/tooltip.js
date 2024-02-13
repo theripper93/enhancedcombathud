@@ -4,6 +4,7 @@ export class Tooltip {
     constructor(tooltipData, triggerElement, orientation, locked = false) {
         this.element = document.createElement("div");
         this.element.classList.add(...this.classes);
+        if(tooltipData.classes) this.element.classList.add(...tooltipData.classes);
         this._tooltipData = tooltipData;
         this._triggerElement = triggerElement;
         this._orientation = orientation;

@@ -50,6 +50,10 @@ export class ArgonComponent {
         return null;
     }
 
+    get tooltipCls() {
+        return Tooltip;
+    }
+
     setColorScheme() {
         if (this.colorScheme === null) return;
         switch (this.colorScheme) {
@@ -107,7 +111,8 @@ export class ArgonComponent {
         if(locked && this._tooltip) this._tooltip._destroy();
         const tooltipData = await this.getTooltipData();
         if (!tooltipData) return;
-        this._tooltip = new Tooltip(tooltipData, this.element, this.tooltipOrientation, locked);
+        const tooltipCls = this.tooltipCls;
+        this._tooltip = new tooltipCls(tooltipData, this.element, this.tooltipOrientation, locked);
         this._tooltip.render();
     }
 
