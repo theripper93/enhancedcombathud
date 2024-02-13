@@ -1,0 +1,21 @@
+<div class="feature-element has-count" data-item-count="2" data-itemname="Oil Flask"
+	style="background-image: url(icons/consumables/potions/bottle-bulb-empty-glass.webp)">
+	{{#if hasQuantity}}
+	<div class="quantity-1">
+		<div class="border-triangle"></div>
+		<span>
+			{{quantity}}
+		</span>
+	</div>
+	{{/if}}
+	{{#if hasQuantitySecondary}}
+	<div class="quantity-2">
+		<div class="border-triangle"></div>
+		<span>
+
+			{{quantitySecondary}}
+		</span>
+	</div>
+	{{/if}}
+	<span class="feature-element-title">{{label}}</span>
+</div>
