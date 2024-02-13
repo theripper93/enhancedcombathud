@@ -5,9 +5,9 @@ import { AccordionPanel } from "./components/main/buttonPanel/accordionPanel.js"
 import { AccordionPanelCategory } from "./components/main/buttonPanel/accordionPanelCategory.js";
 import { ButtonPanel } from "./components/main/buttonPanel/buttonPanel.js";
 import { ActionButton } from "./components/main/buttons/actionButton.js";
-import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton.js";
-import {ItemButton} from "./components/main/buttons/itemButton.js";
 import { MacroButton } from "./components/main/buttons/macroButton.js";
+import { ButtonPanelButton } from "./components/main/buttons/buttonPanelButton.js";
+import { ItemButton } from "./components/main/buttons/itemButton.js";
 import {SplitButton} from "./components/main/buttons/splitButton.js";
 import {ActionPanel} from "./components/main/actionPanel.js";
 import {PortraitPanel} from "./components/portrait/portraitPanel.js";
@@ -198,10 +198,10 @@ export class CoreHUD extends Application{
     }
   }
 
-  _onUpdateToken(tokenDocument, updates) {
+  _onUpdateToken(tokenDocument, updates, context) {
     if (tokenDocument !== this._token?.document) return;
     if(updates.actorId) this.bind(tokenDocument);
-    else this.components.movement?.onTokenUpdate(updates);
+    else this.components.movement?.onTokenUpdate(updates, context);
   }
 
   _onControlToken(token, controlled) {
@@ -560,9 +560,9 @@ export class CoreHUD extends Application{
       MAIN: {
         BUTTONS: {
           ActionButton,
+		  MacroButton,
           ButtonPanelButton,
           ItemButton,
-          MacroButton,
           SplitButton,
         },
         ActionPanel,
