@@ -210,7 +210,7 @@ export class CoreHUD extends Application{
         if(!canvas.tokens.controlled.length) this.bind(null);
       }, 100);
     }
-    if (!controlled || !token?.isOwner) return;
+    if (!controlled) return;
     if (this.enabled || game.settings.get("enhancedcombathud", "alwaysOn")) {
       this.bind(token)
     }
@@ -302,6 +302,7 @@ export class CoreHUD extends Application{
   }
 
   async bind(target) {
+    if (target && !target.isOwner) return;
     //await this.close();
     if (!target) {
       this._target = null;
