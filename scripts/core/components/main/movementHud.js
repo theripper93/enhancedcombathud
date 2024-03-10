@@ -17,7 +17,7 @@ export class MovementHud extends ArgonComponent {
   }
 
   set movementUsed(value) {
-    this._movementUsed = value;
+    this._movementUsed = Math.max(value, 0);
   }
 
   get movementMax() { }
@@ -26,7 +26,7 @@ export class MovementHud extends ArgonComponent {
     return movementColors[Math.min(Math.floor((this.movementUsed) / this.movementMax), 2)];
   }
 
-  onTokenUpdate(updates) {
+  onTokenUpdate(updates, context) {
     if (updates.x === undefined && updates.y === undefined) return;
     const ray = new Ray({ x: this.token.x, y: this.token.y }, { x: updates.x ?? this.token.x, y: updates.y ?? this.token.y });
     const segments = [{ ray }];
@@ -34,7 +34,12 @@ export class MovementHud extends ArgonComponent {
       canvas.grid.measureDistances(segments, { gridSpaces: true }) /
         canvas.dimensions.distance
     );
-    this.movementUsed += distance;
+    if (context?.isUndo) {
+      this.movementUsed -= distance;
+    }
+    else {
+      this.movementUsed += distance;
+    }
     this.updateMovement();
   }
 
