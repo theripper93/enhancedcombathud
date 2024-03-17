@@ -81,7 +81,8 @@ export class TargetPicker{
     document.body.appendChild(element);
     this.element = element;
     if (!this.maxTargets || this.targetCount == this.maxTargets) return this.end(true);
-    showRangeRings(this.ranges.normal, this.ranges.long, this.token);
+    const tokenSizeOffset = Math.max(this.token.document.width, this.token.document.height) * 0.5 * canvas.scene.dimensions.distance;
+    showRangeRings(this.ranges.normal, this.ranges.long, this.token, tokenSizeOffset);
   }
 
   update(event) {

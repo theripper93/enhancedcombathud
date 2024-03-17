@@ -190,11 +190,11 @@ export function clearRanges(force = false) {
   }
 }
 
-export function showRangeRings(normal, long, object) {
+export function showRangeRings(normal, long, object, tokenSizeOffset) {
   if(!game.Levels3DPreview?._active) return;
   clearRanges(true);
-  if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, normal);
-  if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, long, "#ff0000");
+  if (normal) rangeRings.normal = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, normal + tokenSizeOffset);
+  if (long) rangeRings.long = new game.Levels3DPreview.CONFIG.entityClass.RangeRingEffect(object, long + tokenSizeOffset, "#ff0000");
 }
 
 export async function showRangeFinder(range, object){

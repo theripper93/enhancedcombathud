@@ -199,11 +199,9 @@ export class echThemeOptions extends FormApplication {
                 const selectTheme = echThemeOptions.querySelector('select[name="theme"]');
                 selectTheme.innerHTML = "";
 
-                const coreThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/scripts/themes`, {extensions: [".json"]})).files;
+                const coreThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/scripts/themes`, { extensions: [".json"] })).files;
 
-                const customThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/storage/themes`, {extensions: [".json"]})).files;
-
-
+                const customThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/storage/themes`, { extensions: [".json"] })).files;
 
                 function createOption(file) {
                     const filename = file.split("/")[file.split("/").length - 1].replace(/\.json/gi, "");
@@ -226,7 +224,6 @@ export class echThemeOptions extends FormApplication {
                 customThemes.forEach(createOption);
 
                 echThemeOptions.querySelector('select[name="theme"]').value = selectedTheme;
-
             },
         };
     }
@@ -267,10 +264,10 @@ export class echThemeOptions extends FormApplication {
         echThemeOptions.defaultOptions.buildDropdown(game.settings.get("enhancedcombathud", "echThemeData").theme);
 
         $(html).on("click", "li h4.toggleOptions", (event) => {
-          let isOpened = $(event.currentTarget).closest("li").hasClass("show");
-        
-          $(event.currentTarget).closest("ul").find("li.show").removeClass("show");
-          $(event.currentTarget).closest("li").toggleClass("show", !isOpened);
+            let isOpened = $(event.currentTarget).closest("li").hasClass("show");
+
+            $(event.currentTarget).closest("ul").find("li.show").removeClass("show");
+            $(event.currentTarget).closest("li").toggleClass("show", !isOpened);
         });
 
         // Handle Theme Selection
@@ -308,7 +305,7 @@ export class echThemeOptions extends FormApplication {
 
         html[0].querySelector('button[name="export"]').addEventListener("click", (event) => {
             event.preventDefault();
-            echThemeOptions.defaultOptions.createTheme()
+            echThemeOptions.defaultOptions.createTheme();
         });
     }
     async _updateObject(event, formData) {
@@ -336,23 +333,19 @@ export class echThemeOptions extends FormApplication {
 }
 
 export function initConfig() {
-
-
     Handlebars.registerHelper("echLocalize", (data, data2, data3) => {
         let str = `.${data}`;
-        if (typeof data2 == "string")
-          str += `${data2.charAt(0).toUpperCase() + data2.slice(1)}`;
-        if (typeof data3 == "string")
-          str += `${data3.charAt(0).toUpperCase() + data3.slice(1)}`;
-      
+        if (typeof data2 == "string") str += `${data2.charAt(0).toUpperCase() + data2.slice(1)}`;
+        if (typeof data3 == "string") str += `${data3.charAt(0).toUpperCase() + data3.slice(1)}`;
+
         return game.i18n.localize(`enhancedcombathud.themeOptions${str}`);
     });
-    
+
     Handlebars.registerHelper("ifObject", function (item, options) {
         if (typeof item === "object") {
-          return options.fn(this);
+            return options.fn(this);
         } else {
-          return options.inverse(this);
+            return options.inverse(this);
         }
     });
 
@@ -391,7 +384,7 @@ export function initConfig() {
         config: false,
         onChange: () => {
             ui.ARGON.setColorSettings();
-            ui.ARGON.refresh()
+            ui.ARGON.refresh();
         },
     });
 
@@ -452,7 +445,6 @@ export function initConfig() {
         onChange: () => ui.ARGON.refresh(),
     });
 
-    
     game.settings.register("enhancedcombathud", "dialogTheme", {
         name: game.i18n.localize("enhancedcombathud.settings.dialogTheme.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.dialogTheme.hint"),
@@ -571,7 +563,7 @@ export function initConfig() {
         default: false,
         onChange: () => {
             ui.ARGON.setColorSettings();
-            ui.ARGON.refresh()
+            ui.ARGON.refresh();
         },
     });
 
@@ -584,7 +576,7 @@ export function initConfig() {
         default: 4,
         onChange: () => {
             ui.ARGON.setColorSettings();
-            ui.ARGON.refresh()
+            ui.ARGON.refresh();
         },
     });
 
@@ -602,7 +594,7 @@ export function initConfig() {
         default: 0.1,
         onChange: () => {
             ui.ARGON.setColorSettings();
-            ui.ARGON.refresh()
+            ui.ARGON.refresh();
         },
     });
 
@@ -615,7 +607,7 @@ export function initConfig() {
         default: false,
         onChange: () => {
             ui.ARGON.setColorSettings();
-            ui.ARGON.refresh()
+            ui.ARGON.refresh();
         },
     });
 
