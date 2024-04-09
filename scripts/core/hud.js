@@ -247,8 +247,8 @@ export class CoreHUD extends Application{
     const _prevState = this._hudState.get(this._actor);
     if(!_prevState) this._hudState.set(this._actor, {});
     const element = await super._renderInner(data);
-    this._renderingElement = element;
     const html = element[0];
+    this._renderingElement = html;
     this.components = {
       weaponSets: new mainSystemComponents.WEAPONSETS(),
       movement: this._token && mainSystemComponents.MOVEMENT ? new mainSystemComponents.MOVEMENT() : null,
