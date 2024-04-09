@@ -98,7 +98,7 @@ export class CoreHUD extends Application{
 
   get actionBarWidth() {
     let totalActionBarWidth = 0;
-    this.element[0].querySelectorAll(".actions-container").forEach(element => {
+    this.element[0]?.querySelectorAll(".actions-container").forEach(element => {
       totalActionBarWidth += element.offsetWidth;
     });
     return totalActionBarWidth;
