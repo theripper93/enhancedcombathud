@@ -372,6 +372,7 @@ export class CoreHUD extends Application{
   }
 
   collapseAllPanels() {
+    if(!this.element[0]) return;
     this.element[0].querySelectorAll(".features-container.show").forEach(element => {
       element.classList.remove("show");
     });
