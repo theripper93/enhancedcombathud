@@ -211,7 +211,7 @@ export class CoreHUD extends Application{
       }, 100);
     }
     if (!controlled) return;
-    if (this.enabled || game.settings.get("enhancedcombathud", "alwaysOn")) {
+    if (this.enabled || game.settings.get("enhancedcombathud", "alwaysOn") || game.settings.get("enhancedcombathud", "alwaysOnGlobal")) {
       this.bind(token)
     }
   }

@@ -72,6 +72,10 @@
           "name": "Zawsze Włączone",
           "hint": "Automatycznie pokazuj hud za każdym razem, gdy wybierasz token."
         },
+        "alwaysOnGlobal": {
+          "name": "Zawsze Na Globalu",
+          "hint": "Automatycznie pokazuj hud za każdym razem, gdy ktoś wybierze token"
+        },
         "leftPos": {
           "name": "Pozycja Lewa",
           "hint": "Odległość od lewej krawędzi w pikselach"

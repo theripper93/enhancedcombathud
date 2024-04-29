@@ -72,6 +72,10 @@
         "name": "Always On",
         "hint": "Automatically show the hud whenever you select a token"
       },
+      "alwaysOnGlobal": {
+        "name": "Always On Global",
+        "hint": "Automatically show the hud whenever anyone selects a token"
+      },
       "leftPos": {
         "name": "Left Position",
         "hint": "Distance from the left border in pixels"

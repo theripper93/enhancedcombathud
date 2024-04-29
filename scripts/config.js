@@ -489,6 +489,16 @@ export function initConfig() {
         onChange: () => ui.ARGON.refresh(),
     });
 
+    game.settings.register("enhancedcombathud", "alwaysOnGlobal", {
+        name: game.i18n.localize("enhancedcombathud.settings.alwaysOnGlobal.name"),
+        hint: game.i18n.localize("enhancedcombathud.settings.alwaysOnGlobal.hint"),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: () => ui.ARGON.refresh(),
+    });
+
     game.settings.register("enhancedcombathud", "leftPos", {
         name: game.i18n.localize("enhancedcombathud.settings.leftPos.name"),
         hint: game.i18n.localize("enhancedcombathud.settings.leftPos.hint"),
