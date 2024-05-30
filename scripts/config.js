@@ -232,7 +232,7 @@ export class echThemeOptions extends FormApplication {
         // In case a new color was added since the last update
         // We build a new object with the default settings, and then overwrite the values with the stored settings
         let themeOptions = game.settings.get("enhancedcombathud", "echThemeData");
-        themeOptions = mergeObject(defaultTheme, themeOptions);
+        themeOptions = foundry.utils.mergeObject(defaultTheme, themeOptions);
 
         return {
             themeOptions: themeOptions,
