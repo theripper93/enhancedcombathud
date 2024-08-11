@@ -27,11 +27,13 @@ export class MovementHud extends ArgonComponent {
   }
 
   onTokenUpdate(updates, context) {
+    console.log("Measuring Path")
     if (updates.x === undefined && updates.y === undefined) return;
-    const ray = new Ray({ x: this.token.x, y: this.token.y }, { x: updates.x ?? this.token.x, y: updates.y ?? this.token.y });
-    const segments = [{ ray }];
+    const start = new PIXI.Point(this.token.x, this.token.y);
+    const end = new PIXI.Point(updates.x ?? this.token.x, updates.y ?? this.token.y);
+    const segments = [start, end];
     const distance = Math.floor(
-      canvas.grid.measureDistances(segments, { gridSpaces: true }) /
+      canvas.grid.measurePath(segments, { gridSpaces: true }).distance /
         canvas.dimensions.distance
     );
     if (context?.isUndo) {
