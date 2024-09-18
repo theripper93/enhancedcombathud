@@ -633,11 +633,11 @@ export class CoreHUD extends Application {
 
     async getThemeJson(themeName) {
         let file;
-        file = await fetch(`./modules/enhancedcombathud/scripts/themes/${themeName}.json`);
-        if (!file.ok) file = await fetch(`./modules/enhancedcombathud/storage/themes/${themeName}.json`);
+        file = await fetch(`modules/enhancedcombathud/scripts/themes/${themeName}.json`);
+        if (!file.ok) file = await fetch(`modules/enhancedcombathud/storage/themes/${themeName}.json`);
         if (!file.ok) {
             ui.notifications.error("Argon: Theme not found");
-            file = await fetch(`./modules/enhancedcombathud/scripts/themes/argon.json`);
+            file = await fetch(`modules/enhancedcombathud/scripts/themes/argon.json`);
         }
         const json = await file.json();
         return json;

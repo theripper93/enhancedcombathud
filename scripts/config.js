@@ -199,9 +199,9 @@ export class echThemeOptions extends FormApplication {
                 const selectTheme = echThemeOptions.querySelector('select[name="theme"]');
                 selectTheme.innerHTML = "";
 
-                const coreThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/scripts/themes`, { extensions: [".json"] })).files;
+                const coreThemes = (await FilePicker.browse("user", `modules/enhancedcombathud/scripts/themes`, { extensions: [".json"] })).files;
 
-                const customThemes = (await FilePicker.browse("user", `./modules/enhancedcombathud/storage/themes`, { extensions: [".json"] })).files;
+                const customThemes = (await FilePicker.browse("user", `modules/enhancedcombathud/storage/themes`, { extensions: [".json"] })).files;
 
                 function createOption(file) {
                     const filename = file.split("/")[file.split("/").length - 1].replace(/\.json/gi, "");
