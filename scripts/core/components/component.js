@@ -51,7 +51,7 @@ export class ArgonComponent {
     }
 
     get tooltipCls() {
-        return Tooltip;
+        return CONFIG.ARGON.CORE.Tooltip;
     }
 
     setColorScheme() {

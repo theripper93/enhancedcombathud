@@ -35,6 +35,7 @@ const mainSystemComponents = {
     WEAPONSETS: WeaponSets,
     MOVEMENT: MovementHud,
     BUTTONHUD: null,
+    TOOLTIP: Tooltip,
 };
 
 const supportedActorTypes = [];
@@ -546,11 +547,15 @@ export class CoreHUD extends Application {
         supportedActorTypes.push(...actorTypes);
     }
 
+    static defineTooltip(tooltip) {
+        mainSystemComponents.TOOLTIP = tooltip;
+    }
+
     static get ARGON() {
         return {
             CORE: {
                 CoreHUD,
-                Tooltip,
+                Tooltip:mainSystemComponents.TOOLTIP,
                 ArgonComponent,
             },
             MAIN: {
