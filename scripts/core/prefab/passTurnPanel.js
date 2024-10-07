@@ -16,6 +16,11 @@ export class PassTurnPanel extends ActionPanel {
       new PassTurnButton()
     ];
   }
+
+  updateVisibility() {
+    super.updateVisibility();
+    this._buttons.forEach(button => button.render());
+  }
 }
 
 class PassTurnButton extends ActionButton{
