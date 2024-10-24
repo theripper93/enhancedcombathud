@@ -308,6 +308,7 @@ export class CoreHUD extends Application {
             this._token = null;
             this._actor = null;
             this._itemsCount = null;
+            this._tooltip?._destroy(true);
             this._batchItemsUpdates.clear();
             this.toggleUiElements(false);
             this.updateSceneControlButton();
