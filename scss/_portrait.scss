@@ -111,6 +111,17 @@
         text-shadow: 0 0 black;
         top: 0px;
         width: 100%;
+        
+        .effects-container{
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            flex-direction: row;
+            .effect-icon{
+                width: 2rem;
+                height: 2rem;
+            }
+        }
     }
 
     .portrait-stat-block.player-details.player-details-bottom {

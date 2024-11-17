@@ -19,6 +19,7 @@ import { Tooltip } from "./tooltip.js";
 import { showTargetPickerGuide } from "./targetPicker.js";
 
 import { PassTurnPanel } from "./prefab/passTurnPanel.js";
+import {Effect} from "./components/portrait/effect.js";
 
 export const MODULE_ID = "enhancedcombathud";
 export const TEMPLATE_PATH = `modules/${MODULE_ID}/templates/`;
@@ -578,6 +579,7 @@ export class CoreHUD extends Application {
             },
             PORTRAIT: {
                 PortraitPanel,
+                Effect,
             },
             DRAWER: {
                 DrawerButton,

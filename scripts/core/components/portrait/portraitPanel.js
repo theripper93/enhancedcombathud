@@ -1,4 +1,5 @@
 import { ArgonComponent } from "../component.js";
+import {Effect} from "./effect.js";
 
 export class PortraitPanel extends ArgonComponent {
     constructor(...args) {
@@ -44,6 +45,18 @@ export class PortraitPanel extends ArgonComponent {
 
     get configurationTemplate() {
         return null;
+    }
+
+    get effectClass() {
+        return Effect;
+    }
+
+    async getEffects() {
+        const effects = [];
+        for(const effect of this.actor.temporaryEffects) {
+            effects.push({img: effect.img, name: effect.name, tooltip: await TextEditor.enrichHTML(effect.description)});
+        }
+        return effects;
     }
 
     async getData() {
@@ -148,6 +161,14 @@ export class PortraitPanel extends ArgonComponent {
                 deathBtn.style.pointerEvents = "none";
             }
         }
+        const effectsContainer = this.element.querySelector(".effects-container");
+        const effects = await this.getEffects();
+        const effectElements = effects.map((effect) => new this.effectClass(effect));
+        effectsContainer.innerHTML = "";
+        for (const effect of effectElements) {
+            effectsContainer.appendChild(effect.element);
+        }
+        await Promise.all(effectElements.map((effect) => effect.render()));
     }
 
     async _onConfigure(event) {
