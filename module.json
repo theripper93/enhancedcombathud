@@ -2,7 +2,7 @@
   "title": "Argon - Combat HUD (CORE)",
   "id": "enhancedcombathud",
   "description": "Solasta inspired Combat HUD. From D&D 5e to other systems, it offers a dynamic HUD for seasoned players and simplifies gameplay for newcomers. Requires the system specific module to be installed.",
-  "version": "0.1",
+  "version": "3.1.0",
   "authors": [
     {
       "name": "theripper93",
@@ -93,13 +93,7 @@
         "compatibility": {}
       }
     ],
-    "recommends": [
-      {
-        "id": "enhancedcombathud-dnd5e",
-        "type": "module",
-        "compatibility": {}
-      }
-    ],
+    "recommends": [],
     "systems": []
   },
   "compatibility": {
