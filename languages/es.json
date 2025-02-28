@@ -2,38 +2,38 @@
   "enhancedcombathud": {
     "controls": {
       "toggle": {
-        "title": "Activar Argon Combat HUD",
-        "warning": "Argon Combat HUD: No se ha seleccionado ninguna ficha. Por favor, seleccione una ficha para activar el HUD."
+        "title": "Activar HUD de combate Argon",
+        "warning": "HUD de combate Argon: No se ha seleccionado ninguna ficha. Por favor, seleccione una ficha para activar el HUD."
       }
     },
     "settings": {
       "color": {
         "label": "Color",
-        "text": "Color Principal",
+        "text": "Color principal",
         "hint": "Color de la pestaña de acciones y otras características principales del HUD."
       },
       "fore-color": {
-        "text": "Color del Texto",
+        "text": "Color del texto",
         "hint": "Color del texto."
       },
       "color-bonus-action": {
-        "text": "Color de Acción Adicional",
+        "text": "Color de acción adicional",
         "hint": "Color de la pestaña de acciones adicionales."
       },
       "color-free-action": {
-        "text": "Color de Acción Gratis",
+        "text": "Color de acción gratuita",
         "hint": "Color de la pestaña de acciones gratis."
       },
       "color-reaction": {
-        "text": "Color de Reacción",
+        "text": "Color de reacción",
         "hint": "Color de la pestaña de reacciones."
       },
       "color-end-turn": {
-        "text": "Color de Fin de Turno",
+        "text": "Color de fin de turno",
         "hint": "Color de la pestaña de finalización de turno."
       },
       "color-tooltip": {
-        "text": "Color de Cuadros de Información",
+        "text": "Color de cuadros de información",
         "hint": "Color de los cuadros de Información y de las ventanas emergentes de salvación/habilidad/herramientas."
       },
       "theme": {
@@ -48,24 +48,40 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "Modo de tema",
+        "hint": "Si se ajusta a 'Cliente' cada jugador podrá escoger su propio tema. Si se selecciona 'Mundo' en tema que seleccione el GM es el que se aplicará a todos los jugadores.",
+        "choices": {
+          "client": "Cliente",
+          "world": "Mundo"
+        }
+      },
       "scale": {
         "name": "Escala",
-        "hint": "Escala del HUD: si la escala automática está activada, este ajuste se utilizará como multiplicador sobre la escala calculada."
+        "hint": "Escalado del HUD: si la escala automática está activada, este ajuste se utilizará como multiplicador sobre la escala calculada."
       },
-      "noAutoscale": {
-        "name": "No autoescalar",
-        "hint": "No escalar el HUD para que se ajuste a la pantalla, utilizar el valor fijo en la configuración de la Escala."
+      "dialogTheme": {
+        "name": "Tema diálogos",
+        "hint": "Aplicar el tema Argon a los diálogos que se abran desde el HUD"
+      },
+      "autoScale": {
+        "name": "Autoescalar",
+        "hint": "Escalar automáticamente el HUD en base al tamaño de la pantalla. Ignora el ajuste de escalado"
+      },
+      "alwaysOn": {
+        "name": "Siempre activo",
+        "hint": "Muestra automáticamente el HUD al seleccionar una ficha"
       },
       "leftPos": {
-        "name": "Posición Izquierda",
+        "name": "Posición izquierda",
         "hint": "Distancia del borde izquierdo en píxeles."
       },
       "botPos": {
-        "name": "Posición Inferior",
+        "name": "Posición inferior",
         "hint": "Distancia del borde inferior en píxeles."
       },
       "playerDetailsBottom": {
-        "name": "Detalles del Jugador en la parte inferior",
+        "name": "Detalles del jugador en la parte inferior",
         "hint": "Coloca el nombre de los jugadores y la información de la clase en la parte inferior."
       },
       "preparedSpells": {
@@ -73,116 +89,167 @@
         "hint": "Mostrar sólo los hechizos preparados."
       },
       "showTooltips": {
-        "name": "Mostrar Cuadros de Información",
-        "hint": "Mostrar cuadros de información al pasar el ratón por encima."
+        "name": "Mostrar burbujas de información",
+        "hint": "Mostrar burbujas de información al pasar el ratón por encima."
       },
       "showTooltipsSpecial": {
-        "name": "Mostrar Cuadros de Información para Acciones Especiales",
-        "hint": "Mostrar cuadros de información al pasar el ratón por encima de las acciones especiales (esquivar,destrabarse,empujar...)."
+        "name": "Mostrar burbujas de información para acciones especiales",
+        "hint": "Mostrar burbujas de información al pasar el ratón por encima de las acciones especiales (esquivar,destrabarse,empujar...)."
       },
       "showTooltipsAbilityMenuAbilities": {
-        "name": "Mostrar Cuadros de Información para Características",
-        "hint": "Mostrar cuadros de información al pasar el ratón por encima para características en el menú de características."
+        "name": "Mostrar burbujas de información para características",
+        "hint": "Mostrar burbujas de información al pasar el ratón por encima para características en el menú de características."
       },
       "showTooltipsAbilityMenuSkills": {
-        "name": "Mostrar Cuadros de Información para Habilidades",
-        "hint": "Mostrar cuadros de información al pasar el ratón por encima para habilidades en el menú de características."
+        "name": "Mostrar burbujas de información para habilidades",
+        "hint": "Mostrar burbujas de información al pasar el ratón por encima para habilidades en el menú de características."
       },
       "showTooltipsAbilityMenuTools": {
-        "name": "Mostrar Cuadros de Información para Herramientas",
-        "hint": "Mostrar cuadros de información al pasar el ratón por encima para herramientas en el menú de características."
+        "name": "Mostrar burbujas de información para herramientas",
+        "hint": "Mostrar burbujas de información al pasar el ratón por encima para herramientas en el menú de características."
       },
       "fadeOutInactive": {
         "name": "Desvanecer",
         "hint": "Desvanecer el HUD después de no pasar el ratón por encima durante 5 segundos."
       },
       "fadeoutDelay": {
-        "name": "Retraso para Desvanecer",
+        "name": "Retraso para desvanecer",
         "hint": "Retraso antes de desvanecer el HUD en segundos."
       },
       "fadeoutOpacity": {
-        "name": "Opacidad del Desvanecimiento",
+        "name": "Opacidad del desvanecimiento",
         "hint": "Opacidad del HUD cuando se desvanece."
       },
       "hideMacroPlayers": {
-        "name": "Ocultar la Barra de Macros y la Lista de Jugadores",
+        "name": "Ocultar la barra de macros y la lista de jugadores",
         "hint": "Ocultar la barra de macros y la lista de jugadores mientras este abierto el HUD."
       },
       "openCombatStart": {
-        "name": "Abrir al Inicio del Combate",
+        "name": "Abrir al inicio del combate",
         "hint": "Abrir el HUD cuando se inicia un combate."
       },
       "tooltipScale": {
-        "name": "Escala de Cuadro de Información",
+        "name": "Escala de burbujas de información",
         "hint": "Escala de los cuadros de información."
       },
       "switchEquip": {
-        "name": "Equipar Automáticamente",
+        "name": "Equipar automáticamente",
         "hint": "Equipar/desequipar automáticamente los objetos al cambiar de conjunto."
       },
+      "showWeaponsItems": {
+        "name": "Mostrar armas en la sección 'Usar objeto'",
+        "hint": "Mostrar armas en la sección 'Usar objeto'. Es útil si no se tienen suficientes huecos de armas"
+      },
+      "noAA": {
+        "name": "No aplicar efectos activos",
+        "hint": "No aplicar efectos activos cuando se usen acciones especiales (requiere refrescar)"
+      },
+      "noBlur": {
+        "name": "Deshabilitar efectos de difuminación",
+        "hint": "Deshabilita los efectos de difuminación en el HUD. Impacta en el rendimiento y solo debe usarse si se tienen problemas con el mismo."
+      },
+      "suppressWarnings": {
+        "name": "Ocultar avisos",
+        "hint": "Se ocurre un error, silenciarlo sin mostrar un mensaje de aviso."
+      },
+      "rangefinder": {
+        "name": "Lienzo 3D - buscador de alcance",
+        "hint": "Habilita el buscador de alcance del lienzo 3D cuando se pasa el ratón sobre los objetos del HUD. Cuando se habilita mostrará la distancia al objetivo - se mostrará en rojo si el objetivo está fuera de alcance."
+      },
+      "rangepicker": {
+        "name": "Selector de objetivo",
+        "hint": "Cuando se use un objeto o acción que requiere un objetivo, se mostrará un contador de objetivos junto al cursor del ratón hasta que se seleccione el número correcto de objetivos, si es necesario use las teclas +/- para ajustar manualmente el número de objetivos requeridos."
+      },
+      "rangepickerclear": {
+        "name": "Selector de objetivo - cancelar objetivos",
+        "hint": "Cuando se use un objeto o acción que requiere un objetivo, limpia todos los objetivos antes de entrar en el modo de selección de objetivo."
+      },
       "thememenu": {
-        "name": "Personalización del Tema",
+        "name": "Personalización del tema",
         "hint": "Configure, elija y personalice los temas de Argon.",
-        "label": "Configurar Temas"
+        "label": "Configurar temas"
       }
     },
-    "tooltip": {
-      "target": {
-        "name": "Objetivo"
+    "hud": {
+      "pass": {
+        "name": "Pasar"
       },
-      "range": {
-        "name": "Alcance"
+      "endturn": {
+        "name": "Fin turno"
       },
-      "properties": {
-        "name": "Propiedades"
+      "macro": {
+        "name": "Macro",
+        "page": "Página"
       }
     },
     "themeOptions": {
-      "save": "Guardar Cambios",
-      "export": "Exportar Tema",
-      "autoTextColorTitle": "Establecer color del Texto en función del Fondo",
+      "save": "Guardar cambios",
+      "export": "Exportar tema",
+      "autoTextColorTitle": "Establecer color del texto en función del fondo",
       "autoTextColorHint": "Esta configuración ajusta automáticamente el color del texto en función del color de fondo a un color legible.",
-      "exportThemeName": "Nombre del Tema a Exportar:",
+      "exportThemeName": "Nombre del tema a exportar:",
       "exportTheme": {
         "save": "Guardar",
         "cancel": "Cancelar"
       },
-      "themeTitle": "Elegir un Tema",
+      "themeTitle": "Elegir un tema",
       "themeHint": "Al seleccionar un tema se aplicará una paleta de colores predefinida a Argon.",
-      "mainAction": "Colores de Acción Principal",
-      "bonusAction": "Colores de Acción Adicional",
-      "freeAction": "Colores de Acción Gratis",
-      "reaction": "Colores de Reacción",
-      "endTurn": "Colores del Fin de Turno",
-      "tooltip": "Colores de Cuadros de Información",
-      "abilityMenu": "Colores de Menú de Características",
-      "buttons": "Colores de Botones",
-      "movement": "Colores del Cuadro de Movimiento",
-      "background": "Color de Fondo",
-      "color": "Color del Texto",
-      "border": "Color de Bordes",
-      "boxShadow": "Color de Sombra de los Cuadros",
-      "mainActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "mainActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "bonusActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "bonusActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "freeActionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "freeActionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "reactionBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "reactionHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "endTurnBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "endTurnHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "tooltipHeader": "Color Principal/Fondo/Borde de cabecera de Cuadros de Información y Ventanas",
-      "tooltipSubtitle": "Color Principal/Fondo/Borde del subtítulo de Cuadros de Información",
-      "tooltipBody": "Color Principal/Fondo/Borde del cuerpo de Cuadros de Información y Ventanas",
+      "portrait": "Colores del retrato",
+      "mainAction": "Colores de acción principal",
+      "bonusAction": "Colores de acción adicional",
+      "freeAction": "Colores de acción gratuita",
+      "reaction": "Colores de reacción",
+      "endTurn": "Colores del fin de turno",
+      "tooltip": "Colores de burbujas de información",
+      "abilityMenu": "Colores de menú de características",
+      "buttons": "Colores de botones",
+      "movement": "Colores de la caja de movimiento",
+      "background": "Color de fondo",
+      "color": "Color del texto",
+      "border": "Color de los bordes",
+      "boxShadow": "Color de sombra de los cajas",
+      "portraitBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "mainActionBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "mainActionHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "bonusActionBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "bonusActionHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "freeActionBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "freeActionHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "reactionBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "reactionHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "endTurnBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "endTurnHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "tooltipHeader": "Color principal/fondo/borde de cabecera de burbujas de información y ventanas",
+      "tooltipSubtitle": "Color principal/fondo/borde del subtítulo de burbujas de información",
+      "tooltipBody": "Color principal/fondo/borde del cuerpo de burbujas de información y ventanas",
       "abilityMenuBase": "Color Principal/Sombra cuando el ratón no está sobre el elemento",
       "abilityMenuHover": "Color Principal/Sombra cuando el ratón está sobre el elemento",
-      "buttonsBase": "Color Principal/Fondo/Borde cuando el ratón no está sobre el elemento",
-      "buttonsHover": "Color Principal/Fondo/Borde cuando el ratón está sobre el elemento",
-      "movementUsed": "Color de Fondo/Sombra del cuadro de espacios de movimiento usados",
-      "movementBaseMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento disponibles",
-      "movementDashMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento al correr",
-      "movementDangerMovement": "Color de Fondo/Sombra del cuadro de espacios de movimiento excedidos"
+      "buttonsBase": "Color principal/fondo/borde cuando el ratón no está sobre el elemento",
+      "buttonsHover": "Color principal/fondo/borde cuando el ratón está sobre el elemento",
+      "movementUsed": "Color de fondo/sombra del cuadro de espacios de movimiento usados",
+      "movementBaseMovement": "Color de fondo/sombra del cuadro de espacios de movimiento disponibles",
+      "movementDashMovement": "Color de fondo/sombra del cuadro de espacios de movimiento al correr",
+      "movementDangerMovement": "Color de fondo/sombra del cuadro de espacios de movimiento excedidos"
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Conmutar HUD de combate Argon"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon: El tipo de actor '%t' no está soportado por el HUD de combate Argon.",
+      "moduleNotActive": "Argon CORE: El módulo específico del sistema no estña instalado o no está activo, por favor, instale o active el módulo %m si está disponible."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Tutorial de selección de objetivos",
+        "list": {
+          "0": "El número de objetivos seleccionados/requeridos se mostrará junto al cursor",
+          "1": "<span>Clic izquierdo</span> o presione <span>T</span> para marcar ficha como objetivo",
+          "2": "<span>Clic derecho</span> para cancelar la selección de objetivos",
+          "3": "Presione <span>+</span> o <span>-</span> para aumentar/disminuir manualmente el número de objetivos requeridos"
+        }
+      }
     }
   }
 }
