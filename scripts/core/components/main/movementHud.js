@@ -27,12 +27,11 @@ export class MovementHud extends ArgonComponent {
   }
 
   onTokenUpdate(updates, context) {
-    console.log("Measuring Path")
     if (updates.x === undefined && updates.y === undefined) return;
     const start = new PIXI.Point(this.token.x, this.token.y);
     const end = new PIXI.Point(updates.x ?? this.token.x, updates.y ?? this.token.y);
     const segments = [start, end];
-    const distance = Math.floor(
+    const distance = Math.round(
       canvas.grid.measurePath(segments, { gridSpaces: true }).distance /
         canvas.dimensions.distance
     );
