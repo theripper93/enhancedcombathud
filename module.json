@@ -87,13 +87,14 @@
   "library": true,
   "relationships": {
     "requires": [
-      {
+    ],
+    "recommends": [
+            {
         "id": "colorsettings",
         "type": "module",
         "compatibility": {}
       }
     ],
-    "recommends": [],
     "systems": []
   },
   "compatibility": {

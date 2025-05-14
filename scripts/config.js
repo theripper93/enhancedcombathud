@@ -330,6 +330,13 @@ export class echThemeOptions extends FormApplication {
         await game.settings.set("enhancedcombathud", "echThemeData", formData);
         ui.ARGON.setColorSettings();
     }
+
+    async render(args){
+        if(game.modules.get("color-settings")?.active){
+            ui.notification.warn("The lib - Color Settings module is required to customize the theme colors. Please install it from FoundryVTT's module repository.");
+        }
+        return super.render(args);
+    }
 }
 
 export function initConfig() {
