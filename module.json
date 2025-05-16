@@ -89,11 +89,6 @@
     "requires": [
     ],
     "recommends": [
-            {
-        "id": "colorsettings",
-        "type": "module",
-        "compatibility": {}
-      }
     ],
     "systems": []
   },

@@ -425,6 +425,7 @@
 }
 .ech-tooltip .ech-tooltip-header h2 {
   border-width: 0px;
+  color: var(--ech-tooltip-header-color);
 }
 .ech-tooltip .ech-tooltip-subtitle {
   border-radius: 3px;

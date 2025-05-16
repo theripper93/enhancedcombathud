@@ -207,7 +207,8 @@ export class echThemeOptions extends FormApplication {
                     const filename = file.split("/")[file.split("/").length - 1].replace(/\.json/gi, "");
                     const option = document.createElement("option");
                     option.value = filename;
-                    option.text = filename[0].toUpperCase() + filename.substring(1);
+                    const optionName = filename.replace(/-/g, " ");
+                    option.text = optionName.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
                     selectTheme.appendChild(option);
                 }
 
@@ -333,7 +334,7 @@ export class echThemeOptions extends FormApplication {
 
     async render(args){
         if(!game.modules.get("color-settings")?.active){
-            ui.notifications.warn("The lib - Color Settings module is required to customize the theme colors. Please install it from FoundryVTT's module repository.");
+            ui.notifications.warn("The 'lib - Color Settings' module is required to customize the theme colors. Please install it from FoundryVTT's module repository.");
         }
         return super.render(args);
     }
