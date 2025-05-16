@@ -298,6 +298,7 @@
   right: 15px;
   transform: rotate(0deg);
   transition: all 0.3s ease-in-out;
+  font-family: "FontAwesome";
 }
 #echThemeOptions .window-content ul > li.show h4:after {
   transform: rotate(180deg);

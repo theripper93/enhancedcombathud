@@ -333,7 +333,7 @@ export class echThemeOptions extends FormApplication {
     }
 
     async render(args){
-        if(!game.modules.get("color-settings")?.active){
+        if(!game.modules.get("colorsettings")?.active){
             ui.notifications.warn("The 'lib - Color Settings' module is required to customize the theme colors. Please install it from FoundryVTT's module repository.");
         }
         return super.render(args);
