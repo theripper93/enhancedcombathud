@@ -75,7 +75,7 @@ export class TargetPicker{
   }
 
   init() {
-    if(game.settings.get("enhancedcombathud", "rangepickerclear")) (canvas.tokens.placeables[0] ?? _token)?.setTarget(false);
+    if(game.settings.get("enhancedcombathud", "rangepickerclear")) game.user.targets.forEach(t => t.setTarget(false, { releaseOthers: true }));
     const element = document.createElement("div");
     element.classList.add("ech-target-picker");
     document.body.appendChild(element);
