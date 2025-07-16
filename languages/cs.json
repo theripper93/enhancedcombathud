@@ -1,0 +1,255 @@
+{
+"enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Přepínač Argonu Combat HUDu",
+        "warning": "Argon Combat HUD: Není vybrán žádný token. Aby se HUD aktivoval, vyber nějaký token"
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "Barva",
+        "text": "Hlavní barva",
+        "hint": "Barva karet akcí a dalších hlavních prvků panelu."
+      },
+      "fore-color": {
+        "text": "Barva textu",
+        "hint": "Barva textu."
+      },
+      "color-bonus-action": {
+        "text": "Barva bonusové akce",
+        "hint": "Barva karty bonusové akce."
+      },
+      "color-free-action": {
+        "text": "Barva volné akce",
+        "hint": "Barva karty volné akce."
+      },
+      "color-reaction": {
+        "text": "Barva reakce",
+        "hint": "Barva karty reakce."
+      },
+      "color-end-turn": {
+        "text": "Barva ukončení tahu",
+        "hint": "Barva karty ukončení tahu."
+      },
+      "color-tooltip": {
+        "text": "Barva nápovědy",
+        "hint": "Barva bublinové nápovědy a výsuvného panelu záchran, dovedností a nástrojů."
+      },
+      "theme": {
+        "name": "Motiv",
+        "hint": "Barevný motiv HUDu.",
+        "custom": "Vlastní",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "globalTheme": {
+        "name": "Režim motivu",
+        "hint": "Pokud je nastaveno na 'Klient', může si každý hráč vybrat vlastní motiv. Pokud je nastaveno na 'Svět', bude téma vybrané GM stejné pro všechny hráče.",
+        "choices": {
+          "client": "Klient",
+          "world": "Svět"
+        }
+      },
+      "scale": {
+    "name": "Měřítko",
+    "hint": "Měřítko HUDu. Pokud je zapnuté automatické měřítko, bude toto nastavení použito jako násobitel měřítka."
+  },
+  "dialogTheme": {
+    "name": "Motiv dialogu",
+    "hint": "Použít motiv Argonu na dialogy otevřené z HUDu."
+  },
+  "autoScale": {
+    "name": "Používat automatické měřítko?",
+    "hint": "Automaticky nastaví měřítko HUDu podle velikosti obrazovky. Ignoruje tak vlastní nastavení měřítka."
+  },
+  "alwaysOn": {
+    "name": "Má být HUD stále zapnutý?",
+    "hint": "Vždy po nakliknutí tokenu automaticky zobrazí HUD."
+  },
+  "leftPos": {
+    "name": "Pozice levého okraje",
+    "hint": "Vzdálenost od levého okraje obrazovky v pixelech."
+  },
+  "botPos": {
+    "name": "Pozice dolního okraje",
+    "hint": "Vzdálenost od dolního okraje obrazovky v pixelech."
+  },
+  "playerDetailsBottom": {
+    "name": "Zobrazovat detaily hráče?",
+    "hint": "Při zaškrtnutí bude vypisovat jméno hráče a informace o povolání pod portrét."
+  },
+  "preparedSpells": {
+    "name": "Pouze připravená kouzla",
+    "hint": "Zobrazí pouze připravená kouzla."
+  },
+  "showTooltips": {
+    "name": "Zobrazovat bublinové popisky?",
+    "hint": "Zobrazí po přejetí myší bublinové popisky."
+  },
+  "showTooltipsSpecial": {
+    "name": "Zobrazení bublinových popisků speciálních akcí",
+    "hint": "Zobrazí bublinové popisky po přejetí myší u speciálních akcí (Uhýbání, Odpoutání se, Strčit...)."
+  },
+  "showTooltipsAbilityMenuAbilities": {
+    "name": "Zobrazení bublinových popisků u vlastností",
+    "hint": "Zobrazí bublinové popisky po přejetí myší u vlastností v menu vlastností."
+  },
+  "showTooltipsAbilityMenuSkills": {
+    "name": "Zobrazení bublinových popisků u dovednosti",
+    "hint": "Zobrazí bublinové popisky po přejetí myší u dovedností v menu vlastností."
+  },
+  "showTooltipsAbilityMenuTools": {
+    "name": "Zobrazení bublinových popisků u nástrojů",
+    "hint": "Zobrazí bublinové popisky po přejetí myší u nástrojů v menu vlastností."
+  },
+  "fadeOutInactive": {
+    "name": "Má HUD postupně mizet?",
+    "hint": "HUD bude po 5 sekundách bez přejetí myší postupně mizet."
+  },
+  "fadeoutDelay": {
+    "name": "Zpoždění zmizení",
+    "hint": "Zpoždění před zmizením HUDu v sekundách."
+  },
+  "fadeoutOpacity": {
+    "name": "Neprůhlednost po zmizení",
+    "hint": "Nastaví neprůhlednost HUDu po zmizení."
+  },
+  "hideMacroPlayers": {
+    "name": "Skrývat lištu maker a seznam hráčů?",
+    "hint": "Když bude HUD otevřený, skryje se lišta maker a seznam hráčů."
+  },
+  "openCombatStart": {
+    "name": "Otevírat při zahájení boje?",
+    "hint": "Když bude zahájen boj, HUD se automaticky otevře."
+  },
+  "tooltipScale": {
+    "name": "Měřítko bublinoých popisků",
+    "hint": "Nastaví měřítko bublinových popisků."
+  },
+  "switchEquip": {
+    "name": "Automatické vybavení",
+    "hint": "Při přepnutí setu se automaticky vybaví/odloží předměty."
+  },
+  "showWeaponsItems": {
+    "name": "Zobrazovat zbraně na kartě 'Předměty'?",
+    "hint": "Zobrazí zbraně na kartě 'Předměty'. Užitečné, pokud nestačí karty zbraní."
+  },
+  "noAA": {
+    "name": "Nepoužívat aktivní efekty",
+    "hint": "Při použití speciálních akcí se nepoužívají aktivní efekty. (vyžaduje znovunačtení)"
+  },
+  "noBlur": {
+    "name": "Zakázat efekty rozostření?",
+    "hint": "Zakáže efekty rozostření HUDu. Je to nastavení posilující výkon a mělo by být používáno pouze, pokud máš problémy s výkonem."
+  },
+  "suppressWarnings": {
+    "name": "Potlačovat varování?",
+    "hint": "Pokud dojde k chybě, nebude se zobrazovat varovná zpráva a modul tiše selže."
+  },
+  "rangefinder": {
+    "name": "Povolit 3D plátno a měřič vzdálenosti?",
+    "hint": "Povolí měřič vzdálenosti 3D plátna po přejetí nad položkami v HUDu. Pokud je zaškrtnuto, bude zobrazovat vzdálenost k cíli. Pokud bude cíl mimo dosah, bude vzdálenost červená."
+  },
+  "rangepicker": {
+    "name": "Používat výběr cílů?",
+    "hint": "Při použití položky či akce vyžadující cíl se bude zobrazovat počet cílů přejetých kurzorem myši, dokud není vybrán správný počet cílů. Pokud je to nutné, použij pro manuální nastavení potřebných cílů klávesy +/-."
+  },
+  "rangepickerclear": {
+    "name": "Mazat při výběru cíle ten předchozí?",
+    "hint": "Při použití položky či akce vyžadující cíl modul před vstupem do režimu výběru cíle vyčistí všechny předchozí cíle."
+  },
+  "thememenu": {
+    "name": "Přizpůsobení motivu",
+    "hint": "Nastaví, vybere a přizpůsobí motivy Argonu.",
+    "label": "Nastavení motivu"
+  }
+    },
+    "hud": {
+      "pass": {
+        "name": "Přeskočit"
+      },
+      "endturn": {
+        "name": "Konec tahu"
+      },
+      "macro": {
+        "name": "Makro",
+        "page": "Strana"
+      }
+},
+"themeOptions": {
+  "save": "Uložit změny",
+  "export": "Exportovat motiv",
+  "autoTextColorTitle": "Automatické nastavení barvy textu na základě pozadí",
+  "autoTextColorHint": "Toto nastavení upravuje barvu textu na základě barvy pozadí, aby byl čitelný.",
+  "exportThemeName": "Název exportovaného motivu:",
+  "exportTheme": {
+    "save": "Uložit",
+    "cancel": "Zrušit"
+  },
+  "themeTitle": "Vybrat motiv",
+  "themeHint": "Výběrem motivu použiješ přednastavenou paletu barev Argonu.",
+  "portrait": "Barvy portrétu",
+  "mainAction": "Barvy hlavní akce",
+  "bonusAction": "Barvy bonusové akce",
+  "freeAction": "Barvy volné akce",
+  "reaction": "Barvy reakce",
+  "endTurn": "Barvy konce tahu",
+  "tooltip": "Barvy bublinových popisků",
+  "abilityMenu": "Barvy menu vlastností",
+  "buttons": "Barvy tlačítek",
+  "movement": "Barvy polí pohybu",
+  "background": "Barva pozadí",
+  "color": "Barva textu",
+  "border": "Barva ohraničení",
+  "boxShadow": "Barva stínu ohraničení",
+  "portraitBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "mainActionBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "mainActionHover": "Pozadí/Popředí/Barva ohraničení po přejetí myši nad prvkem",
+  "bonusActionBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "bonusActionHover": "Pozadí/Popředí/Barva ohraničení po přejetí myši nad prvkem",
+  "freeActionBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "freeActionHover": "Pozadí/Popředí/Barva ohraničení po přejetí myší nad prvkem",
+  "reactionBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "reactionHover": "Pozadí/Popředí/Barva ohraničení po přejetí myší nad prvkem",
+  "endTurnBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "endTurnHover": "Pozadí/Popředí/Barva ohraničení po přejetí myší nad prvkem",
+  "tooltipHeader": "Pozadí/Popředí/Barva ohraničení záhlaví bublinových popisků/oken",
+  "tooltipSubtitle": "Pozadí/Popředí/Barva ohraničení titulků bublinových popisků",
+  "tooltipBody": "Pozadí/Popředí/Barva ohraničení karty bublinových popisků/oken",
+  "abilityMenuBase": "Popředí/Barva stínu, když není myš nad prvkem",
+  "abilityMenuHover": "Popředí/Barva stínu po přejetí myší nad prvkem",
+  "buttonsBase": "Pozadí/Popředí/Barva ohraničení, když není myš nad prvkem",
+  "buttonsHover": "Pozadí/Popředí/Barva ohraničení po přejetí myší nad prvkem",
+  "movementUsed": "Pozadí/Stín pole označující použité body pohybu",
+  "movementBaseMovement": "Pozadí/Stín pole označující dostupné body pohybu",
+  "movementDashMovement": "Pozadí/Stín pole označující pohyb sprintem",
+  "movementDangerMovement": "Pozadí/Stín pole označující překročené body pohybu"
+},
+"hotkey": {
+      "toggle": {
+        "name": "Zapnout/vypnout Argon Combat HUD"
+      }
+},
+"err": {
+  "unsupportedActorType": "Argon: Typ aktéra '%t' není v Argon Combat HUDu podporován",
+  "moduleNotActive": "Argon CORE: Modul specifický pro systém není nainstalován, nebo aktivní. Prosím nainstaluj a aktivuj modul %m, pokud je dostupný."
+},
+"targetPicker": {
+  "dialog": {
+    "title": "Výukový program výběru cílů",
+    "list": {
+      "0": "Počet vybraných/požadovaných cílů bude sledovat kurzor",
+      "1": "<span>Levým kliknutím</span>, nebo stisknutím <span>T</span> zaměř cíl",
+      "2": "<span>Pravým kliknutím</span> zruš výběr cíle",
+      "3": "Stiskni <span>+</span>, nebo <span>-</span> pro ruční zvýšení/snížení počtu požadovaných cílů"
+        }
+      }
+    }
+  }
+}
