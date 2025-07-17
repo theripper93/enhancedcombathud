@@ -395,6 +395,8 @@
   transform-origin: bottom center;
   left: 50%;
   top: 50%;
+  max-height: 50vh;
+  overflow-y: auto;
   /*transform: translate(calc(-50% + 75px), calc(-100% - 10px));*/
   z-index: 10000;
   pointer-events: all;
