@@ -439,6 +439,7 @@
   top: 0px;
   transform: translate(-50%, -17.5px);
   z-index: 10000;
+  text-wrap: nowrap;
 }
 .ech-tooltip.hide-subtitle .ech-tooltip-subtitle {
   display: none;
