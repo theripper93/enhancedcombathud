@@ -99,7 +99,7 @@
   font-variant: normal;
   text-rendering: auto;
   line-height: 1;
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-awesome);
   font-weight: 900;
   background-color: rgba(255, 28, 12, 0.6);
   content: "\f1f8";
@@ -291,14 +291,14 @@
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-awesome);
   line-height: 1;
   font-weight: 900;
   position: absolute;
   right: 15px;
   transform: rotate(0deg);
   transition: all 0.3s ease-in-out;
-  font-family: "FontAwesome";
+  font-family: var(--font-awesome);
 }
 #echThemeOptions .window-content ul > li.show h4:after {
   transform: rotate(180deg);
@@ -755,7 +755,7 @@
 .extended-combat-hud .action-hud .feature-spell-slots .spell-slot.spell-used:after {
   color: red;
   content: "\f00d";
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-awesome);
   font-size: 1.5rem;
   left: 50%;
   position: absolute;
@@ -918,7 +918,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-awesome);
   font-style: normal;
   text-rendering: auto;
   font-variant: normal;
@@ -1001,7 +1001,7 @@
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-awesome);
   line-height: 1;
   font-weight: 900;
   position: absolute;

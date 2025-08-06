@@ -235,7 +235,7 @@
     .feature-spell-slots .spell-slot.spell-used:after {
         color: red;
         content: "\f00d";
-        font-family: "Font Awesome 5 Free";
+        font-family: var(--font-awesome);
         font-size: 1.5rem;
         left: 50%;
         position: absolute;
