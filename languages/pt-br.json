@@ -125,7 +125,7 @@
         "hint": "Esconde a barra de macros e a lista de jogadores enquanto a HUD estiver aberta."
       },
       "openCombatStart": {
-        "name": "Aberto no Início do Encontro",
+        "name": "Aberir no Início do Encontro",
         "hint": "Abre a HUD quando um encontro for iniciado."
       },
       "tooltipScale": {
@@ -253,3 +253,4 @@
     }
   }
 }
+
