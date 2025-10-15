@@ -29,8 +29,8 @@
         "hint": "Cor da aba de reação."
       },
       "color-end-turn": {
-        "text": "Cor do Fim de Turno",
-        "hint": "Cor da aba de fim de turno."
+        "text": "Cor de Encerrar Turno",
+        "hint": "Cor da aba de encerrar o turno."
       },
       "color-tooltip": {
         "text": "Cor da Dica",
@@ -199,7 +199,7 @@
       "bonusAction": "Cores da Ação Bônus",
       "freeAction": "Cores da Ação Livre",
       "reaction": "Cores da Reação",
-      "endTurn": "Cores do Fim de Turno",
+      "endTurn": "Cores de Encerrar Turno",
       "tooltip": "Cores das Dicas",
       "abilityMenu": "Cores do Menu de Atributos",
       "buttons": "Cores dos Botões",
@@ -253,4 +253,5 @@
     }
   }
 }
+
 
