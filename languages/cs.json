@@ -129,7 +129,7 @@
     "hint": "Když bude zahájen boj, HUD se automaticky otevře."
   },
   "tooltipScale": {
-    "name": "Měřítko bublinoých popisků",
+    "name": "Měřítko bublinových popisků",
     "hint": "Nastaví měřítko bublinových popisků."
   },
   "switchEquip": {
@@ -154,14 +154,14 @@
   },
   "rangefinder": {
     "name": "Povolit 3D plátno a měřič vzdálenosti?",
-    "hint": "Povolí měřič vzdálenosti 3D plátna po přejetí nad položkami v HUDu. Pokud je zaškrtnuto, bude zobrazovat vzdálenost k cíli. Pokud bude cíl mimo dosah, bude vzdálenost červená."
+    "hint": "Povolí měřič vzdálenosti 3D plátna po přejetí nad položkami v HUDu. Po zaškrtnutí bude zobrazovat vzdálenost k cíli. Pokud bude cíl mimo dosah, bude vzdálenost červená."
   },
   "rangepicker": {
     "name": "Používat výběr cílů?",
     "hint": "Při použití položky či akce vyžadující cíl se bude zobrazovat počet cílů přejetých kurzorem myši, dokud není vybrán správný počet cílů. Pokud je to nutné, použij pro manuální nastavení potřebných cílů klávesy +/-."
   },
   "rangepickerclear": {
-    "name": "Mazat při výběru cíle ten předchozí?",
+    "name": "Čistit při výběru cíle ten předchozí?",
     "hint": "Při použití položky či akce vyžadující cíl modul před vstupem do režimu výběru cíle vyčistí všechny předchozí cíle."
   },
   "thememenu": {
