@@ -53,7 +53,7 @@ export class Tooltip {
     async _renderInner() {
         const data = await this.getData();
         this._data = data;
-        const rendered = await renderTemplate(this.template, data);
+        const rendered = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate) (this.template, data);
         const tempElement = document.createElement("div");
         tempElement.innerHTML = rendered;
         this.element.innerHTML = tempElement.firstElementChild.innerHTML;
