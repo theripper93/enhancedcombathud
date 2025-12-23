@@ -134,7 +134,7 @@ export class ArgonComponent {
 
     async _renderInner() {
         const data = await this.getData();
-        const rendered = await renderTemplate(this.template, data);
+        const rendered = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(this.template, data);
         const tempElement = document.createElement("div");
         tempElement.innerHTML = rendered;
         this.element.innerHTML = tempElement.firstElementChild.innerHTML;
