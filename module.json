@@ -79,7 +79,7 @@
   ],
   "scripts": [],
   "esmodules": [
-    "scripts/main.js"
+    "index.js"
   ],
   "styles": [
     "styles/module.css"

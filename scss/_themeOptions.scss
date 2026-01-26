@@ -51,7 +51,6 @@
         right: 15px;
         transform: rotate(0deg);
         transition: all 0.3s ease-in-out;
-        font-family: 'FontAwesome';
     }
 
     .window-content ul > li.show h4:after {
@@ -61,7 +60,7 @@
     .window-content ul li > ul {
         max-height: 0px;
         overflow: hidden;
-        transition: all 0.3s ease-in-out;
+        // transition: all 0.3s ease-in-out;
     }
 
     .window-content ul li.show > ul {
@@ -70,6 +69,9 @@
 
     .window-content ul li > ul li {
         padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
     .window-content .picker_wrapper {
@@ -111,7 +113,7 @@
         border: 1px solid rgba(0, 0, 0, 0.4);
         background: rgba(255, 255, 255, 0.6);
         border-radius: 3px;
-        transition: border 0.3s ease, background 0.3s ease;
+        // transition: border 0.3s ease, background 0.3s ease;
         box-shadow: 0 0 2px rgb(0 0 0 / 30%) inset;
         cursor: pointer;
         border: 1px solid rgba(0, 0, 0, 0.4);

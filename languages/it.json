@@ -1,5 +1,11 @@
 {
   "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Attiva/disattiva HUD combattimento Argon",
+        "warning": "HUD Argon Combat: nessun gettone selezionato. Selezionare un gettone per abilitare l'HUD."
+      }
+    },
     "settings": {
       "color": {
         "label": "Colore",
@@ -42,13 +48,29 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "Modalità tema",
+        "hint": "Se impostato su \"Client\", ogni giocatore potrà scegliere il proprio tema. Se impostato su \"World\", il tema selezionato dal GM sarà lo stesso per tutti i giocatori.",
+        "choices": {
+          "client": "Cliente",
+          "world": "Mondo"
+        }
+      },
       "scale": {
         "name": "Dimensione",
         "hint": "Dimensione HUD - se la Dimensione Automatica è abilitata, questa impostazione verrà utilizzata come moltiplicatore alla dimensione calcolata"
       },
-      "noAutoscale": {
-        "name": "Disattiva Dimensione Automatica",
-        "hint": "Non ridimensionare l'HUD per adattarlo allo schermo, usa invece il valore assegnato nell'impostazione Dimensione"
+      "dialogTheme": {
+        "name": "Tema del dialogo",
+        "hint": "Applica il tema Argon alle finestre di dialogo aperte dall'HUD"
+      },
+      "autoScale": {
+        "name": "Auto Scale",
+        "hint": "Ridimensiona automaticamente l'HUD in base alle dimensioni dello schermo. Ignora l'impostazione di ridimensionamento."
+      },
+      "alwaysOn": {
+        "name": "Sempre attivo",
+        "hint": "Mostra automaticamente l'HUD ogni volta che selezioni un gettone"
       },
       "leftPos": {
         "name": "Posiziona a Sinistra",
@@ -57,6 +79,10 @@
       "botPos": {
         "name": "Posiziona in Basso",
         "hint": "Distanza dal basso in pixel"
+      },
+      "playerDetailsBottom": {
+        "name": "Dettagli del giocatore in basso",
+        "hint": "Posiziona il nome dei giocatori e le informazioni sulla classe nella parte inferiore per il ritratto"
       },
       "preparedSpells": {
         "name": "Solo Incantesimi Preparati",
@@ -69,18 +95,169 @@
       "showTooltipsSpecial": {
         "name": "Mostra Suggerimenti per Azioni Speciali",
         "hint": "Mostra Suggerimenti col passaggio del mouse per le azioni speciali (schivare, disimpegno, spingere...)"
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "Mostra suggerimenti per le abilità",
+        "hint": "Mostra suggerimenti al passaggio del mouse sulle abilità nel menu delle abilità"
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "Mostra suggerimenti per le abilità",
+        "hint": "Mostra suggerimenti al passaggio del mouse sulle abilità nel menu delle abilità"
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "Mostra suggerimenti per gli strumenti",
+        "hint": "Mostra suggerimenti al passaggio del mouse sugli strumenti nel menu delle abilità"
+      },
+      "fadeOutInactive": {
+        "name": "Dissolvenza in chiusura",
+        "hint": "Dissolvenza dell'HUD dopo 5 secondi senza passaggio del mouse"
+      },
+      "fadeoutDelay": {
+        "name": "Ritardo dissolvenza",
+        "hint": "Ritardo prima della dissolvenza dell'HUD in secondi"
+      },
+      "fadeoutOpacity": {
+        "name": "Opacità dissolvenza",
+        "hint": "Opacità dell'HUD quando sfuma"
+      },
+      "hideMacroPlayers": {
+        "name": "Nascondi barra macro ed elenco giocatori",
+        "hint": "Nascondi la barra delle macro e l'elenco dei giocatori quando l'HUD è aperto"
+      },
+      "openCombatStart": {
+        "name": "Aprire all'inizio del combattimento",
+        "hint": "Apri l'HUD quando inizia un combattimento"
+      },
+      "tooltipScale": {
+        "name": "Scala dei suggerimenti",
+        "hint": "Scala dei suggerimenti"
+      },
+      "switchEquip": {
+        "name": "Attrezzature per auto",
+        "hint": "Equipaggia/disattiva automaticamente gli oggetti quando cambi set"
+      },
+      "showWeaponsItems": {
+        "name": "Mostra le armi nella sezione \"Usa oggetto\"",
+        "hint": "Mostra le armi nella sezione \"Usa oggetto\". Utile se gli slot per le armi non sono sufficienti."
+      },
+      "noAA": {
+        "name": "Non applicare effetti attivi",
+        "hint": "Non applicare effetti attivi quando si utilizzano azioni speciali. (richiede aggiornamento)"
+      },
+      "noBlur": {
+        "name": "Disattiva effetti sfocatura",
+        "hint": "Disattiva gli effetti di sfocatura sull'HUD. Si tratta di un'impostazione relativa alle prestazioni e dovrebbe essere utilizzata solo in caso di problemi di prestazioni."
+      },
+      "suppressWarnings": {
+        "name": "Sopprimere gli avvisi",
+        "hint": "Se si verifica un errore, non visualizzare un messaggio di avviso, ma interrompere silenziosamente l'operazione."
+      },
+      "rangefinder": {
+        "name": "3D Canvas - Telemetro",
+        "hint": "Abilita il telemetro 3D Canvas quando passi con il mouse sugli elementi nell'HUD. Quando è abilitato, mostrerà la distanza dal bersaglio: la distanza sarà rossa se il bersaglio è fuori portata."
+      },
+      "rangepicker": {
+        "name": "Selezionatore di obiettivi",
+        "hint": "Quando si utilizza un oggetto o un'azione che richiede un bersaglio, verrà visualizzato un conteggio dei bersagli che segue il cursore del mouse fino a quando non viene selezionato il numero corretto di bersagli. Se necessario, utilizzare i tasti +/- per regolare manualmente i bersagli richiesti."
+      },
+      "rangepickerclear": {
+        "name": "Selezione obiettivi - Cancella obiettivi",
+        "hint": "Quando si utilizza un oggetto o un'azione che richiede un bersaglio, cancellare tutti i bersagli prima di entrare nella modalità Selezione bersaglio."
+      },
+      "thememenu": {
+        "name": "Personalizzazione del tema",
+        "hint": "Configura, scegli e personalizza i temi Argon",
+        "label": "Configura temi"
       }
     },
-    "tooltip": {
-      "target": {
-        "name": "Bersaglio"
+    "hud": {
+      "pass": {
+        "name": "Passo"
       },
-      "range": {
-        "name": "Distanza"
+      "endturn": {
+        "name": "Fine turno"
       },
-      "properties": {
-        "name": "Proprietà"
+      "macro": {
+        "name": "Macro",
+        "page": "Pagina"
       }
-    }
+    },
+    "themeOptions": {
+      "save": "Salva modifiche",
+      "export": "Esporta tema",
+      "savePermanent": {
+        "label": "Salva tema personalizzato per tutti gli utenti",
+        "tooltip": "Salva il tema personalizzato corrente nella memoria del modulo. In questo modo il tema sarà disponibile in tutti i tuoi giochi e per tutti i giocatori. Per rimuovere un tema salvato, dovrai eliminare manualmente il relativo file utilizzando il tuo file explorer (vai su: modules/enhancedcombathud/storage/themes). L'eliminazione dei file dall'interno di Foundry non è supportata."
+      },
+      "autoTextColorTitle": "Imposta automaticamente i colori del testo in base allo sfondo",
+      "autoTextColorHint": "Questa impostazione regola il colore del testo in base al colore dello sfondo, in modo da renderlo leggibile.",
+      "exportThemeName": "Nome tema esportazione:",
+      "exportTheme": {
+        "save": "Salva",
+        "cancel": "Annulla"
+      },
+      "themeTitle": "Scegli un tema",
+      "themeHint": "Selezionando un tema, ad Argon verrà applicata una tavolozza di colori predefinita.",
+      "portrait": "Colori dei ritratti",
+      "mainAction": "Colori delle azioni principali",
+      "bonusAction": "Colori bonus azione",
+      "freeAction": "Colori azione liberi",
+      "reaction": "Colori di reazione",
+      "endTurn": "Colori di fine turno",
+      "tooltip": "Colori dei tooltip",
+      "abilityMenu": "Colori del menu Abilità",
+      "buttons": "Colori dei pulsanti",
+      "movement": "Colori della casella di movimento",
+      "background": "Colore di sfondo",
+      "color": "Colore del testo",
+      "border": "Colore del bordo",
+      "boxShadow": "Colore ombra riquadro",
+      "portraitBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "mainActionBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "mainActionHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "bonusActionBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "bonusActionHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "freeActionBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "freeActionHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "reactionBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "reactionHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "endTurnBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "endTurnHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "tooltipHeader": "Colori di sfondo/primo piano/bordo dell'intestazione dei suggerimenti/finestre",
+      "tooltipSubtitle": "Colori di sfondo/primo piano/bordo dei sottotitoli nei tooltip",
+      "tooltipBody": "Colori di sfondo/primo piano/bordo del corpo dei suggerimenti/finestre",
+      "abilityMenuBase": "Colori di primo piano/ombra del riquadro quando il mouse non si trova sopra l'elemento",
+      "abilityMenuHover": "Colori di primo piano/ombra del riquadro quando il mouse passa sopra l'elemento",
+      "buttonsBase": "Colori di sfondo/primo piano/bordo quando il mouse non è sopra l'elemento",
+      "buttonsHover": "Colori di sfondo/primo piano/bordi quando il mouse passa sopra l'elemento",
+      "movementUsed": "Sfondo/Ombra del riquadro che indica gli spazi di movimento utilizzati",
+      "movementBaseMovement": "Sfondo/Ombra del riquadro che indica gli spazi di movimento disponibili",
+      "movementDashMovement": "Sfondo/Ombra del riquadro che indica gli spazi di movimento del trattino",
+      "movementDangerMovement": "Sfondo/Ombra del riquadro che indica gli spazi di movimento superati"
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Attiva/disattiva HUD combattimento Argon"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon: Il tipo di attore \"%t\" non è supportato da Argon Combat HUD.",
+      "moduleNotActive": "Argon CORE: modulo specifico del sistema non installato o non attivo, installare e abilitare il modulo %m se disponibile."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Tutorial sul Target Picker",
+        "list": {
+          "0": "Il numero di obiettivi selezionati/richiesti seguirà il cursore.",
+          "1": "<span>Clicca con il tasto sinistro del mouse</span> o premi <span>T</span> per selezionare un gettone.",
+          "2": "<span>Clicca con il tasto destro</span> per annullare la selezione del bersaglio",
+          "3": "Premere il tasto <span>+</span> o <span>-</span> per aumentare/ridurre manualmente il numero di obiettivi richiesti."
+        }
+      }
+    },
+    "deleteEffectTitle": "Elimina effetto",
+    "deleteEffectContent": "Sei sicuro di voler eliminare l'effetto? ",
+    "confirmRerollInitiativeTitle": "Iniziativa Reroll",
+    "confirmRerollInitiativeContent": "Sei sicuro di voler ripetere il tiro di iniziativa?"
   }
 }

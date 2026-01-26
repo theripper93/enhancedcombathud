@@ -48,13 +48,29 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "Mode thème",
+        "hint": "Si l'option « Client » est sélectionnée, chaque joueur pourra choisir son propre thème. Si l'option « Monde » est sélectionnée, le thème choisi par le MJ sera le même pour tous les joueurs.",
+        "choices": {
+          "client": "Client",
+          "world": "Monde"
+        }
+      },
       "scale": {
         "name": "Échelle",
         "hint": "Échelle du HUD - si l'échelle automatique est activée, ce paramètre sera utilisé comme un multiplicateur en plus de l'échelle calculée."
       },
-      "noAutoscale": {
-        "name": "Ne pas faire de mise à l'échelle automatique",
-        "hint": "Ne mettez pas le HUD à l'échelle de l'écran, utilisez plutôt la valeur plate du paramètre Scale."
+      "dialogTheme": {
+        "name": "Thème du dialogue",
+        "hint": "Appliquer le thème Argon aux boîtes de dialogue ouvertes à partir du HUD"
+      },
+      "autoScale": {
+        "name": "Auto Scale",
+        "hint": "Redimensionne automatiquement le HUD en fonction de la taille de l'écran. Ignore le paramètre de redimensionnement."
+      },
+      "alwaysOn": {
+        "name": "Toujours actif",
+        "hint": "Afficher automatiquement l'interface lorsque vous sélectionnez un jeton."
       },
       "leftPos": {
         "name": "Position gauche",
@@ -96,6 +112,58 @@
         "name": "Fondu enchaîné",
         "hint": "Disparition du HUD après 5 secondes sans survol de la souris"
       },
+      "fadeoutDelay": {
+        "name": "Délai de fondu",
+        "hint": "Délai avant la disparition progressive du HUD en secondes"
+      },
+      "fadeoutOpacity": {
+        "name": "Opacité en fondu",
+        "hint": "Opacité du HUD lorsqu'il s'estompe"
+      },
+      "hideMacroPlayers": {
+        "name": "Masquer la barre macro et la liste des joueurs",
+        "hint": "Masquer la barre macro et la liste des joueurs lorsque le HUD est ouvert"
+      },
+      "openCombatStart": {
+        "name": "Ouvert au début du combat",
+        "hint": "Ouvrez le HUD lorsqu'un combat commence."
+      },
+      "tooltipScale": {
+        "name": "Échelle des infobulles",
+        "hint": "Échelle des info-bulles"
+      },
+      "switchEquip": {
+        "name": "Équipement automobile",
+        "hint": "Équiper/déséquiper automatiquement des objets lors du changement d'ensemble"
+      },
+      "showWeaponsItems": {
+        "name": "Afficher les armes dans la section « Utiliser un objet »",
+        "hint": "Affichez les armes dans la section « Utiliser un objet ». Utile si vos emplacements d'armes ne sont pas suffisants."
+      },
+      "noAA": {
+        "name": "Ne pas appliquer d'effets actifs",
+        "hint": "N'appliquez pas d'effets actifs lorsque vous utilisez des actions spéciales. (nécessite un rafraîchissement)"
+      },
+      "noBlur": {
+        "name": "Désactiver les effets de flou",
+        "hint": "Désactivez les effets de flou sur le HUD. Il s'agit d'un paramètre de performance qui ne doit être utilisé qu'en cas de problèmes de performances."
+      },
+      "suppressWarnings": {
+        "name": "Supprimer les avertissements",
+        "hint": "Si une erreur se produit, n'affichez pas de message d'avertissement et échouez silencieusement à la place."
+      },
+      "rangefinder": {
+        "name": "Toile 3D - Télémètre",
+        "hint": "Activez le télémètre 3D Canvas lorsque vous survolez des éléments dans le HUD. Une fois activé, il affichera la distance jusqu'à la cible. La distance sera indiquée en rouge si la cible est hors de portée."
+      },
+      "rangepicker": {
+        "name": "Sélecteur de cible",
+        "hint": "Lorsque vous utilisez un objet ou une action qui nécessite une cible, cela affichera un compteur de cibles qui suit le curseur de la souris jusqu'à ce que le nombre correct de cibles soit sélectionné. Utilisez les touches +/- pour ajuster manuellement le nombre de cibles requises si nécessaire."
+      },
+      "rangepickerclear": {
+        "name": "Sélecteur de cibles - Effacer les cibles",
+        "hint": "Lorsque vous utilisez un objet ou une action qui nécessite une cible, effacez toutes les cibles avant d'entrer en mode Sélectionneur de cible."
+      },
       "thememenu": {
         "name": "Personnalisation du thème",
         "hint": "Configurer, choisir et personnaliser les thèmes d'Argon",
@@ -108,22 +176,19 @@
       },
       "endturn": {
         "name": "Fin de tour"
-      }
-    },
-    "tooltip": {
-      "target": {
-        "name": "Cible"
       },
-      "range": {
-        "name": "Portée"
-      },
-      "properties": {
-        "name": "Propriétés"
+      "macro": {
+        "name": "Macro",
+        "page": "Page"
       }
     },
     "themeOptions": {
       "save": "Enregistrer les modifications",
       "export": "Exporter le thème",
+      "savePermanent": {
+        "label": "Enregistrer le thème personnalisé pour tous les utilisateurs",
+        "tooltip": "Enregistrez le thème personnalisé actuel dans le stockage du module. Cela rend le thème disponible dans tous vos jeux et pour tous les joueurs. Pour supprimer un thème enregistré, vous devez supprimer son fichier manuellement à l'aide de votre explorateur de fichiers (accédez à : modules/enhancedcombathud/storage/themes). La suppression de fichiers depuis Foundry n'est pas prise en charge."
+      },
       "autoTextColorTitle": "Définition automatique des couleurs de texte en fonction de l'arrière-plan",
       "autoTextColorHint": "Ce paramètre ajuste la couleur du texte en fonction de la couleur de l'arrière-plan pour obtenir une couleur qui devrait être lisible.",
       "exportThemeName": "Nom du thème exporté :",
@@ -133,6 +198,7 @@
       },
       "themeTitle": "Choisissez un thème",
       "themeHint": "La sélection d'un thème permet d'appliquer une palette de couleurs prédéfinie à Argon.",
+      "portrait": "Couleurs du portrait",
       "mainAction": "Couleur des actions principales",
       "bonusAction": "Couleur des actions bonus",
       "freeAction": "Couleur des actions gratuites",
@@ -146,6 +212,7 @@
       "color": "Couleur du texte",
       "border": "Couleur des bordures",
       "boxShadow": "Couleur de l'ombre de la boîte",
+      "portraitBase": "Couleurs d'arrière-plan/de premier plan/de bordure lorsque la souris n'est pas sur l'élément",
       "mainActionBase": "Couleurs d'arrière-plan/de premier plan/de bordure lorsque la souris n'est pas sur l'élément",
       "mainActionHover": "Couleurs d'arrière-plan/de premier plan/de bordure lorsque la souris se trouve sur un élément",
       "bonusActionBase": "Couleurs d'arrière-plan/de premier plan/de bordure lorsque la souris n'est pas sur l'élément",
@@ -167,6 +234,30 @@
       "movementBaseMovement": "Fond/Boîte Ombre de la boîte indiquant les espaces de mouvement disponibles",
       "movementDashMovement": "Fond/Boîte Ombre de la boîte indiquant les espaces de mouvement du tiret",
       "movementDangerMovement": "Fond/Boîte Ombre de la boîte indiquant les espaces de mouvement dépassés"
-    }
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Activer/désactiver l'affichage tête haute Argon Combat"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon : le type d'acteur « %t » n'est pas pris en charge par Argon Combat HUD.",
+      "moduleNotActive": "Argon CORE : module spécifique au système non installé ou non actif, veuillez installer et activer le module %m s'il est disponible."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Tutoriel sur le sélecteur de cible",
+        "list": {
+          "0": "Le nombre de cibles sélectionnées/requises suivra votre curseur.",
+          "1": "<span>Cliquez avec le bouton gauche</span> ou appuyez sur <span>T</span> pour cibler un jeton.",
+          "2": "<span>Cliquez avec le bouton droit</span> pour annuler la sélection de la cible.",
+          "3": "Appuyez sur la touche <span>+</span> ou <span>-</span> pour augmenter/diminuer manuellement le nombre de cibles requises."
+        }
+      }
+    },
+    "deleteEffectTitle": "Supprimer l'effet",
+    "deleteEffectContent": "Êtes-vous sûr de vouloir supprimer l'effet ? ",
+    "confirmRerollInitiativeTitle": "Initiative de relance",
+    "confirmRerollInitiativeContent": "Êtes-vous sûr de vouloir relancer l'initiative ?"
   }
 }

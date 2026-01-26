@@ -1,8 +1,8 @@
-<form action="#">
+<div>
 	<h3 class="flexrow">
 		Argon - Combat HUD: Theme Options
-        <button type="button" name="export">
-            <i class="fas fa-file-export">{{localize 'enhancedcombathud.themeOptions.export'}}</i>
+        <button type="button" name="export" data-tooltip="enhancedcombathud.themeOptions.savePermanent.tooltip">
+            <i class="fas fa-file-export"></i>{{localize 'enhancedcombathud.themeOptions.savePermanent.label'}}
         </button>
 	</h3>
 	<hr/>
@@ -33,13 +33,15 @@
 					{{echLocalize @../key @key}}
 					{{#each this}}
 						<div>
-							<button name="colored" is="colorpicker-button" data-setting="colors.{{@../../key}}.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color><i class="fas fa-eye-dropper"></i> {{echLocalize @key}}</button>
+							<alpha-color-picker class="color-picker" name="colors.{{@../../key}}.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color></alpha-color-picker>
+							<color-alpha-picker id="picker1" name="testColor" value="#ff5500aa"></color-alpha-picker>
 						</div>
 					{{/each}}
 				{{else}}
 					<div>
-						<button name="colored" is="colorpicker-button" data-setting="colors.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color><i class="fas fa-eye-dropper"></i> {{echLocalize @key}}</button>
+						<color-picker class="color-picker" name="colors.{{@../key}}.{{@key}}" data-color-type="{{@key}}" value="{{this}}"  data-responsive-color></color-picker>
 					</div>
+
 				</li>
 				{{/ifObject}}
 			{{/each}}
@@ -47,9 +49,4 @@
 		</li>
 	{{/each}}
 	</ul>
-	<footer class="sheet-footer flexrow">
-		<button type="submit" name="submit">
-			<i class="fas fa-save"></i> {{localize 'enhancedcombathud.themeOptions.save'}}
-		</button>
-    </footer>
-</form>
+</div>

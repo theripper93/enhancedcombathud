@@ -1,26 +1,27 @@
+.ech-tooltip-container {
+    padding: 0;
+    box-shadow: 0px 0px 10px rgb(0 0 0);
+    background: transparent;
+    backdrop-filter: unset;
+}
+
 .ech-tooltip {
     border-radius: 3px;
-    box-shadow: 0px 0px 10px rgb(0 0 0);
     display: inline-block;
     font-size: 16px;
     height: fit-content;
     max-width: 400px;
-    min-width: 400px;
-    opacity: 0;
-    position: absolute;
+    // min-width: 400px;
+    position: relative;
     text-align: left;
-    transition: opacity 0.3s ease-in-out;
-    transition-property: backdrop-filter, opacity;
-    transform-origin: bottom center;
-    left: 50%;
-    top: 50%;
+    // transition: opacity 0.3s ease-in-out;
+    // transition-property: backdrop-filter, opacity;
+    // transform-origin: bottom center;
+    // left: 50%;
+    // top: 50%;
     max-height: 50vh;
     overflow-y: auto;
-
-    /*transform: translate(calc(-50% + 75px), calc(-100% - 10px));*/
-
     z-index: 10000;
-
     pointer-events: all;
 
     &.ech-locked {
@@ -37,9 +38,10 @@
         transform-origin: left center;
     }
 
-    &.ech-show-tooltip {
-        opacity: 1;
+    &:not(:has(.ech-tooltip-subtitle)) .ech-tooltip-header h2 {
+        margin: 0;
     }
+
     .ech-tooltip-header {
         backdrop-filter: var(--ech-blur-amount);
         border-top-left-radius: 3px;
@@ -47,6 +49,9 @@
         padding: 1rem 0.5rem 2rem;
         position: relative;
         text-align: center;
+        h2 {
+            margin-bottom: 0.5rem;
+        }
     }
     &.hide-subtitle .ech-tooltip-header {
         padding: 1rem 0.5rem;
@@ -78,6 +83,9 @@
         text-align: left;
         position: relative;
     }
+    .ech-tooltip-body:empty {
+            display: none;
+        }
     &.hide-subtitle .ech-tooltip-body {
         padding: 1rem;
     }

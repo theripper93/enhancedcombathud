@@ -185,6 +185,10 @@
     "themeOptions": {
       "save": "Save Changes",
       "export": "Export Theme",
+      "savePermanent": {
+        "label": "Save Custom Theme for all users",
+        "tooltip": "Save the current custom theme to the module's storage. This makes the theme available across all your games and for all players. To remove a saved theme, you'll need to delete its file manually using your file explorer (navigate to: modules/enhancedcombathud/storage/themes). Deleting files from within Foundry is not supported."
+      },
       "autoTextColorTitle": "Autoset Text Colors Based off Background",
       "autoTextColorHint": "This setting adjust the text color based on the background color to a color that should be legiable.",
       "exportThemeName": "Export Theme Name:",
@@ -250,6 +254,10 @@
           "3": "Press the <span>+</span> or <span>-</span> key to increase/decrease the number of required targets manually"
         }
       }
-    }
+    },
+    "deleteEffectTitle": "Delete Effect",
+    "deleteEffectContent": "Are you sure you want to delete the effect ",
+    "confirmRerollInitiativeTitle": "Reroll Initiative",
+    "confirmRerollInitiativeContent": "Are you sure you want to reroll the initiative?"
   }
 }

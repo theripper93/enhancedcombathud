@@ -48,13 +48,29 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "Themenmodus",
+        "hint": "Wenn die Einstellung „Client“ gewählt wird, kann jeder Spieler sein eigenes Thema auswählen. Bei der Einstellung „Welt“ gilt für alle Spieler das vom GM ausgewählte Thema.",
+        "choices": {
+          "client": "Kunde",
+          "world": "Welt"
+        }
+      },
       "scale": {
         "name": "Skalierung",
         "hint": "HUD Skalierung - wenn die Autoskalierung aktiviert ist, wird diese Einstellunge zusätzlich zur berechneten Skalierung als Multiplikator verwendet"
       },
-      "noAutoscale": {
-        "name": "Nicht automatisch Skalieren",
-        "hint": "Skaliere das HUD nicht um sich an den Bildschirm anzupassen, verwende stattdessen den festen Wert in den Skalierungseinstellungen."
+      "dialogTheme": {
+        "name": "Dialogthema",
+        "hint": "Wende das Argon-Design auf Dialoge an, die über das HUD geöffnet werden."
+      },
+      "autoScale": {
+        "name": "Auto Scale",
+        "hint": "Skaliert das HUD automatisch entsprechend der Bildschirmgröße. Ignoriert die Skalierungseinstellung."
+      },
+      "alwaysOn": {
+        "name": "Immer eingeschaltet",
+        "hint": "Zeige das HUD automatisch an, wenn du einen Token auswählst."
       },
       "leftPos": {
         "name": "Linke Position",
@@ -128,26 +144,51 @@
         "name": "Aktive Effekte nicht anwenden",
         "hint": "Beim Einsatz einer Spezialaktion den aktiven Effekt nicht anwenden. (erfordert Aktualisierung)"
       },
+      "noBlur": {
+        "name": "Unschärfeeffekte deaktivieren",
+        "hint": "Deaktivieren Sie Unschärfeeffekte auf dem HUD. Dies ist eine Leistungseinstellung und sollte nur verwendet werden, wenn Sie Leistungsprobleme haben."
+      },
+      "suppressWarnings": {
+        "name": "Warnungen unterdrücken",
+        "hint": "Wenn ein Fehler auftritt, zeigen Sie keine Warnmeldung an, sondern lassen Sie den Vorgang stillschweigend fehlschlagen."
+      },
+      "rangefinder": {
+        "name": "3D-Leinwand – Entfernungsmesser",
+        "hint": "Aktivieren Sie den 3D-Entfernungsmesser, wenn Sie mit der Maus über Elemente im HUD fahren. Wenn diese Funktion aktiviert ist, wird die Entfernung zum Ziel angezeigt – die Entfernung wird rot angezeigt, wenn das Ziel außerhalb der Reichweite liegt."
+      },
+      "rangepicker": {
+        "name": "Zielauswahl",
+        "hint": "Bei Verwendung eines Gegenstands oder einer Aktion, die ein Ziel erfordern, wird eine Zielanzahl angezeigt, die dem Mauszeiger folgt, bis die richtige Anzahl an Zielen ausgewählt ist. Verwenden Sie bei Bedarf die Tasten +/- , um die erforderliche Anzahl an Zielen manuell anzupassen."
+      },
+      "rangepickerclear": {
+        "name": "Zielauswahl – Ziele löschen",
+        "hint": "Wenn Sie einen Gegenstand oder eine Aktion verwenden, die ein Ziel erfordern, löschen Sie alle Ziele, bevor Sie in den Zielauswahlmodus wechseln."
+      },
       "thememenu": {
         "name": "Theme Anpassung",
         "hint": "Konfiguriere, wähle und passe die Argon themes an",
         "label": "Konfiguriere Themes"
       }
     },
-    "tooltip": {
-      "target": {
-        "name": "Ziel"
+    "hud": {
+      "pass": {
+        "name": "Schritt"
       },
-      "range": {
-        "name": "Reichweite"
+      "endturn": {
+        "name": "Ende der Runde"
       },
-      "properties": {
-        "name": "Eigenschaften"
+      "macro": {
+        "name": "Makro",
+        "page": "Seite"
       }
     },
     "themeOptions": {
       "save": "Änderung speichern",
       "export": "Theme Exportieren",
+      "savePermanent": {
+        "label": "Benutzerdefiniertes Design für alle Benutzer speichern",
+        "tooltip": "Speichern Sie das aktuelle benutzerdefinierte Design im Speicher des Moduls. Dadurch steht das Design in allen Ihren Spielen und für alle Spieler zur Verfügung. Um ein gespeichertes Design zu entfernen, müssen Sie die Datei manuell mit Ihrem Datei-Explorer löschen (navigieren Sie zu: modules/enhancedcombathud/storage/themes). Das Löschen von Dateien innerhalb von Foundry wird nicht unterstützt."
+      },
       "autoTextColorTitle": "Automatisches Schriftfarbe basierend auf dem Hintergrund",
       "autoTextColorHint": "Diese Einstellunge passt die Schriftfarbe basierend auf der Hintergrundfarbe zu einer lesbaren Farbe an.",
       "exportThemeName": "Export Theme Name:",
@@ -157,6 +198,7 @@
       },
       "themeTitle": "Wähle Theme",
       "themeHint": "Ein Theme auszuwählen, wendet eine vordefinierte Farbpalette auf Argon an.",
+      "portrait": "Porträtfarben",
       "mainAction": "Farben Hauptaktion",
       "bonusAction": "Farben Bonusaktion",
       "freeAction": "Farben freie Aktion",
@@ -170,6 +212,7 @@
       "color": "Schriftfarbe",
       "border": "Randfarbe",
       "boxShadow": "Boxschattenfarbe",
+      "portraitBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich die Maus nicht über dem Element befindet",
       "mainActionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
       "mainActionHover": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus über dem Element ist",
       "bonusActionBase": "Hintergrund-/Vordergrund-/Randfarbe wenn die Maus nicht über dem Element ist",
@@ -191,6 +234,30 @@
       "movementBaseMovement": "Hintergrund/Boxschatten des Kastens der verfügbare Bewegungsfelder darstellt",
       "movementDashMovement": "Hintergrund/Boxschatten des Kastens der Spurt-Bewegungsfelder darstellt",
       "movementDangerMovement": "Hintergrund/Boxschatten des Kastens der überschrittene Bewegungsfelder darstellt"
-    }
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Toggle Argon Combat HUD"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon: Der Schauspielertyp „%t“ wird von Argon Combat HUD nicht unterstützt.",
+      "moduleNotActive": "Argon CORE: Systemspezifisches Modul nicht installiert oder nicht aktiv, bitte installieren und aktivieren Sie das %m-Modul, falls verfügbar."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Zielauswahl-Tutorial",
+        "list": {
+          "0": "Die Anzahl der ausgewählten/erforderlichen Ziele folgt Ihrem Cursor.",
+          "1": "<span>Linksklick</span> oder drücken Sie <span>T</span>, um ein Token anzusteuern.",
+          "2": "<span>Rechtsklick</span> zum Abbrechen der Zielauswahl",
+          "3": "Drücken Sie die Taste <span>+</span> oder <span>-</span>, um die Anzahl der erforderlichen Ziele manuell zu erhöhen/zu verringern."
+        }
+      }
+    },
+    "deleteEffectTitle": "Effekt löschen",
+    "deleteEffectContent": "Sind Sie sicher, dass Sie den Effekt löschen möchten? ",
+    "confirmRerollInitiativeTitle": "Reroll-Initiative",
+    "confirmRerollInitiativeContent": "Sind Sie sicher, dass Sie die Initiative erneut würfeln möchten?"
   }
 }

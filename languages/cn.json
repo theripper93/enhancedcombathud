@@ -48,13 +48,29 @@
         "radon": "Radon",
         "oganesson": "Oganesson"
       },
+      "globalTheme": {
+        "name": "主题模式",
+        "hint": "若设置为\"客户端\"，每位玩家均可选择自己的主题。若设置为\"世界\"，则由游戏管理员选定的主题将对所有玩家统一生效。",
+        "choices": {
+          "client": "客户",
+          "world": "世界"
+        }
+      },
       "scale": {
         "name": "缩放比例",
         "hint": "（除了主题设置时实时应用，其他设置均需要重新打开HUD才成功应用）"
       },
-      "noAutoscale": {
-        "name": "Don't Autoscale",
-        "hint": "Don't scale the HUD to fit the screen, use the flat value in the Scale setting instead"
+      "dialogTheme": {
+        "name": "对话主题",
+        "hint": "将Argon主题应用于从HUD打开的对话框"
+      },
+      "autoScale": {
+        "name": "自动梯",
+        "hint": "根据屏幕尺寸自动缩放HUD。忽略缩放设置"
+      },
+      "alwaysOn": {
+        "name": "始终在线",
+        "hint": "每次选中代币时自动显示HUD"
       },
       "leftPos": {
         "name": "位置（左）",
@@ -128,26 +144,51 @@
         "name": "不要应用Active Effects",
         "hint": "当执行其他标准动作时，不要应用Active Effects。（需要刷新）"
       },
+      "noBlur": {
+        "name": "禁用模糊效果",
+        "hint": "禁用HUD上的模糊效果。此为性能设置，仅当您遇到性能问题时才应启用。"
+      },
+      "suppressWarnings": {
+        "name": "抑制警告",
+        "hint": "如果发生错误，请不要显示警告消息，而是静默失败。"
+      },
+      "rangefinder": {
+        "name": "3D画布 - 测距仪",
+        "hint": "启用HUD悬停物品时的3D画布测距功能。启用后将显示目标距离——若目标超出射程范围，距离数值将显示为红色。"
+      },
+      "rangepicker": {
+        "name": "目标选择器",
+        "hint": "当使用需要目标的物品或动作时，系统将显示跟随鼠标光标的目标计数器，直至选定正确数量的目标。如需手动调整目标数量，请使用+/-键进行操作。"
+      },
+      "rangepickerclear": {
+        "name": "目标选择器 - 清除目标",
+        "hint": "使用需要目标的物品或动作时，请在进入目标选择模式前清除所有目标。"
+      },
       "thememenu": {
         "name": "自定义主题",
         "hint": "配置，选择及客制化主题",
         "label": "更改主题配置"
       }
     },
-    "tooltip": {
-      "target": {
-        "name": "目标"
+    "hud": {
+      "pass": {
+        "name": "步骤"
       },
-      "range": {
-        "name": "范围"
+      "endturn": {
+        "name": "结束回合"
       },
-      "properties": {
-        "name": "属性"
+      "macro": {
+        "name": "宏观",
+        "page": "页面"
       }
     },
     "themeOptions": {
       "save": "保存更改",
       "export": "导出主题",
+      "savePermanent": {
+        "label": "为所有用户保存自定义主题",
+        "tooltip": "将当前自定义主题保存至模块存储区。此操作将使该主题在所有游戏中对所有玩家生效。若需移除已保存主题，请通过文件资源管理器手动删除其文件（路径：modules/enhancedcombathud/storage/themes）。Foundry内不支持直接删除文件。"
+      },
       "autoTextColorTitle": "Autoset Text Colors Based off Background",
       "autoTextColorHint": "This setting adjust the text color based on the background color to a color that should be legiable.",
       "exportThemeName": "导出主题名称:",
@@ -157,6 +198,7 @@
       },
       "themeTitle": "选择主题",
       "themeHint": "Selecting a theme will apply a predefined color pallet to Argon.",
+      "portrait": "肖像色彩",
       "mainAction": "标准动作区域颜色",
       "bonusAction": "附赠动作区域颜色",
       "freeAction": "特殊动作区域颜色",
@@ -170,6 +212,7 @@
       "color": "字体颜色",
       "border": "边框颜色",
       "boxShadow": "方块阴影颜色",
+      "portraitBase": "鼠标未悬停在元素上的背景色/前景色/边框色",
       "mainActionBase": "当鼠标不在上方时，背景/前景/边框颜色",
       "mainActionHover": "当鼠标在上方时，背景/前景/边框颜色",
       "bonusActionBase": "当鼠标不在上方时，背景/前景/边框颜色",
@@ -191,6 +234,30 @@
       "movementBaseMovement": "可用移动力的背景/方块阴影颜色",
       "movementDashMovement": "疾走移动力的背景/方块阴影颜色",
       "movementDangerMovement": "超出的移动力的背景/方块阴影颜色"
-    }
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "切换氩气战斗HUD"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon：Argon Combat HUD 不支持演员类型 '%t'。",
+      "moduleNotActive": "Argon CORE：系统专用模块未安装或未激活，请安装并启用%m模块（如可用）。"
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "目标选择器教程",
+        "list": {
+          "0": "选定/必需目标的数量将跟随您的光标",
+          "1": "<span>左键点击</span> 或按下 <span>T</span> 键来锁定目标",
+          "2": "<span>右键点击</span>以取消目标选择",
+          "3": "按下<span>+</span>或<span>-</span>键可手动增加/减少所需目标数量"
+        }
+      }
+    },
+    "deleteEffectTitle": "删除效果",
+    "deleteEffectContent": "您确定要删除该效果吗？",
+    "confirmRerollInitiativeTitle": "重掷计划",
+    "confirmRerollInitiativeContent": "你确定要重新掷先攻骰吗？"
   }
 }

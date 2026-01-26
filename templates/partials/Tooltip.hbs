@@ -4,7 +4,8 @@
   </div>
   <div class="ech-tooltip-body">
     {{#if subtitle}}<h4 class="ech-tooltip-subtitle" {{#if subtitlecolor}} style="background-color:{{subtitlecolor}}" {{/if}}>{{{subtitle}}}</h4>{{/if}}
-    <div class="ech-tooltip-description">{{{description}}}</div>
+    {{#if description}}<div class="ech-tooltip-description">{{{description}}}</div>{{/if}}
+    {{#if details.length}}
     <div class="ech-tooltip-details">
       {{#each details}}
       <div>
@@ -13,6 +14,7 @@
       </div>
       {{/each}}
     </div>
+    {{/if}}
     {{#if properties.length}}
     <div class="ech-tooltip-properties">
       <h3>{{localize propertiesLabel}}</h3>

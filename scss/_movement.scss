@@ -47,6 +47,16 @@
         width: 100%;
     }
 
+    .movement-text {
+        img {
+            height: 1.8rem;
+        }
+        div {
+            display: flex;
+            gap: 0.5rem;
+        }
+    }
+
     &:has(.button-hud-button){
         padding: 0;
         justify-content: unset;

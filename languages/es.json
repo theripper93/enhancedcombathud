@@ -185,6 +185,10 @@
     "themeOptions": {
       "save": "Guardar cambios",
       "export": "Exportar tema",
+      "savePermanent": {
+        "label": "Guardar tema personalizado para todos los usuarios",
+        "tooltip": "Guarda el tema personalizado actual en el almacenamiento del módulo. Esto hace que el tema esté disponible en todos tus juegos y para todos los jugadores. Para eliminar un tema guardado, tendrás que borrar su archivo manualmente utilizando tu explorador de archivos (navega hasta: modules/enhancedcombathud/storage/themes). No es posible eliminar archivos desde Foundry."
+      },
       "autoTextColorTitle": "Establecer color del texto en función del fondo",
       "autoTextColorHint": "Esta configuración ajusta automáticamente el color del texto en función del color de fondo a un color legible.",
       "exportThemeName": "Nombre del tema a exportar:",
@@ -250,6 +254,10 @@
           "3": "Presione <span>+</span> o <span>-</span> para aumentar/disminuir manualmente el número de objetivos requeridos"
         }
       }
-    }
+    },
+    "deleteEffectTitle": "Eliminar efecto",
+    "deleteEffectContent": "¿Estás seguro de que deseas eliminar el efecto? ",
+    "confirmRerollInitiativeTitle": "Iniciativa de repetición",
+    "confirmRerollInitiativeContent": "¿Estás seguro de que quieres volver a tirar la iniciativa?"
   }
 }
