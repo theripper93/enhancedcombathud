@@ -7,7 +7,7 @@ export class Tooltip {
         if (tooltipData.classes) this.element.classList.add(...tooltipData.classes);
         this._tooltipData = tooltipData;
         this._triggerElement = triggerElement;
-        this._orientation = orientation;
+        this._orientation = orientation ?? foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.UP; //orientation;
         this._locked = locked;
     }
 
@@ -21,6 +21,20 @@ export class Tooltip {
 
     async getData() {
         return this._tooltipData;
+    }
+
+    get directionClass() {
+        switch(this._orientation) {
+            case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.UP:
+                return "ech-tooltip-up";
+            case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN:
+                return "ech-tooltip-down";
+            case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.LEFT:
+                return "ech-tooltip-left";
+            case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.RIGHT:
+                return "ech-tooltip-right";
+        }
+        return "";
     }
 
     async render(...args) {
@@ -40,7 +54,9 @@ export class Tooltip {
         }
 
         ui.ARGON._tooltip = this;
-        game.tooltip.activate(this._triggerElement, { html: this.element, cssClass: "ech-tooltip-container", direction: this._orientation });
+        game.tooltip.activate(this._triggerElement, { html: this.element, cssClass: `ech-tooltip-container ${this.directionClass}` , direction: this._orientation });
+        const scale = game.settings.get("enhancedcombathud", "tooltipScale");
+        document.querySelector(".ech-tooltip-container").style.setProperty('--ech-tooltip-scale', scale);
         return this.element;
     }
 

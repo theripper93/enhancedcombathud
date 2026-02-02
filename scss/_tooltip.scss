@@ -3,6 +3,20 @@
     box-shadow: 0px 0px 10px rgb(0 0 0);
     background: transparent;
     backdrop-filter: unset;
+    scale: var(--ech-tooltip-scale);
+
+    &.ech-tooltip-up {
+        transform-origin: bottom center;
+    }
+    &.ech-tooltip-down {
+        transform-origin: top center;
+    }
+    &.ech-tooltip-left {
+        transform-origin: center right;
+    }
+    &.ech-tooltip-right {
+        transform-origin: center left;
+    }
 }
 
 .ech-tooltip {
@@ -11,14 +25,8 @@
     font-size: 16px;
     height: fit-content;
     max-width: 400px;
-    // min-width: 400px;
     position: relative;
     text-align: left;
-    // transition: opacity 0.3s ease-in-out;
-    // transition-property: backdrop-filter, opacity;
-    // transform-origin: bottom center;
-    // left: 50%;
-    // top: 50%;
     max-height: 50vh;
     overflow-y: auto;
     z-index: 10000;
