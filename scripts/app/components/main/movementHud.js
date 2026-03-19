@@ -17,8 +17,7 @@ export class MovementHud extends ArgonComponent {
   }
 
   get movementUsed() {
-    if(canvas.scene.grid.type) return this.token.document.movement.history.spaces;
-    return Math.round(this.token.document.movement.history.distance / canvas.scene.dimensions.distance);
+    return this._movementUsed;
   }
 
   set movementUsed(value) {
@@ -47,20 +46,26 @@ export class MovementHud extends ArgonComponent {
 
   onTokenUpdate(updates, context) {
     if (updates.movementAction) this.render();
-    if (updates.x === undefined && updates.y === undefined) return;
+    if (!updates._movementHistory) return;
     this.updateMovement();
   }
 
+  updateMovementUsed() {
+    this.movementUsed = Math.round(this.token.document.movementHistory.reduce((acc, movement) => {
+      acc += movement.cost;
+      return acc;
+    }, 0) / canvas.scene.dimensions.distance);
+  }
+
   updateMovement() {
-    if (!game.combat?.started) this.movementUsed = 0;
+
+    this.updateMovementUsed();
+    
     const movementColor = this.movementColor;
-
     const disabledBars = (this.movementUsed % this.movementMax) || 0;
-
     const barsNumber = this.movementMax - disabledBars;
 
     const barsContainer = this.element.querySelector(".movement-spaces");
-
     let newHtml = "";
     for (let i = 0; i < barsNumber; i++) {
       newHtml += `<div class="movement-space  ${movementColor}"></div>`;
@@ -73,15 +78,11 @@ export class MovementHud extends ArgonComponent {
     barsContainer.innerHTML = newHtml;
   }
 
-  _onNewRound(combat) {
-    this.movementUsed = 0;
-    this.updateMovement();
-  }
+  _onNewTurn(combat, updates) {} 
 
-  _onCombatEnd(combat) {
-    this.movementUsed = 0;
-    this.updateMovement();
-  }
+  _onNewRound(combat, updates) {}
+
+  _onCombatEnd(combat, updates) {}
 
   async render(...args) {
     await super.render(...args);

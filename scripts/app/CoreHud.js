@@ -169,11 +169,14 @@ export class CoreHud extends HandlebarsApplication {
     );
     if ("round" in updates) {
       this.components.main?.forEach((component) =>
-        component._onNewRound(combat)
+        component._onNewRound(combat, updates)
       );
-      this.components.movement?._onNewRound(combat);
+      this.components.movement?._onNewRound(combat, updates);
     }
-    if (updates.round === 1 && updates.turn === 0) this._onCombatStart(combat);
+    if ("turn" in updates) {
+      this.components.movement?._onNewTurn(combat, updates);
+    }
+    if (updates.round === 1 && updates.turn === 0) this._onCombatStart(combat, updates);
     this.updateSidePortraitHuds();
   }
 
