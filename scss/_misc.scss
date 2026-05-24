@@ -6,9 +6,9 @@
     z-index: 9999;
 }
 
-#players.ech-hidden,
-#hotbar.ech-hidden,
-#fps.ech-hidden {
+#players.ech-hidden *,
+#hotbar.ech-hidden *,
+#fps.ech-hidden * {
     opacity: 0 !important;
     pointer-events: none !important;
 }
