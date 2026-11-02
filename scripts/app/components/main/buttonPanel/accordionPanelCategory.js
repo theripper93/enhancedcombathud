@@ -62,15 +62,16 @@ export class AccordionPanelCategory extends ArgonComponent {
     _setUses() {
         if (!Number.isNumeric(this.uses.value)) return;
         const usesElement = this.buttonContainer.querySelector(".feature-spell-slots");
-        usesElement.innerHTML = "";
-        if (this.uses.value === Infinity) {
+        const uses = this.uses;
+        if (uses.value === Infinity) {
             usesElement.innerHTML = `<span class="spell-slot spell-cantrip"><i class="fas fa-infinity"></i></span>`;
             return;
         }
-        for (let index = 0; index < this.uses.max; index++) {
-            //spellSlots.push(index < spellSlotDetails.value);
-            usesElement.innerHTML += `<span class="spell-slot spell-${index < this.uses.max - this.uses.value ? "used" : "available"}"></span>`;
+        let html = "";
+        for (let index = 0; index < uses.max; index++) {
+            html += `<span class="spell-slot spell-${index < uses.max - uses.value ? "used" : "available"}"></span>`;
         }
+        usesElement.innerHTML = html;
     }
 
     async activateListeners(html) {
@@ -121,8 +122,7 @@ export class AccordionPanelCategory extends ArgonComponent {
         this.element.style.transition = "none";
         this.element.style.width = `unset`;
         await new Promise((resolve) => setTimeout(resolve, 1));
-        const width = this.element.offsetWidth;
-        this._realWidth = width;
+        this._realWidth = this.element.offsetWidth;
         this.element.style.width = `0px`;
         this.element.style.transition = null;
     }

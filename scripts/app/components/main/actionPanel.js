@@ -94,7 +94,8 @@ export class ActionPanel extends ArgonComponent{
   async _renderInner() {
     await super._renderInner();
     this.element.dataset.title = localize(this.label);
-    const buttons = await this._getButtons();
+    const buttons = this._preparedButtons ?? await this._getButtons();
+    this._preparedButtons = null;
     this._buttons = buttons;
     for (const button of buttons) {
       button._parent = this;

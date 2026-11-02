@@ -85,6 +85,12 @@ export class ItemButton extends ArgonComponent{
     }
   }
 
+  unregisterHooks() {
+    if (!this.hookId) return;
+    Hooks.off("argon-onSetChangeUpdateItem", this.hookId);
+    this.hookId = null;
+  }
+
   setItem(item) {
     if (!this.isWeaponSet) return console.error("Cannot set item on non-weapon set button");
     this._item = item;

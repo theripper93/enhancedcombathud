@@ -85,7 +85,8 @@ export class CoreHud extends HandlebarsApplication {
     document.addEventListener(
       "wheel",
       (event) =>
-        ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY)
+        ui.ARGON._tooltip && ui.ARGON._tooltip.setScrollDelta(event.deltaY),
+      { passive: true }
     );
   }
 
@@ -136,16 +137,30 @@ export class CoreHud extends HandlebarsApplication {
   }
 
   get itemButtons() {
+    for (const button of this._itemButtons) {
+      if (button.element.isConnected) continue;
+      button.unregisterHooks();
+      this._itemButtons.delete(button);
+    }
     return Array.from(this._itemButtons);
   }
 
   addItemButtons(buttons) {
     if (!Array.isArray(buttons)) buttons = [buttons];
-    this._itemButtons.add(...buttons);
+    for (const button of buttons) this._itemButtons.add(button);
   }
 
   get accordionPanelCategories() {
+    for (const category of this._accordionPanelCategories) {
+      if (!category.element.isConnected) this._accordionPanelCategories.delete(category);
+    }
     return Array.from(this._accordionPanelCategories);
+  }
+
+  _resetButtonRegistry() {
+    for (const button of this._itemButtons) button.unregisterHooks();
+    this._itemButtons.clear();
+    this._accordionPanelCategories.clear();
   }
 
   async _updateActionContainers() {
@@ -193,14 +208,13 @@ export class CoreHud extends HandlebarsApplication {
   _onUpdateItem(item) {
     if (item.parent !== this._actor) return;
     this.accordionPanelCategories.forEach((category) => category.setUses());
-    for (const itemButton of this.itemButtons) {
-      if (itemButton.item === item) itemButton.render();
-    }
+    this.updateItemButtons(item);
   }
 
   updateItemButtons(items) {
     if (!Array.isArray(items)) items = [items];
-    this._batchItemsUpdates.add(...items);
+    if (!items.length) return;
+    for (const item of items) this._batchItemsUpdates.add(item);
     this._batchUpdateItemButtons();
   }
 
@@ -215,9 +229,11 @@ export class CoreHud extends HandlebarsApplication {
     if (actor !== this._actor) return;
     this.components.portrait.refresh();
     this.accordionPanelCategories.forEach((category) => category.setUses());
-    for (const itemButton of this.itemButtons) {
-      if (Number.isNumeric(itemButton.quantity)) itemButton.render();
-    }
+    this.updateItemButtons(
+      this.itemButtons
+        .filter((itemButton) => Number.isNumeric(itemButton.quantity))
+        .map((itemButton) => itemButton.item)
+    );
     this.components.main.forEach((component) => component.updateActionUse());
   }
 
@@ -291,6 +307,9 @@ export class CoreHud extends HandlebarsApplication {
   }
 
   async _renderInner(data) {
+    const renderId = (this._renderId ?? 0) + 1;
+    this._renderId = renderId;
+    this._resetButtonRegistry();
     const _prevState = this._hudState.get(this._actor);
     if (!_prevState) this._hudState.set(this._actor, {});
     // const element = await super._renderInner(data);
@@ -326,8 +345,9 @@ export class CoreHud extends HandlebarsApplication {
     html.appendChild(actionHudElement);
 
     for (const component of this.components.main) {
-      const buttonCount = await component._getButtons();
-      if (buttonCount.length) actionHudElement.appendChild(component.element);
+      component._preparedButtons = await component._getButtons();
+      if (renderId !== this._renderId) return html;
+      if (component._preparedButtons.length) actionHudElement.appendChild(component.element);
     }
 
     const promises = [];
@@ -339,6 +359,7 @@ export class CoreHud extends HandlebarsApplication {
     });
 
     await Promise.all(promises);
+    if (renderId !== this._renderId) return html;
     this._updateActionContainers();
     this.updateSidePortraitHuds();
     this.components.combat = this.components.main.filter(
@@ -376,22 +397,24 @@ export class CoreHud extends HandlebarsApplication {
       this._itemsCount = null;
       this._tooltip?._destroy(true);
       this._batchItemsUpdates.clear();
+      this._resetButtonRegistry();
       this.toggleUiElements(false);
       this.updateSceneControlButton();
       return this.close();
     }
-    this._itemButtons.clear();
-    this._accordionPanelCategories.clear();
+    let actor, token;
     if (target instanceof foundry.canvas.placeables.Token || target instanceof TokenDocument) {
-      this._actor = target.actor;
-      this._token = target instanceof foundry.canvas.placeables.Token ? target : target.object;
+      actor = target.actor;
+      token = target instanceof foundry.canvas.placeables.Token ? target : target.object;
     } else if (target instanceof Actor) {
-      this._actor = target;
-      this._token =
-        target.token ?? target.parent ?? target.getActiveTokens()[0] ?? null;
+      actor = target;
+      token = target.token ?? target.parent ?? target.getActiveTokens()[0] ?? null;
     } else {
       throw new Error("Invalid argument");
     }
+    if (this.rendered && actor && actor === this._actor && token === this._token) return;
+    this._actor = actor;
+    this._token = token;
     if (!this._actor || !this._actor.isOwner) {
       this._target = null;
       this._token = null;
@@ -502,8 +525,6 @@ export class CoreHud extends HandlebarsApplication {
 
     const isMinimizeHud = html.classList.contains("minimize-hud");
 
-    const echHUDWidth = html.offsetWidth;
-    const windowWidth = window.innerWidth - 340;
     const scale = !game.settings.get("enhancedcombathud", "autoScale")
       ? game.settings.get("enhancedcombathud", "scale")
       : window.innerHeight / 2000; //(1 / (echHUDWidth / windowWidth)) * game.settings.get("enhancedcombathud", "scale");

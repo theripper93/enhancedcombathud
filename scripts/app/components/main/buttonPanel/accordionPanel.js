@@ -60,8 +60,9 @@ export class AccordionPanel extends ArgonComponent {
 
     async toggleDefaults() {
         let totalActionBarWidth = ui.ARGON.actionBarWidth;
-        for (const panel of this._subPanels) {
-            totalActionBarWidth -= panel.totalWidth;
+        const widths = this._subPanels.map((panel) => panel.totalWidth);
+        for (const [index, panel] of this._subPanels.entries()) {
+            totalActionBarWidth -= widths[index];
             if (totalActionBarWidth < 0) break;
             panel.toggle(true);
         }
