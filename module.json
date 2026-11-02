@@ -1,50 +1,53 @@
 {
-  "title": "Argon - Combat HUD (CORE)",
-  "id": "enhancedcombathud",
-  "description": "Solasta inspired Combat HUD. From D&D 5e to other systems, it offers a dynamic HUD for seasoned players and simplifies gameplay for newcomers. Requires the system specific module to be installed.",
-  "version": "3.1.0",
-  "authors": [
-    {
-      "name": "theripper93",
-      "email": "tsplab@gmail.com",
-      "url": "https://www.patreon.com/theripper93"
+    "title": "Argon - Combat HUD (CORE)",
+    "id": "enhancedcombathud",
+    "description": "Solasta inspired Combat HUD. From D&D 5e to other systems, it offers a dynamic HUD for seasoned players and simplifies gameplay for newcomers. Requires the system specific module to be installed.",
+    "version": "5.0.1",
+    "authors": [
+        {
+            "name": "theripper93",
+            "email": "tsplab@gmail.com",
+            "url": "https://www.patreon.com/theripper93"
+        },
+        {
+            "name": "Mouse0270",
+            "url": "https://www.patreon.com/mouse0270",
+            "discord": "mouse0270#0270"
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json"
+        },
+		{
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "languages/de.json"
+        }
+    ],
+    "scripts": [],
+    "esmodules": [
+        "index.js"
+    ],
+    "styles": [
+        "styles/module.css"
+    ],
+    "packs": [],
+    "url": "https://github.com/theripper93/enhancedcombathud",
+    "manifest": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.json",
+    "download": "https://github.com/theripper93/enhancedcombathud/releases/download/5.0.1/module.zip",
+    "persistentStorage": true,
+    "library": true,
+    "relationships": {
+        "requires": [],
+        "recommends": [],
+        "systems": []
     },
-    {
-      "name": "Mouse0270",
-      "url": "https://www.patreon.com/mouse0270",
-      "discord": "mouse0270#0270"
+    "compatibility": {
+        "minimum": "14",
+        "verified": "14",
+        "maximum": "14"
     }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json"
-    }
-  ],
-  "scripts": [],
-  "esmodules": [
-    "index.js"
-  ],
-  "styles": [
-    "styles/module.css"
-  ],
-  "packs": [],
-  "url": "https://github.com/theripper93/enhancedcombathud",
-  "manifest": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.json",
-  "download": "https://github.com/theripper93/enhancedcombathud/releases/latest/download/module.zip",
-  "persistentStorage": true,
-  "library": true,
-  "relationships": {
-    "requires": [
-    ],
-    "recommends": [
-    ],
-    "systems": []
-  },
-  "compatibility": {
-    "minimum": "14",
-    "verified": "14",
-    "maximum": "14"
-  }
 }

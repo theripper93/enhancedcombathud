@@ -1,0 +1,263 @@
+{
+  "enhancedcombathud": {
+    "controls": {
+      "toggle": {
+        "title": "Argon-Kampf-HUD umschalten",
+        "warning": "Argon-Kampf-HUD: Kein Token ausgewählt. Bitte wähle ein Token aus, um das HUD zu aktivieren."
+      }
+    },
+    "settings": {
+      "color": {
+        "label": "Farbe",
+        "text": "Hauptfarbe",
+        "hint": "Farbe des Aktions-Tabs und anderer Hauptfunktionen des HUDs"
+      },
+      "fore-color": {
+        "text": "Textfarbe",
+        "hint": "Textfarbe"
+      },
+      "color-bonus-action": {
+        "text": "Farbe der Bonusaktion",
+        "hint": "Farbe des Bonusaktions-Tabs"
+      },
+      "color-free-action": {
+        "text": "Farbe der freien Aktion",
+        "hint": "Farbe des Tabs für freie Aktionen"
+      },
+      "color-reaction": {
+        "text": "Farbe der Reaktion",
+        "hint": "Farbe des Reaktions-Tabs"
+      },
+      "color-end-turn": {
+        "text": "Farbe für Zug beenden",
+        "hint": "Farbe des Tabs zum Beenden des Zuges"
+      },
+      "color-tooltip": {
+        "text": "Tooltip-Farbe",
+        "hint": "Farbe der Tooltips und des Pop-ups für Rettungswürfe, Fertigkeiten und Werkzeuge"
+      },
+      "theme": {
+        "name": "Design",
+        "hint": "Design des HUDs",
+        "custom": "Benutzerdefiniert",
+        "helium": "Helium",
+        "neon": "Neon",
+        "argon": "Argon",
+        "krypton": "Krypton",
+        "xenon": "Xenon",
+        "radon": "Radon",
+        "oganesson": "Oganesson"
+      },
+      "globalTheme": {
+        "name": "Designmodus",
+        "hint": "Wenn „Client“ eingestellt ist, kann jeder Spieler sein eigenes Design auswählen. Wenn „Welt“ eingestellt ist, gilt das von der Spielleitung ausgewählte Design für alle Spieler.",
+        "choices": {
+          "client": "Client",
+          "world": "Welt"
+        }
+      },
+      "scale": {
+        "name": "Skalierung",
+        "hint": "HUD-Skalierung – wenn die automatische Skalierung aktiviert ist, wird diese Einstellung als Multiplikator auf die berechnete Skalierung angewendet."
+      },
+      "dialogTheme": {
+        "name": "Dialogfenster-Design",
+        "hint": "Das Argon-Design auf vom HUD geöffnete Dialogfenster anwenden"
+      },
+      "autoScale": {
+        "name": "Automatische Skalierung",
+        "hint": "Das HUD automatisch basierend auf der Bildschirmgröße skalieren. Ignoriert die Einstellung „Skalierung“."
+      },
+      "alwaysOn": {
+        "name": "Immer aktiv",
+        "hint": "Das HUD automatisch anzeigen, sobald du ein Token auswählst"
+      },
+      "leftPos": {
+        "name": "Position von links",
+        "hint": "Abstand vom linken Rand in Pixeln"
+      },
+      "botPos": {
+        "name": "Position von unten",
+        "hint": "Abstand vom unteren Rand in Pixeln"
+      },
+      "playerDetailsBottom": {
+        "name": "Spielerdetails unten",
+        "hint": "Die Namen und Klasseninformationen der Spieler beim Porträt unten positionieren"
+      },
+      "preparedSpells": {
+        "name": "Nur vorbereitete Zauber",
+        "hint": "Nur vorbereitete Zauber anzeigen"
+      },
+      "showTooltips": {
+        "name": "Tooltips anzeigen",
+        "hint": "Tooltips beim Überfahren anzeigen"
+      },
+      "showTooltipsSpecial": {
+        "name": "Tooltips für besondere Aktionen anzeigen",
+        "hint": "Tooltips beim Überfahren für besondere Aktionen anzeigen (Ausweichen, Rückzug, Schubsen …)"
+      },
+      "showTooltipsAbilityMenuAbilities": {
+        "name": "Tooltips für Fähigkeiten anzeigen",
+        "hint": "Tooltips beim Überfahren von Fähigkeiten im Fähigkeitenmenü anzeigen"
+      },
+      "showTooltipsAbilityMenuSkills": {
+        "name": "Tooltips für Fertigkeiten anzeigen",
+        "hint": "Tooltips beim Überfahren von Fertigkeiten im Fähigkeitenmenü anzeigen"
+      },
+      "showTooltipsAbilityMenuTools": {
+        "name": "Tooltips für Werkzeuge anzeigen",
+        "hint": "Tooltips beim Überfahren von Werkzeugen im Fähigkeitenmenü anzeigen"
+      },
+      "fadeOutInactive": {
+        "name": "Ausblenden",
+        "hint": "Das HUD ausblenden, wenn sich der Mauszeiger 5 Sekunden lang nicht darüber befindet"
+      },
+      "fadeoutDelay": {
+        "name": "Verzögerung beim Ausblenden",
+        "hint": "Verzögerung vor dem Ausblenden des HUDs in Sekunden"
+      },
+      "fadeoutOpacity": {
+        "name": "Deckkraft beim Ausblenden",
+        "hint": "Deckkraft des HUDs im ausgeblendeten Zustand"
+      },
+      "hideMacroPlayers": {
+        "name": "Makroleiste und Spielerliste ausblenden",
+        "hint": "Makroleiste und Spielerliste ausblenden, während das HUD geöffnet ist"
+      },
+      "openCombatStart": {
+        "name": "Bei Kampfbeginn öffnen",
+        "hint": "Das HUD öffnen, wenn ein Kampf beginnt"
+      },
+      "tooltipScale": {
+        "name": "Tooltip-Skalierung",
+        "hint": "Skalierung der Tooltips"
+      },
+      "switchEquip": {
+        "name": "Automatisch ausrüsten",
+        "hint": "Gegenstände beim Wechseln von Sets automatisch aus- bzw. anlegen"
+      },
+      "showWeaponsItems": {
+        "name": "Waffen im Abschnitt „Gegenstand verwenden“ anzeigen",
+        "hint": "Waffen im Abschnitt „Gegenstand verwenden“ anzeigen. Nützlich, wenn deine Waffenplätze nicht ausreichen."
+      },
+      "noAA": {
+        "name": "Aktive Effekte nicht anwenden",
+        "hint": "Aktive Effekte bei der Verwendung besonderer Aktionen nicht anwenden. (Aktualisierung erforderlich.)"
+      },
+      "noBlur": {
+        "name": "Unschärfeeffekte deaktivieren",
+        "hint": "Unschärfeeffekte im HUD deaktivieren. Dies ist eine Leistungseinstellung und sollte nur verwendet werden, wenn Leistungsprobleme auftreten."
+      },
+      "suppressWarnings": {
+        "name": "Warnungen unterdrücken",
+        "hint": "Bei einem Fehler keine Warnmeldung anzeigen und stattdessen stillschweigend fehlschlagen."
+      },
+      "rangefinder": {
+        "name": "3D Canvas – Reichweitenmesser",
+        "hint": "Den Reichweitenmesser von 3D Canvas aktivieren, wenn Gegenstände im HUD überfahren werden. Bei Aktivierung wird die Entfernung zum Ziel angezeigt – das Ziel wird rot markiert, wenn es außer Reichweite ist."
+      },
+      "rangepicker": {
+        "name": "Zielauswahl",
+        "hint": "Bei der Verwendung eines Gegenstands oder einer Aktion, die ein Ziel erfordert, wird eine dem Mauszeiger folgende Anzahl der Ziele angezeigt, bis die richtige Anzahl von Zielen ausgewählt ist. Verwende bei Bedarf die Tasten +/- zur manuellen Anpassung der erforderlichen Ziele."
+      },
+      "rangepickerclear": {
+        "name": "Zielauswahl – Ziele aufheben",
+        "hint": "Bei der Verwendung eines Gegenstands oder einer Aktion, die ein Ziel erfordert, alle Ziele aufheben, bevor der Zielauswahlmodus aktiviert wird."
+      },
+      "thememenu": {
+        "name": "Designanpassung",
+        "hint": "Argon-Designs konfigurieren, auswählen und anpassen",
+        "label": "Designs konfigurieren"
+      }
+    },
+    "hud": {
+      "pass": {
+        "name": "Überspringen"
+      },
+      "endturn": {
+        "name": "Zug beenden"
+      },
+      "macro": {
+        "name": "Makro",
+        "page": "Seite"
+      }
+    },
+    "themeOptions": {
+      "save": "Änderungen speichern",
+      "export": "Design exportieren",
+      "savePermanent": {
+        "label": "Benutzerdefiniertes Design für alle Benutzer speichern",
+        "tooltip": "Das aktuelle benutzerdefinierte Design im Speicher des Moduls speichern. Dadurch wird das Design in allen deinen Spielen und für alle Spieler verfügbar. Um ein gespeichertes Design zu entfernen, musst du seine Datei manuell über deinen Dateiexplorer löschen (navigiere zu: modules/enhancedcombathud/storage/themes). Das Löschen von Dateien innerhalb von Foundry wird nicht unterstützt."
+      },
+      "autoTextColorTitle": "Textfarben basierend auf dem Hintergrund automatisch festlegen",
+      "autoTextColorHint": "Diese Einstellung passt die Textfarbe basierend auf der Hintergrundfarbe an, sodass sie gut lesbar sein sollte.",
+      "exportThemeName": "Name des zu exportierenden Designs:",
+      "exportTheme": {
+        "save": "Speichern",
+        "cancel": "Abbrechen"
+      },
+      "themeTitle": "Ein Design auswählen",
+      "themeHint": "Durch die Auswahl eines Designs wird eine vordefinierte Farbpalette auf Argon angewendet.",
+      "portrait": "Porträtfarben",
+      "mainAction": "Farben der Hauptaktionen",
+      "bonusAction": "Farben der Bonusaktionen",
+      "freeAction": "Farben der freien Aktionen",
+      "reaction": "Farben der Reaktionen",
+      "endTurn": "Farben zum Beenden des Zuges",
+      "tooltip": "Tooltip-Farben",
+      "abilityMenu": "Farben des Fähigkeitenmenüs",
+      "buttons": "Schaltflächenfarben",
+      "movement": "Farben der Bewegungsfelder",
+      "background": "Hintergrundfarbe",
+      "color": "Textfarbe",
+      "border": "Rahmenfarbe",
+      "boxShadow": "Farbe des Box-Schattens",
+      "portraitBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "mainActionBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "mainActionHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "bonusActionBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "bonusActionHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "freeActionBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "freeActionHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "reactionBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "reactionHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "endTurnBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "endTurnHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "tooltipHeader": "Hintergrund-/Vordergrund-/Rahmenfarben des Kopfbereichs von Tooltips/Fenstern",
+      "tooltipSubtitle": "Hintergrund-/Vordergrund-/Rahmenfarben des Untertitels in Tooltips",
+      "tooltipBody": "Hintergrund-/Vordergrund-/Rahmenfarben des Inhalts von Tooltips/Fenstern",
+      "abilityMenuBase": "Vordergrund-/Box-Schattenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "abilityMenuHover": "Vordergrund-/Box-Schattenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "buttonsBase": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger nicht über dem Element befindet",
+      "buttonsHover": "Hintergrund-/Vordergrund-/Rahmenfarben, wenn sich der Mauszeiger über dem Element befindet",
+      "movementUsed": "Hintergrund/Box-Schatten des Feldes, das verwendete Bewegungsfelder anzeigt",
+      "movementBaseMovement": "Hintergrund/Box-Schatten des Feldes, das verfügbare Bewegungsfelder anzeigt",
+      "movementDashMovement": "Hintergrund/Box-Schatten des Feldes, das Bewegungsfelder für den Spurt anzeigt",
+      "movementDangerMovement": "Hintergrund/Box-Schatten des Feldes, das überschrittene Bewegungsfelder anzeigt"
+    },
+    "hotkey": {
+      "toggle": {
+        "name": "Argon-Kampf-HUD umschalten"
+      }
+    },
+    "err": {
+      "unsupportedActorType": "Argon: Der Aktortyp „%t“ wird vom Argon-Kampf-HUD nicht unterstützt.",
+      "moduleNotActive": "Argon CORE: Das systemspezifische Modul ist nicht installiert oder nicht aktiv. Bitte installiere und aktiviere das Modul %m, sofern verfügbar."
+    },
+    "targetPicker": {
+      "dialog": {
+        "title": "Tutorial zur Zielauswahl",
+        "list": {
+          "0": "Die Anzahl der ausgewählten/benötigten Ziele folgt deinem Mauszeiger.",
+          "1": "<span>Linksklick</span> oder drücke <span>T</span>, um ein Token als Ziel auszuwählen",
+          "2": "<span>Rechtsklick</span>, um die Zielauswahl abzubrechen",
+          "3": "Drücke die Taste <span>+</span> oder <span>-</span>, um die Anzahl der benötigten Ziele manuell zu erhöhen bzw. zu verringern"
+        }
+      }
+    },
+    "deleteEffectTitle": "Effekt löschen",
+    "deleteEffectContent": "Möchtest du den Effekt wirklich löschen? ",
+    "confirmRerollInitiativeTitle": "Initiative neu würfeln",
+    "confirmRerollInitiativeContent": "Möchtest du die Initiative wirklich neu würfeln?"
+  }
+}
